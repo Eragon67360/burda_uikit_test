@@ -1,0 +1,30 @@
+{
+  "name": "nodejs_burda_uikit",
+  "version": "1.0.0",
+  "scripts": {
+    "watch:tailwindcss": "npx tailwindcss -i ./tailwind.css -o ./.storybook/tailwind.css --watch",
+    "watch:storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build",
+    "dev": "concurrently --kill-others \"npm run watch:tailwindcss\" \"npm run watch:storybook\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org:avenit/nodejs_burda_uikit.git"
+  },
+  "author": "Avenit AG",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-styling-webpack": "^1.0.1",
+    "@storybook/addon-webpack5-compiler-swc": "^1.0.5",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/html": "^8.4.7",
+    "@storybook/html-webpack5": "^8.4.7",
+    "@storybook/test": "^8.4.7",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "storybook": "^8.4.7",
+    "tailwindcss": "^3.4.16"
+  }
+}
