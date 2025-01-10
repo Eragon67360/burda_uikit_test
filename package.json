@@ -26,5 +26,8 @@
     "concurrently": "^9.1.0",
     "storybook": "^8.4.7",
     "tailwindcss": "^3.4.16"
+  },
+  "dependencies": {
+    "@storybook/addon-backgrounds": "^8.4.7"
   }
 }
