@@ -6,7 +6,7 @@ A Python utility script to automate the creation of Storybook component files an
 
 This script automates the creation of new component files following our project's structure conventions. It creates the necessary directories and generates three files with boilerplate code:
 
-- Component JS file
+- Component TS file
 - Storybook Stories TS file
 - Component CSS file
 
