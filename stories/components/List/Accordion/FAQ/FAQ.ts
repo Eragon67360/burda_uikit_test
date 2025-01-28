@@ -7,18 +7,20 @@ export type AccordionItem = {
 
 export type FAQArgs = {
     items: AccordionItem[];
+    backgroundColor?: 'white' | 'gray';
 };
 
-export const createFAQ = ({ items }: FAQArgs) => {
+export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
     const wrapper = document.createElement('div');
-    wrapper.className = 'w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden';
+    const bgColorClass = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
+    wrapper.className = `w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden`;
 
     items.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = '';
 
         const trigger = document.createElement('button');
-        trigger.className = 'w-full flex justify-between items-center gap-6 p-8 text-left bg-base-white hover:bg-secondary-light transition';
+        trigger.className = `w-full flex justify-between items-center gap-6 p-8 text-left ${bgColorClass} hover:bg-secondary-light transition`;
         trigger.innerHTML = `
         <span class="text-subhead3-desktop">${item.trigger}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

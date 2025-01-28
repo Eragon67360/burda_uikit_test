@@ -15,7 +15,7 @@ const config: StorybookConfig = {
     },
     '@storybook/addon-interactions',
     '@storybook/addon-styling-webpack',
-    '@storybook/addon-backgrounds',
+    '@storybook/addon-backgrounds'
   ],
   framework: {
     name: '@storybook/html-webpack5',

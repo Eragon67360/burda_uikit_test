@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/html";
 
 const meta: Meta = {
   title: "Design System/Typography",
+  tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
