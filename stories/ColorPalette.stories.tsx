@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/html";
 
 const meta: Meta = {
   title: "Design System/Colors",
+  tags: ["autodocs"],
   parameters: {
     layout: "padded",
   },
