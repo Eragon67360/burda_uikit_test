@@ -7,6 +7,7 @@ export type TextboxArgs = {
     className?: string;
     chevronIcon?: string;
 };
+
 export const createTextbox = ({
     expandText = 'See more',
     collapseText = 'See less',

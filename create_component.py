@@ -22,6 +22,7 @@ def create_component_files(component_path):
     
     # Create JS file
     ts_content = f"""import './{css_filename}'
+    
 export type {component_name}Args = {{
 
 }};
@@ -36,8 +37,6 @@ export const create{component_name} = ({{}}) => {{
     stories_content = f"""import type {{ Meta, StoryObj }} from '@storybook/html';
 import {{ create{component_name}, {component_name}Args }} from './{component_name}';
 
-
-
 const meta: Meta<{component_name}Args> = {{
     title: 'Components/{"/".join(parts)}',
     parameters: {{
@@ -45,7 +44,8 @@ const meta: Meta<{component_name}Args> = {{
     }},
     argTypes: {{
 
-    }}
+    }},
+    render: (args) => create{component_name}(args as any)
 }};
 
 export default meta;
