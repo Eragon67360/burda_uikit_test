@@ -21,22 +21,22 @@ def create_component_files(component_path):
         pass  # Create empty CSS file
     
     # Create JS file
-    js_content = f"""import './{css_filename}'
+    ts_content = f"""import './{css_filename}'
+export type {component_name}Args = {{
 
+}};
 export const create{component_name} = ({{}}) => {{
   
 }}
 """
     with open(os.path.join(full_path, f"{component_name}.ts"), 'w') as f:
-        f.write(js_content)
+        f.write(ts_content)
     
     # Create stories file
     stories_content = f"""import type {{ Meta, StoryObj }} from '@storybook/html';
-import {{ create{component_name} }} from './{component_name}';
+import {{ create{component_name}, {component_name}Args }} from './{component_name}';
 
-type {component_name}Args = {{
 
-}};
 
 const meta: Meta<{component_name}Args> = {{
     title: 'Components/{"/".join(parts)}',
