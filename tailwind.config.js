@@ -71,6 +71,7 @@ module.exports = {
         'hotline-footer-small-desktop': ['1rem', { lineHeight: '1rem', fontWeight: 600 }],
         /** Copy */
         'teaser-desktop': ['1.125rem', { lineHeight: '1.5rem', letterSpacing: '-0.0225rem', fontWeight: 500 }],
+        'teaser-copy-desktop': ['1.125rem', { lineHeight: '1.5rem', letterSpacing: '-0.0225rem', fontWeight: 700 }],
         'copy-desktop': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '-0.00875rem', fontWeight: 400 }],
         'copy-small-desktop': ['0.75rem', { lineHeight: '1.125rem', fontWeight: 500 }],
         'bulletpoint-copy-desktop': ['1rem', { lineHeight: '1.25rem', letterSpacing: '0.01rem', fontWeight: 600 }],

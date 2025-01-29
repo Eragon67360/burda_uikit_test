@@ -1,4 +1,5 @@
-import './fAQ.css'
+import { ICON_CHEVRON_DOWN_BIG } from '../../../../assets/icons';
+import './fAQ.css';
 
 export type AccordionItem = {
     trigger: string;
@@ -23,16 +24,7 @@ export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
         trigger.className = `w-full flex justify-between items-center gap-6 p-8 text-left ${bgColorClass} hover:bg-secondary-light transition`;
         trigger.innerHTML = `
         <span class="text-subhead3-desktop">${item.trigger}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <g clip-path="url(#clip0_610_23343)">
-                <path d="M23.7071 5.79338C23.3166 5.40286 22.6834 5.40286 22.2929 5.79338L12 16.0862L1.70711 5.79338C1.31659 5.40286 0.683402 5.40286 0.292887 5.79338C-0.0976289 6.18389 -0.0976289 6.81708 0.292887 7.20759L11.2929 18.2076C11.6834 18.5981 12.3166 18.5981 12.7071 18.2076L23.7071 7.20759C24.0977 6.81703 24.0977 6.18389 23.7071 5.79338Z" fill="black"/>
-            </g>
-            <defs>
-                <clipPath id="clip0_610_23343">
-                <rect width="24" height="24" fill="white" transform="translate(0 0.000488281)"/>
-                </clipPath>
-            </defs>
-        </svg>
+        ${ICON_CHEVRON_DOWN_BIG}
         `;
 
         const separator = document.createElement('div');
