@@ -5,10 +5,10 @@ const preview = {
   parameters: {
     backgrounds: {
       values: [
-        { name: 'Dark', value: '#333333' },
-        { name: 'Light', value: '#F3F4F6' },
+        { name: 'Gray', value: '#F3F4F6' },
+        { name: 'White', value: '#FFFFFF' },
       ],
-      default: 'Light',
+      default: 'Gray',
     },
     controls: {
       matchers: {
