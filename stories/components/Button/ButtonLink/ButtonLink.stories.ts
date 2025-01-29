@@ -1,6 +1,7 @@
 
 import type { Meta, StoryObj } from '@storybook/html';
-import { ButtonLinkArgs, ButtonVariant, createButtonLink, iconMap, IconOptions } from './ButtonLink';
+import { ButtonLinkArgs, ButtonVariant, createButtonLink } from './ButtonLink';
+import { IconCategory, IconRegistry } from '../../../assets/icons';
 
 const meta: Meta<ButtonLinkArgs> = {
   title: 'Components/Button/ButtonLink',
@@ -9,7 +10,7 @@ const meta: Meta<ButtonLinkArgs> = {
     controls: { expanded: true },
   },
   args: {
-    icon: IconOptions.NONE,
+    icon: null,
     iconLeft: false,
     nested: false,
     disabled: false,
@@ -38,8 +39,7 @@ const meta: Meta<ButtonLinkArgs> = {
     },
     icon: {
       control: { type: 'select' },
-      options: Object.values(IconOptions),
-      mapping: iconMap,
+      options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
       description: 'Select an icon',
     },
     onClick: { action: 'clicked' },

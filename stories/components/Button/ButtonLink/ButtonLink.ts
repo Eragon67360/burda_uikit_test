@@ -1,4 +1,4 @@
-import { ICON_ARROW_RIGHT, ICON_ARROW_LEFT, ICON_CHEVRON_DOWN, ICON_CHEVRON_RIGHT, ICON_CHEVRON_LEFT, ICON_PERSON, ICON_SHOPPING_CART } from '../../../assets/icons';
+import { IconCategory, IconRegistry } from '../../../assets/icons';
 import './buttonLink.css';
 
 export enum ButtonVariant {
@@ -17,28 +17,6 @@ export type ButtonLinkArgs = {
   icon: string | null;
 };
 
-export enum IconOptions {
-  NONE = 'none',
-  ARROW_RIGHT = 'arrow-right',
-  ARROW_LEFT = 'arrow-left',
-  CHEVRON_DOWN = 'chevron-down',
-  CHEVRON_RIGHT = 'chevron-right',
-  CHEVRON_LEFT = 'chevron-left',
-  PERSON = 'person',
-  SHOPPING_CART = 'shopping-cart'
-}
-
-export const iconMap: Record<IconOptions, string | null> = {
-  [IconOptions.NONE]: null,
-  [IconOptions.ARROW_RIGHT]: ICON_ARROW_RIGHT,
-  [IconOptions.ARROW_LEFT]: ICON_ARROW_LEFT,
-  [IconOptions.CHEVRON_DOWN]: ICON_CHEVRON_DOWN,
-  [IconOptions.CHEVRON_RIGHT]: ICON_CHEVRON_RIGHT,
-  [IconOptions.CHEVRON_LEFT]: ICON_CHEVRON_LEFT,
-  [IconOptions.PERSON]: ICON_PERSON,
-  [IconOptions.SHOPPING_CART]: ICON_SHOPPING_CART,
-};
-
 export const createButtonLink = ({
   variant = ButtonVariant.PRIMARY,
   nested = false,
@@ -50,9 +28,10 @@ export const createButtonLink = ({
 }: ButtonLinkArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
+
   if (variant.includes('icon')) {
     if (icon) {
-      btnButton.innerHTML = icon;
+      btnButton.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
     }
   } else {
     const labelSpan = document.createElement('span');
@@ -65,7 +44,7 @@ export const createButtonLink = ({
     let arrowSpan = document.createElement('span');
     if ([ButtonVariant.PRIMARY, ButtonVariant.SECONDARY, ButtonVariant.TERTIARY].includes(variant)) {
       if (icon) {
-        arrowSpan.innerHTML = icon;
+        arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
         arrowSpan.className = 'size-5'
       }
     }
