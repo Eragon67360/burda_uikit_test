@@ -1,5 +1,5 @@
 import './textbox.css'
-
+import { IconCategory, IconRegistry } from '../../../../assets/icons';
 export type TextboxArgs = {
     expandText?: string;
     collapseText?: string;
@@ -13,20 +13,7 @@ export const createTextbox = ({
     collapseText = 'See less',
     content = '',
     className = '',
-    chevronIcon = `<svg
-        class="w-4 h-4 transform transition-all duration-200 group-hover:stroke-secondary-light"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-        />
-    </svg>`
+    chevronIcon = IconRegistry[IconCategory.SYSTEM].chevronDown
 }) => {
     const wrapper = document.createElement('div');
     wrapper.className = `textbox-wrapper ${className}`;
@@ -36,26 +23,24 @@ export const createTextbox = ({
     const uniqueId = `textbox-${Math.random().toString(36).substr(2, 9)}`;
 
     wrapper.innerHTML = `
-    <div class="w-96">
+    <div class="w-full">
         <div class="flex flex-col">
-            <!-- Top button (visible when collapsed) -->
             <div class="flex items-center justify-center transition-opacity duration-200" data-button="top">
                 <div class="border-t border-neutral-400 w-full h-0"></div>
                 <button
                     id="${uniqueId}-trigger-top"
                     aria-expanded="false"
                     aria-controls="${uniqueId}-content"
-                    class="textbox-trigger flex items-center gap-2 mx-2 w-full justify-center text-base-black text-button-label-desktop group"
+                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label-desktop group"
                 >
                     <span class="border-b-2 border-transparent transition group-hover:border-secondary-light">${expandText}</span>
-                    <span class="chevron-wrapper">
+                    <span class="chevron-wrapper scale-90">
                         ${chevronIcon}
                     </span>
                 </button>
                 <div class="border-t border-neutral-400 w-full h-0"></div>
             </div>
 
-            <!-- Content -->
             <div
                 id="${uniqueId}-content"
                 class="textbox-content transition-all duration-200 overflow-hidden"
@@ -74,10 +59,10 @@ export const createTextbox = ({
                     id="${uniqueId}-trigger-bottom"
                     aria-expanded="false"
                     aria-controls="${uniqueId}-content"
-                    class="textbox-trigger flex items-center gap-2 mx-2 w-full justify-center text-base-black text-button-label-desktop group"
+                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label-desktop group"
                 >
                     <span class="border-b-2 border-transparent transition group-hover:border-secondary-light">${collapseText}</span>
-                    <span class="chevron-wrapper rotate-180">
+                    <span class="chevron-wrapper rotate-180 scale-90">
                         ${chevronIcon}
                     </span>
                 </button>
@@ -94,12 +79,12 @@ export const createTextbox = ({
     const bottomButton = wrapper.querySelector('#' + uniqueId + '-trigger-bottom') as HTMLButtonElement;
 
     const toggleContent = () => {
+
         isExpanded = !isExpanded;
 
         topButton.setAttribute('aria-expanded', isExpanded.toString());
         bottomButton.setAttribute('aria-expanded', isExpanded.toString());
 
-        // Toggle visibility and disable/enable buttons
         if (isExpanded) {
             topButtonContainer.style.display = 'none';
             bottomButtonContainer.style.display = 'flex';
