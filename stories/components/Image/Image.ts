@@ -1,4 +1,3 @@
-import type { ImageAsset } from '../../types/assets';
 export type ImageArgs = {
     src: string;
     ratio: '1:1' | '4:3' | '16:9';
