@@ -62,7 +62,7 @@ export const createPopup = ({
     };
     popup.className = `
     fixed ${positionStyles[position]} z-50
-    min-w-[320px] max-w-[620px] p-4
+    min-w-[320px] max-w-[520px] p-4
     border ${variantStyles[variant]}
     rounded-lg shadow-lg
     transition-all duration-300
@@ -73,16 +73,14 @@ export const createPopup = ({
     <div class="flex items-start justify-between gap-3">
       <div class="flex-1">
         <h3 class="text-subhead4-desktop">${title}</h3>
-        <div class="flex justify-between gap-2 items-center" >
-        <p class="mt-1 text-copy-desktop">${description}</p>
+        
+        <p class="mt-4 text-copy-desktop">${description}</p>
         ${action ? `
           <a href="${action.href}" class="inline-flex items-center gap-2 text-link-desktop">
             ${action.icon}
             ${action.label}
           </a>
         ` : ''}
-        </div>
-        
       </div>
       <button class="text-gray-400 hover:text-gray-600" aria-label="Close">
         ${IconRegistry[IconCategory.SYSTEM].close}
