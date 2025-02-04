@@ -50,8 +50,6 @@ export const createPopup = ({
     const wrapper = document.createElement('div');
     const popup = document.createElement('div');
     const getInitialTransform = (position: PopupPosition) => {
-        console.log(position);
-
         if (position.startsWith('top')) {
             return 'translate-y-[-100%]';
         }
