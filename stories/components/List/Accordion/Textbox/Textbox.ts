@@ -1,5 +1,6 @@
-import './textbox.css'
 import { IconCategory, IconRegistry } from '../../../../assets/icons';
+import './textbox.css';
+
 export type TextboxArgs = {
     expandText?: string;
     collapseText?: string;

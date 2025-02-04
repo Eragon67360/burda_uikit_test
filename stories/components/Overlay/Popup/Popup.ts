@@ -116,7 +116,7 @@ export const createPopupWithTrigger = ({
 
     const triggerButton = document.createElement('button');
     triggerButton.className = `
-    px-4 py-2 rounded-lg font-medium
+    px-4 py-2 rounded-lg text-button-label-desktop
     ${triggerVariant === 'primary'
             ? 'bg-primary-interaction text-base-black hover:bg-primary-light'
             : 'bg-secondary-interaction text-gray-900 hover:bg-secondary-light'}

@@ -1,41 +1,41 @@
-import { ButtonVariant, createButtonLink } from "../../Button/ButtonLink/ButtonLink";
 import { IconCategory, IconRegistry } from "../../../assets/icons";
+import { ButtonCTAVariant, createButtonCTA } from "../../Button/CTA/ButtonCTA";
 
 export type ModalArgs = {
-    isOpen: boolean;
-    onClose: () => void;
-    title: string;
-    content: string | HTMLElement;
-    triggerButton: {
-        variant: ButtonVariant;
-        label: string;
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  content: string | HTMLElement;
+  triggerButton: {
+    variant: ButtonCTAVariant;
+    label: string;
+  };
+  actions?: {
+    primary?: {
+      label: string;
+      onClick: () => void;
     };
-    actions?: {
-        primary?: {
-            label: string;
-            onClick: () => void;
-        };
-        secondary?: {
-            label: string;
-            onClick: () => void;
-        };
+    secondary?: {
+      label: string;
+      onClick: () => void;
     };
+  };
 };
 
 export const createModal = ({
-    isOpen,
-    onClose,
-    title,
-    content,
-    triggerButton,
-    actions
+  isOpen,
+  onClose,
+  title,
+  content,
+  triggerButton,
+  actions
 }: ModalArgs) => {
-    const wrapper = document.createElement('div');
+  const wrapper = document.createElement('div');
 
-    const modalContainer = document.createElement('div');
-    modalContainer.className = `modal-container ${isOpen ? '' : 'hidden'}`;
+  const modalContainer = document.createElement('div');
+  modalContainer.className = `modal-container ${isOpen ? '' : 'hidden'}`;
 
-    modalContainer.innerHTML = `
+  modalContainer.innerHTML = `
       <div class="modal-backdrop fixed inset-0 bg-base-black opacity-0 transition-opacity duration-300"></div>
       
       <div class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
@@ -72,64 +72,64 @@ export const createModal = ({
       </div>
     `;
 
-    const contentContainer = modalContainer.querySelector('.modal-content');
-    if (contentContainer) {
-        if (content instanceof HTMLElement) {
-            contentContainer.appendChild(content);
-        } else {
-            contentContainer.innerHTML = content;
-        }
+  const contentContainer = modalContainer.querySelector('.modal-content');
+  if (contentContainer) {
+    if (content instanceof HTMLElement) {
+      contentContainer.appendChild(content);
+    } else {
+      contentContainer.innerHTML = content;
     }
+  }
 
-    const button = createButtonLink({
-        variant: triggerButton.variant,
-        label: triggerButton.label,
-        nested: false,
-        disabled: false,
-        iconLeft: false,
-        icon: null,
-        onClick: () => {
-            modalContainer.classList.remove('hidden');
-            setTimeout(() => {
-                const backdrop = modalContainer.querySelector('.modal-backdrop');
-                const modalContent = modalContainer.querySelector('.modal-content-animate');
-                backdrop?.classList.add('opacity-50');
-                modalContent?.classList.remove('translate-y-4', 'opacity-0', 'scale-95');
-                modalContent?.classList.add('translate-y-0', 'opacity-100', 'scale-100');
-            }, 10);
-        }
-    });
-
-    const closeModal = () => {
-        const modalContent = modalContainer.querySelector('.modal-content-animate');
+  const button = createButtonCTA({
+    variant: triggerButton.variant,
+    label: triggerButton.label,
+    nested: false,
+    disabled: false,
+    iconLeft: false,
+    icon: null,
+    onClick: () => {
+      modalContainer.classList.remove('hidden');
+      setTimeout(() => {
         const backdrop = modalContainer.querySelector('.modal-backdrop');
-        backdrop?.classList.remove('opacity-50');
-        modalContent?.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
-        modalContent?.classList.add('translate-y-4', 'opacity-0', 'scale-95');
+        const modalContent = modalContainer.querySelector('.modal-content-animate');
+        backdrop?.classList.add('opacity-50');
+        modalContent?.classList.remove('translate-y-4', 'opacity-0', 'scale-95');
+        modalContent?.classList.add('translate-y-0', 'opacity-100', 'scale-100');
+      }, 10);
+    }
+  });
 
-        setTimeout(() => {
-            modalContainer.classList.add('hidden');
-            onClose();
-        }, 300);
-    };
-
-    const closeButton = modalContainer.querySelector('.modal-close');
+  const closeModal = () => {
+    const modalContent = modalContainer.querySelector('.modal-content-animate');
     const backdrop = modalContainer.querySelector('.modal-backdrop');
-    const primaryAction = modalContainer.querySelector('.primary-action');
-    const secondaryAction = modalContainer.querySelector('.secondary-action');
+    backdrop?.classList.remove('opacity-50');
+    modalContent?.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
+    modalContent?.classList.add('translate-y-4', 'opacity-0', 'scale-95');
 
-    closeButton?.addEventListener('click', closeModal);
-    backdrop?.addEventListener('click', closeModal);
+    setTimeout(() => {
+      modalContainer.classList.add('hidden');
+      onClose();
+    }, 300);
+  };
 
-    if (actions?.primary && primaryAction) {
-        primaryAction.addEventListener('click', actions.primary.onClick);
-    }
-    if (actions?.secondary && secondaryAction) {
-        secondaryAction.addEventListener('click', actions.secondary.onClick);
-    }
+  const closeButton = modalContainer.querySelector('.modal-close');
+  const backdrop = modalContainer.querySelector('.modal-backdrop');
+  const primaryAction = modalContainer.querySelector('.primary-action');
+  const secondaryAction = modalContainer.querySelector('.secondary-action');
 
-    wrapper.appendChild(button);
-    wrapper.appendChild(modalContainer);
+  closeButton?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
 
-    return wrapper;
+  if (actions?.primary && primaryAction) {
+    primaryAction.addEventListener('click', actions.primary.onClick);
+  }
+  if (actions?.secondary && secondaryAction) {
+    secondaryAction.addEventListener('click', actions.secondary.onClick);
+  }
+
+  wrapper.appendChild(button);
+  wrapper.appendChild(modalContainer);
+
+  return wrapper;
 };

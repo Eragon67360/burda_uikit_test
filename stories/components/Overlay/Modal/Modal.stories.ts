@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createModal, ModalArgs } from './Modal';
-import { ButtonVariant, createButtonLink } from '../../Button/ButtonLink/ButtonLink';
+import { ButtonCTAVariant, createButtonCTA } from "../../Button/CTA/ButtonCTA";
 import { createTextbox } from '../../List/Accordion/Textbox/Textbox';
 import { IconCategory, IconRegistry } from '../../../assets/icons';
 
@@ -49,7 +49,7 @@ export const Primary: Story = {
         title: 'Example Modal',
         content: '<p>This is an example modal content.</p>',
         triggerButton: {
-            variant: ButtonVariant.PRIMARY,
+            variant: ButtonCTAVariant.PRIMARY,
             label: 'Open Modal',
         },
     },
@@ -67,7 +67,7 @@ export const WithSecondaryButton: Story = {
         title: 'Secondary Button Modal',
         content: '<p>This modal uses a secondary button.</p>',
         triggerButton: {
-            variant: ButtonVariant.SECONDARY,
+            variant: ButtonCTAVariant.SECONDARY,
             label: 'Open Modal',
         },
     },
@@ -94,7 +94,7 @@ export const WithCTA: Story = {
         title: 'Modal with Actions',
         content: '<p>This modal includes call-to-action buttons at the bottom.</p>',
         triggerButton: {
-            variant: ButtonVariant.PRIMARY,
+            variant: ButtonCTAVariant.PRIMARY,
             label: 'Open Modal with Actions',
         },
     },
@@ -117,7 +117,7 @@ export const WithPrimaryActionOnly: Story = {
         title: 'Modal with Single Action',
         content: '<p>This modal includes only a primary action button.</p>',
         triggerButton: {
-            variant: ButtonVariant.PRIMARY,
+            variant: ButtonCTAVariant.PRIMARY,
             label: 'Open Modal with Single Action',
         },
     },
@@ -139,8 +139,8 @@ export const Showcase: Story = {
         });
         textbox.className += ' mt-4 w-full h-fit';
 
-        const button = createButtonLink({
-            variant: ButtonVariant.SECONDARY,
+        const button = createButtonCTA({
+            variant: ButtonCTAVariant.SECONDARY,
             label: 'Zuzahlung ab 1,00 €',
             nested: false,
             disabled: false,
@@ -205,7 +205,7 @@ export const Showcase: Story = {
         isOpen: false,
         title: '',
         triggerButton: {
-            variant: ButtonVariant.PRIMARY,
+            variant: ButtonCTAVariant.PRIMARY,
             label: 'Open Showcase Modal',
         },
         onClose: () => console.log('Modal closed'),
