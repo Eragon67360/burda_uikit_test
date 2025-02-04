@@ -1,5 +1,5 @@
-import { ICON_CHEVRON_DOWN } from '../../../../assets/icons';
-import './textbox.css'
+import { IconCategory, IconRegistry } from '../../../../assets/icons';
+import './textbox.css';
 
 export type TextboxArgs = {
     expandText?: string;
@@ -14,7 +14,7 @@ export const createTextbox = ({
     collapseText = 'See less',
     content = '',
     className = '',
-    chevronIcon = ICON_CHEVRON_DOWN
+    chevronIcon = IconRegistry[IconCategory.SYSTEM].chevronDown
 }) => {
     const wrapper = document.createElement('div');
     wrapper.className = `textbox-wrapper ${className}`;
