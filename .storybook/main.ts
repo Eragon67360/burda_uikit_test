@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/html-webpack5';
-
+import path from 'path'
 const config: StorybookConfig = {
   stories: [
     '../stories/**/*.mdx',

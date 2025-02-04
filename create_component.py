@@ -130,7 +130,7 @@ export const {component_name}1: Story = {{
 def main():
     if len(sys.argv) != 2:
         print("Usage: python script.py ComponentPath")
-        print("Example: python script.py Button/ButtonLink")
+        print("Example: python script.py Button/ButtonCTA")
         sys.exit(1)
     
     component_path = sys.argv[1]

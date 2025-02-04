@@ -1,4 +1,4 @@
-import './textbox.css'
+import './textbox.css';
 
 export type TextboxArgs = {
     expandText?: string;
@@ -99,7 +99,6 @@ export const createTextbox = ({
         topButton.setAttribute('aria-expanded', isExpanded.toString());
         bottomButton.setAttribute('aria-expanded', isExpanded.toString());
 
-        // Toggle visibility and disable/enable buttons
         if (isExpanded) {
             topButtonContainer.style.display = 'none';
             bottomButtonContainer.style.display = 'flex';
