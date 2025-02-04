@@ -21,5 +21,6 @@ const config: StorybookConfig = {
     name: '@storybook/html-webpack5',
     options: {},
   },
+  staticDirs: ['../public'],
 };
 export default config;
