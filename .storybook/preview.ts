@@ -8,10 +8,10 @@ const preview: Preview = {
     // Maintain your existing backgrounds configuration
     backgrounds: {
       values: [
-        { name: 'Dark', value: '#333333' },
-        { name: 'Light', value: '#F3F4F6' },
+        { name: 'Gray', value: '#F3F4F6' },
+        { name: 'White', value: '#FFFFFF' },
       ],
-      default: 'Light',
+      default: 'Gray',
     },
 
     // Maintain your existing controls configuration
