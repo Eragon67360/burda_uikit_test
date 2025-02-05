@@ -135,9 +135,7 @@ def main():
     
     component_path = sys.argv[1]
     create_component_files(component_path)
-    update_mdx_file(component_path)
     print(f"Component files created successfully for {component_path}")
-    print("MDX documentation updated")
 
 if __name__ == "__main__":
     main()
