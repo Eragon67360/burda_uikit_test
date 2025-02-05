@@ -1,129 +1,59 @@
 import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { getSizedIcon } from '../../../utils/iconUtils';
 import './buttonLink.css';
 
-export enum ButtonVariant {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-}
-
 export type ButtonLinkArgs = {
-  variant: ButtonVariant;
-  nested: boolean;
-  disabled: boolean;
-  iconLeft: boolean;
-  label: string;
-  onClick: () => void;
-  icon: string | null;
+    disabled: boolean;
+    iconLeft: boolean;
+    label: string;
+    onClick: () => void;
+    icon: string | null;
 };
 
 export const createButtonLink = ({
-  variant = ButtonVariant.PRIMARY,
-  nested = false,
-  disabled = false,
-  label,
-  onClick,
-  icon = null,
-  iconLeft = false,
-}: ButtonLinkArgs) => {
-  const btnButton = document.createElement('button');
-  btnButton.type = 'button';
+    disabled = false,
+    label,
+    onClick,
+    icon = 'arrowRight',
+    iconLeft = false, }: ButtonLinkArgs) => {
 
-  if (variant.includes('icon')) {
-    if (icon) {
-      btnButton.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
-    }
-  } else {
-    const labelSpan = document.createElement('span');
-    labelSpan.innerText = label;
-    const contentDiv = document.createElement('div');
-    if (icon) {
-      contentDiv.className = 'flex items-center justify-center gap-3 group-hover:gap-5 group-disabled:gap-3 transition-all';
+    const btnButton = document.createElement('button');
+
+    if (!disabled) {
+        btnButton.addEventListener('click', onClick);
     }
 
-    let arrowSpan = document.createElement('span');
-    if ([ButtonVariant.PRIMARY, ButtonVariant.SECONDARY, ButtonVariant.TERTIARY].includes(variant)) {
-      if (icon) {
-        arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
-        arrowSpan.className = 'size-5'
-      }
+    const baseClasses = [
+        'group flex items-center gap-[0.375rem] hover:gap-[0.625rem] border-b-[0.1875rem] border-t-2 border-x-2 border-b-transparent border-t-transparent border-x-transparent',
+        'text-button-label-desktop hover:border-b-secondary-light',
+        'transition-all duration-300',
+        'outline-none',
+        'active:border-b-secondary-dark',
+        'ring-none',
+        'focus-visible:border-2 focus-visible:rounded-lg focus-visible:px-3 focus-visible:border-black focus-visible:ring-base-black',
+        'disabled:cursor-not-allowed disabled:pointer-events-none',
+        'disabled:text-neutral-400 disabled:pointer-events-none',
+        'py-1'
+    ];
+
+    const classes = [
+        ...baseClasses
+    ];
+    const iconHtml = icon
+        ? getSizedIcon(
+            IconRegistry[IconCategory.SYSTEM][icon],
+            20
+        )
+        : '';
+
+    btnButton.innerHTML = `${iconLeft ? iconHtml : ''}
+      ${label}
+      ${!iconLeft ? iconHtml : ''}`
+    btnButton.className = classes.join(' ');
+
+    if (disabled) {
+        btnButton.disabled = true;
     }
-    if (iconLeft) {
-      contentDiv.appendChild(arrowSpan);
-      contentDiv.appendChild(labelSpan);
-    } else {
-      contentDiv.appendChild(labelSpan);
-      contentDiv.appendChild(arrowSpan);
-    }
-    btnButton.appendChild(contentDiv);
-  }
 
-  if (!disabled) {
-    btnButton.addEventListener('click', onClick);
-  }
-
-  const baseClasses = [
-    'group',
-    'text-button-label-desktop',
-    'transition-all',
-    'duration-200',
-    'focus:outline-none',
-    'focus:ring-2',
-    'focus:ring-offset-0',
-    'disabled:cursor-not-allowed',
-  ];
-
-  const variantClasses: Record<ButtonVariant, readonly string[]> = {
-    [ButtonVariant.PRIMARY]: [
-      'bg-brand',
-      'text-base-black',
-      'hover:bg-primary-light',
-      'active:bg-primary-dark',
-      'focus:ring-base-black',
-      'focus:bg-primary-light',
-      'disabled:bg-base-white',
-      'disabled:text-neutral-400',
-      'disabled:border-base-white',
-      'px-8 py-3'
-    ] as const,
-
-    [ButtonVariant.SECONDARY]: [
-      'bg-secondary-interaction',
-      'text-base-black',
-      'hover:bg-secondary-light',
-      'active:bg-secondary-dark',
-      'focus:ring-base-black',
-      'focus:bg-secondary-light',
-      'disabled:bg-base-white',
-      'disabled:text-neutral-400',
-      'px-8 py-3'
-    ] as const,
-
-    [ButtonVariant.TERTIARY]: [
-      'bg-transparent',
-      'text-base-black',
-      'border border-neutral-400',
-      'hover:bg-neutral-300',
-      'active:bg-neutral-400',
-      'focus:ring-base-black',
-      'disabled:text-neutral-400',
-      'disabled:border-neutral-300',
-      'disabled:bg-base-white',
-      'px-8 py-3'
-    ] as const,
-  };
-
-  const classes = [
-    ...baseClasses,
-    ...variantClasses[variant],
-    ...nested ? ['rounded-nested'] : ['rounded']
-  ];
-
-  btnButton.className = classes.join(' ');
-
-  if (disabled) {
-    btnButton.disabled = true;
-  }
-
-  return btnButton;
-};
+    return btnButton;
+}

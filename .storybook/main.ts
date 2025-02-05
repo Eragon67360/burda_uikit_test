@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/html-webpack5';
-
 const config: StorybookConfig = {
   stories: [
     '../stories/**/*.mdx',
@@ -21,5 +20,6 @@ const config: StorybookConfig = {
     name: '@storybook/html-webpack5',
     options: {},
   },
+  staticDirs: ['../public'],
 };
 export default config;

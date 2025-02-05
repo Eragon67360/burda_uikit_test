@@ -1,4 +1,3 @@
-// Icons.stories.ts
 import type { Meta, StoryObj } from "@storybook/html";
 import { IconRegistry, IconCategory } from "./assets/icons";
 
@@ -23,7 +22,7 @@ const meta: Meta<IconStoryProps> = {
     },
     name: {
       control: "select",
-      options: Object.keys(IconRegistry[IconCategory.SYSTEM]), // Default options
+      options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
       description: "Icon name",
     },
     size: {

@@ -1,9 +1,35 @@
 /**
  * Design System Variables
  * 
- * Usage:
- * - Primary colors are used for main actions and branding
- * - Secondary colors are used for supporting elements
+ * This file contains all design tokens used throughout the FOCUS Abo-Shop UI Kit.
+ * 
+ * Colors Usage:
+ * - Primary colors (--color-primary-*): Main brand colors, primary actions, and key UI elements
+ * - Secondary colors (--color-secondary-*): Supporting elements, backgrounds, and secondary actions
+ * - Tertiary colors (--color-tertiary): Accent elements and decorative purposes
+ * - System colors (--color-system-*): Feedback states like success, error, and notifications
+ * - Base colors (--color-base-*): Fundamental black and white variations
+ * - Neutral colors (--color-neutral-*): Grayscale spectrum for text, borders, and subtle backgrounds
+ * 
+ * Color Variants:
+ * - interaction: Active states and interactive elements
+ * - light: Lighter variations for hover states
+ * - extraLight: Very light variations for backgrounds
+ * - dark: Darker variations for pressed states
+ * 
+ * Typography:
+ * The design system uses two font families:
+ * - Instrument Sans: Primary font for UI elements
+ * - Roboto Serif: Secondary font for specific typographic needs
+ * 
+ * Implementation:
+ * 1. Import this file into your main stylesheet
+ * 2. Use these variables with the var() function
+ * 3. Ensure the Google Fonts import is maintained
+ * 
+ * Example:
+ * color: var(--color-primary-interaction);
+ * background: var(--color-secondary-extraLight);
  */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 

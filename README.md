@@ -25,7 +25,7 @@ python3 create_component.py ComponentPath
 ### Example:
 
 ```bash
-python create_component.py Button/ButtonLink
+python create_component.py Button/ButtonCTA
 ```
 
 This will create:
@@ -34,37 +34,37 @@ This will create:
 stories/
 └── components/
     └── Button/
-        └── ButtonLink/
-            ├── buttonLink.css
-            ├── ButtonLink.js
-            └── ButtonLink.stories.ts
+        └── ButtonCTA/
+            ├── buttonCTA.css
+            ├── ButtonCTA.js
+            └── ButtonCTA.stories.ts
 ```
 
 ## File Structure Generated
 
-### 1. CSS File (`buttonLink.css`)
+### 1. CSS File (`buttonCTA.css`)
 
 - Empty file for component-specific styles
 - Automatically named in camelCase
 
-### 2. Component File (`ButtonLink.js`)
+### 2. Component File (`ButtonCTA.js`)
 
 ```javascript
-import "./buttonLink.css";
+import "./buttonCTA.css";
 
-export const createButtonLink = ({}) => {};
+export const createButtonCTA = ({}) => {};
 ```
 
-### 3. Stories File (`ButtonLink.stories.ts`)
+### 3. Stories File (`ButtonCTA.stories.ts`)
 
 ```typescript
 import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonLink } from "./ButtonLink";
+import { createButtonCTA } from "./ButtonCTA";
 
-type ButtonLinkArgs = {};
+type ButtonCTAArgs = {};
 
-const meta: Meta<ButtonLinkArgs> = {
-  title: "Components/Button/ButtonLink",
+const meta: Meta<ButtonCTAArgs> = {
+  title: "Components/Button/ButtonCTA",
   parameters: {
     controls: { expanded: true },
   },
@@ -72,9 +72,9 @@ const meta: Meta<ButtonLinkArgs> = {
 };
 
 export default meta;
-type Story = StoryObj<ButtonLinkArgs>;
+type Story = StoryObj<ButtonCTAArgs>;
 
-export const ButtonLink1: Story = {
+export const ButtonCTA1: Story = {
   args: {},
 };
 ```
@@ -83,7 +83,7 @@ export const ButtonLink1: Story = {
 
 1. **Naming Conventions**:
 
-   - Use PascalCase for component names (e.g., `ButtonLink`)
+   - Use PascalCase for component names (e.g., `ButtonCTA`)
    - The script will automatically convert the CSS filename to camelCase
    - Keep directory names consistent with component names
 
