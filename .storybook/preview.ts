@@ -5,7 +5,6 @@ import './variables.css';
 
 const preview: Preview = {
   parameters: {
-    // Maintain your existing backgrounds configuration
     backgrounds: {
       values: [
         { name: 'Gray', value: '#F3F4F6' },
@@ -14,22 +13,17 @@ const preview: Preview = {
       default: 'Gray',
     },
 
-    // Maintain your existing controls configuration
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-      // Add sorting for better organization
       sort: 'requiredFirst',
-      // Enable expanded mode by default
       expanded: true,
     },
 
-    // Maintain centered layout
     layout: 'centered',
 
-    // Add viewport configurations
     viewport: {
       viewports: {
         mobile: {
@@ -54,27 +48,21 @@ const preview: Preview = {
           },
         },
       },
-      defaultViewport: 'desktop',
     },
 
-    // Documentation settings
     docs: {
-      // Show code by default
       source: {
         state: 'open',
       },
-      // Configure story sorting
       story: {
-        height: '300px', // Default height for story preview
+        height: '300px',
       },
     },
 
-    // Actions configuration
     actions: {
       argTypesRegex: '^on[A-Z].*'
     },
 
-    // Optional: Add default padding to all stories
     paddings: {
       values: [
         { name: 'None', value: '0' },
@@ -84,12 +72,16 @@ const preview: Preview = {
       ],
       default: 'Medium',
     },
+
+    options: {
+      storySort: {
+        order: ['Welcome', 'Getting Started', 'Willkommen', 'Erste Schritte'],
+      },
+    },
   },
 
-  // Optional: Global decorator for all stories
   decorators: [
     (Story) => {
-      // You can add global wrapper or logic here
       return Story();
     },
   ],
