@@ -1,4 +1,4 @@
-import { ICON_CHEVRON_DOWN_BIG } from '../../../../assets/icons';
+import { IconCategory, IconRegistry } from '../../../../assets/icons';
 import './fAQ.css';
 
 export type AccordionItem = {
@@ -24,7 +24,7 @@ export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
         trigger.className = `w-full flex justify-between items-center gap-6 p-8 text-left ${bgColorClass} hover:bg-secondary-light transition`;
         trigger.innerHTML = `
         <span class="text-subhead3-desktop">${item.trigger}</span>
-        ${ICON_CHEVRON_DOWN_BIG}
+        ${IconRegistry[IconCategory.SYSTEM].chevronDown}
         `;
 
         const separator = document.createElement('div');
