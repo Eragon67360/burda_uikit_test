@@ -27,6 +27,7 @@ const meta: Meta<TextArgs> = {
 
 export default meta;
 type Story = StoryObj<TextArgs>;
+
 export const Ordered: Story = {
     args: {
         variant: 'ordered',
@@ -62,14 +63,67 @@ export const Unordered: Story = {
     },
 };
 
+
 export const Links: Story = {
     args: {
         variant: 'links',
         title: 'Links List Title',
         items: [
-            { text: 'First link', href: '#first' },
-            { text: 'Second link', href: '#second' },
-            { text: 'Third link', href: '#third' },
+            {
+                label: 'First link',
+                href: '#first',
+                disabled: false,
+                iconLeft: false,
+                onClick: () => console.log('First link clicked'),
+                icon: 'arrowRight'
+            },
+            {
+                label: 'Second link',
+                href: '#second',
+                disabled: false,
+                iconLeft: false,
+                onClick: () => console.log('Second link clicked'),
+                icon: 'arrowRight'
+            },
+            {
+                label: 'Third link',
+                href: '#third',
+                disabled: false,
+                iconLeft: false,
+                onClick: () => console.log('Third link clicked'),
+                icon: 'arrowRight'
+            },
+        ],
+    },
+};
+
+export const LinksWithStates: Story = {
+    args: {
+        variant: 'links',
+        title: 'Links With Different States',
+        items: [
+            {
+                label: 'Active link',
+                href: '#active',
+                disabled: false,
+                onClick: () => console.log('Active clicked'),
+                icon: 'arrowRight'
+            },
+            {
+                label: 'Disabled link',
+                href: '#disabled',
+                disabled: true,
+                onClick: () => console.log('Disabled clicked'),
+                icon: 'arrowRight'
+            },
+            {
+                label: 'Icon on left',
+                href: '#left',
+                disabled: false,
+                iconLeft: true,
+                onClick: () => console.log('Left icon clicked'),
+                icon: 'arrowLeft'
+            },
         ],
     },
 };

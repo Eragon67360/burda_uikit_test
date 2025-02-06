@@ -1,54 +1,78 @@
+import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { ButtonLinkArgs, createButtonLink } from '../../Button/ButtonLink/ButtonLink';
 import './text.css'
-import { ICON_ARROW_RIGHT } from '../../../assets/icons';
 
-export type TextArgs = {
-    variant: 'ordered' | 'unordered' | 'links';
-    title?: string;
-    items: Array<{
-        text: string;
-        href?: string;
-    }>;
+type LinkItem = ButtonLinkArgs & {
+  href: string;
 };
+
+type TextItem = {
+  text: string;
+} | LinkItem;
+
+export type TextArgs<T extends 'ordered' | 'unordered' | 'links' = 'ordered' | 'unordered' | 'links'> = {
+  variant: T;
+  title?: string;
+  items: T extends 'links' ? LinkItem[] : TextItem[];
+};
+
 export const createText = ({ variant, title, items }: TextArgs) => {
-    const titleHtml = title
-        ? `<h3 class="text-teaser-desktop mb-4">${title}</h3>`
-        : '';
 
-    if (variant === 'links') {
-        return `
-      <div class="flex flex-col">
-        ${titleHtml}
-        <ul class="list-none">
-          ${items
-                .map(
-                    (item) => `
-            <li class="mb-1">
-              <a href="${item.href || '#'}" class="group flex items-center text-link-desktop no-underline">
-                ${item.text}
-                <span class="ml-2 transition-transform duration-200 group-hover:translate-x-1">
-                  ${ICON_ARROW_RIGHT}
-                </span>
-              </a>
-            </li>
-          `
-                )
-                .join('')}
-        </ul>
-      </div>
-    `;
+  const container = document.createElement('div');
+  container.className = 'flex flex-col';
+
+  if (title) {
+    const titleElement = document.createElement('h3');
+    titleElement.className = 'text-teaser-desktop mb-4';
+    titleElement.textContent = title;
+    container.appendChild(titleElement);
+  }
+
+  if (variant === 'links') {
+    const ul = document.createElement('ul');
+    ul.className = 'list-none';
+
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'mb-1';
+
+      if ('label' in item) {
+        if (!item.href) {
+          console.warn('href should be provided for items in links variant');
+        }
+
+        const buttonLink = createButtonLink({
+          label: item.label,
+          href: item.href,
+          disabled: item.disabled || false,
+          iconLeft: item.iconLeft || false,
+          onClick: item.onClick || (() => { }),
+          icon: item.icon || 'arrowRight',
+        });
+        li.appendChild(buttonLink);
+      }
+
+      ul.appendChild(li);
+    });
+
+    container.appendChild(ul);
+    return container;
+  }
+
+  const list = document.createElement(variant === 'ordered' ? 'ol' : 'ul');
+  list.className = variant === 'ordered'
+    ? 'list-decimal marker:text-bulletpoint-copy-desktop pl-5'
+    : 'list-disc pl-5';
+
+  items.forEach(item => {
+    if ('text' in item) {
+      const li = document.createElement('li');
+      li.className = 'mb-2';
+      li.textContent = item.text;
+      list.appendChild(li);
     }
+  });
 
-    const ListTag = variant === 'ordered' ? 'ol' : 'ul';
-    const listClass = variant === 'ordered'
-        ? 'list-decimal marker:text-bulletpoint-copy-desktop'
-        : 'list-disc';
-
-    return `
-    <div class="flex flex-col">
-      ${titleHtml}
-      <${ListTag} class="${listClass} pl-5">
-        ${items.map((item) => `<li class="mb-2">${item.text}</li>`).join('')}
-      </${ListTag}>
-    </div>
-  `;
+  container.appendChild(list);
+  return container;
 };
