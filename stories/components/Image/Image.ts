@@ -6,7 +6,7 @@ export type ImageArgs = {
 
 const ratioClasses = {
     '1:1': 'aspect-square',
-    '4:3': 'aspect-[4/3]',
+    '4:3': 'aspect-4/3',
     '16:9': 'aspect-video'
 };
 

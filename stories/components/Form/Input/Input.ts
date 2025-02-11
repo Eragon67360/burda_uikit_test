@@ -65,7 +65,7 @@ export const createInput = ({
     rounded-[0.25rem]
     transition-all
     duration-200
-    outline-none
+    outline-hidden
     placeholder:text-neutral-800
     disabled:bg-neutral-100
     disabled:border-transparent

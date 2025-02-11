@@ -43,7 +43,7 @@ export const createButtonIcon = ({
         'group',
         'transition-[color,opacity]',
         'duration-300',
-        'focus:outline-none',
+        'focus:outline-hidden',
         'focus:ring-none',
         'focus:border-transparent',
         'disabled:cursor-not-allowed',
@@ -87,8 +87,8 @@ export const createButtonIcon = ({
             'before:z-0',
             'hover:before:h-full',
             'active:bg-secondary-dark',
-            'before:active:bg-secondary-dark',
-            'before:disabled:bg-transparent'
+            'active:before:bg-secondary-dark',
+            'disabled:before:bg-transparent'
         ] as const,
     };
 
