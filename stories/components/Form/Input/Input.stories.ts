@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { InputArgs, createInput } from './Input';
+import { createTooltip } from '../../Overlay/Tooltip/Tooltip';
 
 const meta: Meta<InputArgs> = {
     title: 'Components (Atoms)/Form/Input',
@@ -124,5 +125,26 @@ export const SideLabel: Story = {
     args: {
         ...Default.args,
         labelPosition: 'side'
+    }
+};
+
+export const WithTooltip: Story = {
+    args: {
+        ...Default.args,
+        state: 'tooltip',
+        tooltipContent: `
+            <div class="text-sm">
+                <p class="font-medium mb-2">Help Information</p>
+                <p class="text-gray-600">This input field accepts any text value. 
+                Please ensure your input follows the required format.</p>
+            </div>
+        `
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Input field with an informational tooltip that provides additional context to the user.'
+            }
+        }
     }
 };
