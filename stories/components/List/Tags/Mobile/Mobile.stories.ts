@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { MobileTagArgs, createMobileTag, createMobileTagGroup } from './Mobile';
 
 const meta: Meta<MobileTagArgs> = {
-    title: 'Components/List/Tags/Mobile',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/List/Tags/Mobile',
+
     parameters: {
         layout: 'centered',
         viewport: {

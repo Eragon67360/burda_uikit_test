@@ -4,8 +4,8 @@ import { IconCategory, IconRegistry } from '../../../assets/icons';
 import { ButtonCTAArgs, ButtonCTAVariant, createButtonCTA } from './ButtonCTA';
 
 const meta: Meta<ButtonCTAArgs> = {
-  title: 'Components/Button/ButtonCTA',
-  tags: ['autodocs'],
+  title: 'Components (Atoms)/Button/ButtonCTA',
+
   parameters: {
     controls: { expanded: true },
   },

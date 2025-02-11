@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { createDesktopTag, createTagGroup, DesktopTagArgs } from './Desktop';
 
 const meta: Meta<DesktopTagArgs> = {
-    title: 'Components/List/Tags/Desktop',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/List/Tags/Desktop',
+
     parameters: {
         controls: { expanded: true },
     },
