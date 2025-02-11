@@ -70,7 +70,7 @@ export const createButtonCTA = ({
     'text-button-label-desktop',
     'transition-all',
     'duration-500',
-    'focus:outline-none',
+    'focus:outline-hidden',
     'focus-visible:ring-2',
     'focus-visible:ring-offset-0',
     'disabled:cursor-not-allowed',
@@ -113,8 +113,8 @@ export const createButtonCTA = ({
       'before:z-10',
       'hover:before:h-full',
       'active:bg-secondary-dark',
-      'before:active:bg-secondary-dark',
-      'before:disabled:bg-transparent',
+      'active:before:bg-secondary-dark',
+      'disabled:before:bg-transparent',
       ...nested ? ['rounded-nested'] : ['rounded']
     ] as const,
 
@@ -164,7 +164,7 @@ export const createButtonCTA = ({
       'before:z-10',
       'hover:before:h-full',
       'active:text-neutral-450',
-      'before:active:bg-base-black',
+      'active:before:bg-base-black',
       'rounded-none'
     ] as const,
 
@@ -190,7 +190,7 @@ export const createButtonCTA = ({
       'before:z-10',
       'hover:before:h-full',
       'active:text-neutral-600',
-      'before:active:bg-neutral-300',
+      'active:before:bg-neutral-300',
       'rounded-none'
     ] as const,
 
@@ -215,7 +215,7 @@ export const createButtonCTA = ({
       'before:ease-in-out',
       'before:z-10',
       'hover:before:h-full',
-      'before:active:bg-primary-dark',
+      'active:before:bg-primary-dark',
       'rounded-none'
     ] as const,
   };

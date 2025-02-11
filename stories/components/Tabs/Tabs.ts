@@ -48,7 +48,7 @@ export const createTabs = ({
         rounded
         transition-colors duration-200 ease-in-out
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
-        focus:outline-none
+        focus:outline-hidden
         focus-visible:border-2 focus-visible:border-base-black
         `;
 

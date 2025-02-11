@@ -1,3 +1,257 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: var(--color-brand);
+
+  --color-primary-interaction: var(--color-brand);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-extra-light: var(--color-primary-extraLight);
+  --color-primary-dark: var(--color-primary-dark);
+
+  --color-secondary-interaction: var(--color-secondary-interaction);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-secondary-extra-light: var(--color-secondary-extraLight);
+  --color-secondary-dark: var(--color-secondary-dark);
+
+  --color-tertiary: var(--color-tertiary);
+
+  --color-system-success: var(--color-system-success);
+  --color-system-notification: var(--color-system-notification);
+  --color-system-error: var(--color-system-error);
+
+  --color-base-transparent: #ffffff00;
+  --color-base-notification: var(--color-base-notification);
+  --color-base-white: var(--color-base-notification);
+  --color-base-black: var(--color-base-black);
+
+  --color-neutral-50: var(--color-neutral-50);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-450: var(--color-neutral-450);
+  --color-neutral-500: var(--color-neutral-500);
+
+  --color-storybook-label: var(--color-storybook-label);
+
+  --radius: 0.5rem;
+  --radius-nested: 0.25rem;
+
+  --font-instrument-sans: 'Instrument Sans', sans-serif;
+  --font-roboto-serif: 'Roboto Serif', serif;
+
+  --text-h1-desktop: 3.25rem;
+  --text-h1-desktop--line-height: 4.125rem;
+  --text-h1-desktop--letter-spacing: -0.04875rem;
+  --text-h1-desktop--font-weight: 600;
+  --text-h2-desktop: 2.75rem;
+  --text-h2-desktop--line-height: 3.125rem;
+  --text-h2-desktop--letter-spacing: -0.0275rem;
+  --text-h2-desktop--font-weight: 600;
+  --text-h3-desktop: 2.25rem;
+  --text-h3-desktop--line-height: 2.5rem;
+  --text-h3-desktop--letter-spacing: -0.0225rem;
+  --text-h3-desktop--font-weight: 600;
+  --text-h4-desktop: 1.875rem;
+  --text-h4-desktop--line-height: 2.25rem;
+  --text-h4-desktop--letter-spacing: -0.01875rem;
+  --text-h4-desktop--font-weight: 600;
+  --text-h5-desktop: 1.5rem;
+  --text-h5-desktop--line-height: 1.75rem;
+  --text-h5-desktop--letter-spacing: -0.015rem;
+  --text-h5-desktop--font-weight: 600;
+  --text-h6-desktop: 1.25rem;
+  --text-h6-desktop--line-height: 1.5rem;
+  --text-h6-desktop--font-weight: 600;
+  --text-subhead1-desktop: 1.875rem;
+  --text-subhead1-desktop--line-height: 2.5rem;
+  --text-subhead1-desktop--font-weight: 600;
+  --text-subhead2-desktop: 1.5rem;
+  --text-subhead2-desktop--line-height: 2rem;
+  --text-subhead2-desktop--font-weight: 600;
+  --text-subhead3-desktop: 1.125rem;
+  --text-subhead3-desktop--line-height: 1.375rem;
+  --text-subhead3-desktop--font-weight: 600;
+  --text-subhead4-desktop: 1rem;
+  --text-subhead4-desktop--line-height: 1.25rem;
+  --text-subhead4-desktop--font-weight: 600;
+  --text-subscription-default-desktop: 2.25rem;
+  --text-subscription-default-desktop--line-height: 3rem;
+  --text-subscription-default-desktop--letter-spacing: -0.045rem;
+  --text-subscription-default-desktop--font-weight: 600;
+  --text-subscription-small-desktop: 1.875rem;
+  --text-subscription-small-desktop--line-height: 2.25rem;
+  --text-subscription-small-desktop--letter-spacing: -0.01875rem;
+  --text-subscription-small-desktop--font-weight: 600;
+  --text-order-step-desktop: 1.875rem;
+  --text-order-step-desktop--line-height: 2.75rem;
+  --text-order-step-desktop--letter-spacing: -0.0375rem;
+  --text-order-step-desktop--font-weight: 700;
+  --text-hotline-footer-default-desktop: 3.75rem;
+  --text-hotline-footer-default-desktop--line-height: 4rem;
+  --text-hotline-footer-default-desktop--font-weight: 400;
+  --text-hotline-footer-small-desktop: 1rem;
+  --text-hotline-footer-small-desktop--line-height: 1rem;
+  --text-hotline-footer-small-desktop--font-weight: 600;
+  --text-teaser-desktop: 1.125rem;
+  --text-teaser-desktop--line-height: 1.5rem;
+  --text-teaser-desktop--letter-spacing: -0.0225rem;
+  --text-teaser-desktop--font-weight: 500;
+  --text-teaser-copy-desktop: 1.125rem;
+  --text-teaser-copy-desktop--line-height: 1.5rem;
+  --text-teaser-copy-desktop--letter-spacing: -0.0225rem;
+  --text-teaser-copy-desktop--font-weight: 700;
+  --text-copy-desktop: 0.875rem;
+  --text-copy-desktop--line-height: 1.25rem;
+  --text-copy-desktop--letter-spacing: -0.00875rem;
+  --text-copy-desktop--font-weight: 400;
+  --text-copy-small-desktop: 0.75rem;
+  --text-copy-small-desktop--line-height: 1.125rem;
+  --text-copy-small-desktop--font-weight: 500;
+  --text-bulletpoint-copy-desktop: 1rem;
+  --text-bulletpoint-copy-desktop--line-height: 1.25rem;
+  --text-bulletpoint-copy-desktop--letter-spacing: 0.01rem;
+  --text-bulletpoint-copy-desktop--font-weight: 600;
+  --text-footer-copy-desktop: 0.75rem;
+  --text-footer-copy-desktop--line-height: 1.125rem;
+  --text-footer-copy-desktop--letter-spacing: 0.0075rem;
+  --text-footer-copy-desktop--font-weight: 400;
+  --text-label-desktop: 0.75rem;
+  --text-label-desktop--line-height: 1.125rem;
+  --text-label-desktop--letter-spacing: -0.0075rem;
+  --text-label-desktop--font-weight: 400;
+  --text-button-label-desktop: 0.875rem;
+  --text-button-label-desktop--line-height: 1.25rem;
+  --text-button-label-desktop--font-weight: 700;
+  --text-button-label-large-desktop: 1.125rem;
+  --text-button-label-large-desktop--line-height: 1.625rem;
+  --text-button-label-large-desktop--letter-spacing: 0.01125rem;
+  --text-button-label-large-desktop--font-weight: 700;
+  --text-input-desktop: 0.875rem;
+  --text-input-desktop--line-height: 1.25rem;
+  --text-input-desktop--font-weight: 500;
+  --text-placeholder-desktop: 0.875rem;
+  --text-placeholder-desktop--line-height: 1.25rem;
+  --text-placeholder-desktop--letter-spacing: -0.00875rem;
+  --text-placeholder-desktop--font-weight: 400;
+  --text-link-desktop: 0.875rem;
+  --text-link-desktop--line-height: 2rem;
+  --text-link-desktop--font-weight: 700;
+  --text-link-small-desktop: 0.75rem;
+  --text-link-small-desktop--line-height: 1.5rem;
+  --text-link-small-desktop--font-weight: 700;
+  --text-h1-mobile: 2.25rem;
+  --text-h1-mobile--line-height: 2.5rem;
+  --text-h1-mobile--letter-spacing: -0.0225rem;
+  --text-h1-mobile--font-weight: 600;
+  --text-h2-mobile: 1.875rem;
+  --text-h2-mobile--line-height: 2.25rem;
+  --text-h2-mobile--letter-spacing: -0.01875rem;
+  --text-h2-mobile--font-weight: 600;
+  --text-h3-mobile: 1.5rem;
+  --text-h3-mobile--line-height: 2rem;
+  --text-h3-mobile--letter-spacing: -0.015rem;
+  --text-h3-mobile--font-weight: 600;
+  --text-h4-mobile: 1.25rem;
+  --text-h4-mobile--line-height: 1.75rem;
+  --text-h4-mobile--letter-spacing: -0.0125rem;
+  --text-h4-mobile--font-weight: 600;
+  --text-h5-mobile: 1.125rem;
+  --text-h5-mobile--line-height: 1.5rem;
+  --text-h5-mobile--font-weight: 600;
+  --text-h6-mobile: 1rem;
+  --text-h6-mobile--line-height: 1.5rem;
+  --text-h6-mobile--font-weight: 600;
+  --text-subhead1-mobile: 1.25rem;
+  --text-subhead1-mobile--line-height: 1.75rem;
+  --text-subhead1-mobile--font-weight: 500;
+  --text-subhead2-mobile: 1.125rem;
+  --text-subhead2-mobile--line-height: 1.625rem;
+  --text-subhead2-mobile--font-weight: 500;
+  --text-subhead3-mobile: 1rem;
+  --text-subhead3-mobile--line-height: 1.375rem;
+  --text-subhead3-mobile--font-weight: 500;
+  --text-subhead4-mobile: 0.875rem;
+  --text-subhead4-mobile--line-height: 1.25rem;
+  --text-subhead4-mobile--font-weight: 500;
+  --text-subscription-default-mobile: 2rem;
+  --text-subscription-default-mobile--font-weight: 600;
+  --text-subscription-small-mobile: 1.5rem;
+  --text-subscription-small-mobile--font-weight: 600;
+  --text-order-step-mobile: 1.5rem;
+  --text-order-step-mobile--line-height: 2.5rem;
+  --text-order-step-mobile--letter-spacing: -0.03rem;
+  --text-order-step-mobile--font-weight: 700;
+  --text-hotline-footer-default-mobile: 2.5rem;
+  --text-hotline-footer-default-mobile--line-height: 3rem;
+  --text-hotline-footer-default-mobile--font-weight: 400;
+  --text-hotline-footer-small-mobile: 1rem;
+  --text-hotline-footer-small-mobile--line-height: 1rem;
+  --text-hotline-footer-small-mobile--font-weight: 600;
+  --text-teaser-mobile: 1rem;
+  --text-teaser-mobile--line-height: 1.25rem;
+  --text-teaser-mobile--font-weight: 500;
+  --text-copy-mobile: 0.875rem;
+  --text-copy-mobile--line-height: 1.25rem;
+  --text-copy-mobile--letter-spacing: -0.00875rem;
+  --text-copy-mobile--font-weight: 400;
+  --text-copy-small-mobile: 0.75rem;
+  --text-copy-small-mobile--line-height: 1rem;
+  --text-copy-small-mobile--font-weight: 400;
+  --text-bulletpoint-copy-mobile: 0.875rem;
+  --text-bulletpoint-copy-mobile--line-height: 1.25rem;
+  --text-bulletpoint-copy-mobile--font-weight: 600;
+  --text-footer-copy-mobile: 0.875rem;
+  --text-footer-copy-mobile--line-height: 1.25rem;
+  --text-footer-copy-mobile--letter-spacing: 0.00875rem;
+  --text-footer-copy-mobile--font-weight: 400;
+  --text-label-mobile: 0.75rem;
+  --text-label-mobile--line-height: 0.875rem;
+  --text-label-mobile--letter-spacing: -0.0075rem;
+  --text-label-mobile--font-weight: 400;
+  --text-button-label-mobile: 0.875rem;
+  --text-button-label-mobile--line-height: 1rem;
+  --text-button-label-mobile--font-weight: 700;
+  --text-button-label-large-mobile: 1rem;
+  --text-button-label-large-mobile--line-height: 1.25rem;
+  --text-button-label-large-mobile--letter-spacing: 0.02rem;
+  --text-button-label-large-mobile--font-weight: 700;
+  --text-input-mobile: 0.875rem;
+  --text-input-mobile--line-height: 1.25rem;
+  --text-input-mobile--font-weight: 500;
+  --text-placeholder-mobile: 0.875rem;
+  --text-placeholder-mobile--line-height: 1.25rem;
+  --text-placeholder-mobile--letter-spacing: -0.00875rem;
+  --text-placeholder-mobile--font-weight: 400;
+  --text-link-mobile: 0.875rem;
+  --text-link-mobile--line-height: 1.75rem;
+  --text-link-mobile--font-weight: 700;
+  --text-link-small-mobile: 0.75rem;
+  --text-link-small-mobile--line-height: 1rem;
+  --text-link-small-mobile--font-weight: 700;
+  --text-label: 0.9375;
+  --text-label--line-height: 1.4375rem;
+  --text-label--letter-spacing: -0.01875rem;
+  --text-label--font-weight: 500;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
