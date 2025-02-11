@@ -1,9 +1,10 @@
 import { IconRegistry, IconCategory } from "../../../assets/icons";
+import { createTooltip } from "../../Overlay/Tooltip/Tooltip";
 import './input.css'
 export type InputVariant = 'input' | 'textarea';
 export type InputType = 'text' | 'email' | 'password' | 'tel' | 'number';
 export type LabelPosition = 'top' | 'side';
-export type InputState = 'default' | 'error' | 'success' | 'highlighted';
+export type InputState = 'default' | 'error' | 'success' | 'highlighted' | 'tooltip';
 
 export type InputArgs = {
     variant?: InputVariant;
@@ -16,6 +17,7 @@ export type InputArgs = {
     state?: InputState;
     errorMessage?: string;
     value?: string;
+    tooltipContent?: string;
 };
 
 export const createInput = ({
@@ -28,7 +30,8 @@ export const createInput = ({
     disabled = false,
     state = 'default',
     errorMessage = '',
-    value = ''
+    value = '',
+    tooltipContent = ''
 }: InputArgs) => {
     const wrapper = document.createElement('div');
     wrapper.className = `input-wrapper ${labelPosition === 'side' ? 'flex items-center gap-4' : 'flex flex-col gap-2'
@@ -58,10 +61,7 @@ export const createInput = ({
     const inputElement = document.createElement(variant);
     const baseClasses = `
     w-full
-    px-4
-    py-0
     border
-    relative
     rounded-[0.25rem]
     transition-all
     duration-200
@@ -71,7 +71,7 @@ export const createInput = ({
     disabled:border-transparent
     disabled:cursor-not-allowed
     disabled:placeholder:text-neutral-400
-    ${variant === 'textarea' ? 'min-h-[100px] resize-handle-center' : 'h-[2.75rem]'}
+    ${variant === 'textarea' ? 'min-h-[100px] resize-handle-center px-4 py-3' : 'h-[2.75rem] px-4 py-0'}
   `;
 
     const stateClasses = {
@@ -81,6 +81,18 @@ export const createInput = ({
         border-neutral-450
         enabled:active:border-secondary-extra-light
         active:bg-secondary-extra-light
+        active:ring-0
+        focus:ring-2
+        focus:ring-base-black
+        focus:border-base-black
+    `,
+        tooltip: `
+       bg-base-white
+        placeholder-shown:bg-neutral-100
+        border-neutral-450
+        enabled:active:border-secondary-extra-light
+        active:bg-secondary-extra-light
+        active:ring-0
         focus:ring-2
         focus:ring-base-black
         focus:border-base-black
@@ -102,27 +114,53 @@ export const createInput = ({
     if (value) {
         inputElement.value = value;
     }
-    if (state === 'error' || state === 'success') {
+
+    // if (state === 'error' || state === 'success') {
+    //     const iconWrapper = document.createElement('div');
+    //     if (state === 'error') {
+    //         iconWrapper.className = 'absolute right-4 top-1/2 -mt-[1.375rem]';
+    //     } else {
+    //         iconWrapper.className = 'absolute right-4 top-1/2 -translate-y-1/2';
+    //     }
+    //     const icon = document.createElement('span');
+    //     icon.innerHTML = state === 'error'
+    //         ? IconRegistry[IconCategory.SYSTEM].warningFilled
+    //         : IconRegistry[IconCategory.SYSTEM].checkAlt;
+
+    //     icon.classList.add(state === 'error' ? 'text-system-error' : 'text-system-success');
+
+    //     iconWrapper.appendChild(icon);
+    //     inputContainer.appendChild(iconWrapper);
+
+    //     inputElement.classList.add('pr-12');
+    // }
+    if (state === 'error' || state === 'success' || state === 'tooltip') {
         const iconWrapper = document.createElement('div');
 
         if (state === 'error') {
             iconWrapper.className = 'absolute right-4 top-1/2 -mt-[1.375rem]';
-        } else {
+            const icon = document.createElement('span');
+            icon.innerHTML = IconRegistry[IconCategory.SYSTEM].warningFilled;
+            icon.classList.add('text-system-error');
+            iconWrapper.appendChild(icon);
+        } else if (state === 'success') {
             iconWrapper.className = 'absolute right-4 top-1/2 -translate-y-1/2';
+            const icon = document.createElement('span');
+            icon.innerHTML = IconRegistry[IconCategory.SYSTEM].checkAlt;
+            icon.classList.add('text-system-success');
+            iconWrapper.appendChild(icon);
+        } else if (state === 'tooltip' && tooltipContent) {
+            iconWrapper.className = 'absolute right-2 top-1/2 -translate-y-1/2';
+            const tooltip = createTooltip({
+                content: tooltipContent,
+                position: 'top'
+            });
+            iconWrapper.appendChild(tooltip);
         }
-        const icon = document.createElement('span');
-        icon.innerHTML = state === 'error'
-            ? IconRegistry[IconCategory.SYSTEM].warningFilled
-            : IconRegistry[IconCategory.SYSTEM].checkAlt;
 
-        icon.classList.add(state === 'error' ? 'text-system-error' : 'text-system-success');
-
-        iconWrapper.appendChild(icon);
         inputContainer.appendChild(iconWrapper);
-
         inputElement.classList.add('pr-12');
     }
-
     inputContainer.appendChild(inputElement);
 
     if (state === 'error' && errorMessage) {
