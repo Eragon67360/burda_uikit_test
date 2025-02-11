@@ -6,10 +6,9 @@ const burdaTheme = create({
     base: 'light',
     brandTitle: 'FOCUS Abo-Shop UI Kit',
     brandUrl: 'https://focus-abo.de/',
-    brandImage: '/burda_logo.png',
-
+    brandImage: '/burda.svg',
     colorPrimary: '#E61F24',
-    colorSecondary: '#8ACBBF',
+    colorSecondary: '#8ACBBF'
 });
 
 addons.setConfig({
@@ -27,6 +26,6 @@ addons.setConfig({
     showToolbar: true,
     showNav: true,
     showPanel: true,
-    panelPosition: 'bottom',
+    panelPosition: 'right',
     selectedPanel: 'docs',
 });

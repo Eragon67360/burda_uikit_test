@@ -24,7 +24,9 @@ import { Meta } from "@storybook/addon-docs";
 
     <div className="grid grid-cols-2 md:grid-cols-2 gap-8 mb-2 sb-unstyled w-full">
         <div className="bg-primary-extra-light p-6 rounded-lg sb-unstyled">
-            <h2 className="text-h6-desktop mb-4 text-base-black sb-unstyled">Technischer Stack</h2>
+            <p className="text-h6-desktop mb-4 text-base-black sb-unstyled">
+                ## Technischer Stack
+            </p>
             <ul className="text-copy-desktop text-base-black space-y-2 sb-unstyled">
                 <li>• HTML5 für semantisches Markup</li>
                 <li>• TypeScript für typsichere Komponenten-Logik</li>
@@ -34,7 +36,9 @@ import { Meta } from "@storybook/addon-docs";
         </div>
 
         <div className="bg-secondary-extra-light p-6 rounded-lg sb-unstyled">
-            <h2 className="text-h6-desktop mb-4 text-base-black sb-unstyled">Hauptmerkmale</h2>
+            <p className="text-h6-desktop mb-4 text-base-black sb-unstyled">
+                ## Hauptmerkmale
+            </p>
             <ul className="text-copy-desktop text-neutral-500 space-y-2 sb-unstyled">
                 <li>• Vanilla JavaScript/TypeScript Komponenten</li>
                 <li>• Responsive Design-Muster</li>
@@ -45,33 +49,33 @@ import { Meta } from "@storybook/addon-docs";
     </div>
 
     <div className="border-t mt-4">
-        <h2 className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
-            Komponenten-Struktur
-        </h2>
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Komponenten-Struktur
+        </p>
         <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
             Jede Komponente folgt einer einheitlichen Struktur:
         </div>
         <div className="gap-4 mt-4 sb-unstyled grid grid-cols-2 sb-unstyled">
             <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
-                <h3 className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
-                    Stories-Datei (.stories.ts)
-                </h3>
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Stories-Datei (.stories.ts)
+                </p>
                 <div className="text-copy-desktop text-neutral-500 sb-unstyled">
                     Enthält Storybook-Konfiguration, Steuerelemente und Dokumentation für die Komponente.
                 </div>
             </div>
             <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
-                <h3 className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
-                    Komponenten-Datei (.ts)
-                </h3>
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Komponenten-Datei (.ts)
+                </p>
                 <div className="text-copy-desktop text-neutral-500 sb-unstyled">
                     Beinhaltet die Komponenten-Logik, Typ-Definitionen und DOM-Manipulation.
                 </div>
             </div>
             <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
-                <h3 className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
-                    Styles (.css)
-                </h3>
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Styles (.css)
+                </p>
                 <div className="text-copy-desktop text-neutral-500 sb-unstyled">
                     Optionale CSS-Datei für komplexe Animationen oder Styles, die nicht von TailwindCSS abgedeckt werden.
                 </div>
@@ -80,29 +84,35 @@ import { Meta } from "@storybook/addon-docs";
     </div>
 
     <div className="border-t mt-4">
-        <h2 className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
-            Links
-        </h2>
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Links
+        </p>
         <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
             Hier sind einige Schnelllinks, die Ihnen den Einstieg erleichtern:
         </div>
         <div className="gap-4 mt-4 sb-unstyled grid grid-cols-2 sb-unstyled">
             <a href="/?path=/docs/erste-schritte" className="border rounded-lg p-6 sb-unstyled">
-                <h3 className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">Erste Schritte</h3>
+                <p className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">
+                    ### Erste Schritte
+                </p>
                 <div className="text-copy-desktop text-neutral-500 sb-unstyled">
                     Erfahren Sie, wie Sie unsere Komponenten in Ihre FOCUS Abo-Shop Projekte integrieren und verwenden können.
                 </div>
             </a>
 
             <a href="/?path=/docs/components" className="border border-neutral-200 rounded-lg p-6 sb-unstyled">
-                <h3 className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">Komponenten</h3>
+                <p className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">
+                    ### Komponenten
+                </p>
                 <div className="text-copy-desktop text-neutral-500 sb-unstyled">
                     Entdecken Sie unsere Bibliothek vorgefertigter UI-Komponenten mit Live-Beispielen und Dokumentation.
                 </div>
             </a>
 
             <a href="/?path=/docs/design-system" className="border border-neutral-200 rounded-lg p-6">
-                <h3 className="text-subhead3-desktop mb-3 text-base-black">Design Tokens</h3>
+                <p className="text-subhead3-desktop mb-3 text-base-black">
+                    ### Design Tokens
+                </p>
                 <div className="text-copy-desktop text-neutral-500">
                     Referenzieren Sie unsere Design-Grundlagen einschließlich Farben, Typografie und Abstandsvariablen.
                 </div>
@@ -111,9 +121,9 @@ import { Meta } from "@storybook/addon-docs";
     </div>
 
     <div className="border-t mt-4 w-full">
-        <h2 className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
-            Entwicklungsrichtlinien
-        </h2>
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Entwicklungsrichtlinien
+        </p>
         <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
             Befolgen Sie diese Tipps, um Konsistenz zwischen UI-Kit Codebasis und Website-Entwicklung sicherzustellen
         </div>

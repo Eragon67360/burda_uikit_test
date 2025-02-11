@@ -1,9 +1,11 @@
 // .storybook/preview.ts
 import type { Preview } from '@storybook/html';
+
 import './tailwind.css';
 import './variables.css';
 
 const preview: Preview = {
+  tags: ['autodocs'],
   parameters: {
     backgrounds: {
       values: [
@@ -43,7 +45,7 @@ const preview: Preview = {
         desktop: {
           name: 'Desktop',
           styles: {
-            width: '1024px',
+            width: '1320px',
             height: '768px',
           },
         },
@@ -51,11 +53,25 @@ const preview: Preview = {
     },
 
     docs: {
-      source: {
-        state: 'open',
+      toc: {
+        headingSelector: 'h2, h3',
+        title: 'On this page',
+        disable: false,
+      },
+      canvas: {
+        layout: 'fullscreen',
       },
       story: {
-        height: '300px',
+        height: '250px',
+        inline: true,
+        iframeHeight: '500px',
+      },
+      parameters: {
+        layout: 'padded',
+        padding: '1rem',
+      },
+      source: {
+        state: 'open',
       },
     },
 
