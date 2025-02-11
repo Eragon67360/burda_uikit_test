@@ -5,8 +5,8 @@ import { createIcon, IconProps } from './Icon';
 import { IconRegistry, IconCategory } from '../../assets/icons';
 
 const meta: Meta<IconProps> = {
-    title: 'Components/Icon',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Icon',
+
     parameters: {
         layout: 'centered',
     },

@@ -5,10 +5,10 @@ import { createTextbox } from '../../List/Accordion/Textbox/Textbox';
 import { IconCategory, IconRegistry } from '../../../assets/icons';
 
 const meta: Meta<ModalArgs> = {
-    title: 'Components/Overlay/Modal',
-    tags: ['autodocs'],
+    title: 'Components (Organisms)/Overlay/Modal',
+
     parameters: {
-        layout: 'centered',
+        layout: 'padded',
     },
     argTypes: {
         isOpen: {

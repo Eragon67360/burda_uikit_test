@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { ImageArgs, createImage } from './Image';
 
 const meta: Meta<ImageArgs> = {
-    title: 'Components/Image',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Image',
+
     parameters: {
         layout: 'padded',
     },

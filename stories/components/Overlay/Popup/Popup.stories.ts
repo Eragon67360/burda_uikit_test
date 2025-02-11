@@ -3,8 +3,8 @@ import { PopupArgs, PopupTriggerArgs, createPopupWithTrigger } from './Popup';
 import { IconRegistry, IconCategory } from '../../../assets/icons';
 
 const meta: Meta<PopupTriggerArgs> = {
-    title: 'Components/Overlay/Popup',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Overlay/Popup',
+
     parameters: {
         layout: 'centered',
     },

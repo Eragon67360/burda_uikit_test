@@ -3,8 +3,7 @@ import { CharacteristicArgs, createCharacteristic } from './Characteristic';
 import { IconCategory, IconRegistry } from '../../../assets/icons';
 
 const meta: Meta<CharacteristicArgs> = {
-    title: 'Components/Table/Characteristic',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Table/Characteristic',
     parameters: {
         layout: 'padded',
     },

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { createSelectionList, SelectionListArgs } from './SelectionList';
 
 const meta: Meta<SelectionListArgs> = {
-    title: 'Components/List/SelectionList',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/List/SelectionList',
+
     parameters: {
         layout: 'centered',
     },

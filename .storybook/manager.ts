@@ -9,7 +9,7 @@ const burdaTheme = create({
     brandImage: '/burda_logo.png',
 
     colorPrimary: '#E61F24',
-    colorSecondary: '#8ACBBF',
+    colorSecondary: '#8ACBBF'
 });
 
 addons.setConfig({
@@ -27,6 +27,6 @@ addons.setConfig({
     showToolbar: true,
     showNav: true,
     showPanel: true,
-    panelPosition: 'bottom',
+    panelPosition: 'right',
     selectedPanel: 'docs',
 });

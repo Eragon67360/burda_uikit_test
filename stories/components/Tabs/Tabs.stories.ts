@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { TabsArgs, createTabs } from './Tabs';
 
 const meta: Meta<TabsArgs> = {
-    title: 'Components/Tabs',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Tabs',
+
     parameters: {
         layout: 'centered',
     },

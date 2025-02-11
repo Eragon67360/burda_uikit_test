@@ -3,8 +3,8 @@ import { IconCategory, IconRegistry } from '../../../assets/icons';
 import { ButtonLinkArgs, createButtonLink } from './ButtonLink';
 
 const meta: Meta<ButtonLinkArgs> = {
-    title: 'Components/Button/ButtonLink',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Button/ButtonLink',
+
     parameters: {
         controls: { expanded: true },
     },
