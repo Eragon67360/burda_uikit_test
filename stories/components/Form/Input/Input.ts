@@ -115,25 +115,6 @@ export const createInput = ({
         inputElement.value = value;
     }
 
-    // if (state === 'error' || state === 'success') {
-    //     const iconWrapper = document.createElement('div');
-    //     if (state === 'error') {
-    //         iconWrapper.className = 'absolute right-4 top-1/2 -mt-[1.375rem]';
-    //     } else {
-    //         iconWrapper.className = 'absolute right-4 top-1/2 -translate-y-1/2';
-    //     }
-    //     const icon = document.createElement('span');
-    //     icon.innerHTML = state === 'error'
-    //         ? IconRegistry[IconCategory.SYSTEM].warningFilled
-    //         : IconRegistry[IconCategory.SYSTEM].checkAlt;
-
-    //     icon.classList.add(state === 'error' ? 'text-system-error' : 'text-system-success');
-
-    //     iconWrapper.appendChild(icon);
-    //     inputContainer.appendChild(iconWrapper);
-
-    //     inputElement.classList.add('pr-12');
-    // }
     if (state === 'error' || state === 'success' || state === 'tooltip') {
         const iconWrapper = document.createElement('div');
 

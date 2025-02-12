@@ -75,8 +75,12 @@ def update_mdx_file(component_path):
     with open(mdx_path, 'w') as f:
         f.write(new_content)
 
-def create_component_files(component_path):
-    # Your existing create_component_files function here...
+def create_component_files(component_path, atomic_type=None):
+    valid_atomic_types = ['Atom', 'Molecule', 'Organism']
+    if atomic_type and atomic_type not in valid_atomic_types:
+        print(f"Error: Atomic type must be one of {', '.join(valid_atomic_types)}")
+        sys.exit(1)
+
     parts = component_path.split('/')
     component_name = parts[-1]
     
@@ -85,15 +89,18 @@ def create_component_files(component_path):
     
     os.makedirs(full_path, exist_ok=True)
     
+    # Create CSS file
     css_filename = f"{component_name[0].lower()}{component_name[1:]}.css"
     with open(os.path.join(full_path, css_filename), 'w') as f:
         pass
     
+    # Create component file
     ts_content = f"""import './{css_filename}'
     
 export type {component_name}Args = {{
 
 }};
+
 export const create{component_name} = ({{}}) => {{
   
 }}
@@ -101,12 +108,14 @@ export const create{component_name} = ({{}}) => {{
     with open(os.path.join(full_path, f"{component_name}.ts"), 'w') as f:
         f.write(ts_content)
     
+    # Create stories file
+    title_prefix = f"Components ({atomic_type}s)" if atomic_type else "Components"
     stories_content = f"""import type {{ Meta, StoryObj }} from '@storybook/html';
 import {{ create{component_name}, {component_name}Args }} from './{component_name}';
 
 const meta: Meta<{component_name}Args> = {{
-    title: 'Components/{"/".join(parts)}',
-    tags:['autodocs'],
+    title: '{title_prefix}/{"/".join(parts)}',
+    tags: ['autodocs'],
     parameters: {{
         controls: {{ expanded: true }},
     }},
@@ -128,13 +137,15 @@ export const {component_name}1: Story = {{
         f.write(stories_content)
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python script.py ComponentPath")
-        print("Example: python script.py Button/ButtonCTA")
+    if len(sys.argv) not in [2, 3]:
+        print("Usage: python script.py ComponentPath [AtomicType]")
+        print("Example: python script.py Button/ButtonCTA [Atom|Molecule|Organism]")
         sys.exit(1)
     
     component_path = sys.argv[1]
-    create_component_files(component_path)
+    atomic_type = sys.argv[2] if len(sys.argv) == 3 else None
+    
+    create_component_files(component_path, atomic_type)
     print(f"Component files created successfully for {component_path}")
 
 if __name__ == "__main__":
