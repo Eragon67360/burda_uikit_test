@@ -6,7 +6,8 @@
     "watch:tailwindcss": "npx @tailwindcss/cli -i ./tailwind.css -o ./.storybook/tailwind.css --watch",
     "watch:storybook": "storybook dev -p 6006",
     "build": "storybook build",
-    "dev": "concurrently --kill-others \"npm run watch:tailwindcss\" \"npm run watch:storybook\""
+    "dev": "concurrently --kill-others \"npm run watch:tailwindcss\" \"npm run watch:storybook\"",
+    "preview-storybook": "serve storybook-static -s -l 6007"
   },
   "repository": {
     "type": "git",
