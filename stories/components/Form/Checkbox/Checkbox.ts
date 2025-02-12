@@ -36,6 +36,7 @@ export const createCheckbox = ({
         relative appearance-none size-4.5 rounded-sm
         border border-neutral-450 bg-neutral-100
         checked:border-base-black
+        hover:border-secondary-dark
         focus-visible:ring-2
         focus-visible:border-transparent
         transition
