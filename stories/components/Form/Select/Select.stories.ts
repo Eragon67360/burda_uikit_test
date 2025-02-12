@@ -6,6 +6,11 @@ const meta: Meta<SelectArgs> = {
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
+        docs: {
+            description: {
+                component: 'A customizable select component that supports both single and multiple selection modes.'
+            }
+        }
     },
     argTypes: {
         placeholder: {
@@ -29,6 +34,10 @@ const meta: Meta<SelectArgs> = {
             control: 'boolean',
             description: 'Whether the select is disabled',
         },
+        multiple: {
+            control: 'boolean',
+            description: 'Enable multiple selection mode',
+        }
     },
     render: (args) => createSelect(args)
 };
@@ -42,26 +51,107 @@ const defaultItems = [
     { value: '3', label: 'Option 3' },
 ];
 
-export const Default: Story = {
+const manyItems = [
+    { value: '1', label: 'Marketing' },
+    { value: '2', label: 'Sales' },
+    { value: '3', label: 'Engineering' },
+    { value: '4', label: 'Human Resources' },
+    { value: '5', label: 'Legal' },
+    { value: '6', label: 'Finance' },
+    { value: '7', label: 'Operations' },
+    { value: '8', label: 'Product' },
+    { value: '9', label: 'Design' },
+    { value: '10', label: 'Customer Support' },
+];
+
+export const SingleSelect: Story = {
     args: {
         placeholder: 'Select an option',
         items: defaultItems,
-        labelText: 'Select Label',
+        labelText: 'Single Select',
         labelPosition: 'above',
         disabled: false,
+        multiple: false,
     },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Default single-select variant with label positioned above.'
+            }
+        }
+    }
+};
+
+export const MultiSelect: Story = {
+    args: {
+        placeholder: 'Select departments',
+        items: manyItems,
+        labelText: 'Multi Select',
+        labelPosition: 'above',
+        disabled: false,
+        multiple: true,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Multi-select variant with checkboxes and selection counter badge. Supports scrollable list for many options.'
+            }
+        }
+    }
 };
 
 export const LabelBeside: Story = {
     args: {
-        ...Default.args,
+        ...SingleSelect.args,
         labelPosition: 'beside',
     },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Single-select variant with label positioned beside the select.'
+            }
+        }
+    }
+};
+
+export const MultiSelectBeside: Story = {
+    args: {
+        ...MultiSelect.args,
+        labelPosition: 'beside',
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Multi-select variant with label positioned beside the select.'
+            }
+        }
+    }
 };
 
 export const Disabled: Story = {
     args: {
-        ...Default.args,
+        ...SingleSelect.args,
         disabled: true,
     },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Disabled state of the select component.'
+            }
+        }
+    }
+};
+
+export const DisabledMulti: Story = {
+    args: {
+        ...MultiSelect.args,
+        disabled: true,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'Disabled state of the multi-select component.'
+            }
+        }
+    }
 };
