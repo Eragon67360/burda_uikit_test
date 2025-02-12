@@ -35,7 +35,7 @@ export const createRadioGroup = ({
     const radioContainer = document.createElement('div');
     radioContainer.className = `
         flex 
-        ${direction === 'horizontal' ? 'flex-row gap-6' : 'flex-col gap-2'} 
+        ${direction === 'horizontal' ? 'flex-row gap-6' : 'flex-col gap-[17px]'} 
         items-${direction === 'horizontal' ? 'center' : 'start'}
         
     `.trim();
