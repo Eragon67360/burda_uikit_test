@@ -110,13 +110,9 @@ export const createDatePicker = ({
         } else {
             const weeks = generateCalendar(date);
             calendar.innerHTML = `
-                <div class="flex justify-between items-center mb-4">
-                    <button type="button" class="prev-month p-2 hover:bg-gray-100 rounded cursor-pointer hover:bg-secondary-extra-light transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path
-                                d="M0.528617 9.5286L7.86193 2.19526C8.12227 1.93491 8.5444 1.93491 8.80474 2.19526C9.06509 2.4556 9.06509 2.87773 8.80474 3.13807L1.94284 10L8.80474 16.8619C9.06509 17.1223 9.06509 17.5444 8.80474 17.8048C8.5444 18.0651 8.12227 18.0651 7.86193 17.8048L0.528585 10.4714C0.268273 10.2111 0.268273 9.78894 0.528617 9.5286Z"
-                                fill="black" />
-                        </svg>
+                <div class="flex justify-between items-center mb-4 gap-2">
+                    <button type="button" class="prev-month p-2 rounded cursor-pointer hover:bg-secondary-extra-light transition-all flex items-center justify-center">
+                        ${IconRegistry[IconCategory.SYSTEM].chevronLeft}
                     </button>
                     <div class="flex flex-col w-full rounded-md gap-2 p-2 text-teaser-copy-desktop items-center cursor-pointer month-year-selector hover:bg-secondary-extra-light transition-all">
                         <p>${LOCALE_CONFIG[language].months[date.getMonth()]} ${date.getFullYear()}</p>
@@ -124,12 +120,8 @@ export const createDatePicker = ({
                             <path d="M7.35355 7.35354L12.8536 1.85355C13.0488 1.6583 13.0488 1.3417 12.8536 1.14644C12.6583 0.951186 12.3417 0.951185 12.1464 1.14644L6.99999 6.29287L1.85354 1.14644C1.65828 0.951185 1.34169 0.951185 1.14643 1.14644C0.95117 1.3417 0.95117 1.65829 1.14643 1.85355L6.64644 7.35356C6.8417 7.5488 7.15829 7.5488 7.35355 7.35354Z" fill="black" stroke="black" stroke-width="0.5"/>
                         </svg>
                     </div>
-                    <button type="button" class="next-month p-2 hover:bg-gray-100 rounded cursor-pointer hover:bg-secondary-extra-light transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path
-                                d="M19.4714 9.5286L12.1381 2.19526C11.8777 1.93491 11.4556 1.93491 11.1953 2.19526C10.9349 2.4556 10.9349 2.87773 11.1953 3.13807L18.0572 10L11.1953 16.8619C10.9349 17.1223 10.9349 17.5444 11.1953 17.8048C11.4556 18.0651 11.8777 18.0651 12.1381 17.8048L19.4714 10.4714C19.7317 10.2111 19.7317 9.78894 19.4714 9.5286Z"
-                                fill="black" />
-                        </svg>
+                    <button type="button" class="next-month p-2 rounded cursor-pointer hover:bg-secondary-extra-light transition-all flex items-center justify-center">
+                        ${IconRegistry[IconCategory.SYSTEM].chevronRight}
                     </button>
                 </div>
                 <div class="grid grid-cols-7 gap-1 text-center">
@@ -265,16 +257,16 @@ export const createDatePicker = ({
                 </svg>
             </div>
 
-            <input type="text" class="w-full h-[2.75rem] px-4 py-0 bg-neutral-100 border rounded-[0.25rem] 
+            <input type="text" class="w-full h-[2.75rem] px-4 py-0 border rounded-[0.25rem] 
                         transition-all duration-200 outline-hidden placeholder:text-neutral-800 
                         disabled:bg-neutral-100 disabled:border-transparent disabled:cursor-not-allowed 
                         disabled:placeholder:text-neutral-400 bg-neutral-100 
                         placeholder-shown:bg-neutral-100 border-neutral-450 
                         enabled:active:border-secondary-extra-light active:bg-secondary-extra-light 
-                        active:ring-0 focus:ring-0 focus:border-base-black focus:border-base-black"
+                        active:ring-0 focus:ring-0 focus:border-base-black"
                 placeholder="${placeholder}" ${disabled ? 'disabled' : ''} value="${value}">
 
-            <div class="absolute z-50 left-0 right-0 mt-1 w-80 bg-white shadow-lg rounded-lg p-4 hidden calendar-wrapper">
+            <div class="absolute z-50 left-0 right-0 mt-1 w-80 bg-white shadow-popover rounded-lg p-4 hidden calendar-wrapper">
                 <div class="calendar-content">
 
                 </div>

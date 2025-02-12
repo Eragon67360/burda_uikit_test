@@ -236,6 +236,9 @@
 
   --font-weight-normal: 400;
   --font-weight-bold: 700;
+
+  --shadow-popover: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+
 }
 
 /*
@@ -247,6 +250,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
