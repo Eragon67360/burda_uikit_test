@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { TextArgs, createText } from './Text';
 
 const meta: Meta<TextArgs> = {
-    title: 'Components/Table/Text',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Table/Text',
+
     parameters: {
         layout: 'padded',
     },

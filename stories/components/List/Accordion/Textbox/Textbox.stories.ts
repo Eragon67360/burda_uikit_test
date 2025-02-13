@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { createTextbox, TextboxArgs } from './Textbox';
 
 const meta: Meta<TextboxArgs> = {
-    title: 'Components/List/Accordion/Textbox',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/List/Accordion/Textbox',
+
     parameters: {
         layout: 'centered',
     },

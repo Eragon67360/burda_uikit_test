@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { createFAQ, FAQArgs } from './FAQ';
 
 const meta: Meta<FAQArgs> = {
-    title: 'Components/List/Accordion/FAQ',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/List/Accordion/FAQ',
+
     parameters: {
         layout: 'centered',
     },

@@ -13,19 +13,27 @@ This script automates the creation of new component files following our project'
 ## Usage
 
 ```bash
-python create_component.py ComponentPath
+python create_component.py ComponentPath [AtomicType]
 ```
 
 or (if running in WSL)
 
 ```bash
-python3 create_component.py ComponentPath
+python3 create_component.py ComponentPath [AtomicType]
 ```
 
-### Example:
+### Examples:
+
+Basic usage:
 
 ```bash
 python create_component.py Button/ButtonCTA
+```
+
+With Atomic Design type:
+
+```bash
+python create_component.py Button/ButtonCTA Atom
 ```
 
 This will create:
@@ -44,61 +52,82 @@ stories/
 
 ### 1. CSS File (`buttonCTA.css`)
 
-- Empty file for component-specific styles
-- Automatically named in camelCase
+```css
+/* Empty file for component-specific styles */
+```
 
 ### 2. Component File (`ButtonCTA.js`)
 
 ```javascript
 import "./buttonCTA.css";
 
+export type ButtonCTAArgs = {};
+
 export const createButtonCTA = ({}) => {};
 ```
 
 ### 3. Stories File (`ButtonCTA.stories.ts`)
 
+Without Atomic Type:
+
 ```typescript
 import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonCTA } from "./ButtonCTA";
-
-type ButtonCTAArgs = {};
+import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
 
 const meta: Meta<ButtonCTAArgs> = {
   title: "Components/Button/ButtonCTA",
+  tags: ["autodocs"],
   parameters: {
     controls: { expanded: true },
   },
   argTypes: {},
+  render: (args) => createButtonCTA(args as any),
 };
+```
 
-export default meta;
-type Story = StoryObj<ButtonCTAArgs>;
+With Atomic Type:
 
-export const ButtonCTA1: Story = {
-  args: {},
+```typescript
+import type { Meta, StoryObj } from "@storybook/html";
+import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
+
+const meta: Meta<ButtonCTAArgs> = {
+  title: "Components (Atoms)/Button/ButtonCTA",
+  tags: ["autodocs"],
+  parameters: {
+    controls: { expanded: true },
+  },
+  argTypes: {},
+  render: (args) => createButtonCTA(args as any),
 };
 ```
 
 ## Important Notes
 
-1. **Naming Conventions**:
+1. **Atomic Design Types**:
+
+   - Optional argument: `Atom`, `Molecule`, or `Organism`
+   - Affects the component's story title organization
+   - If not provided, uses default "Components" category
+
+2. **Naming Conventions**:
 
    - Use PascalCase for component names (e.g., `ButtonCTA`)
    - The script will automatically convert the CSS filename to camelCase
    - Keep directory names consistent with component names
 
-2. **Path Structure**:
+3. **Path Structure**:
 
    - Use forward slashes (`/`) to separate directories
    - The last part of the path will be used as the component name
    - Example: `Category/Subcategory/ComponentName`
 
-3. **Existing Files**:
+4. **Existing Files**:
 
    - The script will not overwrite existing files
    - If a directory already exists, the script will attempt to create files inside it
 
-4. **Requirements**:
+5. **Requirements**:
    - Python 3.x installed on your system
    - Script must be run from the project root directory
    - The `stories/components` directory structure must exist
@@ -124,4 +153,5 @@ export const ButtonCTA1: Story = {
 1. Always verify the generated files after creation
 2. Follow the naming conventions strictly
 3. Run the script from the project root directory
-4. Back up any existing files before running the script in their location
+4. Use atomic design types consistently across related components
+5. Back up any existing files before running the script in their location

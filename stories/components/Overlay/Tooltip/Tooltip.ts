@@ -38,7 +38,6 @@ export const createTooltip = ({
     closeButton.className = 'absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full transition-colors';
     closeButton.innerHTML = IconRegistry[IconCategory.SYSTEM].close
 
-
     const contentWrapper = document.createElement('div');
     contentWrapper.className = 'pr-6';
     if (typeof content === 'string') {

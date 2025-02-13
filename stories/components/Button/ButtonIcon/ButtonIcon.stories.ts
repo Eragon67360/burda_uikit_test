@@ -3,8 +3,8 @@ import { createButtonIcon, ButtonIconArgs, ButtonIconVariant } from './ButtonIco
 import { IconCategory, IconRegistry } from '../../../assets/icons';
 
 const meta: Meta<ButtonIconArgs> = {
-    title: 'Components/Button/ButtonIcon',
-    tags: ['autodocs'],
+    title: 'Components (Atoms)/Button/ButtonIcon',
+
     parameters: {
         controls: { expanded: true },
     },
