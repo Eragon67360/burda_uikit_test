@@ -76,6 +76,7 @@ export const createButtonCTA = ({
     'disabled:cursor-not-allowed',
     'relative',
     'overflow-hidden',
+    'cursor-pointer',
   ];
 
   const variantClasses: Record<ButtonCTAVariant, readonly string[]> = {

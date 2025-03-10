@@ -50,6 +50,7 @@ export const createButtonIcon = ({
         'relative',
         'overflow-hidden ',
         'flex items-center justify-center',
+        'cursor-pointer',
     ];
     const variantClasses: Record<ButtonIconVariant, readonly string[]> = {
         [ButtonIconVariant.SMALL]: [
