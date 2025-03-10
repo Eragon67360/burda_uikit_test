@@ -25,7 +25,7 @@ export const createSubscriptionPlan = ({
     onPrimaryClick,
 }: SubscriptionPlanArgs) => {
     const container = document.createElement('div');
-    container.className = 'flex flex-col bg-transparent rounded-b-xl overflow-hidden max-w-[28rem]';
+    container.className = 'flex flex-col bg-transparent overflow-hidden max-w-[28rem] rounded-b-lg h-full w-full';
 
     const imageContainer = document.createElement('div');
     imageContainer.className = 'bg-transparent px-8 bg-gradient-to-b from-transparent from-[86.43%] to-black/20 to-100% z-20 mx-8 '
@@ -39,9 +39,11 @@ export const createSubscriptionPlan = ({
     container.appendChild(imageContainer);
 
     const contentContainer = document.createElement('div');
-    contentContainer.className = 'bg-base-white gap-12 pt-8';
+    contentContainer.className = 'bg-base-white flex flex-col gap-12 pt-8';
+
     const contentTextContainer = document.createElement('div');
     contentTextContainer.className = 'flex flex-col justify-end items-start gap-12 self-stretch';
+
     const contentTextTitleContainer = document.createElement('div');
     contentTextTitleContainer.className = 'flex px-8 flex-col items-center gap-[1.8125rem] self-stretch';
 
@@ -62,7 +64,7 @@ export const createSubscriptionPlan = ({
 
     characteristics.forEach(characteristic => {
         const listItem = document.createElement('li');
-        listItem.className = 'flex items-center gap-2';
+        listItem.className = 'flex items-center gap-4 text-bulletpoint-copy-desktop font-light';
         const icon = document.createElement('span');
         icon.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
         const textElement = document.createTextNode(characteristic);
@@ -76,11 +78,12 @@ export const createSubscriptionPlan = ({
 
     contentTextContainer.appendChild(contentTextTitleContainer);
     contentTextContainer.appendChild(listElement);
-    contentContainer.appendChild(contentTextContainer)
-    container.appendChild(contentContainer)
+
+    contentContainer.appendChild(contentTextContainer);
+
     // CTAs container
     const ctaContainer = document.createElement('div');
-    ctaContainer.className = 'flex flex-col gap-4 mt-auto';
+    ctaContainer.className = 'flex flex-col gap-4 self-stretch items-center';
 
     // Secondary CTA
     const secondaryCTA = createButtonCTA({
@@ -91,6 +94,7 @@ export const createSubscriptionPlan = ({
         nested: false,
         icon: null,
         iconLeft: false,
+        classNames: "w-fit mx-auto !bg-secondary-extra-light"
     });
 
     // Primary CTA
@@ -102,11 +106,12 @@ export const createSubscriptionPlan = ({
         nested: false,
         icon: null,
         iconLeft: false,
+        classNames: "w-full"
     });
 
     ctaContainer.appendChild(secondaryCTA);
     ctaContainer.appendChild(primaryCTA);
-    container.appendChild(ctaContainer);
-
+    contentContainer.appendChild(ctaContainer);
+    container.appendChild(contentContainer);
     return container;
 };
