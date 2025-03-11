@@ -5,8 +5,10 @@ export type SlideProgressArgs = {
     totalSteps: number;
     duration: number;
     isPlaying?: boolean;
+    currentStep?: number;
     onPlayPauseClick?: () => void;
     onStepComplete?: () => void;
+    onStepClick?: (index: number) => void;
 };
 
 interface ProgressState {
@@ -23,12 +25,15 @@ export const createSlideProgress = ({
     totalSteps,
     duration,
     isPlaying = true,
+    currentStep = 0,
     onPlayPauseClick = () => { },
     onStepComplete = () => { },
+    onStepClick = () => { },
+
 }: SlideProgressArgs): SlideProgressReturn => {
 
     const state: ProgressState = {
-        currentStep: 0,
+        currentStep,
         isPlaying,
         progressWidth: 0,
         startTime: null
@@ -115,6 +120,7 @@ export const createSlideProgress = ({
             state.progressWidth = 0;
             state.startTime = null;
             renderProgressSections();
+            onStepClick?.(index);
         });
 
         return section;
