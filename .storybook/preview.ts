@@ -45,8 +45,15 @@ const preview: Preview = {
         desktop: {
           name: 'Desktop',
           styles: {
-            width: '1320px',
-            height: '768px',
+            width: '1440px',
+            height: '810px',
+          },
+        },
+        widescreen: {
+          name: 'Widescreen',
+          styles: {
+            width: '1920px',
+            height: '1080px',
           },
         },
       },
