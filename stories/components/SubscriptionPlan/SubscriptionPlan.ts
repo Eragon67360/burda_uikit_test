@@ -64,7 +64,7 @@ export const createSubscriptionPlan = ({
 
     characteristics.forEach(characteristic => {
         const listItem = document.createElement('li');
-        listItem.className = 'flex items-center gap-4 text-bulletpoint-copy-desktop font-light';
+        listItem.className = 'flex items-start gap-4 text-bulletpoint-copy-desktop font-light';
         const icon = document.createElement('span');
         icon.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
         const textElement = document.createTextNode(characteristic);

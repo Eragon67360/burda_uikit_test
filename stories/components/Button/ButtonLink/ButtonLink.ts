@@ -3,11 +3,11 @@ import { getSizedIcon } from '../../../utils/iconUtils';
 import './buttonLink.css';
 
 export type ButtonLinkArgs = {
-    disabled: boolean;
+    disabled?: boolean;
     iconLeft?: boolean;
     label: string;
-    onClick: () => void;
-    icon: string | null;
+    onClick?: () => void;
+    icon?: string | null;
     href: string;
 };
 
@@ -21,14 +21,15 @@ export const createButtonLink = ({
 
     const link = document.createElement('a');
 
+    const fullHref = href.startsWith('http') ? href : `https://${href}`;
+
     if (disabled) {
         link.setAttribute('aria-disabled', 'true');
         link.style.pointerEvents = 'none';
         link.href = '#';
-
         link.setAttribute('tabindex', '-1');
     } else {
-        link.href = href;
+        link.href = fullHref;
         if (onClick) {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
