@@ -91,7 +91,7 @@ export const createFooter = ({
 }: FooterArgs) => {
   return `
     <footer class="bg-transparent">
-      <div class="container max-w-[100rem] mx-auto grid grid-cols-1 md:grid-cols-3">
+      <div class="container max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-3">
         
         <!-- First Column -->
         <div class="bg-base-black text-base-white px-4 pt-4 w-full">
