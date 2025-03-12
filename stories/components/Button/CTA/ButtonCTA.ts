@@ -48,11 +48,8 @@ export const createButtonCTA = ({
     }
 
     let arrowSpan = document.createElement('span');
-    if ([ButtonCTAVariant.PRIMARY, ButtonCTAVariant.SECONDARY, ButtonCTAVariant.TERTIARY].includes(variant)) {
-      if (icon) {
-        arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
-        arrowSpan.className = 'size-4'
-      }
+    if (icon) {
+      arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
     }
     if (iconLeft) {
       contentDiv.appendChild(arrowSpan);
