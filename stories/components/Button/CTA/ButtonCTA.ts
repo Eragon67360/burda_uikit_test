@@ -44,7 +44,7 @@ export const createButtonCTA = ({
     labelSpan.innerText = label;
     const contentDiv = document.createElement('div');
     if (icon) {
-      contentDiv.className = 'relative z-10 flex items-center justify-center gap-3 group-active:gap-5 group-disabled:gap-3 transition-all';
+      contentDiv.className = 'relative z-10 flex items-center justify-center gap-3 group-disabled:gap-3 transition-all';
     }
 
     let arrowSpan = document.createElement('span');
@@ -86,26 +86,23 @@ export const createButtonCTA = ({
       'px-8 py-3',
       'before:absolute before:top-0 before:left-0 before:z-10',
       'before:h-full before:w-0 before:inset-0',
-      'before:bg-secondary-interaction/0',
+      'before:bg-primary-light/0',
       'before:transform-gpu',
-      'before:transition-[width,background-color,border-radius]',
+      'before:transition-[width,background-color]',
       'before:duration-300',
       'before:ease-in-out',
-      'hover:before:w-full hover:before:bg-secondary-interaction/100',
-      'active:bg-secondary-dark active:brightness-50 active:text-white/60 hover:bg-transparent',
-      'active:before:bg-secondary-dark',
+      'hover:before:w-full hover:before:bg-primary-light/100',
+      'active:bg-primary-dark',
+      'active:before:bg-primary-dark',
       'disabled:bg-base-white disabled:border disabled:border-neutral-300',
       'disabled:text-neutral-400 disabled:before:bg-transparent',
       'focus:ring-base-black',
-      'before:rounded-[0px_99px_99px_0px]',
       'hover:before:w-full',
       'before:rounded-l-none',
       ...(nested ? [
         'rounded-nested',
-        'hover:before:rounded-[0px_0.25rem_0.25rem_0px]'
       ] : [
         'rounded',
-        'hover:before:rounded-[0px_0.5rem_0.5rem_0px]'
       ])
     ] as const,
 
@@ -132,15 +129,11 @@ export const createButtonCTA = ({
       'before:duration-300',
       'before:ease-in-out',
       'before:z-0',
-      'before:rounded-r-full',
       'hover:before:w-full',
-      'before:rounded-l-none',
       ...nested ? [
         'rounded-nested',
-        'hover:before:rounded-r-nested'
       ] : [
         'rounded',
-        'hover:before:rounded-r'
       ]
     ] as const,
 
@@ -161,8 +154,6 @@ export const createButtonCTA = ({
       'before:w-0',
       'before:bg-neutral-300',
       'active:bg-neutral-400',
-      'before:rounded-l-none',
-      'before:rounded-r-full',
       'before:transition-all',
       'before:duration-300',
       'before:ease-in-out',
@@ -170,10 +161,8 @@ export const createButtonCTA = ({
       'hover:before:w-full',
       ...nested ? [
         'rounded-nested',
-        'hover:before:rounded-r-nested'
       ] : [
         'rounded',
-        'hover:before:rounded-r'
       ]
     ] as const,
 
@@ -201,8 +190,6 @@ export const createButtonCTA = ({
       'hover:before:w-full',
       'active:text-neutral-450',
       'active:before:bg-base-black',
-      'before:rounded-[0_9999px_9999px_0]',
-      'hover:before:rounded-[0px]',
       'rounded-none',
     ] as const,
 
@@ -229,11 +216,8 @@ export const createButtonCTA = ({
       'hover:before:w-full',
       'active:text-neutral-600',
       'active:before:bg-neutral-300',
-      'before:rounded-[0px_99px_99px_0px]',
       'hover:before:w-full',
-      'before:rounded-l-none',
       'rounded-none',
-      'hover:before:rounded-[0px]',
     ] as const,
 
     [ButtonCTAVariant.LARGE_SUBSCRIPTION]: [
@@ -243,22 +227,19 @@ export const createButtonCTA = ({
       'h-[4.5rem]',
       'before:absolute before:top-0 before:left-0 before:z-10',
       'before:h-full before:w-0 before:inset-0',
-      'before:bg-secondary-interaction/0',
+      'before:bg-primary-light/0',
       'before:transform-gpu',
       'before:transition-[width,background-color,border-radius]',
       'before:duration-300',
       'before:ease-in-out',
-      'hover:before:w-full hover:before:bg-secondary-interaction/100',
-      'active:bg-secondary-dark active:brightness-50 active:text-white/60 hover:bg-transparent',
-      'active:before:bg-secondary-dark',
+      'hover:before:w-full hover:before:bg-primary-light/100',
+      'active:bg-secondary-dark',
+      'active:before:bg-primary-dark',
       'disabled:bg-base-white disabled:border disabled:border-neutral-300',
       'disabled:text-neutral-400 disabled:before:bg-transparent',
       'focus:ring-base-black',
-      'before:rounded-[0px_99px_99px_0px]',
       'hover:before:w-full',
-      'before:rounded-l-none',
       'rounded-none',
-      'hover:before:rounded-[0px]',
     ] as const,
   };
 
