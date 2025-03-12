@@ -1,6 +1,6 @@
 import { IconCategory, IconRegistry } from '../../assets/icons';
-import { getSizedIcon } from '../../utils/iconUtils';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
+import { createInfoTag } from '../InfoTag/InfoTag';
 import './subscriptionPlan.css';
 
 export type SubscriptionPlanArgs = {
@@ -8,9 +8,8 @@ export type SubscriptionPlanArgs = {
     title: string;
     subtitle: string;
     characteristics: string[];
-    secondaryCTALabel: string;
+    infoLabel: string;
     primaryCTALabel: string;
-    onSecondaryClick: () => void;
     onPrimaryClick: () => void;
 };
 
@@ -19,16 +18,15 @@ export const createSubscriptionPlan = ({
     title,
     subtitle,
     characteristics,
-    secondaryCTALabel,
+    infoLabel,
     primaryCTALabel,
-    onSecondaryClick,
     onPrimaryClick,
 }: SubscriptionPlanArgs) => {
     const container = document.createElement('div');
-    container.className = 'flex flex-col bg-transparent overflow-hidden max-w-[28rem] rounded-b-lg h-full w-full';
+    container.className = 'flex flex-col bg-transparent max-w-[28rem] rounded-b-lg h-full w-full';
 
     const imageContainer = document.createElement('div');
-    imageContainer.className = 'bg-transparent px-8 bg-gradient-to-b from-transparent from-[86.43%] to-black/20 to-100% z-20 mx-8 '
+    imageContainer.className = 'bg-transparent px-8 bg-gradient-to-b from-transparent from-[86.43%] to-black/20 to-100% z-20 mx-8'
 
     // Image
     const imageElement = document.createElement('img');
@@ -39,7 +37,7 @@ export const createSubscriptionPlan = ({
     container.appendChild(imageContainer);
 
     const contentContainer = document.createElement('div');
-    contentContainer.className = 'bg-base-white flex flex-col gap-12 pt-8';
+    contentContainer.className = 'bg-base-white flex flex-col gap-12 pt-8 shadow-[0px_8px_44px_0px_rgba(0,0,0,0.20)] rounded-b-lg relative z-10';
 
     const contentTextContainer = document.createElement('div');
     contentTextContainer.className = 'flex flex-col justify-end items-start gap-12 self-stretch';
@@ -81,23 +79,9 @@ export const createSubscriptionPlan = ({
 
     contentContainer.appendChild(contentTextContainer);
 
-    // CTAs container
     const ctaContainer = document.createElement('div');
     ctaContainer.className = 'flex flex-col gap-4 self-stretch items-center';
-
-    // Secondary CTA
-    const secondaryCTA = createButtonCTA({
-        variant: ButtonCTAVariant.SECONDARY,
-        label: secondaryCTALabel,
-        onClick: onSecondaryClick,
-        disabled: false,
-        nested: false,
-        icon: null,
-        iconLeft: false,
-        classNames: "w-fit mx-auto !bg-secondary-extra-light"
-    });
-
-    // Primary CTA
+    const secondaryCTA = createInfoTag({ label: infoLabel })
     const primaryCTA = createButtonCTA({
         variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
         label: primaryCTALabel,
@@ -106,7 +90,7 @@ export const createSubscriptionPlan = ({
         nested: false,
         icon: null,
         iconLeft: false,
-        classNames: "w-full"
+        classNames: "w-full rounded-b-lg"
     });
 
     ctaContainer.appendChild(secondaryCTA);

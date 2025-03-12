@@ -14,10 +14,12 @@ export type ModalArgs = {
     primary?: {
       label: string;
       onClick: () => void;
+      icon: string | null;
     };
     secondary?: {
       label: string;
       onClick: () => void;
+      icon: string | null;
     };
   };
 };
@@ -56,16 +58,29 @@ export const createModal = ({
 
           ${actions ? `
             <div class="flex mt-4">
-              ${actions.primary ? `
-                <button class="primary-action h-[4.5rem] w-full bg-primary-interaction text-base-black text-button-label-desktop hover:opacity-90 transition-all duration-200">
-                  ${actions.primary.label}
-                </button>
-              ` : ''}
-              ${actions.secondary ? `
-                <button class="secondary-action h-[4.5rem] w-full bg-base-black text-base-white text-button-label-desktop hover:opacity-90 transition-all duration-200">
-                  ${actions.secondary.label}
-                </button>
-              ` : ''}
+              ${actions.primary ?
+        createButtonCTA({
+          variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
+          nested: false,
+          disabled: false,
+          iconLeft: false,
+          icon: actions.primary.icon,
+          label: actions.primary.label,
+          onClick: actions.primary.onClick,
+          classNames: "w-full primary-action"
+        }).outerHTML
+        :
+        ''}
+              ${actions.secondary ? createButtonCTA({
+          variant: ButtonCTAVariant.LARGE,
+          nested: false,
+          disabled: false,
+          iconLeft: false,
+          icon: actions.secondary.icon,
+          label: actions.secondary.label,
+          onClick: actions.secondary.onClick,
+          classNames: "w-full secondary-action"
+        }).outerHTML : ''}
             </div>
           ` : ''}
         </div>
@@ -89,6 +104,8 @@ export const createModal = ({
     iconLeft: false,
     icon: null,
     onClick: () => {
+      button.setAttribute('disabled', 'true');
+      button.classList.add('pointer-events-none', 'opacity-50');
       modalContainer.classList.remove('hidden');
       setTimeout(() => {
         const backdrop = modalContainer.querySelector('.modal-backdrop');
@@ -97,7 +114,8 @@ export const createModal = ({
         modalContent?.classList.remove('translate-y-4', 'opacity-0', 'scale-95');
         modalContent?.classList.add('translate-y-0', 'opacity-100', 'scale-100');
       }, 10);
-    }
+    },
+    classNames: ''
   });
 
   const closeModal = () => {
@@ -106,7 +124,8 @@ export const createModal = ({
     backdrop?.classList.remove('opacity-50');
     modalContent?.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
     modalContent?.classList.add('translate-y-4', 'opacity-0', 'scale-95');
-
+    button.removeAttribute('disabled');
+    button.classList.remove('pointer-events-none', 'opacity-50');
     setTimeout(() => {
       modalContainer.classList.add('hidden');
       onClose();

@@ -20,22 +20,30 @@ export const createPagination = ({
         const isSelected = pageNum === currentPage;
 
         return `
-      <button
-        class="relative w-12 h-12 flex items-center justify-center cursor-pointer text-button-label-large-desktop
+    <button
+        class="relative w-12 h-12 flex items-center justify-center text-button-label-large-desktop
                overflow-hidden group
                ${isSelected ? 'bg-secondary-dark text-base-black pointer-events-none' : 'cursor-pointer'}
-               transition-colors duration-500 ease-in-out rounded-md"
+               transition-colors duration-300 ease-in-out rounded-md
+               before:absolute before:top-0 before:left-0 before:z-10
+               before:h-full before:w-0 before:inset-0
+               before:bg-secondary-light/0
+               before:transform-gpu
+               before:transition-[border-radius,width,background-color]
+               before:duration-300
+               before:ease-in-out
+               before:rounded-r-[999px]
+               hover:before:rounded-[0px_0.25rem_0.25rem_0px]
+               hover:before:w-full hover:before:bg-secondary-light/100
+               focus:ring-base-black"
         data-page="${pageNum}"
         ${isSelected ? 'disabled' : ''}
-      >
-        <span class="absolute inset-0 bg-secondary-light 
-                     transform translate-y-full group-hover:translate-y-0 
-                     transition-transform duration-500 ease-in-out 
-                     z-0"></span>
-        <span class="relative z-10">${pageNum}</span>
-      </button>
+    >
+        <span class="relative z-20 flex items-center justify-center">${pageNum}</span>
+    </button>
     `;
     };
+
 
     const createChevronButton = (direction: 'left' | 'right', currentPage: number, totalPages: number) => {
         const icon = direction === 'left'
@@ -47,50 +55,51 @@ export const createPagination = ({
             : currentPage === totalPages;
 
         return `
-      <button
-        class="relative w-12 h-12 flex items-center justify-center 
+        <button
+        class="relative w-12 h-12 flex items-center justify-center
                overflow-hidden group
-               ${isDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ' cursor-pointer'}
-               transition-colors duration-500 ease-in-out rounded-md"
+               ${isDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
+               transition-colors duration-300 ease-in-out rounded-md
+               before:absolute before:top-0 before:left-0 before:z-10
+               before:h-full before:w-0 before:inset-0
+               before:bg-secondary-light/0
+               before:transform-gpu
+               before:transition-[border-radius,width,background-color]
+               before:duration-300
+               before:ease-in-out
+               before:rounded-r-[999px]
+               hover:before:rounded-[0px_0.25rem_0.25rem_0px]
+               hover:before:w-full hover:before:bg-secondary-light/100
+               focus:ring-base-black"
         ${isDisabled ? 'disabled' : ''}
         data-direction="${direction}"
       >
-        <span class="absolute inset-0 bg-secondary-light
-                     transform translate-y-full group-hover:translate-y-0
-                     transition-transform duration-500 ease-in-out 
-                     z-0"></span>
-        <span class="relative z-10">${icon}</span>
+        <span class="relative z-20 flex items-center justify-center">${icon}</span>
       </button>
-    `;
+        `;
     };
 
-    // Function to determine visible pages
+
     const calculateVisiblePages = (page: number, totalPages: number): number[] => {
         if (totalPages <= 3) {
             return Array.from({ length: totalPages }, (_, i) => i + 1);
         }
 
-        // If we're near the start
         if (page <= 2) {
             return [1, 2, 3];
         }
 
-        // If we're near the end
         if (page >= totalPages - 1) {
             return [totalPages - 2, totalPages - 1, totalPages];
         }
 
-        // For pages in the middle, show surrounding pages
         return [page - 1, page, page + 1];
     };
 
-    // Create pagination element
     const element = document.createElement('div');
     element.className = `${baseClasses} ${variantClasses} p-2 rounded-lg`;
 
-    // Render pagination with current page
     const renderPagination = (page: number) => {
-        // Calculate visible pages dynamically
         const visiblePages = calculateVisiblePages(page, totalPages);
 
         element.innerHTML = `
@@ -100,10 +109,8 @@ export const createPagination = ({
         `;
     };
 
-    // Initial render
     renderPagination(currentPage);
 
-    // Add event listeners
     element.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         const button = target.closest('button');
@@ -120,12 +127,8 @@ export const createPagination = ({
             newPage = direction === 'left' ? currentPage - 1 : currentPage + 1;
         }
 
-        // Validate new page
         if (newPage >= 1 && newPage <= totalPages) {
-            // Call onPageChange callback
             onPageChange?.(newPage);
-
-            // Update current page and re-render
             currentPage = newPage;
             renderPagination(currentPage);
         }
