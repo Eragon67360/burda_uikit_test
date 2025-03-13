@@ -25,12 +25,9 @@ export const createFlyout = ({
     let isDescriptionOpen = false;
 
     const baseContainerClasses = `
-        fixed 
-        right-0 
-        bottom-4 
-        gap-0 
-        transition-all duration-300 
+        
     `;
+
     const buttonContainerClasses = `
         flex flex-col
         group
@@ -98,6 +95,34 @@ export const createFlyout = ({
     const flyoutContainer = document.createElement('div');
     flyoutContainer.className = baseContainerClasses;
 
+    function setupStickyContainer(flyoutContainer: HTMLElement) {
+        function updateContainerPosition() {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const containerHeight = flyoutContainer.offsetHeight;
+            const middleScreenPosition = windowHeight / 2 - containerHeight / 2;
+
+            if (scrollY > middleScreenPosition) {
+                flyoutContainer.className = "top-1/2 -translate-y-1/2 right-0 transform fixed";
+                flyoutContainer.style.removeProperty('bottom')
+            } else {
+                flyoutContainer.className = "right-0 transform fixed";
+                flyoutContainer.style.bottom = `${scrollY + 16}px`;
+            }
+        }
+
+        window.addEventListener('scroll', updateContainerPosition);
+        window.addEventListener('resize', updateContainerPosition);
+
+        updateContainerPosition();
+
+        return () => {
+            window.removeEventListener('scroll', updateContainerPosition);
+            window.removeEventListener('resize', updateContainerPosition);
+        };
+    }
+
+    setupStickyContainer(flyoutContainer);
     const buttonContainer = document.createElement('button')
     buttonContainer.className = `${buttonContainerClasses} ${defaultButtonContainerClasses}`;
 
@@ -198,28 +223,27 @@ export const createFlyout = ({
             contentItem.className = 'flex items-start justify-between min-full max-w-full w-full gap-0';
 
             const contentItemWrapper = document.createElement('div');
-            contentItemWrapper.className = `h-full relative w-32 min-w-32 pl-7 padding-transition
-                ${isDescriptionOpen ? 'pr-0' : 'pr-7'} 
+            contentItemWrapper.className = `h-full relative w-32 min-w-32 pl-7 padding-transition 
+                pr-7
                 py-6 transition-all duration-1000
             `;
 
             const iconContainer = document.createElement('div');
-            iconContainer.className = `flex flex-col transition-all duration-300 ${isDescriptionOpen ? 'items-start' : 'items-center'} gap-2 w-fit`;
+            iconContainer.className = `flex flex-col transition-all duration-300 items-center gap-2 w-fit`;
 
             const iconWrapper = document.createElement('div');
-            iconWrapper.className = `transition-all duration-700 ease-in-out w-full ${isDescriptionOpen ? 'px-0' : 'px-3.5'}`;
+            iconWrapper.className = `transition-all duration-700 ease-in-out flex justify-center w-full mx-auto`;
             iconWrapper.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40);
 
             const titleElement = document.createElement('h3');
-            titleElement.className = `font-bold leading-[0.875rem] text-xs flex-grow flex-wrap break-words transition-[text-align,align-self] delay-700 duration-300 ease-in-out
-            ${isDescriptionOpen ? 'text-left' : 'text-center'} 
+            titleElement.className = `font-bold leading-[0.875rem] text-center text-xs flex-grow flex-wrap break-words transition-[text-align,align-self] delay-700 duration-300 ease-in-out
             w-full`;
             titleElement.textContent = item.title;
 
             const infoButton = document.createElement('button');
             infoButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].info, 18);
             infoButton.className = `
-                absolute
+                absolute 
                 ml-2 
                 top-2.5 right-2.5 
                 flex-shrink-0 
@@ -258,26 +282,7 @@ export const createFlyout = ({
 
         contentItems.forEach((contentItem) => {
             const contentItemWrapper = contentItem.querySelector(':scope > div:first-child');
-            const iconContainer = contentItemWrapper?.querySelector(':first-child');
-            const iconWrapper = iconContainer?.querySelector(':first-child');
-            const titleElement = iconContainer?.querySelector('h3');
             const infoButton = contentItemWrapper?.querySelector('button');
-
-            // Update wrapper classes
-            contentItemWrapper?.classList.toggle('pr-0', isDescriptionOpen);
-            contentItemWrapper?.classList.toggle('pr-7', !isDescriptionOpen);
-
-            // Update icon container classes
-            iconContainer?.classList.toggle('items-start', isDescriptionOpen);
-            iconContainer?.classList.toggle('items-center', !isDescriptionOpen);
-
-            // Update icon wrapper classes
-            iconWrapper?.classList.toggle('px-0', isDescriptionOpen);
-            iconWrapper?.classList.toggle('px-3.5', !isDescriptionOpen);
-
-            // Update title classes
-            titleElement?.classList.toggle('text-left', isDescriptionOpen);
-            titleElement?.classList.toggle('text-center', !isDescriptionOpen);
 
             // Update info button classes
             infoButton?.classList.toggle('pointer-events-none', isDescriptionOpen);
