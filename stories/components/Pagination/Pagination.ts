@@ -25,16 +25,7 @@ export const createPagination = ({
                overflow-hidden group
                ${isSelected ? 'bg-secondary-dark text-base-black pointer-events-none' : 'cursor-pointer'}
                transition-colors duration-300 ease-in-out rounded-md
-               before:absolute before:top-0 before:left-0 before:z-10
-               before:h-full before:w-0 before:inset-0
-               before:bg-secondary-light/0
-               before:transform-gpu
-               before:transition-[border-radius,width,background-color]
-               before:duration-300
-               before:ease-in-out
-               before:rounded-r-[999px]
-               hover:before:rounded-[0px_0.25rem_0.25rem_0px]
-               hover:before:w-full hover:before:bg-secondary-light/100
+               hover:bg-secondary-light/100
                focus:ring-base-black"
         data-page="${pageNum}"
         ${isSelected ? 'disabled' : ''}
@@ -60,16 +51,7 @@ export const createPagination = ({
                overflow-hidden group
                ${isDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
                transition-colors duration-300 ease-in-out rounded-md
-               before:absolute before:top-0 before:left-0 before:z-10
-               before:h-full before:w-0 before:inset-0
-               before:bg-secondary-light/0
-               before:transform-gpu
-               before:transition-[border-radius,width,background-color]
-               before:duration-300
-               before:ease-in-out
-               before:rounded-r-[999px]
-               hover:before:rounded-[0px_0.25rem_0.25rem_0px]
-               hover:before:w-full hover:before:bg-secondary-light/100
+               hover:bg-secondary-light/100
                focus:ring-base-black"
         ${isDisabled ? 'disabled' : ''}
         data-direction="${direction}"

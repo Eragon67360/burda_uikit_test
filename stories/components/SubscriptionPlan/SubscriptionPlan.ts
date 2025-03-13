@@ -48,7 +48,7 @@ export const createSubscriptionPlan = ({
     // Title
     const titleElement = document.createElement('h3');
     titleElement.textContent = title;
-    titleElement.className = 'text-subscription-default-desktop uppercase font-roboto-serif';
+    titleElement.className = 'text-subscription-default-desktop uppercase font-roboto-serif text-center';
 
     // Subtitle
     const subtitleElement = document.createElement('p');

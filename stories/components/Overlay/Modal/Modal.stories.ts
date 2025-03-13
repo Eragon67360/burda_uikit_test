@@ -171,12 +171,12 @@ export const Showcase: Story = {
             <div class="bg-neutral-50 rounded-lg p-4 w-full flex items-center justify-center">
                 <img src="/fryer_tipp.png" alt="Product view 1" class="rounded-lg w-[13.625rem]">
             </div>
-            <div class="grid grid-cols-2 gap-2 w-full">
+            <div class="grid grid-cols-2 gap-2 w-full items-start justify-start self-start ">
                 <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_2.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_4.png" alt="Product view 1" class="rounded-lg w-full">
+                <img src="/fryer_1.png" alt="Product view 2" class="rounded-lg w-full">
+                <img src="/fryer_1.png" alt="Product view 3" class="rounded-lg w-full">
+                <img src="/fryer_2.png" alt="Product view 4" class="rounded-lg w-full">
+                <img src="/fryer_4.png" alt="Product view 5" class="rounded-lg w-full">
             </div>
         `;
 

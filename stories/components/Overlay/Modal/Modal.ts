@@ -46,7 +46,7 @@ export const createModal = ({
           translate-y-4 opacity-0 scale-95
           modal-content-animate overflow-hidden">
 
-          <div class="relative ${actions ? 'px-14 pt-16 pb-0' : 'p-6'}">
+          <div class="relative ${actions ? 'px-14 py-16' : 'p-6'}">
             <h3 class="text-lg font-semibold pr-8">${title}</h3>
             
             <button class="modal-close absolute top-6 right-6 transition-transform hover:scale-110">
@@ -57,7 +57,7 @@ export const createModal = ({
           </div>
 
           ${actions ? `
-            <div class="flex mt-4">
+            <div class="flex ">
               ${actions.primary ?
         createButtonCTA({
           variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
