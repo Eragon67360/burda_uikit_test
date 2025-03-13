@@ -102,7 +102,7 @@ export const createFlyout = ({
             const containerHeight = flyoutContainer.offsetHeight;
             const middleScreenPosition = windowHeight / 2 - containerHeight / 2;
 
-            if (scrollY > middleScreenPosition) {
+            if (scrollY > (middleScreenPosition - 16)) {
                 flyoutContainer.className = "top-1/2 -translate-y-1/2 right-0 transform fixed";
                 flyoutContainer.style.removeProperty('bottom')
             } else {
