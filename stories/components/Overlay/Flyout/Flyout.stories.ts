@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createFlyout, FlyoutArgs } from './Flyout';
+import { IconRegistry, IconCategory } from '../../../assets/icons';
 
 const meta: Meta<FlyoutArgs> = {
     title: 'Components (Organisms)/Overlay/Flyout',
@@ -15,7 +16,12 @@ const meta: Meta<FlyoutArgs> = {
         label: {
             control: 'text',
             description: 'Label visible on the button'
-        }
+        },
+        icon: {
+            control: { type: 'select' },
+            options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
+            description: 'Select an icon',
+        },
     },
     render: (args) => createFlyout(args)
 };
@@ -28,17 +34,17 @@ export const Default: Story = {
         label: 'Abo-Vorteile',
         items: [
             {
-                icon: 'https://via.placeholder.com/24',
+                icon: 'history',
                 title: 'Pünktliche Lieferung',
                 description: 'Sie bekommen Ihre Wunschzeitschrift pünktlich nach Hause geliefert.'
             },
             {
-                icon: 'https://via.placeholder.com/24',
+                icon: 'laptop',
                 title: 'Direkt vom Verlag',
                 description: 'Sie erhalten Ihre Wunschzeitschrift direkt vom Verlagshaus, ohne Zwischenhändler.'
             },
             {
-                icon: 'https://via.placeholder.com/24',
+                icon: 'documentHand',
                 title: 'E-Paper zum Sonderpreis',
                 description: 'Die digitale Ausgabe ist günstiger als die Printversion. Sie sparen bei einer Kombination aus Print & Digital.'
             }
