@@ -146,7 +146,7 @@ export const createFlyout = ({
         transition-all
         hover:text-gray-800 
         text-2xl 
-        z-50
+        z-50 
     `;
 
     function updateComponentState(open: boolean, descriptionOpen: boolean) {
@@ -162,10 +162,7 @@ export const createFlyout = ({
         closeButton.classList.toggle('hidden', !open);
 
         if (open) {
-            console.log("FLYOUT OPEN");
-
             if (descriptionOpen) {
-                console.log("DESCRIPTION OPEN");
                 expandableContent.classList.toggle('translate-x-[8.5rem]', false);
                 expandableContent.classList.toggle('translate-x-0', true);
             } else {
@@ -178,6 +175,9 @@ export const createFlyout = ({
 
     buttonContainer.addEventListener('click', () => {
         isOpen = !isOpen;
+        if (!isOpen) {
+            isDescriptionOpen = false;
+        }
         updateComponentState(isOpen, isDescriptionOpen);
     });
 
@@ -185,16 +185,13 @@ export const createFlyout = ({
         toggleDescription();
     });
 
-    function toggleDescription() {
-        isDescriptionOpen = !isDescriptionOpen;
-        updateComponentState(isOpen, isDescriptionOpen);
-        renderItems();
-        expandableContent.appendChild(buttonContainer)
-    }
-
     function renderItems() {
-        expandableContent.innerHTML = '';
-        expandableContent.appendChild(closeButton);
+        while (expandableContent.children.length > 1) {
+            const lastChild = expandableContent.lastChild;
+            if (lastChild) {
+                expandableContent.removeChild(lastChild);
+            }
+        }
 
         items.forEach((item) => {
             const contentItem = document.createElement('div');
@@ -206,16 +203,18 @@ export const createFlyout = ({
                 py-6 transition-all duration-1000
             `;
 
-            contentItemWrapper.innerHTML = `
-                <div class="flex flex-col transition-all duration-300 ${isDescriptionOpen ? 'items-start' : 'items-center'} gap-2 w-fit">
-                <div class=" transition-all duration-700 ease-in-out w-full ${isDescriptionOpen ? 'px-0' : 'px-3.5'}">
-                    ${getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40)}
-                </div>
-                    <h3 class="font-bold leading-[0.875rem] text-xs flex-grow flex-wrap break-words transition-[text-align,align-self] delay-300 duration-700 ease-in-out
-                        ${isDescriptionOpen ? 'text-left' : 'text-center'} 
-                        w-full">${item.title}</h3>
-                </div>
-            `;
+            const iconContainer = document.createElement('div');
+            iconContainer.className = `flex flex-col transition-all duration-300 ${isDescriptionOpen ? 'items-start' : 'items-center'} gap-2 w-fit`;
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = `transition-all duration-700 ease-in-out w-full ${isDescriptionOpen ? 'px-0' : 'px-3.5'}`;
+            iconWrapper.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40);
+
+            const titleElement = document.createElement('h3');
+            titleElement.className = `font-bold leading-[0.875rem] text-xs flex-grow flex-wrap break-words transition-[text-align,align-self] delay-700 duration-300 ease-in-out
+            ${isDescriptionOpen ? 'text-left' : 'text-center'} 
+            w-full`;
+            titleElement.textContent = item.title;
 
             const infoButton = document.createElement('button');
             infoButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].info, 18);
@@ -227,8 +226,8 @@ export const createFlyout = ({
                 cursor-pointer 
                 transition-all 
                 duration-1000 
-                
-                ${isDescriptionOpen ? 'pointer-events-none text-base-black/0' : 'text-opacity-100 pointer-events-auto text-base-black/100'}`;
+                ${isDescriptionOpen ? 'pointer-events-none text-base-black/0' : 'pointer-events-auto text-base-black/100'}
+            `;
 
             infoButton.addEventListener('click', toggleDescription);
 
@@ -236,18 +235,61 @@ export const createFlyout = ({
             contentDescriptionWrapper.className = `w-[7.1875rem] text-xs h-full relative mr-7 py-6 overflow-hidden`;
 
             if (item.description) {
-                contentDescriptionWrapper.innerText = item.description.toString()
+                contentDescriptionWrapper.textContent = item.description.toString();
             }
 
+            iconContainer.appendChild(iconWrapper);
+            iconContainer.appendChild(titleElement);
+            contentItemWrapper.appendChild(iconContainer);
             contentItemWrapper.appendChild(infoButton);
+
             contentItem.appendChild(contentItemWrapper);
             contentItem.appendChild(contentDescriptionWrapper);
+
             expandableContent.appendChild(contentItem);
+        });
+    }
+
+    function toggleDescription() {
+        isDescriptionOpen = !isDescriptionOpen;
+        updateComponentState(isOpen, isDescriptionOpen);
+
+        const contentItems = expandableContent.querySelectorAll(':scope > div:not(button)');
+
+        contentItems.forEach((contentItem) => {
+            const contentItemWrapper = contentItem.querySelector(':scope > div:first-child');
+            const iconContainer = contentItemWrapper?.querySelector(':first-child');
+            const iconWrapper = iconContainer?.querySelector(':first-child');
+            const titleElement = iconContainer?.querySelector('h3');
+            const infoButton = contentItemWrapper?.querySelector('button');
+
+            // Update wrapper classes
+            contentItemWrapper?.classList.toggle('pr-0', isDescriptionOpen);
+            contentItemWrapper?.classList.toggle('pr-7', !isDescriptionOpen);
+
+            // Update icon container classes
+            iconContainer?.classList.toggle('items-start', isDescriptionOpen);
+            iconContainer?.classList.toggle('items-center', !isDescriptionOpen);
+
+            // Update icon wrapper classes
+            iconWrapper?.classList.toggle('px-0', isDescriptionOpen);
+            iconWrapper?.classList.toggle('px-3.5', !isDescriptionOpen);
+
+            // Update title classes
+            titleElement?.classList.toggle('text-left', isDescriptionOpen);
+            titleElement?.classList.toggle('text-center', !isDescriptionOpen);
+
+            // Update info button classes
+            infoButton?.classList.toggle('pointer-events-none', isDescriptionOpen);
+            infoButton?.classList.toggle('text-base-black/0', isDescriptionOpen);
+            infoButton?.classList.toggle('pointer-events-auto', !isDescriptionOpen);
+            infoButton?.classList.toggle('text-base-black/100', !isDescriptionOpen);
         });
     }
 
     renderItems();
     expandableContent.appendChild(buttonContainer)
+    expandableContent.appendChild(closeButton)
     flyoutContainer.appendChild(expandableContent);
 
     return flyoutContainer;
