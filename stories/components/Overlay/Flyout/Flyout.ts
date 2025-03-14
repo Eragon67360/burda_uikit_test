@@ -1,6 +1,7 @@
 import { IconCategory, IconRegistry } from "../../../assets/icons";
 import { getSizedIcon } from "../../../utils/iconUtils";
 import { createIcon } from "../../Icon/Icon";
+import * as Hammer from 'hammerjs';
 import './flyout.css';
 
 export type FlyoutItem = {
@@ -23,9 +24,12 @@ export const createFlyout = ({
 }: FlyoutArgs) => {
     let isOpen = false;
     let isDescriptionOpen = false;
+    let isMobileOpen = false;
+
+    const mainContainer = document.createElement('div')
 
     const baseContainerClasses = `
-        
+        hidden sm:block
     `;
 
     const buttonContainerClasses = `
@@ -44,6 +48,7 @@ export const createFlyout = ({
         duration-300 
         text-button-label-desktop
     `
+
     const buttonLabelClasses = `
         w-[3rem]
         h-fit 
@@ -93,7 +98,7 @@ export const createFlyout = ({
     </svg>`
 
     const flyoutContainer = document.createElement('div');
-    flyoutContainer.className = baseContainerClasses;
+
 
     function setupStickyContainer(flyoutContainer: HTMLElement) {
         function updateContainerPosition() {
@@ -103,10 +108,10 @@ export const createFlyout = ({
             const middleScreenPosition = windowHeight / 2 - containerHeight / 2;
 
             if (scrollY > (middleScreenPosition - 16)) {
-                flyoutContainer.className = "top-1/2 -translate-y-1/2 right-0 transform fixed";
+                flyoutContainer.className = "top-1/2 -translate-y-1/2 right-0 transform fixed " + baseContainerClasses;
                 flyoutContainer.style.removeProperty('bottom')
             } else {
-                flyoutContainer.className = "right-0 transform fixed";
+                flyoutContainer.className = "right-0 transform fixed " + baseContainerClasses;
                 flyoutContainer.style.bottom = `${scrollY + 16}px`;
             }
         }
@@ -292,11 +297,276 @@ export const createFlyout = ({
         });
     }
 
+    /** ------------------------------------------------------------- MOBILE VERSION ------------------------------------------------------------- */
+
+    const baseMobileContainerClasses = "block sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] mx-auto rounded-2xl flex flex-col items-center justify-end overflow-hidden transition-opacity duration-500 pointer-events-none";
+
+    const buttonMobileContainerClasses = `
+        bg-base-black 
+        text-base-white 
+        relative 
+        w-full 
+        cursor-pointer 
+        px-6 
+        py-5 
+        h-fit 
+        flex 
+        justify-between
+        transition-all 
+        duration-500
+    `;
+
+    const handleClasses = 'absolute top-[0.38rem] left-1/2 -translate-x-1/2 w-[3.9375rem] h-[0.125rem] bg-neutral-400 z-50 transition-all duration-500'
+
+
+    const flyoutMobileContainer = document.createElement('div');
+    flyoutMobileContainer.className = baseMobileContainerClasses;
+    flyoutMobileContainer.style.touchAction = 'pan-y'; // Allow vertical scrolling
+
+    const buttonMobileContainer = document.createElement('button');
+    buttonMobileContainer.className = buttonMobileContainerClasses;
+
+    const handle = document.createElement('div');
+    handle.className = handleClasses;
+
+    flyoutMobileContainer.appendChild(buttonMobileContainer)
+    buttonMobileContainer.addEventListener('click', toggleMobileFlyout);
+
+    let mobileContentContainer: HTMLDivElement;
+
+    function initializeMobileFlyout() {
+        mobileContentContainer = document.createElement('div');
+        mobileContentContainer.className = `
+        mobile-content-container
+        px-6 
+        py-0 
+        w-full 
+        bg-white 
+        rounded-b-xl 
+        shadow-lg 
+        transition-all 
+        duration-500 
+        ease-in-out 
+        overflow-hidden
+        max-h-0 
+    `;
+
+        const accordionItems: AccordionItem[] = items.map(item => ({
+            icon: item.icon,
+            trigger: item.title,
+            content: item.description || ''
+        }));
+
+        const accordionElement = createAccordion({
+            items: accordionItems
+        });
+
+        mobileContentContainer.appendChild(accordionElement);
+        flyoutMobileContainer.appendChild(mobileContentContainer);
+
+        const hammertime = new Hammer(flyoutMobileContainer);
+        hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+        hammertime.on('swipe',
+            function (ev) {
+                if (ev.direction === Hammer.DIRECTION_UP && !isMobileOpen) {
+                    toggleMobileFlyout();
+                } else if (ev.direction === Hammer.DIRECTION_DOWN && isMobileOpen) {
+                    toggleMobileFlyout();
+                }
+            }
+        );
+    }
+
+
+    function toggleMobileFlyout() {
+        isMobileOpen = !isMobileOpen;
+
+        if (!mobileContentContainer) {
+            initializeMobileFlyout();
+        }
+
+        requestAnimationFrame(() => {
+            if (isMobileOpen) {
+                mobileContentContainer.classList.add('max-h-screen', 'py-4');
+                mobileContentContainer.classList.remove('max-h-0', 'py-0');
+                handle.classList.add('opacity-0');
+                handle.classList.remove('opacity-100');
+                initialChevronMobileElement.classList.add('scale-y-[-1]');
+                initialChevronMobileElement.classList.remove('scale-y-100');
+                buttonMobileContainer.classList.add('py-4', 'bg-secondary-interaction', 'text-base-black');
+                buttonMobileContainer.classList.remove('py-5', 'bg-base-black', 'text-base-white');
+
+            } else {
+                mobileContentContainer.classList.add('max-h-0', 'py-0');
+                mobileContentContainer.classList.remove('max-h-screen', 'py-4');
+                handle.classList.add('opacity-100');
+                handle.classList.remove('opacity-0');
+                initialChevronMobileElement.classList.add('scale-y-100');
+                initialChevronMobileElement.classList.remove('scale-y-[-1]');
+                buttonMobileContainer.classList.add('py-5', 'bg-base-black', 'text-base-white');
+                buttonMobileContainer.classList.remove('py-4', 'bg-secondary-interaction', 'text-base-black');
+            }
+        });
+    }
+
+    function setupMobileFlyoutVisibility() {
+
+        function checkScrollPosition() {
+            const scrollThreshold = window.innerHeight * 1.5;
+
+            if (window.scrollY >= scrollThreshold) {
+                flyoutMobileContainer.classList.remove('opacity-0', 'pointer-events-none');
+                flyoutMobileContainer.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                flyoutMobileContainer.classList.remove('opacity-100', 'pointer-events-auto');
+                flyoutMobileContainer.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        checkScrollPosition();
+
+        window.addEventListener('scroll', checkScrollPosition);
+
+        return () => {
+            window.removeEventListener('scroll', checkScrollPosition);
+        };
+    }
+
+    setupMobileFlyoutVisibility();
+    initializeMobileFlyout();
+
+    buttonMobileContainer.innerHTML = '';
+    const initialButtonMobileContent = document.createElement('div');
+    initialButtonMobileContent.className = 'flex items-center justify-between w-full gap-2';
+
+    const initialIconMobileElement = document.createElement('div');
+    initialIconMobileElement.className = '';
+    initialIconMobileElement.innerHTML = createIcon({
+        name: icon,
+        size: 22
+    });
+
+    const initialLabelMobileElement = document.createElement('span');
+    initialLabelMobileElement.textContent = label;
+    initialLabelMobileElement.className = 'flex-grow text-center text-button-label-mobile';
+
+    const initialChevronMobileElement = document.createElement('div');
+    initialChevronMobileElement.className = 'scale-y-100 transition-all duration-300';
+    initialChevronMobileElement.innerHTML = createIcon({
+        name: 'chevronUp',
+        size: 18
+    });
+
+    initialButtonMobileContent.appendChild(initialIconMobileElement);
+    initialButtonMobileContent.appendChild(initialLabelMobileElement);
+    initialButtonMobileContent.appendChild(initialChevronMobileElement);
+
+    buttonMobileContainer.appendChild(initialButtonMobileContent);
+    buttonMobileContainer.appendChild(handle);
+
+
     renderItems();
     expandableContent.appendChild(buttonContainer)
     expandableContent.appendChild(closeButton)
     flyoutContainer.appendChild(expandableContent);
+    mainContainer.appendChild(flyoutContainer);
+    mainContainer.appendChild(flyoutMobileContainer);
 
-    return flyoutContainer;
+    return mainContainer;
+
 };
 
+type AccordionItem = {
+    icon: string;
+    trigger: string;
+    content: string;
+}
+
+type AccordionArgs = {
+    items: AccordionItem[];
+};
+
+const createAccordion = ({ items }: AccordionArgs) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = `w-full md:w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden`;
+
+    items.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `py-4 ${index < items.length - 1 ? 'border-b border-neutral-400' : ''}`;
+
+        const trigger = document.createElement('button');
+        trigger.className = `w-full flex justify-start items-center gap-4 px-0 text-left cursor-pointer`;
+
+        trigger.innerHTML = `
+            ${getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40)}
+            <span class="text-label-mobile md:text-subhead3-desktop">${item.trigger}</span>
+            <div class="chevron ml-auto">${getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 18)}</div>
+        `;
+
+        const content = document.createElement('div');
+        content.className = `
+            accordion-content-flyout 
+            max-h-0 
+            opacity-0 
+            overflow-hidden 
+            transition-all 
+            duration-500 
+            ease-in-out 
+            text-xs 
+            pl-14
+        `;
+
+        content.textContent = item.content;
+
+        const svg = trigger.querySelector('.chevron');
+        if (svg) {
+            svg.classList.add('transition-transform', 'duration-500', 'ease-in-out');
+        }
+
+        itemDiv.appendChild(trigger);
+        itemDiv.appendChild(content);
+        wrapper.appendChild(itemDiv);
+
+        trigger.addEventListener('click', () => {
+            wrapper.querySelectorAll('.accordion-content-flyout').forEach(el => {
+                if (el !== content) {
+                    el.classList.remove('max-h-96', 'opacity-100', 'py-4');
+                    el.classList.add('max-h-0', 'opacity-0', 'py-0');
+
+                    const otherSvg = el.previousElementSibling?.querySelector('.chevron');
+                    if (otherSvg) {
+                        otherSvg.classList.add('rotate-0',);
+                        otherSvg.classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            const isCurrentlyActive = content.classList.contains('active');
+
+            wrapper.querySelectorAll('.accordion-content-flyout').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            if (!isCurrentlyActive) {
+                content.classList.add('active');
+                content.classList.remove('max-h-0', 'opacity-0', 'py-0');
+                content.classList.add('max-h-96', 'opacity-100', 'py-4');
+
+                if (svg) {
+                    svg.classList.add('rotate-180',);
+                    svg.classList.remove('rotate-0');
+                }
+            } else {
+                content.classList.remove('max-h-96', 'opacity-100', 'py-4');
+                content.classList.add('max-h-0', 'opacity-0', 'py-0');
+
+                if (svg) {
+                    svg.classList.add('rotate-0',);
+                    svg.classList.remove('rotate-180');
+                }
+            }
+        });
+    });
+
+    return wrapper;
+}

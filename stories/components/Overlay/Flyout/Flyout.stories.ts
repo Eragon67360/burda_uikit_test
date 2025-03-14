@@ -30,6 +30,12 @@ export default meta;
 type Story = StoryObj<FlyoutArgs>;
 
 export const Default: Story = {
+    parameters: {
+        viewport: {
+            defaultViewport: 'Desktop',
+        },
+        layout: 'fullscreen',
+    },
     args: {
         label: 'Abo-Vorteile',
         items: [
@@ -54,13 +60,10 @@ export const Default: Story = {
 
 export const ScrollableBackground: Story = {
     parameters: {
-        layout: 'fullscreen',
-        backgrounds: {
-            default: 'light',
-            values: [
-                { name: 'light', value: '#ffffff' }
-            ]
-        }
+        viewport: {
+            defaultViewport: 'Desktop',
+        },
+        layout: 'fullscreen'
     },
     render: (args) => {
         // Create a container with 300vh height to enable scrolling
@@ -98,7 +101,76 @@ export const ScrollableBackground: Story = {
         return scrollContainer;
     }
 };
+
+export const MobileScrollable: Story = {
+    parameters: {
+        viewport: {
+            defaultViewport: 'mobile2',
+        },
+        layout: 'fullscreen',
+    },
+    render: (args) => {
+        // Create a mobile-specific container
+        const mobileContainer = document.createElement('div');
+        mobileContainer.style.width = '100%';
+        mobileContainer.style.height = '100%';
+        mobileContainer.style.overflow = 'auto';
+        mobileContainer.style.position = 'relative';
+        mobileContainer.style.margin = '0 auto';
+
+        // Create scrollable content
+        const scrollContent = document.createElement('div');
+        scrollContent.style.backgroundColor = '#ffffff';
+
+        // Add sections to create scrollable content
+        const sections = ['First Section', 'Second Section', 'Third Section', 'Fourth Section'];
+        sections.forEach((sectionTitle, index) => {
+            const section = document.createElement('div');
+            section.style.height = '100dvh';
+            section.style.display = 'flex';
+            section.style.justifyContent = 'center';
+            section.style.alignItems = 'center';
+            section.style.fontSize = '24px';
+            section.style.backgroundColor = `hsl(0, 0%, ${60 + (index * 3)}%)`;
+            section.textContent = sectionTitle;
+            scrollContent.appendChild(section);
+        });
+
+        // Create the flyout and position it
+        const flyout = createFlyout(args);
+        flyout.style.zIndex = '100';
+
+        // Assemble the mobile container
+        mobileContainer.appendChild(scrollContent);
+        mobileContainer.appendChild(flyout);
+
+        return mobileContainer;
+    }
+};
+
+
 ScrollableBackground.args = {
+    label: 'Abo-Vorteile',
+    items: [
+        {
+            icon: 'history',
+            title: 'Pünktliche Lieferung',
+            description: 'Sie bekommen Ihre Wunschzeitschrift pünktlich nach Hause geliefert.'
+        },
+        {
+            icon: 'laptop',
+            title: 'Direkt vom Verlag',
+            description: 'Sie erhalten Ihre Wunschzeitschrift direkt vom Verlagshaus, ohne Zwischenhändler.'
+        },
+        {
+            icon: 'documentHand',
+            title: 'E-Paper zum Sonderpreis',
+            description: 'Die digitale Ausgabe ist günstiger als die Printversion. Sie sparen bei einer Kombination aus Print & Digital.'
+        }
+    ]
+};
+
+MobileScrollable.args = {
     label: 'Abo-Vorteile',
     items: [
         {
