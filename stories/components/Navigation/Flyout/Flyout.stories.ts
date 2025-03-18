@@ -49,9 +49,9 @@ export const SubLinksFlyout: Story = {
         variant: 'sublinks',
         triggerLabel: 'Zeitschriften',
         linkItems: [
-            { label: 'Home', href: '/', target: '_self' },
-            { label: 'About', href: '/about', target: '_self' },
-            { label: 'Contact', href: '/contact', target: '_self' }
+            { label: 'Home', href: '/', target: '_blank' },
+            { label: 'About', href: '/about', target: '_blank' },
+            { label: 'Contact', href: '/contact', target: '_blank' }
         ]
     }
 };
@@ -107,9 +107,9 @@ export const NavigationFlyouts: Story = {
             variant: 'sublinks',
             triggerLabel: 'Zeitschriften',
             linkItems: [
-                { label: 'FOCUS', href: '/', target: '_self' },
-                { label: 'FOCUS MONEY', href: '/about', target: '_self' },
-                { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_self' }
+                { label: 'FOCUS', href: '/', target: '_blank' },
+                { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
+                { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
             ]
         });
         subLinksFlyoutContainer.appendChild(subLinksFlyout);

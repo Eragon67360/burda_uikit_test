@@ -15,8 +15,8 @@ const extendedVP = {
   widescreen: {
     name: 'Widescreen',
     styles: {
-      width: '1920px',
-      height: '1080px',
+      width: '1600px',
+      height: '900px',
     },
   },
 

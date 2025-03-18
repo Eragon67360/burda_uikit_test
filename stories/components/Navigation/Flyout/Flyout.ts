@@ -125,6 +125,5 @@ export const createFlyout = ({
         return container;
     }
 
-    // Fallback (shouldn't be reached)
     return document.createElement('div');
 };
