@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createFooter, FooterArgs } from './Footer';
-import { IconCategory, IconRegistry } from '../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 
 const meta: Meta<FooterArgs> = {
     title: 'Components (Organisms)/Footer',

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { CharacteristicArgs, createCharacteristic } from './Characteristic';
-import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 
 const meta: Meta<CharacteristicArgs> = {
     title: 'Components (Atoms)/Table/Characteristic',

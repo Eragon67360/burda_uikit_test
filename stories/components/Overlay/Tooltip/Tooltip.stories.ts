@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createTooltip, TooltipArgs } from './Tooltip';
-import { IconRegistry, IconCategory } from '../../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 
 const meta: Meta<TooltipArgs> = {
   title: 'Components (Atoms)/Overlay/Tooltip',

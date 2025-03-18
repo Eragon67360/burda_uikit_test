@@ -1,5 +1,5 @@
-import { IconRegistry, IconCategory } from "../../../assets/icons";
-import { createTooltip } from "../../Overlay/Tooltip/Tooltip";
+import { IconRegistry, IconCategory } from "@/assets/icons";
+import { createTooltip } from "@/components/Overlay/Tooltip/Tooltip";
 import './input.css'
 export type InputVariant = 'input' | 'textarea';
 export type InputType = 'text' | 'email' | 'password' | 'tel' | 'number';

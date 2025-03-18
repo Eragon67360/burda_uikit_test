@@ -1,4 +1,4 @@
-import { IconCategory, IconRegistry } from '../../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 import './desktop.css';
 
 export type DesktopTagArgs = {

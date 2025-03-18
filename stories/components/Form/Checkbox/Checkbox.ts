@@ -1,4 +1,4 @@
-import { IconCategory, IconRegistry } from "../../../assets/icons";
+import { IconCategory, IconRegistry } from "@/assets/icons";
 
 export type CheckboxArgs = {
     label: string;

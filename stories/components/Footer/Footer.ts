@@ -1,5 +1,5 @@
-import { IconRegistry, IconCategory } from "../../assets/icons";
-import { createButtonLink } from "../Button/ButtonLink/ButtonLink";
+import { IconRegistry, IconCategory } from "@/assets/icons";
+import { createButtonLink } from "@/components/Button/ButtonLink/ButtonLink";
 export interface FooterArgs {
   // First Column - Completely Configurable
   column1: {

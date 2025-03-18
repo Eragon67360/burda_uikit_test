@@ -1,4 +1,4 @@
-import { IconRegistry, IconCategory } from "../../../assets/icons";
+import { IconRegistry, IconCategory } from "@/assets/icons";
 import { ToastManager } from "./ToastManager";
 
 export type PopupVariant = 'error' | 'success' | 'info';

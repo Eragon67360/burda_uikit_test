@@ -1,5 +1,5 @@
 // SlideProgress.ts
-import { IconCategory, IconRegistry } from "../../../assets/icons";
+import { IconCategory, IconRegistry } from "@/assets/icons";
 
 export type SlideProgressArgs = {
     totalSteps: number;

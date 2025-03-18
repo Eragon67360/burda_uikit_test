@@ -1,5 +1,5 @@
 import './datePicker.css';
-import { IconRegistry, IconCategory } from '../../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 export type DatePickerArgs = {
     label?: string;
     required?: boolean;

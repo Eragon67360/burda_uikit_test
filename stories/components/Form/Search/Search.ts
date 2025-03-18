@@ -1,6 +1,6 @@
-import { IconCategory, IconRegistry } from '../../../assets/icons';
-import { getSizedIcon } from '../../../utils/iconUtils';
-import { createButtonLink } from '../../Button/ButtonLink/ButtonLink'
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { getSizedIcon } from '@/utils/iconUtils';
+import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink'
 
 export type SearchArgs = {
     placeholder?: string;
@@ -36,11 +36,11 @@ export const createSearch = ({
         border-b
         border-neutral-400
         focus:bg-base-white
-        focus:border-b-2
+        focus:border-b-[3px]
         focus:border-secondary-dark
         overflow-hidden
         transition-colors
-        duration-300
+        duration-150
         outline-none
     `;
     input.placeholder = placeholder;
@@ -89,20 +89,26 @@ export const createSearch = ({
         });
     }
 
-    input.addEventListener('focus', () => {
-        resultsPopover.style.display = 'flex';
-    });
-
-    input.addEventListener('blur', (e) => {
-        setTimeout(() => {
-            resultsPopover.style.display = 'none';
-        }, 200);
-    });
-
     input.addEventListener('input', (e) => {
-        if (onSearch) {
-            onSearch((e.target as HTMLInputElement).value);
+        const inputValue = (e.target as HTMLInputElement).value.trim();
+
+        if (inputValue) {
+            resultsPopover.style.display = 'flex';
+
+            if (onSearch) {
+                onSearch(inputValue);
+            }
+        } else {
+            resultsPopover.style.display = 'none';
         }
+    });
+
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            if (!input.value.trim()) {
+                resultsPopover.style.display = 'none';
+            }
+        }, 200);
     });
 
     inputWrapper.appendChild(input);

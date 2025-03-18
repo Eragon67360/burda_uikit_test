@@ -1,6 +1,6 @@
 // components/Icon/Icon.ts
 
-import { IconRegistry, IconCategory } from "../../assets/icons";
+import { IconRegistry, IconCategory } from "@/assets/icons";
 
 export type IconProps = {
     name: keyof typeof IconRegistry[IconCategory.SYSTEM];

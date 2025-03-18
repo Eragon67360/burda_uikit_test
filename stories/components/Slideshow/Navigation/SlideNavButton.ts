@@ -1,4 +1,4 @@
-import { createIcon } from "../../Icon/Icon";
+import { createIcon } from "@/components/Icon/Icon";
 
 export type SlideshowNavButtonArgs = {
     mode: 'previous' | 'next';

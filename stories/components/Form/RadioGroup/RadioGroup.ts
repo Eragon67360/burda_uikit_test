@@ -1,4 +1,4 @@
-import { createRadioButton, RadioButtonArgs } from "../RadioButton/RadioButton";
+import { createRadioButton, RadioButtonArgs } from "@/components/Form/RadioButton/RadioButton";
 
 export type RadioOption = {
     value: string;

@@ -1,5 +1,5 @@
-import { IconCategory, IconRegistry } from "../../../assets/icons";
-import { ButtonCTAVariant, createButtonCTA } from "../../Button/CTA/ButtonCTA";
+import { IconCategory, IconRegistry } from "@/assets/icons";
+import { ButtonCTAVariant, createButtonCTA } from "@/components/Button/CTA/ButtonCTA";
 
 export type ModalArgs = {
   isOpen: boolean;

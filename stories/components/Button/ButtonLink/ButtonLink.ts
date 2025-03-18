@@ -1,5 +1,5 @@
-import { IconCategory, IconRegistry } from '../../../assets/icons';
-import { getSizedIcon } from '../../../utils/iconUtils';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { getSizedIcon } from '@/utils/iconUtils';
 import './buttonLink.css';
 
 export type ButtonLinkArgs = {
@@ -45,8 +45,7 @@ export const createButtonLink = ({
         'w-fit',
         'flex',
         'items-center m-1',
-        'gap-[0.375rem]',
-        'hover:gap-[0.625rem]',
+        'gap-2',
         'border-b-[0.1875rem]',
         'border-b-transparent',
         'border-t-0',

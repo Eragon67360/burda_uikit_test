@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/html';
-import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonLinkArgs, createButtonLink } from './ButtonLink';
 
 const meta: Meta<ButtonLinkArgs> = {
