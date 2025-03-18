@@ -1,9 +1,26 @@
 // .storybook/preview.ts
 import type { Preview } from '@storybook/html';
-
+import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
 import './tailwind.css';
 import './variables.css';
 
+const extendedVP = {
+  desktop: {
+    name: 'Desktop',
+    styles: {
+      width: '1440px',
+      height: '810px',
+    },
+  },
+  widescreen: {
+    name: 'Widescreen',
+    styles: {
+      width: '1920px',
+      height: '1080px',
+    },
+  },
+
+}
 const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
@@ -28,35 +45,9 @@ const preview: Preview = {
 
     viewport: {
       viewports: {
-        mobile: {
-          name: 'Mobile',
-          styles: {
-            width: '320px',
-            height: '568px',
-          },
-        },
-        tablet: {
-          name: 'Tablet',
-          styles: {
-            width: '768px',
-            height: '1024px',
-          },
-        },
-        desktop: {
-          name: 'Desktop',
-          styles: {
-            width: '1440px',
-            height: '810px',
-          },
-        },
-        widescreen: {
-          name: 'Widescreen',
-          styles: {
-            width: '1920px',
-            height: '1080px',
-          },
-        },
-      },
+        ...MINIMAL_VIEWPORTS,
+        ...extendedVP
+      }
     },
 
     docs: {
