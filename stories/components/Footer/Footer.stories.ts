@@ -25,7 +25,8 @@ export const DefaultFooter: Story = {
             phone: {
                 label: 'Bestell-Hotline',
                 number: '07816 39 65 20',
-                description: 'Dieser Anruf kostet € 0,20/Verbindung aus allen deutschen Netzen.'
+                description: 'Dieser Anruf kostet € 0,20/Verbindung aus allen deutschen Netzen.',
+                extraHint: '**',
             },
             hints: {
                 firstHint: {
