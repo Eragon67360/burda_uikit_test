@@ -1,4 +1,5 @@
-import { IconRegistry, IconCategory } from "../../assets/icons";
+import { IconCategory, IconRegistry } from "../../assets/icons";
+import { getSizedIcon } from "../../utils/iconUtils";
 
 export type PaginationArgs = {
     variant?: 'white' | 'grey';
@@ -38,8 +39,8 @@ export const createPagination = ({
 
     const createChevronButton = (direction: 'left' | 'right', currentPage: number, totalPages: number) => {
         const icon = direction === 'left'
-            ? IconRegistry[IconCategory.SYSTEM].chevronLeft
-            : IconRegistry[IconCategory.SYSTEM].chevronRight;
+            ? getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 16)
+            : getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 16);
 
         const isDisabled = direction === 'left'
             ? currentPage === 1
@@ -49,9 +50,9 @@ export const createPagination = ({
         <button
         class="relative w-12 h-12 flex items-center justify-center
                overflow-hidden group
-               ${isDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer'}
+               ${isDisabled ? 'bg-neutral-50 hover:bg-neutral-50 text-neutral-500 cursor-not-allowed' : 'cursor-pointer hover:bg-secondary-light/100'}
                transition-colors duration-300 ease-in-out rounded-md
-               hover:bg-secondary-light/100
+              
                focus:ring-base-black"
         ${isDisabled ? 'disabled' : ''}
         data-direction="${direction}"
