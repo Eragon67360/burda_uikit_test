@@ -48,6 +48,7 @@ export const createButtonIcon = ({
         'focus:border-transparent',
         'disabled:cursor-not-allowed',
         'relative',
+        'rounded-lg',
         'overflow-hidden ',
         'flex items-center justify-center',
         'cursor-pointer',
