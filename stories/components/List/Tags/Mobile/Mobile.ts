@@ -9,7 +9,7 @@ export type MobileTagArgs = {
 
 export const createMobileTag = ({ text, showIcon = true }: MobileTagArgs) => {
     return `
-    <div class="inline-flex items-center px-6 py-3 pl-4 my-auto gap-2 rounded-[3.25rem] border border-neutral-100 bg-neutral-50">
+    <div class="inline-flex items-center px-6 py-3 pl-4 my-auto gap-2 rounded-[3.25rem] border border-neutral-200 bg-neutral-50">
       ${IconRegistry[IconCategory.SYSTEM].success}
       <span class="text-label-mobile whitespace-nowrap">${text}</span>
     </div>

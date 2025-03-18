@@ -9,19 +9,21 @@ export type ButtonLinkArgs = {
     onClick?: () => void;
     icon?: string | null;
     href: string;
+    target?: '_blank' | '_self' | '_parent' | '_top'
 };
 
 export const createButtonLink = ({
     disabled = false,
     label,
     onClick,
-    href,
+    href = "example.com",
     icon = 'arrowRight',
-    iconLeft = false, }: ButtonLinkArgs) => {
+    iconLeft = false,
+    target = "_blank"
+}: ButtonLinkArgs) => {
 
     const link = document.createElement('a');
-
-    const fullHref = href.startsWith('http') ? href : `https://${href}`;
+    link.target = target
 
     if (disabled) {
         link.setAttribute('aria-disabled', 'true');
@@ -29,7 +31,7 @@ export const createButtonLink = ({
         link.href = '#';
         link.setAttribute('tabindex', '-1');
     } else {
-        link.href = fullHref;
+        link.href = href;
         if (onClick) {
             link.addEventListener('click', (e) => {
                 e.preventDefault();

@@ -12,9 +12,8 @@ const meta: Meta<SubscriptionPlanArgs> = {
         title: { control: 'text' },
         subtitle: { control: 'text' },
         characteristics: { control: 'object' },
-        secondaryCTALabel: { control: 'text' },
+        infoLabel: { control: 'text' },
         primaryCTALabel: { control: 'text' },
-        onSecondaryClick: { action: 'secondary clicked' },
         onPrimaryClick: { action: 'primary clicked' },
     },
     render: (args) => createSubscriptionPlan(args as any)
@@ -34,9 +33,8 @@ export const Default: Story = {
             'Feature 3',
             'Feature 4',
         ],
-        secondaryCTALabel: 'Learn More',
+        infoLabel: 'ab 3,40 € pro Ausgabe',
         primaryCTALabel: 'Subscribe Now',
-        onSecondaryClick: () => console.log('Secondary CTA clicked'),
         onPrimaryClick: () => console.log('Primary CTA clicked'),
     },
 };
@@ -56,9 +54,8 @@ export const ThreePlans: Story = {
                 'FOCUS klassisch als Print-Ausgabe',
                 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
             ],
-            secondaryCTALabel: 'ab 3,40 € pro Ausgabe',
+            infoLabel: 'ab 3,40 € pro Ausgabe',
             primaryCTALabel: 'Abo auswählen',
-            onSecondaryClick: () => console.log('Plan 1 Secondary clicked'),
             onPrimaryClick: () => console.log('Plan 1 Primary clicked'),
         });
 
@@ -72,9 +69,8 @@ export const ThreePlans: Story = {
                 'FOCUS klassisch als Print-Ausgabe',
                 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
             ],
-            secondaryCTALabel: 'ab 3,40 € pro Ausgabe',
+            infoLabel: 'ab 3,40 € pro Ausgabe',
             primaryCTALabel: 'Abo auswählen',
-            onSecondaryClick: () => console.log('Plan 2 Secondary clicked'),
             onPrimaryClick: () => console.log('Plan 2 Primary clicked'),
         });
 
@@ -88,9 +84,8 @@ export const ThreePlans: Story = {
                 'FOCUS klassisch als Print-Ausgabe',
                 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
             ],
-            secondaryCTALabel: 'ab 3,40 € pro Ausgabe',
+            infoLabel: 'ab 3,40 € pro Ausgabe',
             primaryCTALabel: 'Abo auswählen',
-            onSecondaryClick: () => console.log('Plan 3 Secondary clicked'),
             onPrimaryClick: () => console.log('Plan 3 Primary clicked'),
         });
 

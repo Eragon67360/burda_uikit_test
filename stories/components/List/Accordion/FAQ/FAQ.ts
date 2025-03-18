@@ -1,4 +1,5 @@
 import { IconCategory, IconRegistry } from '../../../../assets/icons';
+import { getSizedIcon } from '../../../../utils/iconUtils';
 import './fAQ.css';
 
 export type AccordionItem = {
@@ -14,7 +15,7 @@ export type FAQArgs = {
 export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
     const wrapper = document.createElement('div');
     const bgColorClass = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
-    wrapper.className = `w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden`;
+    wrapper.className = `w-full md:w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden`;
 
     items.forEach((item, index) => {
         const itemDiv = document.createElement('div');
@@ -23,8 +24,8 @@ export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
         const trigger = document.createElement('button');
         trigger.className = `w-full flex justify-between items-center gap-6 p-8 text-left ${bgColorClass} hover:bg-secondary-light transition`;
         trigger.innerHTML = `
-        <span class="text-subhead3-desktop">${item.trigger}</span>
-        ${IconRegistry[IconCategory.SYSTEM].chevronDown}
+        <span class="text-label-mobile md:text-subhead3-desktop">${item.trigger}</span>
+        ${getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 18)}
         `;
 
         const separator = document.createElement('div');

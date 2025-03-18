@@ -3,6 +3,7 @@ import { createModal, ModalArgs } from './Modal';
 import { ButtonCTAVariant, createButtonCTA } from "../../Button/CTA/ButtonCTA";
 import { createTextbox } from '../../List/Accordion/Textbox/Textbox';
 import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { createInfoTag } from '../../InfoTag/InfoTag';
 
 const meta: Meta<ModalArgs> = {
     title: 'Components (Organisms)/Overlay/Modal',
@@ -81,10 +82,12 @@ export const WithCTA: Story = {
                 primary: {
                     label: 'Confirm',
                     onClick: () => console.log('Primary action clicked'),
+                    icon: null
                 },
                 secondary: {
                     label: 'Cancel',
                     onClick: () => console.log('Secondary action clicked'),
+                    icon: null
                 },
             },
         });
@@ -108,6 +111,7 @@ export const WithPrimaryActionOnly: Story = {
                 primary: {
                     label: 'Confirm',
                     onClick: () => console.log('Primary action clicked'),
+                    icon: null
                 },
             },
         });
@@ -139,14 +143,8 @@ export const Showcase: Story = {
         });
         textbox.className += ' mt-4 w-full h-fit';
 
-        const button = createButtonCTA({
-            variant: ButtonCTAVariant.SECONDARY,
-            label: 'Zuzahlung ab 1,00 €',
-            nested: false,
-            disabled: false,
-            iconLeft: false,
-            icon: null,
-            onClick: () => console.log('Button clicked'),
+        const button = createInfoTag({
+            label: 'Zuzahlung ab 1,00 €'
         });
         const buttonWrapper = document.createElement('div');
         buttonWrapper.className = 'mt-16 mx-auto';
@@ -173,12 +171,12 @@ export const Showcase: Story = {
             <div class="bg-neutral-50 rounded-lg p-4 w-full flex items-center justify-center">
                 <img src="/fryer_tipp.png" alt="Product view 1" class="rounded-lg w-[13.625rem]">
             </div>
-            <div class="grid grid-cols-2 gap-2 w-full">
+            <div class="grid grid-cols-2 gap-2 w-full items-start justify-start self-start ">
                 <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_1.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_2.png" alt="Product view 1" class="rounded-lg w-full">
-                <img src="/fryer_4.png" alt="Product view 1" class="rounded-lg w-full">
+                <img src="/fryer_1.png" alt="Product view 2" class="rounded-lg w-full">
+                <img src="/fryer_1.png" alt="Product view 3" class="rounded-lg w-full">
+                <img src="/fryer_2.png" alt="Product view 4" class="rounded-lg w-full">
+                <img src="/fryer_4.png" alt="Product view 5" class="rounded-lg w-full">
             </div>
         `;
 
@@ -192,10 +190,12 @@ export const Showcase: Story = {
                 primary: {
                     label: 'Prämie auswählen',
                     onClick: () => console.log('Select premium clicked'),
+                    icon: 'cart'
                 },
                 secondary: {
-                    label: 'Zum nächsten Schritt ->',
+                    label: 'Zum nächsten Schritt',
                     onClick: () => console.log('Next step clicked'),
+                    icon: 'arrowRight'
                 },
             },
             content: modalContent
