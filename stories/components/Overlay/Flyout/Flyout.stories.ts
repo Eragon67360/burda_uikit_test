@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createFlyout, FlyoutArgs } from './Flyout';
-import { IconRegistry, IconCategory } from '../../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 
 const meta: Meta<FlyoutArgs> = {
     title: 'Components (Organisms)/Overlay/Flyout',

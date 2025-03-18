@@ -1,5 +1,5 @@
-import { IconCategory, IconRegistry } from '../../../assets/icons';
-import { ButtonLinkArgs, createButtonLink } from '../../Button/ButtonLink/ButtonLink';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { ButtonLinkArgs, createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
 import './text.css'
 
 type LinkItem = ButtonLinkArgs & {

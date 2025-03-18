@@ -1,4 +1,4 @@
-import { IconCategory, IconRegistry } from '../../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 import './mobile.css';
 
 export type MobileTagArgs = {

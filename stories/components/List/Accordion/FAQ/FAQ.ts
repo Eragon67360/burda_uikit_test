@@ -1,5 +1,5 @@
-import { IconCategory, IconRegistry } from '../../../../assets/icons';
-import { getSizedIcon } from '../../../../utils/iconUtils';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { getSizedIcon } from '@/utils/iconUtils';
 import './fAQ.css';
 
 export type AccordionItem = {

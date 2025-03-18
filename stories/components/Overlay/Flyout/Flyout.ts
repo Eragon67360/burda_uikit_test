@@ -1,6 +1,6 @@
-import { IconCategory, IconRegistry } from "../../../assets/icons";
-import { getSizedIcon } from "../../../utils/iconUtils";
-import { createIcon } from "../../Icon/Icon";
+import { IconCategory, IconRegistry } from "@/assets/icons";
+import { getSizedIcon } from "@/utils/iconUtils";
+import { createIcon } from "@/components/Icon/Icon";
 import * as Hammer from 'hammerjs';
 import './flyout.css';
 
@@ -28,6 +28,7 @@ export const createFlyout = ({
 
     const mainContainer = document.createElement('div')
 
+    /** ------------------------------------------------------------- DESKTOP VERSION ------------------------------------------------------------- */
     const baseContainerClasses = `
         hidden sm:block
     `;
@@ -321,7 +322,7 @@ export const createFlyout = ({
 
     const flyoutMobileContainer = document.createElement('div');
     flyoutMobileContainer.className = baseMobileContainerClasses;
-    flyoutMobileContainer.style.touchAction = 'pan-y'; // Allow vertical scrolling
+    flyoutMobileContainer.style.touchAction = 'pan-y';
 
     const buttonMobileContainer = document.createElement('button');
     buttonMobileContainer.className = buttonMobileContainerClasses;
@@ -412,7 +413,7 @@ export const createFlyout = ({
     function setupMobileFlyoutVisibility() {
 
         function checkScrollPosition() {
-            const scrollThreshold = window.innerHeight * 1.5;
+            const scrollThreshold = window.innerHeight * 1.0;
 
             if (window.scrollY >= scrollThreshold) {
                 flyoutMobileContainer.classList.remove('opacity-0', 'pointer-events-none');

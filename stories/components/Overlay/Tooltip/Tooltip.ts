@@ -1,5 +1,5 @@
 import './tooltip.css'
-import { IconRegistry, IconCategory } from '../../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 
 export type TooltipArgs = {
     content: string | HTMLElement;

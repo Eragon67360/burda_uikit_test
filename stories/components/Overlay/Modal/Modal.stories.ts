@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createModal, ModalArgs } from './Modal';
-import { ButtonCTAVariant, createButtonCTA } from "../../Button/CTA/ButtonCTA";
-import { createTextbox } from '../../List/Accordion/Textbox/Textbox';
-import { IconCategory, IconRegistry } from '../../../assets/icons';
-import { createInfoTag } from '../../InfoTag/InfoTag';
+import { ButtonCTAVariant, createButtonCTA } from "@/components/Button/CTA/ButtonCTA";
+import { createTextbox } from '@/components/List/Accordion/Textbox/Textbox';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { createInfoTag } from '@/components/InfoTag/InfoTag';
 
 const meta: Meta<ModalArgs> = {
     title: 'Components (Organisms)/Overlay/Modal',

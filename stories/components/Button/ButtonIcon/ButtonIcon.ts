@@ -1,6 +1,6 @@
-import { IconCategory, IconRegistry } from '../../../assets/icons';
-import { createIcon, IconProps } from '../../Icon/Icon';
-import './buttonIcon.css'
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { createIcon } from '@/components/Icon/Icon';
+import './buttonIcon.css';
 
 export enum ButtonIconVariant {
     SMALL = 'small',

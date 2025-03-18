@@ -1,6 +1,6 @@
-import { IconCategory, IconRegistry } from '../../assets/icons';
-import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
-import { createInfoTag } from '../InfoTag/InfoTag';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
+import { createInfoTag } from '@/components/InfoTag/InfoTag';
 import './subscriptionPlan.css';
 
 export type SubscriptionPlanArgs = {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createButtonIcon, ButtonIconArgs, ButtonIconVariant } from './ButtonIcon';
-import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 
 const meta: Meta<ButtonIconArgs> = {
     title: 'Components (Atoms)/Button/ButtonIcon',

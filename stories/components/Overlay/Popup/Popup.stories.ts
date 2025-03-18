@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { PopupArgs, PopupTriggerArgs, createPopupWithTrigger } from './Popup';
-import { IconRegistry, IconCategory } from '../../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 
 const meta: Meta<PopupTriggerArgs> = {
     title: 'Components (Atoms)/Overlay/Popup',

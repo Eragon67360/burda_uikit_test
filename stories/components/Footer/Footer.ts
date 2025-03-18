@@ -1,5 +1,5 @@
-import { IconRegistry, IconCategory } from "../../assets/icons";
-import { createButtonLink } from "../Button/ButtonLink/ButtonLink";
+import { IconRegistry, IconCategory } from "@/assets/icons";
+import { createButtonLink } from "@/components/Button/ButtonLink/ButtonLink";
 export interface FooterArgs {
   // First Column - Completely Configurable
   column1: {
@@ -113,7 +113,7 @@ export const createFooter = ({
               <div class="flex items-center gap-4 text-subhead2-desktop" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
               ${column1.phone.number ? `
                 <p class="text-hotline-footer-default-mobile font-roboto-serif mt-4 w-3/4 proportional-nums">
-                  <a href="tel:${column1.phone.number.trim().replace(/\s/g,'')}">${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2-desktop pl-1 align-top">${column1.phone.extraHint}</span>` : ''}</a>
+                  <a href="tel:${column1.phone.number.trim().replace(/\s/g, '')}">${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2-desktop pl-1 align-top">${column1.phone.extraHint}</span>` : ''}</a>
                 </p>
               `: ''}
               <p class="text-footer-copy-desktop mt-3">${column1.phone.description || ''}</p>

@@ -1,4 +1,4 @@
-import { IconCategory, IconRegistry } from '../../../assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
 import './buttonCTA.css';
 
 export enum ButtonCTAVariant {

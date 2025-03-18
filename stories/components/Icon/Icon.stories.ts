@@ -2,7 +2,7 @@
 
 import type { Meta, StoryObj } from '@storybook/html';
 import { createIcon, IconProps } from './Icon';
-import { IconRegistry, IconCategory } from '../../assets/icons';
+import { IconRegistry, IconCategory } from '@/assets/icons';
 
 const meta: Meta<IconProps> = {
     title: 'Components (Atoms)/Icon',

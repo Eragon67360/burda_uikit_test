@@ -1,4 +1,4 @@
-import { IconCategory, IconRegistry } from "../../../assets/icons";
+import { IconCategory, IconRegistry } from "@/assets/icons";
 import './select.css'
 export type SelectItem = {
     value: string;

@@ -1,6 +1,6 @@
 // Showcase.ts
-import { createSlideProgress, SlideProgressArgs } from '../SlideProgress/SlideProgress';
-import { createSlideshowNavButton } from '../Navigation/SlideNavButton';
+import { createSlideshowNavButton } from '@/components/Slideshow/Navigation/SlideNavButton';
+import { createSlideProgress } from '@/components/Slideshow/SlideProgress/SlideProgress';
 
 export type ShowcaseArgs = {
     images: string[];
