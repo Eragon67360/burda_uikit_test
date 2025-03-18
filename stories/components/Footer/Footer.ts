@@ -13,6 +13,7 @@ export interface FooterArgs {
       label?: string;
       number?: string;
       description?: string;
+      extraHint?: string;
     };
     hints?: {
       firstHint?: {
@@ -92,15 +93,15 @@ export const createFooter = ({
   return `
     <footer class="bg-transparent">
       <div class="container max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-3">
-        
+
         <!-- First Column -->
         <div class="bg-base-black text-base-white px-4 pt-4 w-full">
           <div class="bg-brand w-full h-fit md:h-[11.125rem] pr-6 md:pr-20 pl-6 md:pl-12 py-7 md:py-0 flex justify-start items-center rounded-sm">
           ${column1.logo ? `
-            <img 
-              src="${column1.logo.src}" 
-              alt="${column1.logo.alt || 'Logo'}" 
-              width="${column1.logo.width || 'auto'}" 
+            <img
+              src="${column1.logo.src}"
+              alt="${column1.logo.alt || 'Logo'}"
+              width="${column1.logo.width || 'auto'}"
               height="${column1.logo.height || 'auto'}"
               class="scale-80 md:scale-100 w-[11.75rem] md:w-auto"
             />
@@ -110,11 +111,15 @@ export const createFooter = ({
             ${column1.phone ? `
             <div class="mb-4">
               <div class="flex items-center gap-4 text-subhead2-desktop" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
-              <p class="text-hotline-footer-default-mobile font-roboto-serif mt-4 w-3/4 proportional-nums">${column1.phone.number || ''}</p>
+              ${column1.phone.number ? `
+                <p class="text-hotline-footer-default-mobile font-roboto-serif mt-4 w-3/4 proportional-nums">
+                  <a href="tel:${column1.phone.number.trim().replace(/\s/g,'')}">${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2-desktop pl-1 align-top">${column1.phone.extraHint}</span>` : ''}</a>
+                </p>
+              `: ''}
               <p class="text-footer-copy-desktop mt-3">${column1.phone.description || ''}</p>
             </div>
             ` : ''}
-            
+
             <div class="mt-14 md:mt-32">
               ${column1.hints?.firstHint ? `
                 <div class="flex gap-2 items-center flex-wrap">
@@ -127,11 +132,11 @@ export const createFooter = ({
         : ''}
                 </div>
               ` : ''}
-            
+
               ${column1.hints?.secondHint ? `
                 <p class="text-footer-copy-mobile md:text-footer-copy-desktop mt-2">${column1.hints.secondHint}</p>
               ` : ''}
-              
+
               ${column1.copyright ? `
                 <p class="text-footer-copy-mobile md:text-footer-copy-desktop mt-8">${column1.copyright}</p>
               ` : ''}
@@ -144,7 +149,7 @@ export const createFooter = ({
             ${column2.title ? `
             <h2 class="text-subhead2-mobile md:text-subhead2-desktop">${column2.title}</h2>
             ` : ''}
-            
+
             ${column2.links ? `
               <ul class="">
                 ${column2.links.map(link => `
@@ -166,10 +171,10 @@ export const createFooter = ({
             <p class="text-subhead3-mobile md:text-subhead3-desktop mb-2">${column2.paymentSection.title || 'Payment Methods'}</p>
             <div class="flex gap-2 mb-4 self-stretch items-start content-start flex-wrap">
               ${column2.paymentSection.icons?.map(icon => `
-                <img 
-                  src="${icon.src}" 
-                  alt="${icon.alt}" 
-                  width="${icon.width || 50}" 
+                <img
+                  src="${icon.src}"
+                  alt="${icon.alt}"
+                  width="${icon.width || 50}"
                   height="${icon.height || 30}"
                 />
               `).join('')}
@@ -181,10 +186,10 @@ export const createFooter = ({
             <p class="text-subhead3-mobile md:text-subhead3-desktop mb-2">${column2.qualitySection.title || 'Sicher & Nachhaltig'}</p>
             <div class="flex gap-8 items-start">
               ${column2.qualitySection.icons?.map(icon => `
-                <img 
-                  src="${icon.src}" 
-                  alt="${icon.alt}" 
-                  width="${icon.width || 50}" 
+                <img
+                  src="${icon.src}"
+                  alt="${icon.alt}"
+                  width="${icon.width || 50}"
                   height="${icon.height || 30}"
                 />
               `).join('')}
@@ -198,28 +203,28 @@ export const createFooter = ({
               ${column2.socialSection.networks?.map(network => `
                 <a href="${network.href}">
                 ${network.svg}
-                  
+
                 </a>
               `).join('')}
             </div>
           ` : ''}
           </div>
-          
+
         </div>
 
         <!-- Third Column -->
         <div class="bg-base-white text-base-black w-full flex flex-col gap-8 px-6 md:px-16 py-14 md:py-16">
           <div class="flex flex-col gap-5">
             ${column3.logo ? `
-            <img 
-              src="${column3.logo.src}" 
-              alt="${column3.logo.alt || 'Logo'}" 
-              width="${column3.logo.width || 150}" 
+            <img
+              src="${column3.logo.src}"
+              alt="${column3.logo.alt || 'Logo'}"
+              width="${column3.logo.width || 150}"
               height="${column3.logo.height || 50}"
               class="mb-4"
             />
           ` : ''}
-          
+
           ${column3.description ? `
             <p class="text-footer-copy-mobile md:text-footer-copy-desktop">
               <span class="font-bold">${column3.description.title || ''}: </span>
@@ -243,7 +248,7 @@ export const createFooter = ({
           ` : ''}
 
           </div>
-          
+
           <div class="flex flex-col gap-4" >
           ${column3.secondSection ? `
             <h4 class="text-subhead3-mobile md:text-subhead3-desktop">${column3.secondSection.title || ''}</h4>
