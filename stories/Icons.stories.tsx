@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { IconRegistry, IconCategory } from "./assets/icons";
+import { IconRegistry, IconCategory } from "@/assets/icons";
 
 interface IconStoryProps {
   category: IconCategory;
