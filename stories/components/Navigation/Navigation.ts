@@ -1,24 +1,41 @@
-import './navigation.css'
-import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
-import { create } from 'domain';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
-import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { createFlyout, LinkItem } from './Flyout/Flyout';
+import './navigation.css';
 
-export type NavigationItem = {
+export type NavigationItemType = 'flyout' | 'link';
+
+export type BaseNavigationItem = {
+    type: NavigationItemType;
+    order: number;
+}
+
+export type LinkNavigationItem = BaseNavigationItem & {
+    type: 'link';
     label: string;
     href: string;
     target: '_blank' | '_self' | '_parent' | '_top';
 }
 
+export type FlyoutNavigationItem = BaseNavigationItem & {
+    type: 'flyout';
+    label: string;
+    flyoutItems: LinkItem[];
+}
+
+// export type NavigationItem = {
+//     label: string;
+//     href: string;
+//     target: '_blank' | '_self' | '_parent' | '_top';
+// }
+
 export type NavigationArgs = {
     logoSrc: string;
     logoAltText: string;
-    hasFlyoutLinks: boolean;
     has2LinesNavigation: boolean;
     flyoutLabel: string;
     flyoutItems: LinkItem[];
-    navigationItems: NavigationItem[];
+    navigationItems: Array<LinkNavigationItem | FlyoutNavigationItem>;
     hasSearch: boolean;
     searchProps?: SearchArgs;
     loginButtonText: string;
@@ -27,11 +44,13 @@ export type NavigationArgs = {
     cartButtonText: string;
     cartButtonIcon: string;
     onClickCartButton: () => void;
+    addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
 };
 
-export const createNavigation = ({ logoSrc, logoAltText, hasFlyoutLinks, has2LinesNavigation, flyoutLabel, flyoutItems, navigationItems, hasSearch, searchProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
+export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, flyoutLabel, flyoutItems, navigationItems, hasSearch, searchProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
 
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
+    const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
 
     const navigationContainer = document.createElement('div');
     const navigationWrapper = document.createElement('div');
@@ -65,39 +84,39 @@ export const createNavigation = ({ logoSrc, logoAltText, hasFlyoutLinks, has2Lin
     logoContainer.alt = logoAltText;
     logoContainer.className = 'h-[2.8rem] w-auto ml-2 mr-3'
 
-    if (hasFlyoutLinks) {
-        const flyout = createFlyout({
-            variant: 'sublinks',
-            triggerLabel: flyoutLabel,
-            linkItems: flyoutItems,
-        })
-        linksWrapper.appendChild(flyout)
-    }
-
-    navigationItems.forEach((item) => {
-        const itemButton = document.createElement('a');
-        itemButton.text = item.label;
-        itemButton.href = item.href;
-        itemButton.target = item.target;
-        itemButton.className = `
-            flex
-            items-center
-            h-full
-            gap-2
-            px-4
-            py-2
-            text-sm
-            font-semibold
-            rounded-none
-            transition-all
-            duration-300
-            cursor-pointer
-            hover:bg-secondary-light
-        `
-        linksWrapper.appendChild(itemButton)
+    sortedNavigationItems.forEach((item) => {
+        if (item.type === 'link') {
+            const itemButton = document.createElement('a');
+            itemButton.text = item.label;
+            itemButton.href = item.href;
+            itemButton.target = item.target;
+            itemButton.className = `
+                flex
+                items-center
+                h-full
+                gap-2
+                px-4
+                py-2
+                text-sm
+                font-semibold
+                rounded-none
+                transition-all
+                duration-300
+                cursor-pointer
+                hover:bg-secondary-light
+            `;
+            linksWrapper.appendChild(itemButton);
+        } else if (item.type === 'flyout') {
+            const flyout = createFlyout({
+                variant: 'sublinks',
+                triggerLabel: item.label,
+                linkItems: item.flyoutItems,
+            });
+            linksWrapper.appendChild(flyout);
+        }
     })
 
-    if (hasSearch) {
+    if (hasSearch && searchProps) {
         const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, classNames: 'mx-6' })
         rightWrapper.appendChild(searchContainer)
     }
