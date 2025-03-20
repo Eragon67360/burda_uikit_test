@@ -1,157 +1,110 @@
-# Component Creation Script
+# 🚀 Storybook Component Library Setup Guide
 
-A Python utility script to automate the creation of Storybook component files and directory structure.
+## 📋 Prerequisites
 
-## Overview
+### System Requirements
 
-This script automates the creation of new component files following our project's structure conventions. It creates the necessary directories and generates three files with boilerplate code:
+- **Node.js**: v20.x or later
+  - [Official Node.js Download](https://nodejs.org/en/download)
+- **Package Manager**:
+  - npm (v10.x)
+  - or Yarn (v1.22.x)
 
-- Component TS file
-- Storybook Stories TS file
-- Component CSS file
-
-## Usage
-
-```bash
-python create_component.py ComponentPath [AtomicType]
-```
-
-or (if running in WSL)
+### Global Installations
 
 ```bash
-python3 create_component.py ComponentPath [AtomicType]
+npm install -g npm@latest
+npm install -g @storybook/cli
 ```
 
-### Examples:
+## 🔧 Project Setup
 
-Basic usage:
+### 1. Open a terminal in the Repository/Folder
+
+### 2. Install Dependencies
 
 ```bash
-python create_component.py Button/ButtonCTA
+# Using npm
+npm install
 ```
 
-With Atomic Design type:
+## 🛠 Available Scripts
+
+### Development
 
 ```bash
-python create_component.py Button/ButtonCTA Atom
+# Start Development (Tailwind + Storybook)
+npm run dev
+
+# Watch Tailwind CSS
+npm run watch:tailwindcss
+
+# Start Storybook
+npm run watch:storybook
 ```
 
-This will create:
+### Build Project
 
-```
-stories/
-└── components/
-    └── Button/
-        └── ButtonCTA/
-            ├── buttonCTA.css
-            ├── ButtonCTA.js
-            └── ButtonCTA.stories.ts
+```bash
+# Build Storybook static site
+npm run build
+
+# Preview Built Storybook
+npm run preview-storybook
 ```
 
-## File Structure Generated
+### Testing
 
-### 1. CSS File (`buttonCTA.css`)
-
-```css
-/* Empty file for component-specific styles */
+```bash
+npm test
 ```
 
-### 2. Component File (`ButtonCTA.js`)
+## 📦 Core Dependencies
 
-```javascript
-import "./buttonCTA.css";
+| Dependency  | Version | Purpose               |
+| ----------- | ------- | --------------------- |
+| Storybook   | v8.6.4  | Component Development |
+| TailwindCSS | v4.0.6  | Styling               |
+| Webpack     | v5      | Bundling              |
 
-export type ButtonCTAArgs = {};
+## 🔍 Troubleshooting
 
-export const createButtonCTA = ({}) => {};
+### Common Installation Issues
+
+#### Node Version Conflicts
+
+- Use [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm)
+- Verify Node.js compatibility
+
+#### Dependency Conflicts
+
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Rebuild node modules
+rm -rf node_modules
+npm install
 ```
 
-### 3. Stories File (`ButtonCTA.stories.ts`)
+## 🌐 Storybook Addons Included
 
-Without Atomic Type:
+- Accessibility (a11y)
+- Interactions
+- Essentials
+- Backgrounds
+- Webpack5 Compiler
 
-```typescript
-import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
+## 🔒 License
 
-const meta: Meta<ButtonCTAArgs> = {
-  title: "Components/Button/ButtonCTA",
-  tags: ["autodocs"],
-  parameters: {
-    controls: { expanded: true },
-  },
-  argTypes: {},
-  render: (args) => createButtonCTA(args as any),
-};
-```
+UNLICENSED - avenit AG
 
-With Atomic Type:
+---
 
-```typescript
-import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
+### 🌟 Quick Start Checklist
 
-const meta: Meta<ButtonCTAArgs> = {
-  title: "Components (Atoms)/Button/ButtonCTA",
-  tags: ["autodocs"],
-  parameters: {
-    controls: { expanded: true },
-  },
-  argTypes: {},
-  render: (args) => createButtonCTA(args as any),
-};
-```
-
-## Important Notes
-
-1. **Atomic Design Types**:
-
-   - Optional argument: `Atom`, `Molecule`, or `Organism`
-   - Affects the component's story title organization
-   - If not provided, uses default "Components" category
-
-2. **Naming Conventions**:
-
-   - Use PascalCase for component names (e.g., `ButtonCTA`)
-   - The script will automatically convert the CSS filename to camelCase
-   - Keep directory names consistent with component names
-
-3. **Path Structure**:
-
-   - Use forward slashes (`/`) to separate directories
-   - The last part of the path will be used as the component name
-   - Example: `Category/Subcategory/ComponentName`
-
-4. **Existing Files**:
-
-   - The script will not overwrite existing files
-   - If a directory already exists, the script will attempt to create files inside it
-
-5. **Requirements**:
-   - Python 3.x installed on your system
-   - Script must be run from the project root directory
-   - The `stories/components` directory structure must exist
-
-## Common Issues
-
-1. **Wrong Working Directory**:
-
-   - Ensure you're running the script from the project root
-   - The script assumes `stories/components` exists
-
-2. **Invalid Component Names**:
-
-   - Avoid special characters in component names
-   - Stick to PascalCase naming convention
-   - Don't use spaces in names
-
-3. **Permission Issues**:
-   - Ensure you have write permissions in the target directory
-
-## Best Practices
-
-1. Always verify the generated files after creation
-2. Follow the naming conventions strictly
-3. Run the script from the project root directory
-4. Use atomic design types consistently across related components
-5. Back up any existing files before running the script in their location
+- [ ] Install Node.js v20.x
+- [ ] Install dependencies
+- [ ] Run `npm run dev`
+- [ ] Open Storybook at `http://localhost:6006`
+- [ ] Start developing components!
