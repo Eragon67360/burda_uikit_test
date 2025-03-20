@@ -26,7 +26,7 @@ export const createFlyout = ({
     has2LinesNavigation
 }: FlyoutArgs) => {
     const container = document.createElement('div');
-    container.className = `relative inline-block ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+    container.className = `relative inline-block z-[999] ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
 
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `
@@ -100,7 +100,6 @@ export const createFlyout = ({
         let isOpen = false;
         triggerButton.addEventListener('click', () => {
             isOpen = !isOpen;
-
             flyoutWrapper.classList.toggle('hidden', !isOpen);
 
             if (isOpen) {

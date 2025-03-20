@@ -23,12 +23,6 @@ export type FlyoutNavigationItem = BaseNavigationItem & {
     flyoutItems: LinkItem[];
 }
 
-// export type NavigationItem = {
-//     label: string;
-//     href: string;
-//     target: '_blank' | '_self' | '_parent' | '_top';
-// }
-
 export type NavigationArgs = {
     logoSrc: string;
     logoAltText: string;
@@ -56,11 +50,11 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
     const linksWrapper = document.createElement('div');
     const rightWrapper = document.createElement('div');
 
-    navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out`;
+    navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-[999]`;
     navigationWrapper.className = `h-18 ${has2LinesNavigation ? 'h-fit' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
     contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
-    linksWrapper.className = ` flex items-center z-50 ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
-    rightWrapper.className = `flex items-center z-50 ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
+    linksWrapper.className = ` flex items-center z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
+    rightWrapper.className = `flex items-center z-[999] ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
 
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
@@ -89,19 +83,19 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
             itemButton.href = item.href;
             itemButton.target = item.target;
             itemButton.className = `
-                flex
-                items-center
-                h-full
-                gap-2
-                px-4
-                py-2
-                text-sm
-                font-semibold
-                rounded-none
-                transition-all
-                duration-300
-                cursor-pointer
-                hover:bg-secondary-light
+                flex 
+                items-center 
+                h-full 
+                gap-2 
+                px-4 
+                py-2 
+                text-sm 
+                font-semibold 
+                rounded-none 
+                transition-all 
+                duration-300 
+                cursor-pointer 
+                hover:bg-secondary-light 
                 ${(has2LinesNavigation && (index === sortedNavigationItems.length - 1)) && 'rounded-ee-lg'}
             `;
             linksWrapper.appendChild(itemButton);
