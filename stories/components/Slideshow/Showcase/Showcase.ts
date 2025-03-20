@@ -11,6 +11,7 @@ interface ShowcaseReturn {
     element: HTMLElement;
     cleanup: () => void;
 }
+
 export const createShowcase = ({
     images,
     duration = 5,
@@ -20,6 +21,8 @@ export const createShowcase = ({
     let progressComponent: { element: HTMLElement; cleanup: () => void } | null = null;
     let localIsPlaying = isPlaying;
     let isTransitioning = false;
+    let animationFrameId: number | null = null;
+    const preloadedImages: HTMLImageElement[] = [];
 
     const container = document.createElement('div');
     container.className = 'relative w-full mx-auto';
@@ -36,44 +39,55 @@ export const createShowcase = ({
     const bottomControls = document.createElement('div');
     bottomControls.className = 'absolute bottom-6 left-1/2 -translate-x-1/2';
 
-    const cleanup = () => {
-        if (progressComponent) {
-            progressComponent.cleanup();
-        }
-        imageContainer.innerHTML = '';
-        prevButton.removeEventListener('click', handlePrevious);
-        nextButton.removeEventListener('click', handleNext);
-    };
-
     const preloadImages = () => {
-        images.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
+        return Promise.all(images.map(src => {
+            return new Promise<HTMLImageElement>((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.alt = `Slide ${preloadedImages.length + 1}`;
+                img.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
+
+                img.onload = () => {
+                    preloadedImages.push(img);
+                    resolve(img);
+                };
+                img.onerror = reject;
+            });
+        }));
     };
 
-    const updateSlide = async (index: number) => {
-        if (isTransitioning) return; // Prevent multiple transitions
+    const updateSlide = (index: number) => {
+        if (isTransitioning) return;
         isTransitioning = true;
 
-        const newImg = new Image();
-        newImg.src = images[index];
-        newImg.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
-        newImg.alt = `Slide ${index + 1}`;
-
-        await new Promise((resolve) => {
-            newImg.onload = resolve;
-        });
+        const newImg = preloadedImages[index];
 
         imageContainer.innerHTML = '';
         imageContainer.appendChild(newImg);
 
-        requestAnimationFrame(() => {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+
+        animationFrameId = requestAnimationFrame(() => {
             newImg.classList.remove('opacity-0');
             setTimeout(() => {
                 isTransitioning = false;
             }, 300);
         });
+    };
+
+    const cleanup = () => {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+
+        prevButton.removeEventListener('click', handlePrevious);
+        nextButton.removeEventListener('click', handleNext);
+
+        imageContainer.innerHTML = '';
+
+        progressComponent = null;
     };
 
     const handleNext = () => {
@@ -89,12 +103,14 @@ export const createShowcase = ({
         updateSlide(currentIndex);
         reinitializeProgress();
     };
+
     const reinitializeProgress = () => {
         if (progressComponent) {
             progressComponent.cleanup();
         }
         initializeProgress();
     };
+
     const prevButton = createSlideshowNavButton({
         mode: 'previous',
         disabled: false,
@@ -130,7 +146,7 @@ export const createShowcase = ({
                     reinitializeProgress();
                 }
             },
-            onStepClick: (index: number) => {  // Add this handler
+            onStepClick: (index: number) => {
                 currentIndex = index;
                 updateSlide(currentIndex);
                 reinitializeProgress();
@@ -141,26 +157,30 @@ export const createShowcase = ({
         bottomControls.appendChild(progressComponent.element);
     };
 
-    // const handleProgressClick = (index: number) => {
-    //     currentIndex = index;
-    //     updateSlide(currentIndex);
-    //     reinitializeProgress();
-    // };
+    // Async initialization function
+    const initialize = async () => {
+        // Preload all images first
+        await preloadImages();
 
-    preloadImages();
-    updateSlide(currentIndex);
-    initializeProgress();
-    prevButton.addEventListener('click', handlePrevious);
-    nextButton.addEventListener('click', handleNext);
+        // Initial slide setup
+        updateSlide(currentIndex);
+        initializeProgress();
 
-    navigationContainer.appendChild(prevButton);
-    navigationContainer.appendChild(nextButton);
+        prevButton.addEventListener('click', handlePrevious);
+        nextButton.addEventListener('click', handleNext);
 
-    slideshowContent.appendChild(imageContainer);
-    slideshowContent.appendChild(navigationContainer);
-    slideshowContent.appendChild(bottomControls);
+        navigationContainer.appendChild(prevButton);
+        navigationContainer.appendChild(nextButton);
 
-    container.appendChild(slideshowContent);
+        slideshowContent.appendChild(imageContainer);
+        slideshowContent.appendChild(navigationContainer);
+        slideshowContent.appendChild(bottomControls);
+
+        container.appendChild(slideshowContent);
+    };
+
+    // Call initialize
+    initialize();
 
     return {
         element: container,
