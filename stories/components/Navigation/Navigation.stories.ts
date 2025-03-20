@@ -180,7 +180,7 @@ export const Desktop: Story = {
         const topContent = document.createElement('div');
         topContent.style.height = '100vh';
         topContent.style.backgroundColor = '#f0f0f0';
-        topContent.innerHTML = '<h1 style="text-align: center; padding-top: 200px;">Scroll down to see Navigation behavior<br><span class="font-bold">Please click on the upper right Fullscreen button (alt+F) to see the widescreen behavior</span></h1>';
+        topContent.innerHTML = '<h1 style="text-align: center; padding-top: 200px;" class="w-[42rem] mx-auto">Scroll down to see Navigation behavior<br><p class="font-bold mt-8">Please click on the upper right Fullscreen button (alt+F) and change the size of the preview (top left) to see the widescreen behavior</p></h1>';
 
         const middleContent = document.createElement('div');
         middleContent.style.height = '100vh';
@@ -243,7 +243,7 @@ export const DynamicNavigation: Story = {
             item.order = index + 1;
         })
         const wrapper = document.createElement('div');
-        wrapper.className = 'p-4 bg-gray-100 space-y-4';
+        wrapper.className = 'p-4 bg-base-white space-y-4';
 
         const createAddItemModal = () => {
             const modal = document.createElement('div');
