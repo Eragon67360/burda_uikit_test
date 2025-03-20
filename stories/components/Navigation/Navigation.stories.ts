@@ -25,18 +25,6 @@ const meta: Meta<NavigationArgs> = {
             description: 'Enable two-line navigation layout',
             defaultValue: false
         },
-        flyoutLabel: {
-            control: 'text',
-            description: 'Label for the flyout menu',
-            defaultValue: 'Menu',
-            if: { arg: 'hasFlyoutLinks', eq: true }
-        },
-        flyoutItems: {
-            control: 'object',
-            description: 'List of items in the flyout menu',
-            defaultValue: [],
-            if: { arg: 'hasFlyoutLinks', eq: true }
-        },
         navigationItems: {
             control: {
                 type: 'object',
@@ -202,6 +190,90 @@ export const Desktop: Story = {
     }
 };
 
+export const DesktopWith2Lines: Story = {
+    parameters: {
+        viewport: {
+            defaultViewport: 'desktop',
+        },
+        layout: 'fullscreen',
+    },
+    args: {
+        logoSrc: '/burda_logo.png',
+        logoAltText: 'Burda Logo',
+        has2LinesNavigation: true,
+        navigationItems: [
+            {
+                type: 'flyout',
+                order: 1,
+                label: 'Zeitschriften',
+                flyoutItems: [
+                    { label: 'FOCUS', href: '/', target: '_blank' },
+                    { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
+                    { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
+                ]
+            },
+            {
+                type: 'link',
+                order: 2,
+                label: 'FOCUS+',
+                href: '/focus',
+                target: '_self'
+            },
+            {
+                type: 'link',
+                order: 3,
+                label: 'Einzelausgaben',
+                href: '/einzelausgaben',
+                target: '_self'
+            }
+        ],
+        hasSearch: true,
+        searchProps: {
+            emptyText: 'Keine Ergebnisse gefunden',
+            placeholder: 'Suche',
+            results: [
+                { label: 'Product 1', href: '/product1' },
+                { label: 'Product 2', href: '/product2' },
+                { label: 'Product 3', href: '/product3' }
+            ]
+        },
+        loginButtonText: 'Kundenservice & Login',
+        loginButtonIcon: 'userCircle',
+        cartButtonText: 'Warenkorb & Kasse',
+        cartButtonIcon: 'cart',
+        onClickLoginButton: () => console.log("Login button has been clicked"),
+        onClickCartButton: () => console.log("Cart button has been clicked"),
+    },
+    render: (args) => {
+        const scrollContainer = document.createElement('div');
+        scrollContainer.style.height = '300vh';
+        scrollContainer.style.position = 'relative';
+
+        const topContent = document.createElement('div');
+        topContent.style.height = '100vh';
+        topContent.style.backgroundColor = '#f0f0f0';
+        topContent.innerHTML = '<h1 style="text-align: center; padding-top: 200px;" class="w-[42rem] mx-auto">Scroll down to see Navigation behavior<br><p class="font-bold mt-8">Please click on the upper right Fullscreen button (alt+F) and change the size of the preview (top left) to see the widescreen behavior</p></h1>';
+
+        const middleContent = document.createElement('div');
+        middleContent.style.height = '100vh';
+        middleContent.style.backgroundColor = '#e0e0e0';
+        middleContent.innerHTML = '<h2 style="text-align: center; padding-top: 200px;">Scrolling through content</h2>';
+
+        const bottomContent = document.createElement('div');
+        bottomContent.style.height = '100vh';
+        bottomContent.style.backgroundColor = '#d0d0d0';
+        bottomContent.innerHTML = '<h2 style="text-align: center; padding-top: 200px;">Bottom of the page</h2>';
+
+        scrollContainer.appendChild(topContent);
+        scrollContainer.appendChild(middleContent);
+        scrollContainer.appendChild(bottomContent);
+
+        const navigation = createNavigation(args);
+        scrollContainer.appendChild(navigation);
+        return scrollContainer;
+    }
+};
+
 export const DynamicNavigation: Story = {
     parameters: {
         viewport: {
@@ -233,6 +305,15 @@ export const DynamicNavigation: Story = {
             }
         ],
         hasSearch: true,
+        searchProps: {
+            emptyText: 'Keine Ergebnisse gefunden',
+            placeholder: 'Suche',
+            results: [
+                { label: 'Product 1', href: '/product1' },
+                { label: 'Product 2', href: '/product2' },
+                { label: 'Product 3', href: '/product3' }
+            ]
+        },
         loginButtonText: 'Kundenservice & Login',
         loginButtonIcon: 'userCircle',
         cartButtonText: 'Warenkorb & Kasse',
@@ -416,10 +497,21 @@ export const DynamicNavigation: Story = {
             document.body.appendChild(modal);
         };
 
-        const controlsContainer = document.createElement('div');
-        controlsContainer.className = 'mb-4 p-4 bg-white mt-[5rem] rounded shadow flex justify-between items-center';
-        controlsContainer.appendChild(addButton);
+        const toggle2LinesButton = document.createElement('button');
+        toggle2LinesButton.textContent = 'Toggle 2 lines display';
+        toggle2LinesButton.className = 'bg-tertiary hover:bg-tertiary/80 transition duration-300 text-base-black px-4 py-2 rounded cursor-pointer';
+        toggle2LinesButton.onclick = () => {
+            args.has2LinesNavigation = !args.has2LinesNavigation;
+            const newNavigation = createNavigation(args);
+            navigationContainer.replaceWith(newNavigation);
+            navigationContainer = newNavigation;
+            updateCurrentItems();
+        };
 
+        const controlsContainer = document.createElement('div');
+        controlsContainer.className = `mb-4 p-4 bg-white mt-32 rounded shadow flex justify-between items-center`;
+        controlsContainer.appendChild(addButton);
+        controlsContainer.appendChild(toggle2LinesButton);
         const currentItemsContainer = document.createElement('div');
         currentItemsContainer.className = 'mt-4 p-4 bg-white rounded shadow';
         currentItemsContainer.innerHTML = '<h3 class="font-bold mb-2">Current Navigation Items</h3>';

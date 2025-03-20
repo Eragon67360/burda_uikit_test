@@ -33,8 +33,6 @@ export type NavigationArgs = {
     logoSrc: string;
     logoAltText: string;
     has2LinesNavigation: boolean;
-    flyoutLabel: string;
-    flyoutItems: LinkItem[];
     navigationItems: Array<LinkNavigationItem | FlyoutNavigationItem>;
     hasSearch: boolean;
     searchProps?: SearchArgs;
@@ -47,7 +45,7 @@ export type NavigationArgs = {
     addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
 };
 
-export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, flyoutLabel, flyoutItems, navigationItems, hasSearch, searchProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
+export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, navigationItems, hasSearch, searchProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
 
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
@@ -59,10 +57,10 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, fl
     const rightWrapper = document.createElement('div');
 
     navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out`;
-    navigationWrapper.className = `h-18 rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
-    contentWrapper.className = `w-full h-full flex items-center justify-between`;
-    linksWrapper.className = `h-full flex items-center z-50`;
-    rightWrapper.className = `h-full flex items-center z-50`;
+    navigationWrapper.className = `h-18 ${has2LinesNavigation ? 'h-fit' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
+    contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
+    linksWrapper.className = ` flex items-center z-50 ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
+    rightWrapper.className = `flex items-center z-50 ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
 
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
@@ -84,7 +82,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, fl
     logoContainer.alt = logoAltText;
     logoContainer.className = 'h-[2.8rem] w-auto ml-2 mr-3'
 
-    sortedNavigationItems.forEach((item) => {
+    sortedNavigationItems.forEach((item, index) => {
         if (item.type === 'link') {
             const itemButton = document.createElement('a');
             itemButton.text = item.label;
@@ -104,6 +102,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, fl
                 duration-300
                 cursor-pointer
                 hover:bg-secondary-light
+                ${(has2LinesNavigation && (index === sortedNavigationItems.length - 1)) && 'rounded-ee-lg'}
             `;
             linksWrapper.appendChild(itemButton);
         } else if (item.type === 'flyout') {
@@ -111,6 +110,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, fl
                 variant: 'sublinks',
                 triggerLabel: item.label,
                 linkItems: item.flyoutItems,
+                has2LinesNavigation: has2LinesNavigation
             });
             linksWrapper.appendChild(flyout);
         }
@@ -122,7 +122,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, fl
     }
 
     const ctaContainer = document.createElement('div');
-    ctaContainer.className = 'flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg rounded-ee-lg'
+    ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${has2LinesNavigation ? '' : 'rounded-ee-lg'}`
 
     const loginButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_LOGIN, nested: false, disabled: false, label: loginButtonText, icon: loginButtonIcon, iconLeft: false, onClick: onClickLoginButton })
     const cartButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_CART_PAY, nested: false, disabled: false, label: cartButtonText, icon: cartButtonIcon, iconLeft: false, onClick: onClickCartButton })
