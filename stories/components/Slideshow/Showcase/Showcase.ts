@@ -22,7 +22,7 @@ export const createShowcase = ({
     let isTransitioning = false;
 
     const container = document.createElement('div');
-    container.className = 'relative w-full max-w-[48rem] mx-auto';
+    container.className = 'relative w-full mx-auto';
 
     const slideshowContent = document.createElement('div');
     slideshowContent.className = 'relative aspect-video w-full';
