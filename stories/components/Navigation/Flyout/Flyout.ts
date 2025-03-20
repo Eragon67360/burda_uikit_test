@@ -15,16 +15,18 @@ export type FlyoutArgs = {
     linkItems?: LinkItem[];
     searchProps?: SearchArgs;
     triggerLabel?: string;
+    has2LinesNavigation?: boolean;
 };
 
 export const createFlyout = ({
     variant,
     linkItems = [],
     searchProps,
-    triggerLabel = 'Menu'
+    triggerLabel = 'Menu',
+    has2LinesNavigation
 }: FlyoutArgs) => {
     const container = document.createElement('div');
-    container.className = 'relative inline-block h-[4.5rem]';
+    container.className = `relative inline-block ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
 
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `
@@ -125,6 +127,5 @@ export const createFlyout = ({
         return container;
     }
 
-    // Fallback (shouldn't be reached)
     return document.createElement('div');
 };

@@ -500,7 +500,7 @@ const createAccordion = ({ items }: AccordionArgs) => {
 
         trigger.innerHTML = `
             ${getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40)}
-            <span class="text-label-mobile md:text-subhead3-desktop">${item.trigger}</span>
+            <span class="text-link-mobile md:text-subhead3-desktop">${item.trigger}</span>
             <div class="chevron ml-auto">${getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 18)}</div>
         `;
 

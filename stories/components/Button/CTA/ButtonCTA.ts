@@ -8,6 +8,8 @@ export enum ButtonCTAVariant {
   LARGE = 'large',
   LARGE_LIGHT = 'large_light',
   LARGE_SUBSCRIPTION = 'large_subscription',
+  LARGE_CART_PAY = 'large_cart_pay',
+  LARGE_LOGIN = 'large_login'
 }
 
 export type ButtonCTAArgs = {
@@ -106,7 +108,6 @@ export const createButtonCTA = ({
       ])
     ] as const,
 
-
     [ButtonCTAVariant.SECONDARY]: [
       'bg-secondary-interaction',
       'text-button-label-desktop',
@@ -165,7 +166,6 @@ export const createButtonCTA = ({
         'rounded',
       ]
     ] as const,
-
 
     [ButtonCTAVariant.LARGE]: [
       'bg-base-black',
@@ -243,6 +243,40 @@ export const createButtonCTA = ({
       'before:rounded-l-none',
       'rounded-none',
       'hover:before:rounded-[0px]',
+    ] as const,
+
+    [ButtonCTAVariant.LARGE_CART_PAY]: [
+      'bg-neutral-300 hover:bg-secondary-light',
+      'active:bg-secondary-dark',
+      'text-base-black text-sm font-semibold',
+      'border-none disabled:border',
+      'focus:ring-base-black',
+      'disabled:text-neutral-400',
+      'disabled:border-neutral-300',
+      'disabled:bg-base-white',
+      'px-6 gap-2',
+      'min-w-fit w-fit text-nowrap',
+      'h-full',
+      'active:text-neutral-600',
+      'rounded-none',
+    ] as const,
+
+    [ButtonCTAVariant.LARGE_LOGIN]: [
+      'bg-neutral-200 hover:bg-secondary-light',
+      'active:bg-secondary-dark',
+      'text-base-black text-sm font-semibold',
+      'border-none disabled:border',
+      'focus:ring-base-black',
+      'disabled:text-neutral-400',
+      'disabled:border-neutral-300',
+      'disabled:bg-base-white',
+      'px-6 gap-2',
+      'min-w-fit w-fit text-nowrap',
+      'h-full',
+      'active:text-neutral-600',
+      'active:before:bg-neutral-300',
+      'hover:before:w-full',
+      'rounded-none',
     ] as const,
   };
 

@@ -11,16 +11,18 @@ export type SearchArgs = {
     }>;
     onSearch?: (value: string) => void;
     emptyText?: string;
+    classNames?: string;
 };
 
 export const createSearch = ({
     placeholder = 'Search...',
     results = [],
     onSearch,
-    emptyText = 'No results found'
+    emptyText = 'No results found',
+    classNames
 }: SearchArgs) => {
     const wrapper = document.createElement('div');
-    wrapper.className = 'relative w-full';
+    wrapper.className = 'relative w-full ' + classNames;
 
     const inputWrapper = document.createElement('div');
     inputWrapper.className = 'relative';
@@ -36,18 +38,20 @@ export const createSearch = ({
         border-b
         border-neutral-400
         focus:bg-base-white
-        focus:border-b-[3px]
-        focus:border-secondary-dark
+        focus:border-b-[3px] 
+        focus:border-secondary-dark 
+        active:bg-secondary-dark 
+        cursor-pointer 
         overflow-hidden
         transition-colors
         duration-150
-        outline-none
+        outline-none 
     `;
     input.placeholder = placeholder;
 
     const searchIcon = document.createElement('div');
     searchIcon.className = 'absolute right-5 top-1/2 -translate-y-1/2';
-    searchIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 20);
+    searchIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
 
     const resultsPopover = document.createElement('div');
     resultsPopover.className = `
