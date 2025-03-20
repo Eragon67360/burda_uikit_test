@@ -12,7 +12,7 @@ export type FlyoutItem = {
 
 export type FlyoutArgs = {
     label: string;
-    icon: keyof typeof IconRegistry[IconCategory.SYSTEM];
+    icon?: keyof typeof IconRegistry[IconCategory.SYSTEM];
     items: FlyoutItem[];
     activeIndex?: number;
 };
@@ -39,44 +39,44 @@ export const createFlyout = ({
         gap-0
         absolute
         top-1/2
-        left-0 
+        left-0
         -translate-x-full
         -translate-y-1/2
         w-[3rem]
-        cursor-pointer 
-        transition-all 
-        ease-in-out 
-        duration-300 
+        cursor-pointer
+        transition-all
+        ease-in-out
+        duration-300
         text-button-label-desktop
     `
 
     const buttonLabelClasses = `
         w-[3rem]
-        h-fit 
-        px-3 
-        py-4 
-        base-button 
-        origin-left 
-        flex items-center justify-center 
-        gap-4 
-        cursor-pointer 
-        transition-all 
-        duration-300 
-        z-50 
+        h-fit
+        px-3
+        py-4
+        base-button
+        origin-left
+        flex items-center justify-center
+        gap-4
+        cursor-pointer
+        transition-all
+        duration-300
+        z-50
     `;
 
     const baseContentClasses = `
-        transform 
-        h-fit 
-        bg-white 
+        transform
+        h-fit
+        bg-white
         shadow-[10px_5px_30px_0px_rgba(0,0,0,0.15)]
-        transition-all 
-        duration-700 
-        ease-in-out 
-        relative 
-        w-[16.5rem] 
+        transition-all
+        duration-700
+        ease-in-out
+        relative
+        w-[16.5rem]
         bg-transparent
-        translate-x-[16.5rem] 
+        translate-x-[16.5rem]
         rounded-l-2xl
     `;
 
@@ -169,15 +169,15 @@ export const createFlyout = ({
         size: 16
     });
     closeButton.className = `
-        absolute 
+        absolute
         cursor-pointer
-        top-2.5 
-        right-2.5 
+        top-2.5
+        right-2.5
         text-base-black
         transition-all
-        hover:text-gray-800 
-        text-2xl 
-        z-50 
+        hover:text-gray-800
+        text-2xl
+        z-50
     `;
 
     function updateComponentState(open: boolean, descriptionOpen: boolean) {
@@ -229,7 +229,7 @@ export const createFlyout = ({
             contentItem.className = 'flex items-start justify-between min-full max-w-full w-full gap-0';
 
             const contentItemWrapper = document.createElement('div');
-            contentItemWrapper.className = `h-full relative w-32 min-w-32 pl-7 padding-transition 
+            contentItemWrapper.className = `h-full relative w-32 min-w-32 pl-7 padding-transition
                 pr-7
                 py-6 transition-all duration-1000
             `;
@@ -249,13 +249,13 @@ export const createFlyout = ({
             const infoButton = document.createElement('button');
             infoButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].info, 18);
             infoButton.className = `
-                absolute 
-                ml-2 
-                top-2.5 right-2.5 
-                flex-shrink-0 
-                cursor-pointer 
-                transition-all 
-                duration-1000 
+                absolute
+                ml-2
+                top-2.5 right-2.5
+                flex-shrink-0
+                cursor-pointer
+                transition-all
+                duration-1000
                 ${isDescriptionOpen ? 'pointer-events-none text-base-black/0' : 'pointer-events-auto text-base-black/100'}
             `;
 
@@ -303,17 +303,17 @@ export const createFlyout = ({
     const baseMobileContainerClasses = "block sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] mx-auto rounded-2xl flex flex-col items-center justify-end overflow-hidden transition-opacity duration-500 pointer-events-none";
 
     const buttonMobileContainerClasses = `
-        bg-base-black 
-        text-base-white 
-        relative 
-        w-full 
-        cursor-pointer 
-        px-6 
-        py-5 
-        h-fit 
-        flex 
+        bg-base-black
+        text-base-white
+        relative
+        w-full
+        cursor-pointer
+        px-6
+        py-5
+        h-fit
+        flex
         justify-between
-        transition-all 
+        transition-all
         duration-500
     `;
 
@@ -339,17 +339,17 @@ export const createFlyout = ({
         mobileContentContainer = document.createElement('div');
         mobileContentContainer.className = `
         mobile-content-container
-        px-6 
-        py-0 
-        w-full 
-        bg-white 
-        rounded-b-xl 
-        shadow-lg 
-        transition-all 
-        duration-500 
-        ease-in-out 
+        px-6
+        py-0
+        w-full
+        bg-white
+        rounded-b-xl
+        shadow-lg
+        transition-all
+        duration-500
+        ease-in-out
         overflow-hidden
-        max-h-0 
+        max-h-0
     `;
 
         const accordionItems: AccordionItem[] = items.map(item => ({
@@ -506,14 +506,14 @@ const createAccordion = ({ items }: AccordionArgs) => {
 
         const content = document.createElement('div');
         content.className = `
-            accordion-content-flyout 
-            max-h-0 
-            opacity-0 
-            overflow-hidden 
-            transition-all 
-            duration-500 
-            ease-in-out 
-            text-xs 
+            accordion-content-flyout
+            max-h-0
+            opacity-0
+            overflow-hidden
+            transition-all
+            duration-500
+            ease-in-out
+            text-xs
             pl-14
         `;
 
