@@ -20,6 +20,8 @@ export const createShowcase = ({
     let progressComponent: { element: HTMLElement; cleanup: () => void } | null = null;
     let localIsPlaying = isPlaying;
     let isTransitioning = false;
+    let animationFrameId: number | null = null;
+    const imageRefs = new WeakSet<HTMLImageElement>();
 
     const container = document.createElement('div');
     container.className = 'relative w-full max-w-[48rem] mx-auto';
@@ -36,30 +38,31 @@ export const createShowcase = ({
     const bottomControls = document.createElement('div');
     bottomControls.className = 'absolute bottom-6 left-1/2 -translate-x-1/2';
 
-    const cleanup = () => {
-        if (progressComponent) {
-            progressComponent.cleanup();
-        }
-        imageContainer.innerHTML = '';
-        prevButton.removeEventListener('click', handlePrevious);
-        nextButton.removeEventListener('click', handleNext);
-    };
 
     const preloadImages = () => {
         images.forEach(src => {
             const img = new Image();
             img.src = src;
+
+            // Limit concurrent preloads
+            img.loading = 'lazy';
+
+            // Track preloaded images
+            imageRefs.add(img);
         });
     };
 
     const updateSlide = async (index: number) => {
-        if (isTransitioning) return; // Prevent multiple transitions
+        if (isTransitioning) return;
         isTransitioning = true;
 
         const newImg = new Image();
         newImg.src = images[index];
         newImg.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
         newImg.alt = `Slide ${index + 1}`;
+        imageRefs.add(newImg);
+
+        // finalizationRegistry.register(newImg, newImg.src);
 
         await new Promise((resolve) => {
             newImg.onload = resolve;
@@ -67,13 +70,29 @@ export const createShowcase = ({
 
         imageContainer.innerHTML = '';
         imageContainer.appendChild(newImg);
-
-        requestAnimationFrame(() => {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+        animationFrameId = requestAnimationFrame(() => {
             newImg.classList.remove('opacity-0');
             setTimeout(() => {
                 isTransitioning = false;
             }, 300);
         });
+
+    };
+
+    const cleanup = () => {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+
+        prevButton.removeEventListener('click', handlePrevious);
+        nextButton.removeEventListener('click', handleNext);
+
+        imageContainer.innerHTML = '';
+
+        progressComponent = null;
     };
 
     const handleNext = () => {
@@ -89,12 +108,14 @@ export const createShowcase = ({
         updateSlide(currentIndex);
         reinitializeProgress();
     };
+
     const reinitializeProgress = () => {
         if (progressComponent) {
             progressComponent.cleanup();
         }
         initializeProgress();
     };
+
     const prevButton = createSlideshowNavButton({
         mode: 'previous',
         disabled: false,
@@ -141,11 +162,6 @@ export const createShowcase = ({
         bottomControls.appendChild(progressComponent.element);
     };
 
-    // const handleProgressClick = (index: number) => {
-    //     currentIndex = index;
-    //     updateSlide(currentIndex);
-    //     reinitializeProgress();
-    // };
 
     preloadImages();
     updateSlide(currentIndex);
