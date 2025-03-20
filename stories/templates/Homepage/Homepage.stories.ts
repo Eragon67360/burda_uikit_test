@@ -16,7 +16,7 @@ export const DefaultHomepage: Story = {
   args: {},
   parameters: {
     viewport: {
-      defaultViewport: 'desktop',
+      defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
   },
