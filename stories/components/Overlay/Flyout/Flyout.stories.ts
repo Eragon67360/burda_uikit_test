@@ -32,7 +32,7 @@ type Story = StoryObj<FlyoutArgs>;
 export const Default: Story = {
     parameters: {
         viewport: {
-            defaultViewport: 'Desktop',
+            defaultViewport: 'desktop',
         },
         layout: 'fullscreen',
     },
@@ -61,7 +61,7 @@ export const Default: Story = {
 export const ScrollableBackground: Story = {
     parameters: {
         viewport: {
-            defaultViewport: 'Desktop',
+            defaultViewport: 'desktop',
         },
         layout: 'fullscreen'
     },
