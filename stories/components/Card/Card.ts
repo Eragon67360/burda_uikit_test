@@ -28,23 +28,23 @@ export const createCard = ({
           ${getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96)}
         </div>
         <div class="w-auto text-center md:text-left">
-          <h4 class="font-roboto-serif text-3xl">${title}</h4>
+          <h4 class="text-h4-desktop font-roboto-serif">${title}</h4>
           <p class="mt-4 text-xs">${text}</p>
         </div>
       </div>
       ${buttonLabel
-        ? createButtonCTA({
-            label: buttonLabel,
-            classNames: 'rounded-tl-none rounded-tr-none',
-            onClick: () => { },
-            disabled: false,
-            variant: ButtonCTAVariant.PRIMARY,
-            nested: false,
-            iconLeft: false,
-            icon: 'arrowRight',
-          }).outerHTML
-        : ''
-      }
+      ? createButtonCTA({
+        label: buttonLabel,
+        classNames: 'rounded-tl-none rounded-tr-none',
+        onClick: () => { },
+        disabled: false,
+        variant: ButtonCTAVariant.PRIMARY,
+        nested: false,
+        iconLeft: false,
+        icon: 'arrowRight',
+      }).outerHTML
+      : ''
+    }
     </div>
   `;
 };
