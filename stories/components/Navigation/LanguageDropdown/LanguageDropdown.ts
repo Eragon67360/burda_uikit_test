@@ -21,26 +21,27 @@ export const createLanguageDropdown = ({
     label = 'Sprache',
     disabled = false
 }: LanguageDropdownArgs) => {
-    // Find the currently selected language
+
     const currentLanguage = selectedLanguage
         ? options.find(lang => lang.code === selectedLanguage)
         : options[0];
 
-    // Create main wrapper
     const wrapper = document.createElement('div');
     wrapper.className = 'relative inline-block w-full';
 
-    // Create dropdown trigger
     const dropdownTrigger = document.createElement('button');
     dropdownTrigger.className = `
         flex items-center justify-between w-full bg-base-white h-14
-        px-4 py-2 gap-2
+        px-4 pt-2 gap-2
         bg-white text-sm font-medium text-gray-700
-        hover:bg-gray-50 focus:outline-none
-        border-b-[5px] border-base-white 
+        hover:bg-secondary-light
+        hover:border-transparent
+        active:bg-secondary-interaction
+        border-b-[5px] border-transparent 
         transition 
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
     `.trim();
+
     dropdownTrigger.type = 'button';
     dropdownTrigger.disabled = disabled;
 
@@ -62,7 +63,7 @@ export const createLanguageDropdown = ({
     const dropdownContainer = document.createElement('div');
     dropdownContainer.className = `
         absolute z-10 mt-2 left-1/2 -translate-x-1/2 py-3 pl-2 pr-4 w-fit 
-        bg-white shadow-lg rounded-lg 
+        bg-base-white shadow-lg rounded-lg 
         hidden 
     `.trim();
 
@@ -72,7 +73,7 @@ export const createLanguageDropdown = ({
     const updateTrigger = (option: LanguageOption) => {
         currentFlagIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.FLAGS][option.icon], 18);
         dropdownContainer.classList.add('hidden');
-        dropdownTrigger.classList.add('border-base-white');
+        dropdownTrigger.classList.add('border-transparent');
         dropdownTrigger.classList.remove('border-secondary-dark');
         dropdownIcon.classList.remove('scale-y-[-1]');
     };
@@ -162,10 +163,10 @@ export const createLanguageDropdown = ({
 
         if (!isOpen) {
             dropdownTrigger.classList.add('border-secondary-dark');
-            dropdownTrigger.classList.remove('border-base-white');
+            dropdownTrigger.classList.remove('border-transparent');
             dropdownIcon.classList.add('scale-y-[-1]');
         } else {
-            dropdownTrigger.classList.add('border-base-white');
+            dropdownTrigger.classList.add('border-transparent');
             dropdownTrigger.classList.remove('border-secondary-dark');
             dropdownIcon.classList.remove('scale-y-[-1]');
         }
@@ -174,7 +175,7 @@ export const createLanguageDropdown = ({
     document.addEventListener('click', (event) => {
         if (!wrapper.contains(event.target as Node)) {
             dropdownContainer.classList.add('hidden');
-            dropdownTrigger.classList.add('border-base-white');
+            dropdownTrigger.classList.add('border-transparent');
             dropdownTrigger.classList.remove('border-secondary-dark');
             dropdownIcon.classList.remove('scale-y-[-1]');
         }
