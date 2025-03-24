@@ -2,6 +2,7 @@ import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
 import './navigation.css';
+import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -30,6 +31,9 @@ export type NavigationArgs = {
     navigationItems: Array<LinkNavigationItem | FlyoutNavigationItem>;
     hasSearch: boolean;
     searchProps?: SearchArgs;
+    hasLanguageDropdown: boolean;
+    languageProps?: LanguageDropdownArgs;
+    isLanguageDropdownCompressed: boolean;
     loginButtonText: string;
     loginButtonIcon: string;
     onClickLoginButton: () => void;
@@ -39,7 +43,7 @@ export type NavigationArgs = {
     addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
 };
 
-export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, navigationItems, hasSearch, searchProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
+export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, navigationItems, hasSearch, searchProps, hasLanguageDropdown, languageProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
 
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
@@ -113,6 +117,10 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
     if (hasSearch && searchProps) {
         const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, classNames: 'mx-6' })
         rightWrapper.appendChild(searchContainer)
+    }
+    if (hasLanguageDropdown && languageProps) {
+        const languageDropdownContainer = createLanguageDropdown({ label: languageProps.label, options: languageProps.options, isCompressed: languageProps.isCompressed, selectedLanguage: languageProps.selectedLanguage })
+        rightWrapper.appendChild(languageDropdownContainer)
     }
 
     const ctaContainer = document.createElement('div');

@@ -42,6 +42,17 @@ const meta: Meta<NavigationArgs> = {
             defaultValue: {},
             if: { arg: 'hasSearch', eq: true }
         },
+        hasLanguageDropdown: {
+            control: 'boolean',
+            description: 'Enable language dropdown',
+            defaultValue: false
+        },
+        languageProps: {
+            control: 'object',
+            description: 'Additional language configuration',
+            defaultValue: {},
+            if: { arg: 'hasLanguageDropdown', eq: true }
+        },
         loginButtonText: {
             control: 'text',
             description: 'Login button label',
@@ -153,6 +164,17 @@ export const Desktop: Story = {
                 { label: 'Product 3', href: '/product3' }
             ]
         },
+        hasLanguageDropdown: true,
+        languageProps: {
+            label: "Sprache",
+            options: [
+                { code: 'de', name: 'Deutsch', icon: 'germany' },
+                { code: 'en', name: 'English', icon: 'england' },
+                { code: 'fr', name: 'Français', icon: 'france' }
+            ],
+            selectedLanguage: 'en',
+            isCompressed: true,
+        },
         loginButtonText: 'Kundenservice & Login',
         loginButtonIcon: 'userCircle',
         cartButtonText: 'Warenkorb & Kasse',
@@ -237,6 +259,17 @@ export const DesktopWith2Lines: Story = {
                 { label: 'Product 3', href: '/product3' }
             ]
         },
+        hasLanguageDropdown: true,
+        languageProps: {
+            label: "Sprache",
+            options: [
+                { code: 'de', name: 'Deutsch', icon: 'germany' },
+                { code: 'en', name: 'English', icon: 'england' },
+                { code: 'fr', name: 'Français', icon: 'france' }
+            ],
+            selectedLanguage: 'en',
+            isCompressed: false,
+        },
         loginButtonText: 'Kundenservice & Login',
         loginButtonIcon: 'userCircle',
         cartButtonText: 'Warenkorb & Kasse',
@@ -313,6 +346,17 @@ export const DynamicNavigation: Story = {
                 { label: 'Product 2', href: '/product2' },
                 { label: 'Product 3', href: '/product3' }
             ]
+        },
+        hasLanguageDropdown: true,
+        languageProps: {
+            label: "Sprache",
+            options: [
+                { code: 'de', name: 'Deutsch', icon: 'germany' },
+                { code: 'en', name: 'English', icon: 'england' },
+                { code: 'fr', name: 'Français', icon: 'france' }
+            ],
+            selectedLanguage: 'en',
+            isCompressed: true,
         },
         loginButtonText: 'Kundenservice & Login',
         loginButtonIcon: 'userCircle',
