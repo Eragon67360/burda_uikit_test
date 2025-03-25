@@ -115,9 +115,10 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
     })
 
     if (hasSearch && searchProps) {
-        const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, classNames: 'mx-6' })
+        const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, isSmall: searchProps.isSmall })
         rightWrapper.appendChild(searchContainer)
     }
+
     if (hasLanguageDropdown && languageProps) {
         const languageDropdownContainer = createLanguageDropdown({ label: languageProps.label, options: languageProps.options, isCompressed: languageProps.isCompressed, selectedLanguage: languageProps.selectedLanguage })
         rightWrapper.appendChild(languageDropdownContainer)

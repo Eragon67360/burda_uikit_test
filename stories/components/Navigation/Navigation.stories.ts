@@ -162,7 +162,8 @@ export const Desktop: Story = {
                 { label: 'Product 1', href: '/product1' },
                 { label: 'Product 2', href: '/product2' },
                 { label: 'Product 3', href: '/product3' }
-            ]
+            ],
+            isSmall: true
         },
         hasLanguageDropdown: true,
         languageProps: {
@@ -257,7 +258,8 @@ export const DesktopWith2Lines: Story = {
                 { label: 'Product 1', href: '/product1' },
                 { label: 'Product 2', href: '/product2' },
                 { label: 'Product 3', href: '/product3' }
-            ]
+            ],
+            isSmall: false
         },
         hasLanguageDropdown: true,
         languageProps: {
@@ -345,7 +347,8 @@ export const DynamicNavigation: Story = {
                 { label: 'Product 1', href: '/product1' },
                 { label: 'Product 2', href: '/product2' },
                 { label: 'Product 3', href: '/product3' }
-            ]
+            ],
+            isSmall: true
         },
         hasLanguageDropdown: true,
         languageProps: {

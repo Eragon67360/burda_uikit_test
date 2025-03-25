@@ -20,7 +20,12 @@ const meta: Meta<SearchArgs> = {
             control: 'text',
             description: 'Text to show when no results are available',
         },
-        onSearch: { action: 'searched' }
+        onSearch: { action: 'searched' },
+        isSmall: {
+            control: 'boolean',
+            description: 'Is search small',
+            defaultValue: false
+        },
     },
     render: (args) => {
         const wrapper = document.createElement('div');
@@ -45,6 +50,15 @@ export const EmptyCustomText: Story = {
         placeholder: 'Search...',
         results: [],
         emptyText: 'No matching results found. Try different keywords.',
+    },
+};
+
+export const WithSmallSearch: Story = {
+    args: {
+        placeholder: 'Search...',
+        results: [],
+        emptyText: 'No matching results found. Try different keywords.',
+        isSmall: true
     },
 };
 
