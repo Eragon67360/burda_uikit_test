@@ -8,103 +8,117 @@
   - [Official Node.js Download](https://nodejs.org/en/download)
 - **Package Manager**:
   - npm (v10.x)
-  - or Yarn (v1.22.x)
+  - Yarn (v1.22.x)
+  - pnpm (optional)
 
-### Global Installations
+### Cross-Platform Setup
 
 ```bash
-npm install -g npm@latest
-npm install -g @storybook/cli
+# Universal Node.js Installation
+# Windows: Use official installer
+# Linux: Use nvm or package manager
+# MacOS: Recommended methods below
 ```
 
-## 🔧 Project Setup
+## 🔧 Platform-Specific Installations
 
-### 1. Open a terminal in the Repository/Folder
-
-### 2. Install Dependencies
+### MacOS Specific Setup 🍎
 
 ```bash
-# Using npm
+# Recommended MacOS Installation Methods
+# Option 1: Homebrew (Preferred)
+brew install node@20
+
+# Option 2: Official Installer
+# Download from nodejs.org and install
+
+# Xcode Command Line Tools (Essential)
+xcode-select --install
+```
+
+### Windows Specific Setup 🪟
+
+```powershell
+# Use Windows Installer
+# Ensure to check "Automatically install npm"
+# Use Windows Subsystem for Linux (WSL) for better compatibility
+```
+
+### Linux Specific Setup 🐧
+
+```bash
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Arch Linux
+sudo pacman -S nodejs npm
+```
+
+## 🛠 Project Dependencies
+
+```bash
+# Universal Dependency Installation
 npm install
+
+# MacOS Specific Performance Tip
+brew install watchman  # Faster file watching
 ```
-
-## 🛠 Available Scripts
-
-### Development
-
-```bash
-# Start Development (Tailwind + Storybook)
-npm run dev
-
-# Watch Tailwind CSS
-npm run watch:tailwindcss
-
-# Start Storybook
-npm run watch:storybook
-```
-
-### Build Project
-
-```bash
-# Build Storybook static site
-npm run build
-
-# Preview Built Storybook
-npm run preview-storybook
-```
-
-### Testing
-
-```bash
-npm test
-```
-
-## 📦 Core Dependencies
-
-| Dependency  | Version | Purpose               |
-| ----------- | ------- | --------------------- |
-| Storybook   | v8.6.4  | Component Development |
-| TailwindCSS | v4.0.6  | Styling               |
-| Webpack     | v5      | Bundling              |
 
 ## 🔍 Troubleshooting
 
-### Common Installation Issues
-
-#### Node Version Conflicts
-
-- Use [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm)
-- Verify Node.js compatibility
-
-#### Dependency Conflicts
+### Common Cross-Platform Issues
 
 ```bash
-# Clear npm cache
+# Universal Dependency Reset
 npm cache clean --force
-
-# Rebuild node modules
 rm -rf node_modules
 npm install
 ```
 
-## 🌐 Storybook Addons Included
+### MacOS Specific Quirks 🍏
 
-- Accessibility (a11y)
-- Interactions
-- Essentials
-- Backgrounds
-- Webpack5 Compiler
+- **Permissions**: Often more strict
+- **Firewall Considerations**:
+  - Allow Node.js in Security Preferences
+  - Check Application Permissions
+- **M1/M2 Arch Compatibility**:
+  - Use ARM64 Node.js versions
+  - Rosetta 2 for x86 compatibility if needed
+
+## 💡 Development Scripts
+
+```bash
+# Start Development
+npm run dev
+
+# Build Storybook
+npm run build:storybook
+
+# Run Tests
+npm test
+```
+
+## 🌐 Recommended Tools
+
+- **Cross-Platform**:
+  - Visual Studio Code
+  - Docker Desktop
+- **MacOS Extras**:
+  - iTerm2
+  - Homebrew
+- **Windows Extras**:
+  - Windows Terminal
+  - WSL2
 
 ## 🔒 License
 
 UNLICENSED - avenit AG
 
----
+### 🚀 Quick Start Checklist
 
-### 🌟 Quick Start Checklist
-
-- [ ] Install Node.js v20.x
+- [ ] Install Node.js
 - [ ] Install dependencies
+- [ ] Configure environment
 - [ ] Run `npm run dev`
-- [ ] Open Storybook at `http://localhost:6006`
-- [ ] Start developing components!
+- [ ] Open Storybook

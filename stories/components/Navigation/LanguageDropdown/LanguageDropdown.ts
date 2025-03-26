@@ -13,13 +13,15 @@ export type LanguageDropdownArgs = {
     selectedLanguage?: string;
     label?: string;
     disabled?: boolean;
+    isCompressed: boolean;
 };
 
 export const createLanguageDropdown = ({
     options,
     selectedLanguage,
     label = 'Sprache',
-    disabled = false
+    disabled = false,
+    isCompressed = false,
 }: LanguageDropdownArgs) => {
 
     const currentLanguage = selectedLanguage
@@ -27,13 +29,12 @@ export const createLanguageDropdown = ({
         : options[0];
 
     const wrapper = document.createElement('div');
-    wrapper.className = 'relative inline-block w-full';
+    wrapper.className = 'relative inline-block w-fit h-full';
 
     const dropdownTrigger = document.createElement('button');
     dropdownTrigger.className = `
-        flex items-center justify-between w-full bg-base-white h-14
-        px-4 pt-2 gap-2
-        bg-white text-sm font-medium text-gray-700
+        flex items-center justify-between w-fit bg-transparent h-full
+        px-4 pt-2 pb-1 gap-2 text-sm font-medium text-gray-700
         hover:bg-secondary-light
         hover:border-transparent
         active:bg-secondary-interaction
@@ -56,7 +57,9 @@ export const createLanguageDropdown = ({
     dropdownIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 14);
     dropdownIcon.className = 'transition-transform duration-300';
 
-    dropdownTrigger.appendChild(currentLanguageText);
+    if (!isCompressed) {
+        dropdownTrigger.appendChild(currentLanguageText);
+    }
     dropdownTrigger.appendChild(currentFlagIcon);
     dropdownTrigger.appendChild(dropdownIcon);
 
@@ -73,8 +76,8 @@ export const createLanguageDropdown = ({
     const updateTrigger = (option: LanguageOption) => {
         currentFlagIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.FLAGS][option.icon], 18);
         dropdownContainer.classList.add('hidden');
-        dropdownTrigger.classList.add('border-transparent');
-        dropdownTrigger.classList.remove('border-secondary-dark');
+        dropdownTrigger.classList.add('border-transparent', 'bg-transparent');
+        dropdownTrigger.classList.remove('border-secondary-dark', 'bg-base-white');
         dropdownIcon.classList.remove('scale-y-[-1]');
     };
 
@@ -162,11 +165,12 @@ export const createLanguageDropdown = ({
         dropdownContainer.classList.toggle('hidden');
 
         if (!isOpen) {
-            dropdownTrigger.classList.add('border-secondary-dark');
-            dropdownTrigger.classList.remove('border-transparent');
+            dropdownTrigger.classList.add('border-secondary-dark', 'bg-base-white');
+            dropdownTrigger.classList.remove('border-transparent', 'bg-transparent');
             dropdownIcon.classList.add('scale-y-[-1]');
         } else {
             dropdownTrigger.classList.add('border-transparent');
+            dropdownTrigger.classList.remove('bg-base-white');
             dropdownTrigger.classList.remove('border-secondary-dark');
             dropdownIcon.classList.remove('scale-y-[-1]');
         }
@@ -176,7 +180,7 @@ export const createLanguageDropdown = ({
         if (!wrapper.contains(event.target as Node)) {
             dropdownContainer.classList.add('hidden');
             dropdownTrigger.classList.add('border-transparent');
-            dropdownTrigger.classList.remove('border-secondary-dark');
+            dropdownTrigger.classList.remove('border-secondary-dark', 'bg-base-white');
             dropdownIcon.classList.remove('scale-y-[-1]');
         }
     });

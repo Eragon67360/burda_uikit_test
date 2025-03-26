@@ -43,7 +43,7 @@ export const createButtonLink = ({
     const baseClasses = [
         'group',
         'w-fit',
-        'flex',
+        'flex flex-nowrap text-nowrap',
         'items-center m-1',
         'gap-2',
         'border-b-[0.1875rem]',
