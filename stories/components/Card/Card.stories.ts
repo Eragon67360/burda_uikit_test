@@ -21,6 +21,25 @@ const meta: Meta<CardArgs> = {
       description: 'Image shown on the left side of the Card',
       defaultValue: 'burdaMag',
     },
+    title: {
+      control: 'text',
+      description: 'Main title of the card',
+      defaultValue: 'Card Title',
+    },
+    text: {
+      control: 'text',
+      description: 'Description text for the card',
+      defaultValue: 'Card description text',
+    },
+    buttonLabel: {
+      control: 'text',
+      description: 'Label for the CTA button (optional)',
+      defaultValue: 'Call to Action',
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Optional click handler for the button',
+    }
   },
   render: (args) => createCard(args)
 };
@@ -45,11 +64,13 @@ export const DefaultCard: Story = {
     buttonLabel: 'zum Angebot',
     onClick: () => console.log('Button clicked')
   },
-  render: (args) => (`
-    <div class="mx-auto w-96">
-      ${createCard(args)}
-    </div>
-    `)
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mx-auto w-96';
+    const card = createCard(args);
+    wrapper.appendChild(card);
+    return wrapper;
+  }
 };
 
 export const MultipleCards: Story = {
@@ -68,13 +89,29 @@ export const MultipleCards: Story = {
       }
     }
   },
-  render: (args) => (`
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-      ${createCard(args)}
-      ${createCard({ ...args, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' })}
-      ${createCard({ ...args, image: 'keypad', text: styledCardText, buttonLabel: '' })}
-    </div>
-    `)
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 w-full';
+
+    const card1 = createCard(args);
+    const card2 = createCard({
+      ...args,
+      image: 'emailCheck',
+      text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.'
+    });
+    const card3 = createCard({
+      ...args,
+      image: 'keypad',
+      text: styledCardText,
+      buttonLabel: ''
+    });
+
+    wrapper.appendChild(card1);
+    wrapper.appendChild(card2);
+    wrapper.appendChild(card3);
+
+    return wrapper;
+  }
 };
 
 export const WithoutLinkCard: Story = {
@@ -84,11 +121,13 @@ export const WithoutLinkCard: Story = {
     title: 'Card ipsum',
     text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!'
   },
-  render: (args) => (`
-    <div class="mx-auto w-96">
-      ${createCard(args)}
-    </div>
-    `)
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mx-auto w-96';
+    const card = createCard(args);
+    wrapper.appendChild(card);
+    return wrapper;
+  }
 };
 
 export const GreyBackgroundCard: Story = {
@@ -110,11 +149,13 @@ export const GreyBackgroundCard: Story = {
   globals: {
     backgrounds: { value: 'white', grid: false },
   },
-  render: (args) => (`
-    <div class="mx-auto w-96">
-      ${createCard(args)}
-    </div>
-    `)
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mx-auto w-96';
+    const card = createCard(args);
+    wrapper.appendChild(card);
+    return wrapper;
+  }
 };
 
 export const StyledTextCard: Story = {
@@ -124,9 +165,11 @@ export const StyledTextCard: Story = {
     image: 'keypad',
     text: styledCardText,
   },
-  render: (args) => (`
-    <div class="mx-auto w-96">
-      ${createCard(args)}
-    </div>
-    `)
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mx-auto w-96';
+    const card = createCard(args);
+    wrapper.appendChild(card);
+    return wrapper;
+  }
 };
