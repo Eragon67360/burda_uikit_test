@@ -1,4 +1,5 @@
 import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
+import { createBadge } from "../Badge/Badge";
 
 export type ArticleArgs = {
   backgroundColor?: 'white' | 'gray';
@@ -19,35 +20,43 @@ export const createArticle = ({
   badgeText,
   onClick = () => { },
 }: ArticleArgs) => {
+  const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
 
-  const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white';
+  const articleElement = document.createElement('article');
+  articleElement.className = `size-full min-w-48 p-4 flex flex-col justify-end gap-4 ${bgColor} rounded`;
 
-  return `
-    <div class="size-full min-w-48 p-4 flex flex-col justify-end gap-4 ${bgColor} rounded">
-      <div class="relative h-0 grow w-full px-2.5">
-        <img src="${image}" alt="${imageAltText}" class="size-full object-contain">
-        ${!!badgeText && badgeText.length > 0
-          ? `
-            <div class="absolute top-0 left-0 p-2 min-w-11 min-h-11 aspect-square bg-primary-interaction rounded-full flex items-center justify-center">
-              <div class="text-copy-small font-bold">${badgeText}</div>
-            </div>
-          `
-          : ''
-        }
-      </div>
-      <p class="text-label text-center">${title}</p>
-      ${buttonLabel
-        ? createButtonCTA({
-          label: buttonLabel,
-          onClick,
-          disabled: false,
-          variant: ButtonCTAVariant.PRIMARY,
-          nested: true,
-          iconLeft: false,
-          icon: 'arrowRight',
-        }).outerHTML
-        : ''
-      }
-    </div>
-  `
+  const imageContainer = document.createElement('div');
+  imageContainer.className = 'relative h-0 grow w-full px-2.5';
+
+  const imgElement = document.createElement('img');
+  imgElement.src = image;
+  imgElement.alt = imageAltText;
+  imgElement.className = 'size-full object-contain';
+  imageContainer.appendChild(imgElement);
+
+  if (badgeText && badgeText.length > 0) {
+    const badgeElement = createBadge(badgeText, 42, "primary")
+    imageContainer.appendChild(badgeElement);
+  }
+
+  const titleElement = document.createElement('p');
+  titleElement.className = 'text-label text-center';
+  titleElement.textContent = title;
+
+  articleElement.appendChild(imageContainer);
+  articleElement.appendChild(titleElement);
+
+  if (buttonLabel) {
+    articleElement.appendChild(createButtonCTA({
+      label: buttonLabel,
+      onClick,
+      disabled: false,
+      variant: ButtonCTAVariant.PRIMARY,
+      nested: true,
+      iconLeft: false,
+      icon: 'arrowRight',
+    }));
+  }
+
+  return articleElement;
 }

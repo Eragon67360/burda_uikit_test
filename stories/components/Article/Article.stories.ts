@@ -39,11 +39,7 @@ const meta: Meta<ArticleArgs> = {
             description: 'Callback function when the button is clicked',
         },
     },
-    render: (args) => (`
-        <div class="w-48 h-72">
-            ${createArticle(args)}
-        </div>
-    `)
+    render: (args) => (createArticle(args))
 };
 
 export default meta;
@@ -59,6 +55,13 @@ export const DefaultArticle: Story = {
         badgeText: '',
         onClick: () => console.log('Button clicked')
     },
+    render: (args) => {
+        const articleElement = createArticle(args);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'w-48 h-72';
+        wrapper.appendChild(articleElement);
+        return wrapper;
+    }
 };
 
 export const ArticleWithBadge: Story = {
@@ -71,6 +74,13 @@ export const ArticleWithBadge: Story = {
         badgeText: 'Tipp',
         onClick: () => console.log('Button clicked')
     },
+    render: (args) => {
+        const articleElement = createArticle(args);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'w-48 h-72';
+        wrapper.appendChild(articleElement);
+        return wrapper;
+    }
 };
 
 export const MultipleArticles: Story = {
@@ -79,14 +89,24 @@ export const MultipleArticles: Story = {
         buttonLabel: 'Details',
         onClick: () => console.log('Button clicked')
     },
-    render: (args) => (`
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'Just Vegan Heißluftfritteuse', image: 'fryer_4.png', badgeText: 'Tipp' })}</div>
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'Weinpaket', image: 'wine.png', badgeText: 'NEU' })}</div>
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'Clatronic Raclette Grill', image: 'barbecue.png' })}</div>
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'THE DUKE - Munich Dry Gin', image: 'gin.png' })}</div>
-        </div>
-    `)
+    render: (args) => {
+        const mainWrapper = document.createElement('div');
+        mainWrapper.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 w-full';
+        const articlesArgs = [
+            { ...args, title: 'Just Vegan Heißluftfritteuse', image: 'fryer_4.png', badgeText: 'Tipp' },
+            { ...args, title: 'Weinpaket', image: 'wine.png', badgeText: 'NEU' },
+            { ...args, title: 'Clatronic Raclette Grill', image: 'barbecue.png' },
+            { ...args, title: 'THE DUKE - Munich Dry Gin', image: 'gin.png' }
+        ];
+        articlesArgs.forEach((articleArgs) => {
+            const articleWrapper = document.createElement('div');
+            articleWrapper.className = 'w-48 h-72';
+            articleWrapper.appendChild(createArticle(articleArgs));
+            mainWrapper.appendChild(articleWrapper);
+        })
+
+        return mainWrapper;
+    }
 };
 
 export const GreyBackgroundArticle: Story = {
@@ -100,4 +120,11 @@ export const GreyBackgroundArticle: Story = {
     globals: {
         backgrounds: { value: 'white', grid: false },
     },
+    render: (args) => {
+        const articleElement = createArticle(args);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'w-48 h-72';
+        wrapper.appendChild(articleElement);
+        return wrapper;
+    }
 };
