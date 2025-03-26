@@ -30,9 +30,9 @@ const meta: Meta<ArticleArgs> = {
             control: 'text',
             description: 'Label of the button',
         },
-        batchText: {
+        badgeText: {
             control: 'text',
-            description: 'Text for the optional batch (if empty, no batch will be shown)',
+            description: 'Text for the optional badge (if empty, no badge will be shown)',
         },
         onClick: {
             action: 'button clicked',
@@ -56,19 +56,19 @@ export const DefaultArticle: Story = {
         image: 'fryer_4.png',
         imageAltText: 'Just Vegan Heißluftfritteuse',
         buttonLabel: 'Details',
-        batchText: '',
+        badgeText: '',
         onClick: () => console.log('Button clicked')
     },
 };
 
-export const ArticleWithBatch: Story = {
+export const ArticleWithBadge: Story = {
     args: {
         backgroundColor: 'white',
         title: 'Just Vegan Heißluftfritteuse',
         image: 'fryer_4.png',
         imageAltText: 'Just Vegan Heißluftfritteuse',
         buttonLabel: 'Details',
-        batchText: 'Tipp',
+        badgeText: 'Tipp',
         onClick: () => console.log('Button clicked')
     },
 };
@@ -81,8 +81,8 @@ export const MultipleArticles: Story = {
     },
     render: (args) => (`
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'Just Vegan Heißluftfritteuse', image: 'fryer_4.png', batchText: 'Tipp' })}</div>
-            <div class="w-48 h-72">${createArticle({ ...args, title: 'Weinpaket', image: 'wine.png', batchText: 'NEU' })}</div>
+            <div class="w-48 h-72">${createArticle({ ...args, title: 'Just Vegan Heißluftfritteuse', image: 'fryer_4.png', badgeText: 'Tipp' })}</div>
+            <div class="w-48 h-72">${createArticle({ ...args, title: 'Weinpaket', image: 'wine.png', badgeText: 'NEU' })}</div>
             <div class="w-48 h-72">${createArticle({ ...args, title: 'Clatronic Raclette Grill', image: 'barbecue.png' })}</div>
             <div class="w-48 h-72">${createArticle({ ...args, title: 'THE DUKE - Munich Dry Gin', image: 'gin.png' })}</div>
         </div>

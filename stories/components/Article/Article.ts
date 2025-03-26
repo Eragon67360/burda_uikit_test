@@ -6,7 +6,7 @@ export type ArticleArgs = {
   image: string;
   imageAltText: string;
   buttonLabel: string;
-  batchText?: string;
+  badgeText?: string;
   onClick?: () => void;
 };
 
@@ -16,7 +16,7 @@ export const createArticle = ({
   image,
   imageAltText = title,
   buttonLabel,
-  batchText,
+  badgeText,
   onClick = () => { },
 }: ArticleArgs) => {
 
@@ -26,10 +26,10 @@ export const createArticle = ({
     <div class="size-full min-w-48 p-4 flex flex-col justify-end gap-4 ${bgColor} rounded">
       <div class="relative h-0 grow w-full px-2.5">
         <img src="${image}" alt="${imageAltText}" class="size-full object-contain">
-        ${!!batchText && batchText.length > 0
+        ${!!badgeText && badgeText.length > 0
           ? `
             <div class="absolute top-0 left-0 p-2 min-w-11 min-h-11 aspect-square bg-primary-interaction rounded-full flex items-center justify-center">
-              <div class="text-copy-small font-bold">${batchText}</div>
+              <div class="text-copy-small font-bold">${badgeText}</div>
             </div>
           `
           : ''
