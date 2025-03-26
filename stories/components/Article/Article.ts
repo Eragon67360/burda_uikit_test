@@ -1,5 +1,6 @@
 import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
 import { createBadge } from "../Badge/Badge";
+import { sanitizeHTML } from "@/stories/utils/sanitize";
 
 export type ArticleArgs = {
   backgroundColor?: 'white' | 'gray';
@@ -30,7 +31,7 @@ export const createArticle = ({
 
   const imgElement = document.createElement('img');
   imgElement.src = image;
-  imgElement.alt = imageAltText;
+  imgElement.alt = sanitizeHTML(imageAltText);
   imgElement.className = 'size-full object-contain';
   imageContainer.appendChild(imgElement);
 
@@ -41,7 +42,7 @@ export const createArticle = ({
 
   const titleElement = document.createElement('p');
   titleElement.className = 'text-label text-center';
-  titleElement.textContent = title;
+  titleElement.textContent = sanitizeHTML(title);
 
   articleElement.appendChild(imageContainer);
   articleElement.appendChild(titleElement);
