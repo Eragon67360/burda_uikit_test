@@ -1,6 +1,7 @@
 import { IconCategory, IconRegistry } from '../../assets/icons';
 import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
 import { getSizedIcon } from '../../utils/iconUtils';
+import { sanitizeHTML } from '@/stories/utils/sanitize';
 
 export interface CardArgs {
   backgroundColor?: 'white' | 'gray';
@@ -19,32 +20,52 @@ export const createCard = ({
   buttonLabel,
   onClick = () => { },
 }: CardArgs) => {
-  const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white';
+  const cardContainer = document.createElement('div');
+  cardContainer.className = `flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
 
-  return `
-    <div class="flex flex-col justify-stretch ${bgColor} rounded">
-      <div class="p-8 flex flex-col md:flex-row space-x-8 space-y-8 h-full">
-        <div class="w-full md:min-w-24 flex justify-center md:block">
-          ${getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96)}
-        </div>
-        <div class="w-auto text-center md:text-left">
-          <h4 class="text-h4-desktop font-roboto-serif">${title}</h4>
-          <p class="mt-4 text-xs">${text}</p>
-        </div>
-      </div>
-      ${buttonLabel
-      ? createButtonCTA({
-        label: buttonLabel,
-        classNames: 'rounded-tl-none rounded-tr-none',
-        onClick: () => { },
-        disabled: false,
-        variant: ButtonCTAVariant.PRIMARY,
-        nested: false,
-        iconLeft: false,
-        icon: 'arrowRight',
-      }).outerHTML
-      : ''
-    }
-    </div>
-  `;
+  const contentWrapper = document.createElement('div');
+  contentWrapper.className = 'p-8 flex flex-col md:flex-row space-x-8 space-y-8 h-full';
+
+  const iconContainer = document.createElement('div');
+  iconContainer.className = 'w-full md:min-w-24 flex justify-center md:block';
+
+  const iconElement = document.createElement('div');
+  iconElement.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96);
+  iconContainer.appendChild(iconElement);
+
+  const textContainer = document.createElement('div');
+  textContainer.className = 'w-auto text-center md:text-left';
+
+  const titleElement = document.createElement('h4');
+  titleElement.className = 'text-h4 font-roboto-serif';
+  titleElement.textContent = sanitizeHTML(title);
+
+  const textElement = document.createElement('p');
+  textElement.className = 'mt-4 text-copy-small';
+  textElement.innerHTML = sanitizeHTML(text);
+
+  textContainer.appendChild(titleElement);
+  textContainer.appendChild(textElement);
+
+  contentWrapper.appendChild(iconContainer);
+  contentWrapper.appendChild(textContainer);
+
+  cardContainer.appendChild(contentWrapper);
+
+  if (buttonLabel) {
+    const buttonElement = createButtonCTA({
+      label: buttonLabel,
+      classNames: 'rounded-tl-none rounded-tr-none',
+      onClick: onClick,
+      disabled: false,
+      variant: ButtonCTAVariant.PRIMARY,
+      nested: false,
+      iconLeft: false,
+      icon: 'arrowRight',
+    });
+
+    cardContainer.appendChild(buttonElement);
+  }
+
+  return cardContainer;
 };
