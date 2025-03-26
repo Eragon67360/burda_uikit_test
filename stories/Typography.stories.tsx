@@ -104,19 +104,19 @@ export const Desktop: Story = {
         <h2 class="text-3xl font-bold">Copy</h2>
         <div class="gap-8 mt-8 grid grid-cols-3">
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Teaser</p>
+            <p class="text-storybook-label" >Teaser</p>
             <p class="text-teaser-desktop">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Copy</p>
+            <p class="text-storybook-label" >Copy</p>
             <p class="text-copy-desktop">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Copy small</p>
+            <p class="text-storybook-label" >Copy small</p>
             <p class="text-copy-small-desktop">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >          
-            <p class="text-label text-storybook-label" >Bulletpoint Copy</p>
+            <p class="text-storybook-label" >Bulletpoint Copy</p>
             <ul class="text-bulletpoint-copy-desktop list-disc ml-4">
               <li>Lorem ipsum dolor sit amet</li>
               <li>Sit tempus pharetra</li>
@@ -126,37 +126,37 @@ export const Desktop: Story = {
             </ul>
             </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Footer Copy</p>
+            <p class="text-storybook-label" >Footer Copy</p>
             <p class="text-footer-copy-desktop">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum.</p>
           </div>
           <div></div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Label</p>
+            <p class="text-storybook-label" >Label</p>
             <p class="text-label-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Button Label</p>
+            <p class="text-storybook-label" >Button Label</p>
             <p class="text-button-label-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Button Label Large</p>
+            <p class="text-storybook-label" >Button Label Large</p>
             <p class="text-button-label-large-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Input</p>
+            <p class="text-storybook-label" >Input</p>
             <p class="text-input-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Placeholder</p>
+            <p class="text-storybook-label" >Placeholder</p>
             <p class="text-placeholder-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div></div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Link</p>
+            <p class="text-storybook-label" >Link</p>
             <p class="text-link-desktop">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Link Small</p>
+            <p class="text-storybook-label" >Link Small</p>
             <p class="text-link-small-desktop">Lorem ipsum dolor sit amet </p>
           </div>
         </div>
@@ -257,19 +257,19 @@ export const Mobile: Story = {
         <h2 class="text-3xl font-bold">Copy</h2>
         <div class="gap-8 mt-8 grid grid-cols-3">
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Teaser</p>
+            <p class="text-storybook-label" >Teaser</p>
             <p class="text-teaser-mobile">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Copy</p>
+            <p class="text-storybook-label" >Copy</p>
             <p class="text-copy-mobile">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Copy small</p>
+            <p class="text-storybook-label" >Copy small</p>
             <p class="text-copy-small-mobile">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum. Sit tempus pharetra odio imperdiet nunc massa sodales at tempor. Auctor vestibulum phasellus aliquam cursus. Mattis enim accumsan ultricies vel imperdiet blandit dolor in.</p>
           </div>
           <div class="space-y-4" >          
-            <p class="text-label text-storybook-label" >Bulletpoint Copy</p>
+            <p class="text-storybook-label" >Bulletpoint Copy</p>
             <ul class="text-bulletpoint-copy-mobile list-disc ml-4">
               <li>Lorem ipsum dolor sit amet</li>
               <li>Sit tempus pharetra</li>
@@ -279,37 +279,37 @@ export const Mobile: Story = {
             </ul>
             </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Footer Copy</p>
+            <p class="text-storybook-label" >Footer Copy</p>
             <p class="text-footer-copy-mobile">Lorem ipsum dolor sit amet consectetur. Vulputate diam ac integer arcu commodo donec rhoncus lacus vestibulum.</p>
           </div>
           <div></div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Label</p>
+            <p class="text-storybook-label" >Label</p>
             <p class="text-label-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Button Label</p>
+            <p class="text-storybook-label" >Button Label</p>
             <p class="text-button-label-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Button Label Large</p>
+            <p class="text-storybook-label" >Button Label Large</p>
             <p class="text-button-label-large-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Input</p>
+            <p class="text-storybook-label" >Input</p>
             <p class="text-input-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Placeholder</p>
+            <p class="text-storybook-label" >Placeholder</p>
             <p class="text-placeholder-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div></div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Link</p>
+            <p class="text-storybook-label" >Link</p>
             <p class="text-link-mobile">Lorem ipsum dolor sit amet </p>
           </div>
           <div class="space-y-4" >
-            <p class="text-label text-storybook-label" >Link Small</p>
+            <p class="text-storybook-label" >Link Small</p>
             <p class="text-link-small-mobile">Lorem ipsum dolor sit amet </p>
           </div>
         </div>
