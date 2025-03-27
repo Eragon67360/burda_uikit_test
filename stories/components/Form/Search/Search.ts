@@ -24,11 +24,9 @@ export const createSearch = ({
     isSmall = false,
 }: SearchArgs) => {
     let isPopoverOpen = false;
-    let emptyStateAdded = false;
-    let resultsAdded = false;
     let resultsRendered = false;
     const wrapper = document.createElement('div');
-    wrapper.className = 'relative w-full flex items-center justify-center h-full ' + classNames;
+    wrapper.className = 'relative w-full flex items-center justify-center h-full search-container ' + classNames;
 
     const inputWrapper = document.createElement('div');
     inputWrapper.className = 'relative h-full flex items-center';

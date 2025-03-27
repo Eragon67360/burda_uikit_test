@@ -110,3 +110,24 @@ export const HomepageWith2LinesNavigation: Story = {
     backgrounds: { value: 'white' },
   }
 };
+
+export const MeinSchoenerGarten: Story = {
+  args: {},
+  parameters: {
+    viewport: {
+      defaultViewport: 'widescreen',
+    },
+    layout: 'fullscreen',
+  },
+  globals: {
+    backgrounds: { value: 'white' },
+  },
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.style.setProperty('--color-primary-interaction', 'hsla(88, 63%, 44%, 1)');
+    wrapper.style.setProperty('--color-primary-extra-light', 'hsla(86, 33%, 91%,1)');
+    wrapper.style.setProperty('--color-brand', 'hsla(88, 63%, 44%, 1)');
+    wrapper.appendChild(createHomepage(args))
+    return wrapper;
+  }
+}
