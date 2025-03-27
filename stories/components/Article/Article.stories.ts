@@ -11,8 +11,10 @@ const meta: Meta<ArticleArgs> = {
         backgroundColor: {
             control: 'radio',
             options: ['white', 'gray'],
-            defaultValue: 'white',
             description: 'Background color of the article',
+            table: {
+                defaultValue: { summary: 'white' },
+            },
         },
         title: {
             control: 'text',
@@ -55,13 +57,6 @@ export const DefaultArticle: Story = {
         badgeText: '',
         onClick: () => console.log('Button clicked')
     },
-    render: (args) => {
-        const articleElement = createArticle(args);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'w-48 h-72';
-        wrapper.appendChild(articleElement);
-        return wrapper;
-    }
 };
 
 export const ArticleWithBadge: Story = {
@@ -74,39 +69,6 @@ export const ArticleWithBadge: Story = {
         badgeText: 'Tipp',
         onClick: () => console.log('Button clicked')
     },
-    render: (args) => {
-        const articleElement = createArticle(args);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'w-48 h-72';
-        wrapper.appendChild(articleElement);
-        return wrapper;
-    }
-};
-
-export const MultipleArticles: Story = {
-    args: {
-        backgroundColor: 'white',
-        buttonLabel: 'Details',
-        onClick: () => console.log('Button clicked')
-    },
-    render: (args) => {
-        const mainWrapper = document.createElement('div');
-        mainWrapper.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 w-full';
-        const articlesArgs = [
-            { ...args, title: 'Just Vegan Heißluftfritteuse', image: 'fryer_4.png', badgeText: 'Tipp' },
-            { ...args, title: 'Weinpaket', image: 'wine.png', badgeText: 'NEU' },
-            { ...args, title: 'Clatronic Raclette Grill', image: 'barbecue.png' },
-            { ...args, title: 'THE DUKE - Munich Dry Gin', image: 'gin.png' }
-        ];
-        articlesArgs.forEach((articleArgs) => {
-            const articleWrapper = document.createElement('div');
-            articleWrapper.className = 'w-48 h-72';
-            articleWrapper.appendChild(createArticle(articleArgs));
-            mainWrapper.appendChild(articleWrapper);
-        })
-
-        return mainWrapper;
-    }
 };
 
 export const GreyBackgroundArticle: Story = {
@@ -120,11 +82,4 @@ export const GreyBackgroundArticle: Story = {
     globals: {
         backgrounds: { value: 'white', grid: false },
     },
-    render: (args) => {
-        const articleElement = createArticle(args);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'w-48 h-72';
-        wrapper.appendChild(articleElement);
-        return wrapper;
-    }
 };

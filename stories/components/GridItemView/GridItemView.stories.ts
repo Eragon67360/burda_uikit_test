@@ -40,62 +40,46 @@ type Story = StoryObj<GridItemViewArgs>;
 
 export const DefaultGridItemView: Story = {
     args: {
-        maxWidth: '600px',
+        maxWidth: '700px',
         gridItemType: 'article',
         articles: [
             {
-                backgroundColor: 'gray',
                 title: 'Just Vegan Heißluftfritteuse',
                 image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
+                badgeText: 'Tipp',
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: 'Weinpaket',
+                image: 'wine.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: 'Clatronic Raclette Grill',
+                image: 'barbecue.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: 'THE DUKE - Munich Dry Gin',
+                image: 'gin.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
+                badgeText: 'NEU',
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
             },
             {
-                backgroundColor: 'gray',
                 title: 'Just Vegan Heißluftfritteuse',
                 image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
+                badgeText: 'Tipp',
+            },
+            {
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
+                buttonLabel: 'Details',
             },
         ]
     }
@@ -106,40 +90,42 @@ export const GridItemViewWithArticles: Story = {
         gridItemType: 'article',
         articles: [
             {
-                backgroundColor: 'gray',
                 title: 'Just Vegan Heißluftfritteuse',
                 image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
+                badgeText: 'Tipp',
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: 'Weinpaket',
+                image: 'wine.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
             },
             {
-                backgroundColor: 'gray',
-                title: 'Just Vegan Heißluftfritteuse',
-                image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
+                title: 'Clatronic Raclette Grill',
+                image: 'barbecue.png',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
             },
             {
-                backgroundColor: 'gray',
+                title: 'THE DUKE - Munich Dry Gin',
+                image: 'gin.png',
+                buttonLabel: 'Details',
+                badgeText: 'NEU',
+            },
+            {
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
+                buttonLabel: 'Details',
+            },
+            {
                 title: 'Just Vegan Heißluftfritteuse',
                 image: 'fryer_4.png',
-                imageAltText: 'Just Vegan Heißluftfritteuse',
                 buttonLabel: 'Details',
-                badgeText: '',
-                onClick: () => console.log('Button clicked'),
+                badgeText: 'Tipp',
+            },
+            {
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
+                buttonLabel: 'Details',
             },
         ]
     }
@@ -150,36 +136,180 @@ export const GridItemViewWithCards: Story = {
         gridItemType: 'card',
         cards: [
             {
-                backgroundColor: 'gray',
-                image: 'burdaMag',
-                title: 'Card ipsum',
-                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
-                buttonLabel: 'zum Angebot',
-                onClick: () => console.log('Button clicked')
+                title: 'Login E-Paper',
+                image: 'documentHand',
+                text: 'Lorem ipsum dolor sit amet consectetur. Euismod feugiat condimentum ipsum pellentesque amet arcu sed ante enim.',
+                buttonLabel: 'Login E-Paper',
             },
-                        {
-                backgroundColor: 'gray',
-                image: 'burdaMag',
-                title: 'Card ipsum',
+            {
+                title: 'Heftreklamation',
                 text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
-                buttonLabel: 'zum Angebot',
-                onClick: () => console.log('Button clicked')
+                buttonLabel: 'Zur Heftreklamation',
             },
-                        {
-                backgroundColor: 'gray',
-                image: 'burdaMag',
-                title: 'Card ipsum',
+            {
+                title: 'Kontakt',
                 text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
-                buttonLabel: 'zum Angebot',
-                onClick: () => console.log('Button clicked')
+                buttonLabel: 'Zum Kontaktformular',
             },
-                        {
-                backgroundColor: 'gray',
-                image: 'burdaMag',
-                title: 'Card ipsum',
+            {
+                title: 'Geschenkurkunde',
+                image: 'certificate',
                 text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
-                buttonLabel: 'zum Angebot',
-                onClick: () => console.log('Button clicked')
+                buttonLabel: 'Jetzt erstellen',
+            },
+            {
+                title: 'Bankverbindung',
+                image: 'creditCard',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Daten ändern',
+            },
+            {
+                title: 'Umzugsservice',
+                image: 'delivery',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse ändern',
+            },
+            {
+                title: 'Urlaubsservice',
+                image: 'vacation',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse mitteilen',
+            },
+            {
+                title: 'Abonnement kündigen',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Rufen Sie uns an',
+            },
+            {
+                title: 'FAQ',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zur FAQ Übersicht',
+            },
+        ]
+    }
+};
+
+export const GrexBackgroundGridItemViewWithArticles: Story = {
+    globals: {
+        backgrounds: { value: 'white', grid: false },
+    },
+    args: {
+        gridItemType: 'article',
+        articles: [
+            {
+                backgroundColor: 'gray',
+                title: 'Just Vegan Heißluftfritteuse',
+                image: 'fryer_4.png',
+                buttonLabel: 'Details',
+                badgeText: 'Tipp',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Weinpaket',
+                image: 'wine.png',
+                buttonLabel: 'Details',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Clatronic Raclette Grill',
+                image: 'barbecue.png',
+                buttonLabel: 'Details',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'THE DUKE - Munich Dry Gin',
+                image: 'gin.png',
+                buttonLabel: 'Details',
+                badgeText: 'NEU',
+            },
+            {
+                backgroundColor: 'gray',
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
+                buttonLabel: 'Details',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Just Vegan Heißluftfritteuse',
+                image: 'fryer_4.png',
+                buttonLabel: 'Details',
+                badgeText: 'Tipp',
+            },
+            {
+                backgroundColor: 'gray',
+                title: '70 EUR Amazon.de Gutschein',
+                image: 'amazon.png',
+                buttonLabel: 'Details',
+            },
+        ]
+    }
+};
+
+export const GrexBackgroundGridItemViewWithCards: Story = {
+    globals: {
+        backgrounds: { value: 'white', grid: false },
+    },
+    args: {
+        gridItemType: 'card',
+        cards: [
+            {
+                backgroundColor: 'gray',
+                title: 'Login E-Paper',
+                image: 'documentHand',
+                text: 'Lorem ipsum dolor sit amet consectetur. Euismod feugiat condimentum ipsum pellentesque amet arcu sed ante enim.',
+                buttonLabel: 'Login E-Paper',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Heftreklamation',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zur Heftreklamation',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Kontakt',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zum Kontaktformular',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Geschenkurkunde',
+                image: 'certificate',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Jetzt erstellen',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Bankverbindung',
+                image: 'creditCard',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Daten ändern',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Umzugsservice',
+                image: 'delivery',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse ändern',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Urlaubsservice',
+                image: 'vacation',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse mitteilen',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Abonnement kündigen',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Rufen Sie uns an',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'FAQ',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zur FAQ Übersicht',
             },
         ]
     }

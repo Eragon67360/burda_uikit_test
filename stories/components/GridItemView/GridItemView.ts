@@ -17,18 +17,23 @@ export const createGridItemView = ({
 
   let elements = [];
   if (gridItemType === 'card') {
-    elements = cards.map(card => createCard(card).outerHTML);
+    elements = cards.map(card => createCard(card));
   } else {
-    elements = articles.map(article => createArticle(article).outerHTML);
+    elements = articles.map(article => createArticle(article));
   }
 
-  console.log('elements', elements);
+  const container = document.createElement('div');
+  container.className = 'w-full flex';
+  container.style.maxWidth = maxWidth ?? 'unset';
 
-  return `
-    <div class="w-full flex" style="max-width: ${maxWidth ?? 'unset'};">
-        <div class="shrink flex gap-5 flex-wrap">
-          ${elements.join('')}
-        </div>
-    </div>
-  `
+  const innerContainer = document.createElement('div');
+  innerContainer.className = 'shrink flex gap-5 flex-wrap';
+
+  elements.forEach(element => {
+    innerContainer.appendChild(element);
+  });
+
+  container.appendChild(innerContainer);
+
+  return container;
 }
