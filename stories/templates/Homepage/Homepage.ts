@@ -1,16 +1,33 @@
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { sampleBigImages, sampleSmallImages } from '@/stories/assets/sampleImages';
 import { CardArgs, createCard } from '@/stories/components/Card/Card';
 import { createFooter } from '@/stories/components/Footer/Footer';
+import { createShowcase } from '@/stories/components/Header/Slideshow/Showcase/Showcase';
+import { createStaticHero } from '@/stories/components/Header/StaticHero/StaticHero';
 import { createDesktopTag } from '@/stories/components/List/Tags/Desktop/Desktop';
-import { createMobileTag, createMobileTagGroup, MobileTagArgs } from '@/stories/components/List/Tags/Mobile/Mobile';
+import { createMobileTagGroup, MobileTagArgs } from '@/stories/components/List/Tags/Mobile/Mobile';
 import { createNavigation } from '@/stories/components/Navigation/Navigation';
 import { createFlyout } from '@/stories/components/Overlay/Flyout/Flyout';
-import { createShowcase } from '@/stories/components/Slideshow/Showcase/Showcase';
 import { createSubscriptionPlan } from '@/stories/components/SubscriptionPlan/SubscriptionPlan';
 
-export interface HomepageArgs { }
+export interface HomepageArgs {
+  withStaticHero: boolean;
+  withSmallSlideshow: boolean;
+  staticHeroImageSrc?: string;
+  staticHeroImageAltText?: string;
+  staticHeroHref?: string;
+  navigationHas2Lines: boolean;
+}
 
-export const createHomepage = ({ }: HomepageArgs) => {
+export const createHomepage = ({
+  withStaticHero = false,
+  withSmallSlideshow = false,
+  staticHeroImageSrc,
+  staticHeroHref,
+  staticHeroImageAltText,
+  navigationHas2Lines = false
+}: HomepageArgs) => {
+
   const cardExample: CardArgs = {
     backgroundColor: 'gray',
     image: 'burdaMag',
@@ -28,13 +45,16 @@ export const createHomepage = ({ }: HomepageArgs) => {
   `;
 
   const container = document.createElement('div');
-  container.className = "h-full container mx-auto";
+  container.className = `h-full w-full mx-auto ${navigationHas2Lines ? 'pt-34' : 'pt-26'} px-4`;
+  container.style.maxWidth = "90rem";
 
   const header = document.createElement('header');
+  header.className = "w-full max-w-[90rem] mx-auto";
+  header.style.maxWidth = "90rem";
   header.appendChild(createNavigation({
     logoSrc: '/burda_logo.png',
     logoAltText: 'Burda Logo',
-    has2LinesNavigation: false,
+    has2LinesNavigation: navigationHas2Lines,
     navigationItems: [
       {
         type: 'flyout',
@@ -61,6 +81,8 @@ export const createHomepage = ({ }: HomepageArgs) => {
         target: '_self'
       }
     ],
+    hasLanguageDropdown: true,
+    isLanguageDropdownCompressed: true,
     hasSearch: true,
     searchProps: {
       emptyText: 'Keine Ergebnisse gefunden',
@@ -69,7 +91,8 @@ export const createHomepage = ({ }: HomepageArgs) => {
         { label: 'Product 1', href: '/product1' },
         { label: 'Product 2', href: '/product2' },
         { label: 'Product 3', href: '/product3' }
-      ]
+      ],
+      isSmall: false
     },
     loginButtonText: 'Kundenservice & Login',
     loginButtonIcon: 'userCircle',
@@ -78,16 +101,27 @@ export const createHomepage = ({ }: HomepageArgs) => {
     onClickLoginButton: () => console.log("Login button has been clicked"),
     onClickCartButton: () => console.log("Cart button has been clicked"),
   }))
-
-  header.appendChild(
-    createShowcase({
-      images: ['https://picsum.photos/id/7/800/600.webp',
-        'https://picsum.photos/id/10/800/600.webp',
-        'https://picsum.photos/id/20/800/600.webp',
-        'https://picsum.photos/id/15/800/600.webp'],
-      duration: 5,
-      isPlaying: true,
-    }).element)
+  if (withStaticHero) {
+    header.appendChild(createStaticHero({ imageSrc: staticHeroImageSrc, href: staticHeroHref, altText: staticHeroImageAltText }))
+  } else {
+    if (withSmallSlideshow) {
+      header.appendChild(
+        createShowcase({
+          isSmall: withSmallSlideshow,
+          images: sampleSmallImages,
+          duration: 5,
+          isPlaying: true,
+        }).element)
+    } else {
+      header.appendChild(
+        createShowcase({
+          isSmall: withSmallSlideshow,
+          images: sampleBigImages,
+          duration: 5,
+          isPlaying: true,
+        }).element)
+    }
+  }
 
   const subscriptionSection = document.createElement('section');
   subscriptionSection.className = "bg-base-white px-12 py-32 space-y-16"
@@ -97,7 +131,8 @@ export const createHomepage = ({ }: HomepageArgs) => {
           <h2 class="text-subhead2-desktop font-semibold">Print- und Digitalangebote</h2>`;
 
   const subscriptionPlans = document.createElement('div');
-  subscriptionPlans.className = "flex gap-8 items-end w-full flex-wrap justify-center"
+  subscriptionPlans.className = "flex gap-8 items-end w-full flex-wrap justify-center self-stretch";
+
   subscriptionPlans.appendChild(createSubscriptionPlan({
     image: '/burda_subscriptions_1.png',
     title: 'FOCUS',
@@ -175,10 +210,12 @@ export const createHomepage = ({ }: HomepageArgs) => {
   const cardsSection = document.createElement('section');
   cardsSection.classList = "px-12 py-32";
   const cardDiv = document.createElement('div');
-  cardDiv.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
-  cardDiv.innerHTML = `${createCard(cardExample)}
-          ${createCard({ ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' })}
-          ${createCard({ ...cardExample, image: 'keypad', text: styledCardText, buttonLabel: '' })}`
+  cardDiv.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full";
+
+  cardDiv.appendChild(createCard(cardExample));
+  cardDiv.appendChild(createCard({ ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' }));
+  cardDiv.appendChild(createCard({ ...cardExample, image: 'keypad', text: styledCardText, buttonLabel: '' }));
+
   cardsSection.appendChild(cardDiv);
 
   const footer = document.createElement('footer');

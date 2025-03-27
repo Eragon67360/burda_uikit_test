@@ -42,7 +42,7 @@ export const createCard = ({
 
   const textElement = document.createElement('p');
   textElement.className = 'mt-4 text-copy-small';
-  textElement.innerHTML = sanitizeHTML(text);
+  textElement.innerHTML = text;
 
   textContainer.appendChild(titleElement);
   textContainer.appendChild(textElement);

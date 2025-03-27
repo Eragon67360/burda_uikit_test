@@ -15,7 +15,7 @@ type Story = StoryObj<StaticHeroArgs>;
 
 export const DefaultStaticHero: Story = {
   args: {
-    image: 'static-hero-header-example.jpg',
+    imageSrc: 'static-hero-header-example.jpg',
     altText: 'Example of a static hero image',
     href: '#',
   },

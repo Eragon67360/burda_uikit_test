@@ -23,7 +23,7 @@ export const createSubscriptionPlan = ({
     onPrimaryClick,
 }: SubscriptionPlanArgs) => {
     const container = document.createElement('div');
-    container.className = 'flex flex-col bg-transparent max-w-[28rem] rounded-b-lg h-full w-full';
+    container.className = 'flex flex-col bg-transparent max-w-[26rem] rounded-b-lg h-full w-full';
 
     const imageContainer = document.createElement('div');
     imageContainer.className = 'bg-transparent px-8 bg-gradient-to-b from-transparent from-[86.43%] to-black/20 to-100% z-20 mx-8'
