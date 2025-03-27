@@ -18,11 +18,19 @@ export const createShowcase = ({
     isPlaying = true
 }: ShowcaseArgs): ShowcaseReturn => {
     let currentIndex = 0;
-    let progressComponent: { element: HTMLElement; cleanup: () => void } | null = null;
+    let progressComponent: ReturnType<typeof createSlideProgress> | null = null;
     let localIsPlaying = isPlaying;
     let isTransitioning = false;
+
+    // Use a single animation frame tracker
     let animationFrameId: number | null = null;
-    const preloadedImages: HTMLImageElement[] = [];
+
+    // Centralized state management
+    const state = {
+        currentIndex: 0,
+        isPlaying: localIsPlaying,
+        duration
+    };
 
     const container = document.createElement('div');
     container.className = 'relative w-full mx-auto';
@@ -39,116 +47,76 @@ export const createShowcase = ({
     const bottomControls = document.createElement('div');
     bottomControls.className = 'absolute bottom-6 left-1/2 -translate-x-1/2';
 
-    const preloadImages = () => {
-        return Promise.all(images.map(src => {
-            return new Promise<HTMLImageElement>((resolve, reject) => {
+    // Preload images with improved promise handling
+    const preloadImages = async () => {
+        const imagePromises = images.map(src =>
+            new Promise<HTMLImageElement>((resolve, reject) => {
                 const img = new Image();
                 img.src = src;
-                img.alt = `Slide ${preloadedImages.length + 1}`;
+                img.alt = `Slide ${images.indexOf(src) + 1}`;
                 img.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
 
-                img.onload = () => {
-                    preloadedImages.push(img);
-                    resolve(img);
-                };
+                img.onload = () => resolve(img);
                 img.onerror = reject;
-            });
-        }));
+            })
+        );
+
+        return Promise.all(imagePromises);
     };
 
     const updateSlide = (index: number) => {
         if (isTransitioning) return;
-        isTransitioning = true;
 
+        isTransitioning = true;
         const newImg = preloadedImages[index];
 
         imageContainer.innerHTML = '';
         imageContainer.appendChild(newImg);
 
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-        }
-
-        animationFrameId = requestAnimationFrame(() => {
+        // Use requestAnimationFrame for smoother transition
+        requestAnimationFrame(() => {
             newImg.classList.remove('opacity-0');
+
             setTimeout(() => {
                 isTransitioning = false;
             }, 300);
         });
     };
 
-    const cleanup = () => {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-        }
+    const advanceSlide = () => {
+        if (!state.isPlaying || isTransitioning) return;
 
-        prevButton.removeEventListener('click', handlePrevious);
-        nextButton.removeEventListener('click', handleNext);
-
-        imageContainer.innerHTML = '';
-
-        progressComponent = null;
-    };
-
-    const handleNext = () => {
-        if (!localIsPlaying || isTransitioning) return;
-        currentIndex = (currentIndex + 1) % images.length;
-        updateSlide(currentIndex);
+        state.currentIndex = (state.currentIndex + 1) % images.length;
+        updateSlide(state.currentIndex);
         reinitializeProgress();
     };
 
-    const handlePrevious = () => {
-        if (!localIsPlaying || isTransitioning) return;
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateSlide(currentIndex);
-        reinitializeProgress();
-    };
-
-    const reinitializeProgress = () => {
+    const reinitializeProgress = (withNextOrPrevious?: boolean) => {
         if (progressComponent) {
             progressComponent.cleanup();
+            bottomControls.innerHTML = '';
         }
-        initializeProgress();
+        initializeProgress(withNextOrPrevious);
     };
 
-    const prevButton = createSlideshowNavButton({
-        mode: 'previous',
-        disabled: false,
-        onClick: handlePrevious
-    });
-
-    const nextButton = createSlideshowNavButton({
-        mode: 'next',
-        disabled: false,
-        onClick: handleNext
-    });
-
-    const initializeProgress = () => {
-        if (progressComponent) {
-            progressComponent.cleanup();
-        }
+    const initializeProgress = (withNextOrPrevious?: boolean) => {
+        const existingProgressWidth = withNextOrPrevious ? 0 : (progressComponent
+            ? progressComponent.getProgressWidth()
+            : 0);
 
         progressComponent = createSlideProgress({
             totalSteps: images.length,
-            duration,
-            isPlaying: localIsPlaying,
-            currentStep: currentIndex,
-            onStepComplete: () => {
-                if (localIsPlaying) {
-                    currentIndex = (currentIndex + 1) % images.length;
-                    updateSlide(currentIndex);
-                    reinitializeProgress();
-                }
-            },
+            duration: state.duration,
+            isPlaying: state.isPlaying,
+            currentStep: state.currentIndex,
+            initialProgressWidth: existingProgressWidth,
+            onStepComplete: advanceSlide,
             onPlayPauseClick: () => {
-                localIsPlaying = !localIsPlaying;
-                if (localIsPlaying) {
-                    reinitializeProgress();
-                }
+                state.isPlaying = !state.isPlaying;
             },
             onStepClick: (index: number) => {
-                currentIndex = index;
-                updateSlide(currentIndex);
+                state.currentIndex = index;
+                updateSlide(state.currentIndex);
                 reinitializeProgress();
             }
         });
@@ -157,17 +125,35 @@ export const createShowcase = ({
         bottomControls.appendChild(progressComponent.element);
     };
 
-    // Async initialization function
+    const handleNext = () => {
+        state.currentIndex = (state.currentIndex + 1) % images.length;
+        updateSlide(state.currentIndex);
+        reinitializeProgress(true);
+    };
+
+    const handlePrevious = () => {
+        state.currentIndex = (state.currentIndex - 1 + images.length) % images.length;
+        updateSlide(state.currentIndex);
+        reinitializeProgress(true);
+    };
+
+    const prevButton = createSlideshowNavButton({
+        mode: 'previous',
+        onClick: handlePrevious
+    });
+
+    const nextButton = createSlideshowNavButton({
+        mode: 'next',
+        onClick: handleNext
+    });
+
+    let preloadedImages: HTMLImageElement[] = [];
+
     const initialize = async () => {
-        // Preload all images first
-        await preloadImages();
+        preloadedImages = await preloadImages();
 
-        // Initial slide setup
-        updateSlide(currentIndex);
+        updateSlide(state.currentIndex);
         initializeProgress();
-
-        prevButton.addEventListener('click', handlePrevious);
-        nextButton.addEventListener('click', handleNext);
 
         navigationContainer.appendChild(prevButton);
         navigationContainer.appendChild(nextButton);
@@ -179,7 +165,18 @@ export const createShowcase = ({
         container.appendChild(slideshowContent);
     };
 
-    // Call initialize
+    const cleanup = () => {
+        if (progressComponent) {
+            progressComponent.cleanup();
+            progressComponent = null;
+        }
+
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+    };
+
+    // Trigger initialization
     initialize();
 
     return {

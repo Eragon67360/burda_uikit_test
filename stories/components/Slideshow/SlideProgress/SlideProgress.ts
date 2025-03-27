@@ -9,6 +9,8 @@ export type SlideProgressArgs = {
     onPlayPauseClick?: () => void;
     onStepComplete?: () => void;
     onStepClick?: (index: number) => void;
+    initialProgressWidth?: number;
+    initialRemainingTime?: number;
 };
 
 interface ProgressState {
@@ -16,11 +18,14 @@ interface ProgressState {
     isPlaying: boolean;
     progressWidth: number;
     startTime: number | null;
+    remainingTime: number;
 }
 interface SlideProgressReturn {
     element: HTMLElement;
     cleanup: () => void;
+    getProgressWidth: () => number;
 }
+
 export const createSlideProgress = ({
     totalSteps,
     duration,
@@ -29,14 +34,17 @@ export const createSlideProgress = ({
     onPlayPauseClick = () => { },
     onStepComplete = () => { },
     onStepClick = () => { },
-
+    initialProgressWidth = 0,
+    initialRemainingTime,
 }: SlideProgressArgs): SlideProgressReturn => {
+
 
     const state: ProgressState = {
         currentStep,
         isPlaying,
-        progressWidth: 0,
-        startTime: null
+        progressWidth: initialProgressWidth,
+        startTime: null,
+        remainingTime: initialRemainingTime ?? duration * 1000
     };
 
     let animationFrameId: number;
@@ -48,9 +56,11 @@ export const createSlideProgress = ({
 
     const updateProgress = (progressElement: HTMLElement, timestamp: number): void => {
         if (!state.startTime) {
-            state.startTime = timestamp;
-            progressElement.style.width = '0%';
+            // If no start time, calculate based on existing progress
+            state.startTime = timestamp - (state.progressWidth / 100) * (duration * 1000);
+            progressElement.style.width = `${state.progressWidth}%`;
         }
+
         if (!state.isPlaying) return;
 
         const elapsed = timestamp - state.startTime;
@@ -66,6 +76,7 @@ export const createSlideProgress = ({
             handleStepCompletion();
         }
     };
+
     const handleStepCompletion = (): void => {
         cancelAnimationFrame(animationFrameId);
         state.startTime = null;
@@ -78,19 +89,6 @@ export const createSlideProgress = ({
         }, 0);
     };
 
-    const startProgressAnimation = (progressElement: HTMLElement): void => {
-        cancelAnimationFrame(animationFrameId);
-        state.startTime = null;
-        state.progressWidth = 0;
-        progressElement.style.width = '0%';
-
-        if (state.isPlaying) {
-            requestAnimationFrame(() => {
-                requestAnimationFrame((timestamp) => updateProgress(progressElement, timestamp));
-            });
-        }
-    };
-
     const createProgressSection = (index: number): HTMLElement => {
         const section = document.createElement('div');
         section.className = 'flex-1 h-2 bg-neutral-100 z-0 rounded overflow-hidden cursor-pointer hover:bg-secondary-dark hover:z-[999] transition-colors duration-300';
@@ -100,6 +98,7 @@ export const createSlideProgress = ({
             progress.className = `h-full ${state.isPlaying ? 'bg-secondary-interaction' : 'bg-neutral-500'}`;
             section.appendChild(progress);
 
+            // Preserve progress state when pausing
             if (state.isPlaying) {
                 setTimeout(() => {
                     startProgressAnimation(progress);
@@ -124,6 +123,22 @@ export const createSlideProgress = ({
         });
 
         return section;
+    };
+
+    const startProgressAnimation = (progressElement: HTMLElement): void => {
+        cancelAnimationFrame(animationFrameId);
+
+        // Only reset if not already in progress
+        if (state.progressWidth === 0) {
+            state.startTime = null;
+            progressElement.style.width = '0%';
+        }
+
+        if (state.isPlaying) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame((timestamp) => updateProgress(progressElement, timestamp));
+            });
+        }
     };
 
     const renderProgressSections = (): void => {
@@ -174,8 +189,10 @@ export const createSlideProgress = ({
     const cleanup = () => {
         cancelAnimationFrame(animationFrameId);
     };
+
     return {
         element: container,
-        cleanup
+        cleanup: cleanup,
+        getProgressWidth: () => state.progressWidth
     };
 };
