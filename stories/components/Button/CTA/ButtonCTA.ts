@@ -1,5 +1,6 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import './buttonCTA.css';
+import { getPrimaryColorMode } from '@/stories/utils/colorMode';
 
 export enum ButtonCTAVariant {
   PRIMARY = 'primary',
@@ -33,8 +34,11 @@ export const createButtonCTA = ({
   iconLeft = false,
   classNames,
 }: ButtonCTAArgs) => {
+
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
+
+  const isPrimaryColorDark = getPrimaryColorMode();
 
   if (variant.includes('icon')) {
     if (icon) {
@@ -84,7 +88,8 @@ export const createButtonCTA = ({
     [ButtonCTAVariant.PRIMARY]: [
       'bg-primary-interaction overflow-hidden relative',
       'text-button-label-desktop',
-      'text-base-black border-none',
+      ...(isPrimaryColorDark ? ['text-base-white'] : ['text-base-black']),
+      'border-none',
       'px-8 py-3',
       'before:absolute before:top-0 before:left-0 before:z-10',
       'before:h-full before:w-0 before:inset-0',
@@ -222,6 +227,7 @@ export const createButtonCTA = ({
 
     [ButtonCTAVariant.LARGE_SUBSCRIPTION]: [
       'bg-primary-interaction overflow-hidden relative',
+      ...(isPrimaryColorDark ? ['text-base-white'] : ['text-base-black']),
       'border-none text-button-label-large-desktop',
       'px-8',
       'h-[4.5rem]',
@@ -279,7 +285,6 @@ export const createButtonCTA = ({
       'rounded-none',
     ] as const,
   };
-
 
   const classes = [
     ...baseClasses,

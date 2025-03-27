@@ -75,7 +75,7 @@ export const createNavigation = ({
     navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-[999]`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
     contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
-    linksWrapper.className = ` flex items-center z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
+    linksWrapper.className = ` flex items-center self-stretch justify-between z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
     rightWrapper.className = `flex items-center z-[999] ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
 
     const updateNavigationLayout = (forceOneLine = false) => {
@@ -141,6 +141,7 @@ export const createNavigation = ({
                 const searchContainer = createSearch({
                     ...searchProps,
                     isSmall: false,
+                    classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
                 });
 
                 const existingSearch = rightWrapper.querySelector('.search-container');
@@ -165,7 +166,8 @@ export const createNavigation = ({
         } else {
             if (hasSearch && searchProps) {
                 const searchContainer = createSearch({
-                    ...searchProps
+                    ...searchProps,
+                    classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
                 });
 
                 const existingSearch = rightWrapper.querySelector('.search-container');
@@ -214,10 +216,13 @@ export const createNavigation = ({
             itemButton.className = `
                 flex 
                 items-center 
+                justify-center 
                 h-full 
                 gap-2 
                 px-4 
                 py-2 
+                w-full
+                text-center 
                 text-sm 
                 font-semibold 
                 rounded-none 
@@ -244,7 +249,8 @@ export const createNavigation = ({
             placeholder: searchProps.placeholder,
             results: searchProps.results,
             emptyText: searchProps.emptyText,
-            isSmall: has2LinesNavigation ? false : searchProps.isSmall
+            isSmall: has2LinesNavigation ? false : searchProps.isSmall,
+            classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
         });
         rightWrapper.appendChild(searchContainer);
     }
@@ -265,8 +271,9 @@ export const createNavigation = ({
     const loginButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_LOGIN, nested: false, disabled: false, label: loginButtonText, icon: loginButtonIcon, iconLeft: false, onClick: onClickLoginButton })
     const cartButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_CART_PAY, nested: false, disabled: false, label: cartButtonText, icon: cartButtonIcon, iconLeft: false, onClick: onClickCartButton })
 
-    ctaContainer.appendChild(loginButton);
+    if (loginButtonText.length) ctaContainer.appendChild(loginButton);
     ctaContainer.appendChild(cartButton);
+
     rightWrapper.appendChild(ctaContainer);
     contentWrapper.appendChild(linksWrapper);
     contentWrapper.appendChild(rightWrapper);

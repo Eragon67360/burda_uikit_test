@@ -103,7 +103,7 @@ export const createFooter = ({
               alt="${column1.logo.alt || 'Logo'}"
               width="${column1.logo.width || 'auto'}"
               height="${column1.logo.height || 'auto'}"
-              class="scale-80 md:scale-100 w-[11.75rem] md:w-auto"
+              class="scale-80 md:scale-100 w-[11.75rem] md:w-[${column1.logo.width}px]"
             />
           ` : ''}
           </div>
