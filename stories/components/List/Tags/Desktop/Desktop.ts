@@ -10,7 +10,7 @@ export const createDesktopTag = ({ text, showIcon = true }: DesktopTagArgs) => {
   return `
     <div class="inline-flex items-center px-5 py-4 pl-5 gap-4 rounded-[3.25rem] border border-neutral-200 bg-white">
       ${showIcon ? IconRegistry[IconCategory.SYSTEM].success : ''}
-      <span class="text-label-desktop">${text}</span>
+      <span class="text-label">${text}</span>
     </div>
   `;
 };

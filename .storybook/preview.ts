@@ -93,7 +93,9 @@ const preview: Preview = {
       },
     },
   },
-
+  beforeEach: () => {
+    localStorage.setItem('primaryColorMode', 'light');
+  },
   decorators: [
     (Story) => {
       return Story();

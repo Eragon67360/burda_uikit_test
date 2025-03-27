@@ -12,7 +12,7 @@ export type TextArgs = {
 export const createText = ({ rows }: TextArgs) => {
     const getCellStyle = (colIndex: number) => {
         return colIndex === 0
-            ? 'text-copy-desktop font-bold bg-base-white'
+            ? 'text-copy font-bold bg-base-white'
             : 'bg-neutral-100';
     };
 

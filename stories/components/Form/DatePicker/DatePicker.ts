@@ -114,7 +114,7 @@ export const createDatePicker = ({
                     <button type="button" class="prev-month p-2 rounded cursor-pointer hover:bg-secondary-extra-light transition-all flex items-center justify-center">
                         ${IconRegistry[IconCategory.SYSTEM].chevronLeft}
                     </button>
-                    <div class="flex flex-col w-full rounded-md gap-2 p-2 text-teaser-copy-desktop items-center cursor-pointer month-year-selector hover:bg-secondary-extra-light transition-all">
+                    <div class="flex flex-col w-full rounded-md gap-2 p-2 text-teaser-copy items-center cursor-pointer month-year-selector hover:bg-secondary-extra-light transition-all">
                         <p>${LOCALE_CONFIG[language].months[date.getMonth()]} ${date.getFullYear()}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
                             <path d="M7.35355 7.35354L12.8536 1.85355C13.0488 1.6583 13.0488 1.3417 12.8536 1.14644C12.6583 0.951186 12.3417 0.951185 12.1464 1.14644L6.99999 6.29287L1.85354 1.14644C1.65828 0.951185 1.34169 0.951185 1.14643 1.14644C0.95117 1.3417 0.95117 1.65829 1.14643 1.85355L6.64644 7.35356C6.8417 7.5488 7.15829 7.5488 7.35355 7.35354Z" fill="black" stroke="black" stroke-width="0.5"/>
@@ -275,7 +275,7 @@ export const createDatePicker = ({
                     <button type="button" class="w-full py-2 px-4 flex items-center gap-3 justify-center bg-base-white hover:bg-neutral-100 border border-neutral-400
                                     text-base-black cursor-pointer rounded-[0.25rem] transition-colors duration-200 reset-date">
                         ${IconRegistry[IconCategory.SYSTEM].arrowLeft}
-                        <p class="text-button-label-desktop">${LOCALE_CONFIG[language].resetButton}</p>
+                        <p class="text-button-label">${LOCALE_CONFIG[language].resetButton}</p>
                     </button>
                 </div>
             </div>

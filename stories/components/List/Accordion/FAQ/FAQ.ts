@@ -24,7 +24,7 @@ export const createFAQ = ({ items, backgroundColor = 'white' }: FAQArgs) => {
         const trigger = document.createElement('button');
         trigger.className = `w-full flex justify-between items-center gap-6 p-8 text-left ${bgColorClass} hover:bg-secondary-light transition`;
         trigger.innerHTML = `
-        <span class="text-label-mobile md:text-subhead3-desktop">${item.trigger}</span>
+        <span class="text-label md:text-subhead3">${item.trigger}</span>
         ${getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 18)}
         `;
 

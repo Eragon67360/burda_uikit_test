@@ -29,7 +29,7 @@ export const createSelectionList = ({ items, name, selectedValue = items[0], bac
                 before:scale-0 checked:before:scale-100
                 hover:border-base-black"
             />
-            <span class="text-label-desktop">${item}</span>
+            <span class="text-label">${item}</span>
         </label>
         `).join('')}
     </div>

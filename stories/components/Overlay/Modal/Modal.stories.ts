@@ -156,10 +156,10 @@ export const Showcase: Story = {
         const leftColumn = document.createElement('div');
         leftColumn.className = 'flex flex-col w-1/2 h-full';
         leftColumn.innerHTML = `
-            <h2 class="text-h2-desktop font-roboto-serif">Just Vegan Heißluftfritteuse</h2>
-            <p class="text-subhead3-desktop mt-5">Artikelnummer AZ72</p>
-            <p class="text-copy-desktop mt-8">Der Airfryer von Just Vegan bietet eine gesunde Brat- und Backoption mit seiner Heißlufttechnologie, die die herkömmliche Verwendung von Öl beim Frittieren überflüssig macht. Diese Fritteuse ist mit einer einzigartigen keramischen CeraVegan-Antihaftbeschichtung auf Avocadoöl-Basis ausgestattet. Die innovative CERAVEGAN Beschichtung erlaubt nicht nur das Frittieren, sondern auch Braten, Grillen, Aufwärmen, Warmhalten und Auftauen – von knusprigen Pommes bis hin zu köstlichen Gerichten wie Apfelkuchen oder veganen Speisen.</p>
-            <p class="text-copy-desktop"><br>Merkmale:</p>
+            <h2 class="text-h2 font-roboto-serif">Just Vegan Heißluftfritteuse</h2>
+            <p class="text-subhead3 mt-5">Artikelnummer AZ72</p>
+            <p class="text-copy mt-8">Der Airfryer von Just Vegan bietet eine gesunde Brat- und Backoption mit seiner Heißlufttechnologie, die die herkömmliche Verwendung von Öl beim Frittieren überflüssig macht. Diese Fritteuse ist mit einer einzigartigen keramischen CeraVegan-Antihaftbeschichtung auf Avocadoöl-Basis ausgestattet. Die innovative CERAVEGAN Beschichtung erlaubt nicht nur das Frittieren, sondern auch Braten, Grillen, Aufwärmen, Warmhalten und Auftauen – von knusprigen Pommes bis hin zu köstlichen Gerichten wie Apfelkuchen oder veganen Speisen.</p>
+            <p class="text-copy"><br>Merkmale:</p>
         `;
 
         leftColumn.appendChild(textbox);

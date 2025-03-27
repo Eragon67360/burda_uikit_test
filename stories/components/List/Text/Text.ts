@@ -23,7 +23,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
 
   if (title) {
     const titleElement = document.createElement('h3');
-    titleElement.className = 'text-teaser-desktop mb-4';
+    titleElement.className = 'text-teaser mb-4';
     titleElement.textContent = title;
     container.appendChild(titleElement);
   }
@@ -61,7 +61,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
 
   const list = document.createElement(variant === 'ordered' ? 'ol' : 'ul');
   list.className = variant === 'ordered'
-    ? 'list-decimal marker:text-bulletpoint-copy-desktop pl-5'
+    ? 'list-decimal marker:text-bulletpoint-copy pl-5'
     : 'list-disc pl-5';
 
   items.forEach(item => {

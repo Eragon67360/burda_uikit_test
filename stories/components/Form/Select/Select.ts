@@ -31,7 +31,7 @@ export const createSelect = ({
 
     const label = document.createElement('label');
     label.className = `
-        text-sm text-label-desktop ml-4 w-full
+        text-sm text-label ml-4 w-full
         ${disabled ? 'text-neutral-400' : 'text-base-black'}
     `;
     label.textContent = labelText;
@@ -80,7 +80,7 @@ export const createSelect = ({
     button.type = 'button';
     button.setAttribute('data-state', 'closed');
     button.className = `
-        text-input-desktop
+        text-input
         cursor-pointer
         w-full h-[3.25rem] pl-4 pr-1 gap-4
         min-w-64
@@ -141,7 +141,7 @@ export const createSelect = ({
         option.className = `
             p-2
             cursor-pointer
-            text-placeholder-desktop
+            text-placeholder
             rounded-none
             hover:rounded-sm
             hover:bg-secondary-extra-light

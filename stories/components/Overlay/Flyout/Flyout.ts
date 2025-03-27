@@ -48,7 +48,7 @@ export const createFlyout = ({
         transition-all
         ease-in-out
         duration-300
-        text-button-label-desktop
+        text-button-label
     `
 
     const buttonLabelClasses = `
@@ -309,7 +309,7 @@ export const createFlyout = ({
 
     /** ------------------------------------------------------------- MOBILE VERSION ------------------------------------------------------------- */
 
-    const baseMobileContainerClasses = "block sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] mx-auto rounded-2xl flex flex-col items-center justify-end overflow-hidden transition-opacity duration-500 pointer-events-none";
+    const baseMobileContainerClasses = "block sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] mx-auto rounded-2xl flex flex-col items-center justify-end overflow-hidden transition-opacity duration-500 pointer-events-none z-50";
 
     const buttonMobileContainerClasses = `
         bg-base-black
@@ -458,7 +458,7 @@ export const createFlyout = ({
 
     const initialLabelMobileElement = document.createElement('span');
     initialLabelMobileElement.textContent = label;
-    initialLabelMobileElement.className = 'flex-grow text-center text-button-label-mobile';
+    initialLabelMobileElement.className = 'flex-grow text-center text-button-label';
 
     const initialChevronMobileElement = document.createElement('div');
     initialChevronMobileElement.className = 'scale-y-100 transition-all duration-300';
@@ -509,7 +509,7 @@ const createAccordion = ({ items }: AccordionArgs) => {
 
         trigger.innerHTML = `
             ${getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 40)}
-            <span class="text-link-mobile md:text-subhead3-desktop">${item.trigger}</span>
+            <span class="text-link md:text-subhead3">${item.trigger}</span>
             <div class="chevron ml-auto">${getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 18)}</div>
         `;
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createNavigation, NavigationArgs } from './Navigation';
 import { IconRegistry, IconCategory } from '@/stories/assets/icons';
+import { autoMotorUndSportNavigation, focusNavigation, meinSchoenerGartenNavigation } from '@/stories/assets/navigationAlternatives';
 
 const meta: Meta<NavigationArgs> = {
     title: 'Components (Molecules)/Navigation',
@@ -111,6 +112,7 @@ const meta: Meta<NavigationArgs> = {
             action: 'addNavigationItem'
         }
     },
+    args: focusNavigation,
     render: (args) => createNavigation(args as any)
 };
 
@@ -123,65 +125,6 @@ export const Desktop: Story = {
             defaultViewport: 'desktop',
         },
         layout: 'fullscreen',
-    },
-    args: {
-        logoSrc: '/burda_logo.png',
-        logoAltText: 'Burda Logo',
-        has2LinesNavigation: false,
-        navigationItems: [
-            {
-                type: 'flyout',
-                order: 1,
-                label: 'Zeitschriften',
-                flyoutItems: [
-                    { label: 'FOCUS', href: '/', target: '_blank' },
-                    { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
-                    { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
-                ]
-            },
-            {
-                type: 'link',
-                order: 2,
-                label: 'FOCUS+',
-                href: '/focus',
-                target: '_self'
-            },
-            {
-                type: 'link',
-                order: 3,
-                label: 'Einzelausgaben',
-                href: '/einzelausgaben',
-                target: '_self'
-            }
-        ],
-        hasSearch: true,
-        searchProps: {
-            emptyText: 'Keine Ergebnisse gefunden',
-            placeholder: 'Suche',
-            results: [
-                { label: 'Product 1', href: '/product1' },
-                { label: 'Product 2', href: '/product2' },
-                { label: 'Product 3', href: '/product3' }
-            ],
-            isSmall: true
-        },
-        hasLanguageDropdown: true,
-        languageProps: {
-            label: "Sprache",
-            options: [
-                { code: 'de', name: 'Deutsch', icon: 'germany' },
-                { code: 'en', name: 'English', icon: 'england' },
-                { code: 'fr', name: 'Français', icon: 'france' }
-            ],
-            selectedLanguage: 'en',
-            isCompressed: true,
-        },
-        loginButtonText: 'Kundenservice & Login',
-        loginButtonIcon: 'userCircle',
-        cartButtonText: 'Warenkorb & Kasse',
-        cartButtonIcon: 'cart',
-        onClickLoginButton: () => console.log("Login button has been clicked"),
-        onClickCartButton: () => console.log("Cart button has been clicked"),
     },
     render: (args) => {
         const scrollContainer = document.createElement('div');
@@ -220,67 +163,7 @@ export const DesktopWith2Logos: Story = {
         },
         layout: 'fullscreen',
     },
-    args: {
-        logoSrc: '/msgarten1.png',
-        logoAltText: 'Burda Logo',
-        logo2Src: '/msgarten2.png',
-        logo2AltText: 'Burda Logo',
-        has2LinesNavigation: false,
-        navigationItems: [
-            {
-                type: 'flyout',
-                order: 1,
-                label: 'Zeitschriften',
-                flyoutItems: [
-                    { label: 'FOCUS', href: '/', target: '_blank' },
-                    { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
-                    { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
-                ]
-            },
-            {
-                type: 'link',
-                order: 2,
-                label: 'FOCUS+',
-                href: '/focus',
-                target: '_self'
-            },
-            {
-                type: 'link',
-                order: 3,
-                label: 'Einzelausgaben',
-                href: '/einzelausgaben',
-                target: '_self'
-            }
-        ],
-        hasSearch: true,
-        searchProps: {
-            emptyText: 'Keine Ergebnisse gefunden',
-            placeholder: 'Suche',
-            results: [
-                { label: 'Product 1', href: '/product1' },
-                { label: 'Product 2', href: '/product2' },
-                { label: 'Product 3', href: '/product3' }
-            ],
-            isSmall: true
-        },
-        hasLanguageDropdown: true,
-        languageProps: {
-            label: "Sprache",
-            options: [
-                { code: 'de', name: 'Deutsch', icon: 'germany' },
-                { code: 'en', name: 'English', icon: 'england' },
-                { code: 'fr', name: 'Français', icon: 'france' }
-            ],
-            selectedLanguage: 'en',
-            isCompressed: true,
-        },
-        loginButtonText: 'Kundenservice & Login',
-        loginButtonIcon: 'userCircle',
-        cartButtonText: 'Warenkorb & Kasse',
-        cartButtonIcon: 'cart',
-        onClickLoginButton: () => console.log("Login button has been clicked"),
-        onClickCartButton: () => console.log("Cart button has been clicked"),
-    },
+    args: meinSchoenerGartenNavigation,
     render: (args) => {
         const scrollContainer = document.createElement('div');
         scrollContainer.style.height = '300vh';
@@ -318,65 +201,7 @@ export const DesktopWith2Lines: Story = {
         },
         layout: 'fullscreen',
     },
-    args: {
-        logoSrc: '/burda_logo.png',
-        logoAltText: 'Burda Logo',
-        has2LinesNavigation: true,
-        navigationItems: [
-            {
-                type: 'flyout',
-                order: 1,
-                label: 'Zeitschriften',
-                flyoutItems: [
-                    { label: 'FOCUS', href: '/', target: '_blank' },
-                    { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
-                    { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
-                ]
-            },
-            {
-                type: 'link',
-                order: 2,
-                label: 'FOCUS+',
-                href: '/focus',
-                target: '_self'
-            },
-            {
-                type: 'link',
-                order: 3,
-                label: 'Einzelausgaben',
-                href: '/einzelausgaben',
-                target: '_self'
-            }
-        ],
-        hasSearch: true,
-        searchProps: {
-            emptyText: 'Keine Ergebnisse gefunden',
-            placeholder: 'Suche',
-            results: [
-                { label: 'Product 1', href: '/product1' },
-                { label: 'Product 2', href: '/product2' },
-                { label: 'Product 3', href: '/product3' }
-            ],
-            isSmall: false
-        },
-        hasLanguageDropdown: true,
-        languageProps: {
-            label: "Sprache",
-            options: [
-                { code: 'de', name: 'Deutsch', icon: 'germany' },
-                { code: 'en', name: 'English', icon: 'england' },
-                { code: 'fr', name: 'Français', icon: 'france' }
-            ],
-            selectedLanguage: 'en',
-            isCompressed: false,
-        },
-        loginButtonText: 'Kundenservice & Login',
-        loginButtonIcon: 'userCircle',
-        cartButtonText: 'Warenkorb & Kasse',
-        cartButtonIcon: 'cart',
-        onClickLoginButton: () => console.log("Login button has been clicked"),
-        onClickCartButton: () => console.log("Cart button has been clicked"),
-    },
+    args: autoMotorUndSportNavigation,
     render: (args) => {
         const scrollContainer = document.createElement('div');
         scrollContainer.style.height = '300vh';
@@ -773,3 +598,41 @@ export const DynamicNavigation: Story = {
     }
 };
 
+export const MobileNavigation: Story = {
+    parameters: {
+        viewport: {
+            defaultViewport: 'mobile1',
+        },
+        layout: 'fullscreen',
+    },
+    args: focusNavigation,
+    render: (args) => {
+        const scrollContainer = document.createElement('div');
+        scrollContainer.style.height = '300dvh';
+        scrollContainer.style.position = 'relative';
+        scrollContainer.className = "overflow-x-hidden";
+
+        const topContent = document.createElement('div');
+        topContent.style.height = '100vh';
+        topContent.style.backgroundColor = '#f0f0f0';
+        topContent.innerHTML = '<h1 style="text-align: center; padding-top: 200px; width: 75%; margin-inline: auto">Scroll down to see Navigation behavior</h1>';
+
+        const middleContent = document.createElement('div');
+        middleContent.style.height = '100vh';
+        middleContent.style.backgroundColor = '#e0e0e0';
+        middleContent.innerHTML = '<h2 style="text-align: center; padding-top: 200px;">Scrolling through content</h2>';
+
+        const bottomContent = document.createElement('div');
+        bottomContent.style.height = '100vh';
+        bottomContent.style.backgroundColor = '#d0d0d0';
+        bottomContent.innerHTML = '<h2 style="text-align: center; padding-top: 200px;">Bottom of the page</h2>';
+
+        scrollContainer.appendChild(topContent);
+        scrollContainer.appendChild(middleContent);
+        scrollContainer.appendChild(bottomContent);
+
+        const navigation = createNavigation(args);
+        scrollContainer.appendChild(navigation);
+        return scrollContainer;
+    }
+}
