@@ -31,6 +31,7 @@ export const createFlyout = ({
     /** ------------------------------------------------------------- DESKTOP VERSION ------------------------------------------------------------- */
     const baseContainerClasses = `
         hidden sm:block
+        transition-[z-index] duration-500 
     `;
 
     const buttonContainerClasses = `
@@ -62,7 +63,6 @@ export const createFlyout = ({
         cursor-pointer
         transition-all
         duration-300
-        z-50
     `;
 
     const baseContentClasses = `
@@ -82,8 +82,8 @@ export const createFlyout = ({
 
     const defaultClasses = 'bg-base-black group-hover:bg-secondary-dark text-base-white group-hover:w-[3.625rem] transition-all ease-in-out duration-300';
     const openClasses = 'bg-secondary-interaction text-base-black';
-    const defaultButtonContainerClasses = 'text-base-black hover:text-secondary-dark transition-all ease-in-out duration-300 transform-gpu hover:w-[3.625rem]';
-    const openButtonContainerClasses = 'text-secondary-interaction';
+    const defaultButtonContainerClasses = 'text-base-black hover:text-secondary-dark transition-all ease-in-out duration-300 transform-gpu hover:w-[3.625rem] z-10';
+    const openButtonContainerClasses = 'text-secondary-interaction z-50';
 
     const svgRight = document.createElement('div')
     svgRight.className = `
@@ -99,18 +99,23 @@ export const createFlyout = ({
     </svg>`
 
     const flyoutContainer = document.createElement('div');
-
-
+    flyoutContainer.classList = baseContainerClasses;
     function setupStickyContainer(flyoutContainer: HTMLElement) {
+        flyoutContainer.style.zIndex = "10";
         function updateContainerPosition() {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
             const containerHeight = flyoutContainer.offsetHeight;
             const middleScreenPosition = windowHeight / 2 - containerHeight / 2;
-
+            if (isOpen) {
+                flyoutContainer.style.zIndex = "50";
+            } else {
+                flyoutContainer.style.zIndex = "10";
+            }
             if (scrollY > (middleScreenPosition - 16)) {
                 flyoutContainer.className = "top-1/2 -translate-y-1/2 right-0 transform fixed" + baseContainerClasses;
-                flyoutContainer.style.removeProperty('bottom')
+                flyoutContainer.style.removeProperty('bottom');
+
             } else {
                 flyoutContainer.className = "right-0 transform fixed" + baseContainerClasses;
                 flyoutContainer.style.bottom = `${scrollY + 16}px`;
@@ -183,7 +188,11 @@ export const createFlyout = ({
     function updateComponentState(open: boolean, descriptionOpen: boolean) {
         buttonLabel.className = `${buttonLabelClasses} ${open ? openClasses : defaultClasses}`;
         buttonContainer.className = `${buttonContainerClasses} ${open ? openButtonContainerClasses : defaultButtonContainerClasses}`;
-
+        if (isOpen) {
+            flyoutContainer.style.zIndex = "50";
+        } else {
+            flyoutContainer.style.zIndex = "10";
+        }
         svgRight.classList.toggle('group-hover:w-[3.625rem]', !open)
         svgRight.classList.toggle('group-hover:w-[3rem]', open)
         svgLeft.classList.toggle('group-hover:w-[3.625rem]', !open)

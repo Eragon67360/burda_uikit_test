@@ -33,7 +33,6 @@ export type NavigationArgs = {
     searchProps?: SearchArgs;
     hasLanguageDropdown: boolean;
     languageProps?: LanguageDropdownArgs;
-    isLanguageDropdownCompressed: boolean;
     loginButtonText: string;
     loginButtonIcon: string;
     onClickLoginButton: () => void;
@@ -43,8 +42,22 @@ export type NavigationArgs = {
     addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
 };
 
-export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, navigationItems, hasSearch, searchProps, hasLanguageDropdown, languageProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
-
+export const createNavigation = ({
+    logoSrc,
+    logoAltText,
+    has2LinesNavigation,
+    navigationItems,
+    hasSearch,
+    searchProps,
+    hasLanguageDropdown,
+    languageProps,
+    loginButtonText,
+    loginButtonIcon,
+    cartButtonText,
+    cartButtonIcon,
+    onClickLoginButton,
+    onClickCartButton
+}: NavigationArgs) => {
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
 
@@ -55,7 +68,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
     const rightWrapper = document.createElement('div');
 
     navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-[999]`;
-    navigationWrapper.className = `h-18 ${has2LinesNavigation ? 'h-fit' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
+    navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
     contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
     linksWrapper.className = ` flex items-center z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
     rightWrapper.className = `flex items-center z-[999] ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
@@ -115,7 +128,7 @@ export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, na
     })
 
     if (hasSearch && searchProps) {
-        const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, isSmall: searchProps.isSmall })
+        const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, isSmall: searchProps.isSmall, classNames: ' mr-4 ' })
         rightWrapper.appendChild(searchContainer)
     }
 

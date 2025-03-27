@@ -1,19 +1,26 @@
+import { Img } from "storybook/internal/components";
+
 export interface StaticHeroArgs {
-  image: string;
+  imageSrc: string;
   href: string;
   altText?: string;
 }
 
 export const createStaticHero = ({
-  image,
+  imageSrc,
   href,
   altText,
 }: StaticHeroArgs) => {
-  return `
-    <div class="w-full">
-      <a href="${href}">
-        <img src="${image}" alt="${altText}" />
-      </a>
-    </div>
-  `;
+  const wrapper = document.createElement('div');
+  wrapper.className = "w-full"
+  const link = document.createElement('a');
+  link.href = href;
+  const image = document.createElement('img');
+  image.src = imageSrc;
+  image.alt = altText;
+
+  link.appendChild(image);
+  wrapper.appendChild(link);
+
+  return wrapper;
 };
