@@ -1,6 +1,5 @@
-import { IconRegistry, IconCategory } from "@/stories/assets/icons";
+import { IconCategory, IconRegistry } from "@/stories/assets/icons";
 import { getSizedIcon } from "@/stories/utils/iconUtils";
-import { createRadioButton } from "../../Form/RadioButton/RadioButton";
 
 export type LanguageOption = {
     code: string;
@@ -29,7 +28,7 @@ export const createLanguageDropdown = ({
         : options[0];
 
     const wrapper = document.createElement('div');
-    wrapper.className = 'relative inline-block w-fit h-full';
+    wrapper.className = 'relative inline-block w-fit h-full language-dropdown';
 
     const dropdownTrigger = document.createElement('button');
     dropdownTrigger.className = `

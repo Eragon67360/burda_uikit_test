@@ -27,6 +27,8 @@ export type FlyoutNavigationItem = BaseNavigationItem & {
 export type NavigationArgs = {
     logoSrc: string;
     logoAltText: string;
+    logo2Src?: string;
+    logo2AltText?: string;
     has2LinesNavigation: boolean;
     navigationItems: Array<LinkNavigationItem | FlyoutNavigationItem>;
     hasSearch: boolean;
@@ -45,6 +47,8 @@ export type NavigationArgs = {
 export const createNavigation = ({
     logoSrc,
     logoAltText,
+    logo2Src,
+    logo2AltText,
     has2LinesNavigation,
     navigationItems,
     hasSearch,
@@ -60,6 +64,7 @@ export const createNavigation = ({
 }: NavigationArgs) => {
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
+    let currentNavigationLayout = has2LinesNavigation ? 2 : 1;
 
     const navigationContainer = document.createElement('div');
     const navigationWrapper = document.createElement('div');
@@ -70,28 +75,137 @@ export const createNavigation = ({
     navigationContainer.className = `w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-[999]`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
     contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
-    linksWrapper.className = ` flex items-center z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
+    linksWrapper.className = ` flex items-center self-stretch justify-between z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
     rightWrapper.className = `flex items-center z-[999] ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
+
+    const updateNavigationLayout = (forceOneLine = false) => {
+        if (forceOneLine || currentNavigationLayout === 2) {
+            navigationWrapper.classList.remove('h-[6.375rem]');
+            navigationWrapper.classList.add('h-18');
+
+            contentWrapper.classList.remove('flex-col', 'items-end');
+            contentWrapper.classList.add('flex-row', 'items-center', 'justify-between');
+
+            linksWrapper.classList.remove('order-2', 'h-[2.8rem]');
+            linksWrapper.classList.add('order-1', 'h-full');
+
+            rightWrapper.classList.remove('order-1', 'h-[3.5rem]');
+            rightWrapper.classList.add('order-2', 'h-full');
+
+            if (has2LinesNavigation) {
+                if (hasSearch && searchProps) {
+                    const searchContainer = createSearch({
+                        ...searchProps,
+                        isSmall: true,
+                        classNames: ' mr-4 '
+                    });
+
+                    const existingSearch = rightWrapper.querySelector('.search-container');
+                    if (existingSearch) {
+                        rightWrapper.replaceChild(searchContainer, existingSearch);
+                    }
+                }
+
+                if (hasLanguageDropdown && languageProps) {
+                    const languageDropdownContainer = createLanguageDropdown({
+                        ...languageProps,
+                        isCompressed: true
+                    });
+
+                    const existingLanguageDropdown = rightWrapper.querySelector('.language-dropdown');
+                    if (existingLanguageDropdown) {
+                        rightWrapper.replaceChild(languageDropdownContainer, existingLanguageDropdown);
+                    }
+                }
+            }
+
+            currentNavigationLayout = 1;
+        }
+    };
+
+    const resetNavigationLayout = () => {
+        if (has2LinesNavigation) {
+            navigationWrapper.classList.add('h-[6.375rem]');
+            navigationWrapper.classList.remove('h-18');
+
+            contentWrapper.classList.add('flex-col', 'items-end');
+            contentWrapper.classList.remove('flex-row', 'items-center', 'justify-between');
+
+            linksWrapper.classList.add('order-2', 'h-[2.8rem]');
+            linksWrapper.classList.remove('order-1', 'h-full');
+
+            rightWrapper.classList.add('order-1', 'h-[3.5rem]');
+            rightWrapper.classList.remove('order-2', 'h-full');
+
+            if (hasSearch && searchProps) {
+                const searchContainer = createSearch({
+                    ...searchProps,
+                    isSmall: false,
+                    classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
+                });
+
+                const existingSearch = rightWrapper.querySelector('.search-container');
+                if (existingSearch) {
+                    rightWrapper.replaceChild(searchContainer, existingSearch);
+                }
+            }
+
+            if (hasLanguageDropdown && languageProps) {
+                const languageDropdownContainer = createLanguageDropdown({
+                    ...languageProps,
+                    isCompressed: false
+                });
+
+                const existingLanguageDropdown = rightWrapper.querySelector('.language-dropdown');
+                if (existingLanguageDropdown) {
+                    rightWrapper.replaceChild(languageDropdownContainer, existingLanguageDropdown);
+                }
+            }
+
+            currentNavigationLayout = 2;
+        } else {
+            if (hasSearch && searchProps) {
+                const searchContainer = createSearch({
+                    ...searchProps,
+                    classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
+                });
+
+                const existingSearch = rightWrapper.querySelector('.search-container');
+                if (existingSearch) {
+                    rightWrapper.replaceChild(searchContainer, existingSearch);
+                }
+            }
+        }
+    };
 
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        const viewportHeight = window.innerHeight;
+        const viewportHeight = 150;
 
         if (scrollPosition >= viewportHeight) {
             navigationContainer.classList.remove('py-4');
             navigationWrapper.classList.remove('rounded-t-lg');
             ctaContainer.classList.remove('rounded-se-lg');
+
+            updateNavigationLayout(true);
         } else {
             navigationContainer.classList.add('py-4');
             navigationWrapper.classList.add('rounded-t-lg');
             ctaContainer.classList.add('rounded-se-lg');
+
+            resetNavigationLayout();
         }
     });
 
     const logoContainer = document.createElement('img');
     logoContainer.src = logoSrc;
     logoContainer.alt = logoAltText;
-    logoContainer.className = 'h-[2.8rem] w-auto ml-2 mr-3'
+    logoContainer.className = 'h-[2.8rem] w-auto ml-2 mr-3';
+
+    const logo2Container = document.createElement('img');
+    logo2Container.src = logo2Src;
+    logo2Container.alt = logo2AltText;
+    logo2Container.className = 'h-[2.8rem] w-auto ml-2 mr-3';
 
     sortedNavigationItems.forEach((item, index) => {
         if (item.type === 'link') {
@@ -102,10 +216,13 @@ export const createNavigation = ({
             itemButton.className = `
                 flex 
                 items-center 
+                justify-center 
                 h-full 
                 gap-2 
                 px-4 
                 py-2 
+                w-full
+                text-center 
                 text-sm 
                 font-semibold 
                 rounded-none 
@@ -128,13 +245,24 @@ export const createNavigation = ({
     })
 
     if (hasSearch && searchProps) {
-        const searchContainer = createSearch({ placeholder: searchProps.placeholder, results: searchProps.results, emptyText: searchProps.emptyText, isSmall: searchProps.isSmall, classNames: ' mr-4 ' })
-        rightWrapper.appendChild(searchContainer)
+        const searchContainer = createSearch({
+            placeholder: searchProps.placeholder,
+            results: searchProps.results,
+            emptyText: searchProps.emptyText,
+            isSmall: has2LinesNavigation ? false : searchProps.isSmall,
+            classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
+        });
+        rightWrapper.appendChild(searchContainer);
     }
 
     if (hasLanguageDropdown && languageProps) {
-        const languageDropdownContainer = createLanguageDropdown({ label: languageProps.label, options: languageProps.options, isCompressed: languageProps.isCompressed, selectedLanguage: languageProps.selectedLanguage })
-        rightWrapper.appendChild(languageDropdownContainer)
+        const languageDropdownContainer = createLanguageDropdown({
+            label: languageProps.label,
+            options: languageProps.options,
+            isCompressed: has2LinesNavigation ? false : languageProps.isCompressed,
+            selectedLanguage: languageProps.selectedLanguage
+        });
+        rightWrapper.appendChild(languageDropdownContainer);
     }
 
     const ctaContainer = document.createElement('div');
@@ -143,12 +271,16 @@ export const createNavigation = ({
     const loginButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_LOGIN, nested: false, disabled: false, label: loginButtonText, icon: loginButtonIcon, iconLeft: false, onClick: onClickLoginButton })
     const cartButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_CART_PAY, nested: false, disabled: false, label: cartButtonText, icon: cartButtonIcon, iconLeft: false, onClick: onClickCartButton })
 
-    ctaContainer.appendChild(loginButton);
+    if (loginButtonText.length) ctaContainer.appendChild(loginButton);
     ctaContainer.appendChild(cartButton);
+
     rightWrapper.appendChild(ctaContainer);
     contentWrapper.appendChild(linksWrapper);
     contentWrapper.appendChild(rightWrapper);
     navigationWrapper.appendChild(logoContainer);
+    if (logo2Src) {
+        navigationWrapper.appendChild(logo2Container);
+    }
     navigationWrapper.appendChild(contentWrapper);
     navigationContainer.appendChild(navigationWrapper);
 
