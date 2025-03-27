@@ -92,29 +92,30 @@ export const createNavigation = ({
             rightWrapper.classList.remove('order-1', 'h-[3.5rem]');
             rightWrapper.classList.add('order-2', 'h-full');
 
-            if (hasSearch && searchProps) {
-                const searchContainer = createSearch({
-                    ...searchProps,
-                    isSmall: true,
-                    classNames: ' mr-4 '
-                });
+            if (has2LinesNavigation) {
+                if (hasSearch && searchProps) {
+                    const searchContainer = createSearch({
+                        ...searchProps,
+                        isSmall: true,
+                        classNames: ' mr-4 '
+                    });
 
-                const existingSearch = rightWrapper.querySelector('.search-container');
-                if (existingSearch) {
-                    rightWrapper.replaceChild(searchContainer, existingSearch);
+                    const existingSearch = rightWrapper.querySelector('.search-container');
+                    if (existingSearch) {
+                        rightWrapper.replaceChild(searchContainer, existingSearch);
+                    }
                 }
-            }
 
-            // Compress language dropdown
-            if (hasLanguageDropdown && languageProps) {
-                const languageDropdownContainer = createLanguageDropdown({
-                    ...languageProps,
-                    isCompressed: true
-                });
+                if (hasLanguageDropdown && languageProps) {
+                    const languageDropdownContainer = createLanguageDropdown({
+                        ...languageProps,
+                        isCompressed: true
+                    });
 
-                const existingLanguageDropdown = rightWrapper.querySelector('.language-dropdown');
-                if (existingLanguageDropdown) {
-                    rightWrapper.replaceChild(languageDropdownContainer, existingLanguageDropdown);
+                    const existingLanguageDropdown = rightWrapper.querySelector('.language-dropdown');
+                    if (existingLanguageDropdown) {
+                        rightWrapper.replaceChild(languageDropdownContainer, existingLanguageDropdown);
+                    }
                 }
             }
 
@@ -140,7 +141,6 @@ export const createNavigation = ({
                 const searchContainer = createSearch({
                     ...searchProps,
                     isSmall: false,
-                    classNames: ' mr-4 '
                 });
 
                 const existingSearch = rightWrapper.querySelector('.search-container');
@@ -162,6 +162,17 @@ export const createNavigation = ({
             }
 
             currentNavigationLayout = 2;
+        } else {
+            if (hasSearch && searchProps) {
+                const searchContainer = createSearch({
+                    ...searchProps
+                });
+
+                const existingSearch = rightWrapper.querySelector('.search-container');
+                if (existingSearch) {
+                    rightWrapper.replaceChild(searchContainer, existingSearch);
+                }
+            }
         }
     };
 
@@ -233,8 +244,7 @@ export const createNavigation = ({
             placeholder: searchProps.placeholder,
             results: searchProps.results,
             emptyText: searchProps.emptyText,
-            isSmall: has2LinesNavigation ? false : searchProps.isSmall,
-            classNames: ' mr-4 '
+            isSmall: has2LinesNavigation ? false : searchProps.isSmall
         });
         rightWrapper.appendChild(searchContainer);
     }
