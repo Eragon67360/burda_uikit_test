@@ -91,20 +91,18 @@ export const createShowcase = ({
         reinitializeProgress();
     };
 
-    const reinitializeProgress = () => {
+    const reinitializeProgress = (withNextOrPrevious?: boolean) => {
         if (progressComponent) {
             progressComponent.cleanup();
             bottomControls.innerHTML = '';
         }
-
-        initializeProgress();
+        initializeProgress(withNextOrPrevious);
     };
 
-    const initializeProgress = () => {
-        // Get existing progress width if available
-        const existingProgressWidth = progressComponent
+    const initializeProgress = (withNextOrPrevious?: boolean) => {
+        const existingProgressWidth = withNextOrPrevious ? 0 : (progressComponent
             ? progressComponent.getProgressWidth()
-            : 0;
+            : 0);
 
         progressComponent = createSlideProgress({
             totalSteps: images.length,
@@ -130,13 +128,13 @@ export const createShowcase = ({
     const handleNext = () => {
         state.currentIndex = (state.currentIndex + 1) % images.length;
         updateSlide(state.currentIndex);
-        reinitializeProgress();
+        reinitializeProgress(true);
     };
 
     const handlePrevious = () => {
         state.currentIndex = (state.currentIndex - 1 + images.length) % images.length;
         updateSlide(state.currentIndex);
-        reinitializeProgress();
+        reinitializeProgress(true);
     };
 
     const prevButton = createSlideshowNavButton({
