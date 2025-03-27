@@ -92,7 +92,6 @@ export const createShowcase = ({
     };
 
     const reinitializeProgress = () => {
-        // Comprehensive cleanup
         if (progressComponent) {
             progressComponent.cleanup();
             bottomControls.innerHTML = '';
@@ -116,7 +115,6 @@ export const createShowcase = ({
             onStepComplete: advanceSlide,
             onPlayPauseClick: () => {
                 state.isPlaying = !state.isPlaying;
-                reinitializeProgress();
             },
             onStepClick: (index: number) => {
                 state.currentIndex = index;

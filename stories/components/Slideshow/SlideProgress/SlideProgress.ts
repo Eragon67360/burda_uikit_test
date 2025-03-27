@@ -177,7 +177,6 @@ export const createSlideProgress = ({
 
             if (state.isPlaying) {
                 requestAnimationFrame((timestamp) => {
-                    // Preserve existing progress when resuming
                     state.startTime = timestamp - (state.progressWidth / 100) * (duration * 1000);
                     updateProgress(currentProgress, timestamp);
                 });
@@ -193,9 +192,7 @@ export const createSlideProgress = ({
 
     return {
         element: container,
-        cleanup: () => {
-            cancelAnimationFrame(animationFrameId);
-        },
-        getProgressWidth: () => state.progressWidth // Expose progress width
+        cleanup: cleanup,
+        getProgressWidth: () => state.progressWidth
     };
 };
