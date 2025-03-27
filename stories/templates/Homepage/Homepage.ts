@@ -82,7 +82,15 @@ export const createHomepage = ({
       }
     ],
     hasLanguageDropdown: true,
-    isLanguageDropdownCompressed: true,
+    languageProps: {
+      isCompressed: !navigationHas2Lines,
+      options: [
+        { code: 'de', name: 'Deutsch', icon: 'germany' },
+        { code: 'en', name: 'English', icon: 'england' },
+        { code: 'fr', name: 'Français', icon: 'france' }
+      ],
+      selectedLanguage: 'en',
+    },
     hasSearch: true,
     searchProps: {
       emptyText: 'Keine Ergebnisse gefunden',

@@ -33,7 +33,6 @@ export type NavigationArgs = {
     searchProps?: SearchArgs;
     hasLanguageDropdown: boolean;
     languageProps?: LanguageDropdownArgs;
-    isLanguageDropdownCompressed: boolean;
     loginButtonText: string;
     loginButtonIcon: string;
     onClickLoginButton: () => void;
@@ -43,8 +42,22 @@ export type NavigationArgs = {
     addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
 };
 
-export const createNavigation = ({ logoSrc, logoAltText, has2LinesNavigation, navigationItems, hasSearch, searchProps, hasLanguageDropdown, languageProps, loginButtonText, loginButtonIcon, cartButtonText, cartButtonIcon, onClickLoginButton, onClickCartButton }: NavigationArgs) => {
-
+export const createNavigation = ({
+    logoSrc,
+    logoAltText,
+    has2LinesNavigation,
+    navigationItems,
+    hasSearch,
+    searchProps,
+    hasLanguageDropdown,
+    languageProps,
+    loginButtonText,
+    loginButtonIcon,
+    cartButtonText,
+    cartButtonIcon,
+    onClickLoginButton,
+    onClickCartButton
+}: NavigationArgs) => {
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
 
