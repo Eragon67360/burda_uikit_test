@@ -1,6 +1,6 @@
 import { NavigationArgs } from "../components/Navigation/Navigation";
 
-export const focusNavigtation: NavigationArgs = {
+export const focusNavigation: NavigationArgs = {
     logoSrc: '/burda_logo.png',
     logoAltText: 'Burda Logo',
     has2LinesNavigation: false,
@@ -57,6 +57,8 @@ export const focusNavigtation: NavigationArgs = {
     cartButtonIcon: 'cart',
     onClickLoginButton: () => console.log("Login button has been clicked"),
     onClickCartButton: () => console.log("Cart button has been clicked"),
+    mobileBackButtonLabel: "zurück",
+    mobileMenuTitle: "Home"
 }
 
 export const meinSchoenerGartenNavigation: NavigationArgs = {
@@ -114,6 +116,8 @@ export const meinSchoenerGartenNavigation: NavigationArgs = {
     cartButtonIcon: 'cart',
     onClickLoginButton: () => console.log("Login button has been clicked"),
     onClickCartButton: () => console.log("Cart button has been clicked"),
+    mobileBackButtonLabel: "zurück",
+    mobileMenuTitle: "Home"
 }
 
 export const autoMotorUndSportNavigation: NavigationArgs = {
@@ -155,20 +159,6 @@ export const autoMotorUndSportNavigation: NavigationArgs = {
             label: 'Events',
             href: '/focus',
             target: '_self'
-        },
-        {
-            type: 'link',
-            order: 6,
-            label: 'Mehr Automobil',
-            href: '/einzelausgaben',
-            target: '_self'
-        },
-        {
-            type: 'link',
-            order: 7,
-            label: 'Alle Magazine',
-            href: '/einzelausgaben',
-            target: '_self'
         }
     ],
     hasLanguageDropdown: true,
@@ -198,4 +188,6 @@ export const autoMotorUndSportNavigation: NavigationArgs = {
     cartButtonIcon: 'cart',
     onClickLoginButton: () => console.log("Login button has been clicked"),
     onClickCartButton: () => console.log("Cart button has been clicked"),
+    mobileBackButtonLabel: "zurück",
+    mobileMenuTitle: "Home"
 }

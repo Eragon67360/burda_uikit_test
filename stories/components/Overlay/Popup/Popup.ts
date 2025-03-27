@@ -70,11 +70,11 @@ export const createPopup = ({
     const content = `
     <div class="flex items-start justify-between gap-3">
       <div class="flex-1">
-        <h3 class="text-subhead4-desktop">${title}</h3>
+        <h3 class="text-subhead4">${title}</h3>
         
-        <p class="mt-4 text-copy-desktop">${description}</p>
+        <p class="mt-4 text-copy">${description}</p>
         ${action ? `
-          <a href="${action.href}" class="inline-flex items-center gap-2 text-link-desktop">
+          <a href="${action.href}" class="inline-flex items-center gap-2 text-link">
             ${action.icon}
             ${action.label}
           </a>
@@ -114,7 +114,7 @@ export const createPopupWithTrigger = ({
 
     const triggerButton = document.createElement('button');
     triggerButton.className = `
-    px-4 py-2 rounded-lg text-button-label-desktop
+    px-4 py-2 rounded-lg text-button-label
     ${triggerVariant === 'primary'
             ? 'bg-primary-interaction text-base-black hover:bg-primary-light'
             : 'bg-secondary-interaction text-gray-900 hover:bg-secondary-light'}

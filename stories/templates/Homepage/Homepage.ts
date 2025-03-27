@@ -1,5 +1,5 @@
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
-import { focusNavigtation } from '@/stories/assets/navigationAlternatives';
+import { focusNavigation } from '@/stories/assets/navigationAlternatives';
 import { sampleBigImages, sampleSmallImages } from '@/stories/assets/sampleImages';
 import { CardArgs, createCard } from '@/stories/components/Card/Card';
 import { createFooter, FooterArgs } from '@/stories/components/Footer/Footer';
@@ -55,7 +55,7 @@ export const createHomepage = ({
   const container = document.createElement('div');
   container.className = `h-full w-full mx-auto ${navigationHas2Lines ? 'pt-34' : 'pt-26'} px-4`;
   container.style.maxWidth = "90rem";
-  setPrimaryColorMode(isPrimaryColorDark)
+  setPrimaryColorMode(isPrimaryColorDark);
 
   const header = document.createElement('header');
   header.className = "w-full max-w-[90rem] mx-auto";
@@ -88,8 +88,8 @@ export const createHomepage = ({
   subscriptionSection.className = "bg-base-white px-12 py-32 space-y-16"
   const subscriptionHeader = document.createElement('div');
   subscriptionHeader.className = "flex flex-col items-center"
-  subscriptionHeader.innerHTML = `<h1 class="text-h1-desktop font-roboto-serif">Unsere Zeitschriften</h1>
-          <h2 class="text-subhead2-desktop font-semibold">Print- und Digitalangebote</h2>`;
+  subscriptionHeader.innerHTML = `<h1 class="text-h1 font-roboto-serif text-center hyphens-auto">Unsere Zeitschriften</h1>
+          <h2 class="text-subhead2 font-semibold">Print- und Digitalangebote</h2>`;
 
   const subscriptionPlans = document.createElement('div');
   subscriptionPlans.className = "flex gap-8 items-end w-full flex-wrap justify-center self-stretch";

@@ -22,7 +22,7 @@ export const createPagination = ({
 
         return `
     <button
-        class="relative w-12 h-12 flex items-center justify-center text-button-label-large-desktop
+        class="relative w-12 h-12 flex items-center justify-center text-button-label-large
                overflow-hidden group
                ${isSelected ? 'bg-secondary-dark text-base-black pointer-events-none' : 'cursor-pointer'}
                transition-colors duration-300 ease-in-out rounded-md

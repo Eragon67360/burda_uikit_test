@@ -13,6 +13,9 @@ const meta: Meta<IconStoryProps> = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    viewport: {
+      defaultViewport: "reset",
+    },
   },
   argTypes: {
     category: {

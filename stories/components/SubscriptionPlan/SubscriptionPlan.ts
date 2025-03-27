@@ -48,12 +48,12 @@ export const createSubscriptionPlan = ({
     // Title
     const titleElement = document.createElement('h3');
     titleElement.textContent = title;
-    titleElement.className = 'text-subscription-default-desktop uppercase font-roboto-serif text-center';
+    titleElement.className = 'text-subscription-default uppercase font-roboto-serif text-center';
 
     // Subtitle
     const subtitleElement = document.createElement('p');
     subtitleElement.textContent = subtitle;
-    subtitleElement.className = 'text-subhead3-desktop text-center';
+    subtitleElement.className = 'text-subhead3 text-center';
 
     // Characteristics list
     const listElement = document.createElement('ul');
@@ -62,7 +62,7 @@ export const createSubscriptionPlan = ({
 
     characteristics.forEach(characteristic => {
         const listItem = document.createElement('li');
-        listItem.className = 'flex items-start gap-4 text-bulletpoint-copy-desktop font-light';
+        listItem.className = 'flex items-start gap-4 text-bulletpoint-copy font-light';
         const icon = document.createElement('span');
         icon.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
         const textElement = document.createTextNode(characteristic);

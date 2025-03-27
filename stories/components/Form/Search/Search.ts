@@ -201,7 +201,7 @@ export const createSearch = ({
                     py-4
                     text-center
                     text-neutral-400
-                    text-body-desktop
+                    text-body
                 `;
                     emptyState.textContent = emptyText;
                     resultsPopover.appendChild(emptyState);

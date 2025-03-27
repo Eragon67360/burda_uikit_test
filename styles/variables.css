@@ -191,7 +191,7 @@
   --text-teaser-mobile--font-weight: 500;
   --text-teaser-copy-mobile: 1rem;
   --text-teaser-copy-mobile--line-height: 1.25rem;
-  --text-teaser-copy-mobile--font-weight:700;
+  --text-teaser-copy-mobile--font-weight: 700;
   --text-copy-mobile: 0.875rem;
   --text-copy-mobile--line-height: 1.25rem;
   --text-copy-mobile--letter-spacing: -0.00875rem;
@@ -230,6 +230,15 @@
   --text-link-small-mobile: 0.75rem;
   --text-link-small-mobile--line-height: 1rem;
   --text-link-small-mobile--font-weight: 700;
+
+  --text-offcanvas-level1-mobile: 1.75rem;
+  --text-offcanvas-level1-mobile--line-height: 3rem;
+  --text-offcanvas-level1-mobile--font-weight: 700;
+  --text-offcanvas-level1-mobile--letter-spacing: -0.035rem;
+
+  --text-offcanvas-level2-mobile: 1.25rem;
+  --text-offcanvas-level2-mobile--line-height: 3rem;
+  --text-offcanvas-level2-mobile--font-weight: 700;
 
   --font-weight-normal: 400;
   --font-weight-bold: 700;

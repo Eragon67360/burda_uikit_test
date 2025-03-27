@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createHomepage, HomepageArgs } from './Homepage';
 import { autoMotorUndSportFooter, focusFooter, meinSchoenerGartenFooter } from '@/stories/assets/footerAlternatives';
-import { autoMotorUndSportNavigation, focusNavigtation, meinSchoenerGartenNavigation } from '@/stories/assets/navigationAlternatives';
+import { autoMotorUndSportNavigation, focusNavigation, meinSchoenerGartenNavigation } from '@/stories/assets/navigationAlternatives';
 
 const meta: Meta<HomepageArgs> = {
   title: 'Templates/Homepage',
@@ -44,7 +44,7 @@ const meta: Meta<HomepageArgs> = {
     withStaticHero: false,
     withSmallSlideshow: false,
     footerArgs: focusFooter,
-    navigationArgs: focusNavigtation
+    navigationArgs: focusNavigation
   },
   render: (args) => createHomepage(args)
 };
@@ -115,7 +115,26 @@ export const HomepageWith2LinesNavigation: Story = {
   }
 };
 
-export const MeinSchoenerGarten: Story = {
+export const FocusMobile: Story = {
+  args: {
+    withStaticHero: true,
+    staticHeroImageSrc: 'static-hero-header-example.jpg',
+    staticHeroHref: '#',
+    staticHeroImageAltText: 'Static hero'
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+    layout: 'fullscreen',
+  },
+  globals: {
+    backgrounds: { value: 'white' },
+  }
+};
+
+
+export const MeinSchoenerGartenDesktop: Story = {
   args: {
     navigationArgs: meinSchoenerGartenNavigation,
     navigationHas2Lines: false,
@@ -126,6 +145,34 @@ export const MeinSchoenerGarten: Story = {
   parameters: {
     viewport: {
       defaultViewport: 'widescreen',
+    },
+    layout: 'fullscreen',
+  },
+  globals: {
+    backgrounds: { value: 'white' },
+  },
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.style.setProperty('--color-primary-interaction', 'hsla(88, 63%, 44%, 1)');
+    wrapper.style.setProperty('--color-primary-extra-light', 'hsla(86, 33%, 91%,1)');
+    wrapper.style.setProperty('--color-brand', 'hsla(88, 63%, 44%, 1)');
+    wrapper.appendChild(createHomepage(args))
+    return wrapper;
+  }
+}
+
+
+export const MeinSchoenerGartenMobile: Story = {
+  args: {
+    navigationArgs: meinSchoenerGartenNavigation,
+    navigationHas2Lines: false,
+    withStaticHero: true,
+    staticHeroImageSrc: "static-hero-header-example.jpg",
+    footerArgs: meinSchoenerGartenFooter
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
     },
     layout: 'fullscreen',
   },

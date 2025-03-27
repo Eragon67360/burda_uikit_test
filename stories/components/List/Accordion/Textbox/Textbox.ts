@@ -32,7 +32,7 @@ export const createTextbox = ({
                     id="${uniqueId}-trigger-top"
                     aria-expanded="false"
                     aria-controls="${uniqueId}-content"
-                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label-desktop group"
+                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label group"
                 >
                     <span class="border-b-2 border-transparent transition group-hover:border-secondary-light">${expandText}</span>
                     <span class="chevron-wrapper scale-90">
@@ -60,7 +60,7 @@ export const createTextbox = ({
                     id="${uniqueId}-trigger-bottom"
                     aria-expanded="false"
                     aria-controls="${uniqueId}-content"
-                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label-desktop group"
+                    class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label group"
                 >
                     <span class="border-b-2 border-transparent transition group-hover:border-secondary-light">${collapseText}</span>
                     <span class="chevron-wrapper rotate-180 scale-90">

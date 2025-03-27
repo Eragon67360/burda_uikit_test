@@ -51,7 +51,7 @@ export const createButtonLink = ({
         'border-t-0',
         'border-x-0',
         'ring-2 ring-offset-0 ring-transparent',
-        'text-button-label-desktop',
+        'text-button-label',
         'transition-[border-color,opacity,gap]',
         'duration-300',
         'outline-hidden',

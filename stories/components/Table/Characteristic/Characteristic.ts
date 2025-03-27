@@ -18,9 +18,9 @@ export const createCharacteristic = ({ headers, rows }: CharacteristicArgs) => {
 
     const getCellStyle = (rowIndex: number, colIndex: number) => {
         if (rowIndex === 0) {
-            return colIndex === 0 ? 'text-teaser-copy-desktop' : 'text-copy-desktop font-bold';
+            return colIndex === 0 ? 'text-teaser-copy' : 'text-copy font-bold';
         }
-        return colIndex === 0 ? 'text-copy-desktop font-bold' : '';
+        return colIndex === 0 ? 'text-copy font-bold' : '';
     };
 
     const getAlignment = (colIndex: number) => {

@@ -110,11 +110,11 @@ export const createFooter = ({
           <div class="pl-2 md:pl-12 pt-14 md:pt-16 pr-2 md:pr-8 pb-14 md:pb-16 flex flex-col" >
             ${column1.phone ? `
             <div class="mb-4">
-              <div class="flex items-center gap-4 text-subhead2-desktop" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
+              <div class="flex items-center gap-4 text-subhead2" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
               ${column1.phone.number ? `
-                <p class="text-hotline-footer-default-mobile font-roboto-serif mt-4 w-3/4 proportional-nums">
+                <p class="text-hotline-footer-default font-roboto-serif mt-4 w-3/4 proportional-nums">
                   <a href="tel:${column1.phone.number.trim().replace(/\s/g, '')}" class="group">
-                  ${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2-desktop pl-1 align-top">${column1.phone.extraHint}</span>` : ''}
+                  ${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2 pl-1 align-top">${column1.phone.extraHint}</span>` : ''}
                     <span>
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20" fill="none" class="inline relative -left-5 opacity-0 group-hover:opacity-100 group-hover:left-3 transition-all duration-300">
                         <path d="M19.6229 10.3737C19.6284 10.3669 19.6333 10.3598 19.6385 10.3528C19.6448 10.3444 19.6513 10.3362 19.6572 10.3274C19.6628 10.319 19.6676 10.3103 19.6728 10.3017C19.6775 10.2938 19.6824 10.2861 19.6868 10.278C19.6915 10.2692 19.6955 10.2601 19.6997 10.2512C19.7037 10.2427 19.7079 10.2344 19.7115 10.2257C19.7151 10.217 19.718 10.2081 19.7212 10.1993C19.7245 10.19 19.7281 10.1808 19.731 10.1713C19.7337 10.1624 19.7356 10.1535 19.7379 10.1445C19.7403 10.1348 19.743 10.1252 19.745 10.1153C19.7471 10.105 19.7482 10.0946 19.7498 10.0843C19.751 10.0756 19.7526 10.0671 19.7535 10.0583C19.7554 10.0391 19.7564 10.0199 19.7564 10.0006C19.7564 9.98137 19.7554 9.96127 19.7535 9.94207C19.7526 9.93328 19.751 9.92477 19.7498 9.91609C19.7483 9.90574 19.7471 9.89535 19.745 9.88506C19.743 9.87515 19.7403 9.86556 19.7379 9.85584C19.7356 9.84691 19.7337 9.83797 19.731 9.82914C19.7281 9.81961 19.7246 9.81043 19.7212 9.80109C19.718 9.79226 19.7151 9.78338 19.7115 9.77468C19.7079 9.76599 19.7037 9.75763 19.6997 9.74916C19.6955 9.74021 19.6915 9.73121 19.6868 9.72246C19.6825 9.71431 19.6775 9.70656 19.6728 9.69867C19.6676 9.69007 19.6628 9.68138 19.6572 9.67302C19.6513 9.66425 19.6448 9.65599 19.6385 9.64757C19.6333 9.64064 19.6285 9.63349 19.6229 9.62671C19.6105 9.61169 19.5976 9.59726 19.5838 9.58353L14.167 4.16673C13.9369 3.93661 13.5638 3.93661 13.3337 4.16673C13.1036 4.39685 13.1036 4.76995 13.3337 5.00007L17.7445 9.41091L0.833411 9.41093C0.507975 9.41093 0.244141 9.67476 0.244141 10.0002C0.244141 10.3256 0.507974 10.5895 0.833411 10.5895L17.7445 10.5895L13.3337 15.0003C13.1036 15.2304 13.1036 15.6035 13.3337 15.8336C13.5638 16.0638 13.9369 16.0638 14.167 15.8337L19.5838 10.4169C19.5975 10.4032 19.6105 10.3887 19.6229 10.3737Z" fill="currentColor"/>
@@ -124,14 +124,14 @@ export const createFooter = ({
                   </a>
                 </p>
               `: ''}
-              <p class="text-footer-copy-desktop mt-3">${column1.phone.description || ''}</p>
+              <p class="text-footer-copy mt-3">${column1.phone.description || ''}</p>
             </div>
             ` : ''}
 
             <div class="mt-14 md:mt-32">
               ${column1.hints?.firstHint ? `
                 <div class="flex gap-2 items-center flex-wrap">
-                  <span class="text-footer-copy-mobile md:text-footer-copy-desktop">${column1.hints.firstHint.text}</span>
+                  <span class="text-footer-copy md:text-footer-copy">${column1.hints.firstHint.text}</span>
                   ${column1.hints.firstHint.linkText
         ? createButtonLink({
           label: column1.hints.firstHint.linkText,
@@ -142,11 +142,11 @@ export const createFooter = ({
               ` : ''}
 
               ${column1.hints?.secondHint ? `
-                <p class="text-footer-copy-mobile md:text-footer-copy-desktop mt-2">${column1.hints.secondHint}</p>
+                <p class="text-footer-copy md:text-footer-copy mt-2">${column1.hints.secondHint}</p>
               ` : ''}
 
               ${column1.copyright ? `
-                <p class="text-footer-copy-mobile md:text-footer-copy-desktop mt-8">${column1.copyright}</p>
+                <p class="text-footer-copy md:text-footer-copy mt-8">${column1.copyright}</p>
               ` : ''}
             </div>
           </div>
@@ -155,7 +155,7 @@ export const createFooter = ({
         <div class="bg-neutral-100 text-base-black px-6 md:px-16 py-14 md:py-16 flex flex-col gap-8 w-full">
           <div class="flex flex-col gap-4" >
             ${column2.title ? `
-            <h2 class="text-subhead2-mobile md:text-subhead2-desktop">${column2.title}</h2>
+            <h2 class="text-subhead2 md:text-subhead2">${column2.title}</h2>
             ` : ''}
 
             ${column2.links ? `
@@ -176,7 +176,7 @@ export const createFooter = ({
           </div>
           <div class="flex flex-col gap-4">
               ${column2.paymentSection ? `
-            <p class="text-subhead3-mobile md:text-subhead3-desktop mb-2">${column2.paymentSection.title || 'Payment Methods'}</p>
+            <p class="text-subhead3 md:text-subhead3 mb-2">${column2.paymentSection.title || 'Payment Methods'}</p>
             <div class="flex gap-2 mb-4 self-stretch items-start content-start flex-wrap">
               ${column2.paymentSection.icons?.map(icon => `
                 <img
@@ -191,7 +191,7 @@ export const createFooter = ({
           </div>
           <div class="flex flex-col gap-4">
               ${column2.qualitySection ? `
-            <p class="text-subhead3-mobile md:text-subhead3-desktop mb-2">${column2.qualitySection.title || 'Sicher & Nachhaltig'}</p>
+            <p class="text-subhead3 md:text-subhead3 mb-2">${column2.qualitySection.title || 'Sicher & Nachhaltig'}</p>
             <div class="flex gap-8 items-start">
               ${column2.qualitySection.icons?.map(icon => `
                 <img
@@ -206,7 +206,7 @@ export const createFooter = ({
           </div>
           <div class="flex flex-col gap-4">
           ${column2.socialSection ? `
-            <p class="text-subhead3-mobile md:text-subhead3-desktop">${column2.socialSection.title || 'Follow Us'}</p>
+            <p class="text-subhead3 md:text-subhead3">${column2.socialSection.title || 'Follow Us'}</p>
             <div class="flex gap-8">
               ${column2.socialSection.networks?.map(network => `
                 <a href="${network.href}">
@@ -234,14 +234,14 @@ export const createFooter = ({
           ` : ''}
 
           ${column3.description ? `
-            <p class="text-footer-copy-mobile md:text-footer-copy-desktop">
+            <p class="text-footer-copy md:text-footer-copy">
               <span class="font-bold">${column3.description.title || ''}: </span>
               ${column3.description.text || ''}
             </p>
           ` : ''}
 
           ${column3.linkColumns ? `
-            <div class="grid grid-cols-2 gap-2 uppercase text-link-mobile md:text-link-desktop font-bold">
+            <div class="grid grid-cols-2 gap-2 uppercase text-linkt-link font-bold">
               <div>
                 ${column3.linkColumns.column1?.map(link => `
                   <a href="${link.href}" class="block">${link.text}</a>
@@ -259,8 +259,8 @@ export const createFooter = ({
 
           <div class="flex flex-col gap-4" >
           ${column3.secondSection ? `
-            <h4 class="text-subhead3-mobile md:text-subhead3-desktop">${column3.secondSection.title || ''}</h4>
-            <p class="text-footer-copy-mobile md:text-footer-copy-desktop">${column3.secondSection.description || ''}</p>
+            <h4 class="text-subhead3t-subhead3">${column3.secondSection.title || ''}</h4>
+            <p class="text-footer-copy md:text-footer-copy">${column3.secondSection.description || ''}</p>
           ` : ''}
 
           ${column3.specialLinks ? `
@@ -278,7 +278,7 @@ export const createFooter = ({
           ` : ''}
 
           ${column3.finalDescription ? `
-            <p class="text-footer-copy-mobile md:text-footer-copy-desktop">${column3.finalDescription}</p>
+            <p class="text-footer-copy md:text-footer-copy">${column3.finalDescription}</p>
           ` : ''}
           </div>
         </div>

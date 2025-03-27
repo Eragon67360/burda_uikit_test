@@ -87,7 +87,7 @@ export const createButtonCTA = ({
   const variantClasses: Record<ButtonCTAVariant, readonly string[]> = {
     [ButtonCTAVariant.PRIMARY]: [
       'bg-primary-interaction overflow-hidden relative',
-      'text-button-label-desktop',
+      'text-button-label',
       ...(isPrimaryColorDark ? ['text-base-white'] : ['text-base-black']),
       'border-none',
       'px-8 py-3',
@@ -115,7 +115,7 @@ export const createButtonCTA = ({
 
     [ButtonCTAVariant.SECONDARY]: [
       'bg-secondary-interaction',
-      'text-button-label-desktop',
+      'text-button-label',
       'text-base-black',
       'focus:ring-base-black',
       'disabled:text-neutral-400',
@@ -145,7 +145,7 @@ export const createButtonCTA = ({
 
     [ButtonCTAVariant.TERTIARY]: [
       'bg-transparent',
-      'text-button-label-desktop',
+      'text-button-label',
       'text-base-black',
       'border border-neutral-400',
       'focus:ring-base-black',
@@ -174,7 +174,7 @@ export const createButtonCTA = ({
 
     [ButtonCTAVariant.LARGE]: [
       'bg-base-black',
-      'text-base-white text-button-label-large-desktop',
+      'text-base-white text-button-label-large',
       'border-none disabled:border',
       'focus:ring-base-black',
       'disabled:text-neutral-400',
@@ -200,7 +200,7 @@ export const createButtonCTA = ({
 
     [ButtonCTAVariant.LARGE_LIGHT]: [
       'bg-base-white',
-      'text-base-black text-button-label-large-desktop',
+      'text-base-black text-button-label-large',
       'border-none disabled:border',
       'focus:ring-base-black',
       'disabled:text-neutral-400',
@@ -228,7 +228,7 @@ export const createButtonCTA = ({
     [ButtonCTAVariant.LARGE_SUBSCRIPTION]: [
       'bg-primary-interaction overflow-hidden relative',
       ...(isPrimaryColorDark ? ['text-base-white'] : ['text-base-black']),
-      'border-none text-button-label-large-desktop',
+      'border-none text-button-label-large',
       'px-8',
       'h-[4.5rem]',
       'before:absolute before:top-0 before:left-0 before:z-10',
