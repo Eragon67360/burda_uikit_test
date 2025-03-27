@@ -5,10 +5,11 @@ import { sanitizeHTML } from '@/stories/utils/sanitize';
 
 export interface CardArgs {
   backgroundColor?: 'white' | 'gray';
-  image: string;
+  image?: string;
   title: string;
   text: string;
   buttonLabel: string;
+  maxWidth?: string;
   onClick?: () => void;
 }
 
@@ -18,26 +19,22 @@ export const createCard = ({
   title,
   text,
   buttonLabel,
+  maxWidth = '384px',
   onClick = () => { },
 }: CardArgs) => {
   const cardContainer = document.createElement('div');
-  cardContainer.className = `flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
+  cardContainer.className = `shrink grow min-w-[360px] flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
+  cardContainer.style.width = maxWidth !== '' ? maxWidth : '384px';
+  cardContainer.style.maxWidth = maxWidth !== '' ? maxWidth : '384px';
 
   const contentWrapper = document.createElement('div');
-  contentWrapper.className = 'p-8 flex flex-col md:flex-row space-x-8 space-y-8 h-full';
-
-  const iconContainer = document.createElement('div');
-  iconContainer.className = 'w-full md:min-w-24 flex justify-center md:block';
-
-  const iconElement = document.createElement('div');
-  iconElement.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96);
-  iconContainer.appendChild(iconElement);
+  contentWrapper.className = 'p-8 flex flex-col md:flex-row gap-8 h-full';
 
   const textContainer = document.createElement('div');
-  textContainer.className = 'w-auto text-center md:text-left';
+  textContainer.className = 'w-auto md:w-0 grow text-center md:text-left';
 
   const titleElement = document.createElement('h4');
-  titleElement.className = 'text-h4 font-roboto-serif';
+  titleElement.className = 'text-h4 font-roboto-serif hyphens-auto';
   titleElement.textContent = sanitizeHTML(title);
 
   const textElement = document.createElement('p');
@@ -47,7 +44,17 @@ export const createCard = ({
   textContainer.appendChild(titleElement);
   textContainer.appendChild(textElement);
 
-  contentWrapper.appendChild(iconContainer);
+
+  if (!!image) {
+    const iconContainer = document.createElement('div');
+    iconContainer.className = 'md:min-w-24 flex justify-center md:block';
+  
+    const iconElement = document.createElement('div');
+    iconElement.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96);
+    iconContainer.appendChild(iconElement);
+    contentWrapper.appendChild(iconContainer);
+  }
+
   contentWrapper.appendChild(textContainer);
 
   cardContainer.appendChild(contentWrapper);
