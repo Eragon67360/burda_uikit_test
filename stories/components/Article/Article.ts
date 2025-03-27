@@ -24,7 +24,7 @@ export const createArticle = ({
   const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
 
   const articleElement = document.createElement('article');
-  articleElement.className = `size-full min-w-48 p-4 flex flex-col justify-end gap-4 ${bgColor} rounded`;
+  articleElement.className = `h-72 min-w-44 max-w-48 p-4 flex flex-col justify-end gap-4 ${bgColor} rounded`;
 
   const imageContainer = document.createElement('div');
   imageContainer.className = 'relative h-0 grow w-full px-2.5';
