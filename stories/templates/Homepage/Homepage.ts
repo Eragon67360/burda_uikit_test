@@ -3,6 +3,7 @@ import { focusNavigation } from '@/stories/assets/navigationAlternatives';
 import { sampleBigImages, sampleSmallImages } from '@/stories/assets/sampleImages';
 import { CardArgs, createCard } from '@/stories/components/Card/Card';
 import { createFooter, FooterArgs } from '@/stories/components/Footer/Footer';
+import { createGridItemView } from '@/stories/components/GridItemView/GridItemView';
 import { createShowcase } from '@/stories/components/Header/Slideshow/Showcase/Showcase';
 import { createStaticHero } from '@/stories/components/Header/StaticHero/StaticHero';
 import { createDesktopTag } from '@/stories/components/List/Tags/Desktop/Desktop';
@@ -15,7 +16,8 @@ import { setPrimaryColorMode } from '@/stories/utils/colorMode';
 export interface HomepageArgs {
   withStaticHero: boolean;
   withSmallSlideshow: boolean;
-  staticHeroImageSrc?: string;
+  staticHeroDesktopImageSrc?: string;
+  staticHeroMobileImageSrc?: string;
   staticHeroImageAltText?: string;
   staticHeroHref?: string;
   navigationHas2Lines: boolean;
@@ -27,7 +29,8 @@ export interface HomepageArgs {
 export const createHomepage = ({
   withStaticHero = false,
   withSmallSlideshow = false,
-  staticHeroImageSrc,
+  staticHeroDesktopImageSrc,
+  staticHeroMobileImageSrc,
   staticHeroHref,
   staticHeroImageAltText,
   navigationHas2Lines = false,
@@ -53,7 +56,7 @@ export const createHomepage = ({
   `;
 
   const container = document.createElement('div');
-  container.className = `h-full w-full mx-auto ${navigationHas2Lines ? 'pt-34' : 'pt-26'} px-4`;
+  container.className = `flex flex-col h-full w-full mx-auto ${navigationHas2Lines ? 'pt-[3.25rem] md:pt-34' : 'pt-[3.25rem] md:pt-26'} px-0 md:px-4`;
   container.style.maxWidth = "90rem";
   setPrimaryColorMode(isPrimaryColorDark);
 
@@ -63,7 +66,7 @@ export const createHomepage = ({
   header.appendChild(createNavigation(navigationArgs))
 
   if (withStaticHero) {
-    header.appendChild(createStaticHero({ imageSrc: staticHeroImageSrc, href: staticHeroHref, altText: staticHeroImageAltText }))
+    header.appendChild(createStaticHero({ desktopImageSrc: staticHeroDesktopImageSrc, mobileImageSrc: staticHeroMobileImageSrc, href: staticHeroHref, altText: staticHeroImageAltText }))
   } else {
     if (withSmallSlideshow) {
       header.appendChild(
@@ -85,14 +88,14 @@ export const createHomepage = ({
   }
 
   const subscriptionSection = document.createElement('section');
-  subscriptionSection.className = "bg-base-white px-12 py-32 space-y-16"
+  subscriptionSection.className = "py-32 w-full max-w-[90rem] mx-auto px-4 flex flex-col gap-8 flex-wrap justify-center"
   const subscriptionHeader = document.createElement('div');
   subscriptionHeader.className = "flex flex-col items-center"
   subscriptionHeader.innerHTML = `<h1 class="text-h1 font-roboto-serif text-center hyphens-auto">Unsere Zeitschriften</h1>
           <h2 class="text-subhead2 font-semibold">Print- und Digitalangebote</h2>`;
 
   const subscriptionPlans = document.createElement('div');
-  subscriptionPlans.className = "flex gap-8 items-end w-full flex-wrap justify-center self-stretch";
+  subscriptionPlans.className = "w-full max-w-[90rem] mx-auto flex flex-wrap gap-8 justify-center items-end";
 
   subscriptionPlans.appendChild(createSubscriptionPlan({
     image: '/burda_subscriptions_1.png',
@@ -169,17 +172,20 @@ export const createHomepage = ({
   tagsSection.appendChild(mobileTags);
 
   const cardsSection = document.createElement('section');
-  cardsSection.classList = "px-12 py-32";
-  const cardDiv = document.createElement('div');
-  cardDiv.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full";
+  cardsSection.className = "py-12 w-full max-w-[90rem] mx-auto px-4 md:px-12 flex gap-8 flex-wrap";
 
-  cardDiv.appendChild(createCard(cardExample));
-  cardDiv.appendChild(createCard({ ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' }));
-  cardDiv.appendChild(createCard({ ...cardExample, image: 'keypad', text: styledCardText, buttonLabel: '' }));
+  const cards: CardArgs[] = [
+    cardExample,
+    { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
+    { ...cardExample, image: 'keypad', text: styledCardText, buttonLabel: '' }
+  ]
+  cards.forEach((card) => {
+    cardsSection.appendChild(createCard({ ...card, maxWidth: 'unset' }))
+  })
 
-  cardsSection.appendChild(cardDiv);
 
   const footer = document.createElement('footer');
+  footer.className = "px-4"
   footer.innerHTML = `${createFooter(footerArgs)}`
 
   const flyout = document.createElement('div');

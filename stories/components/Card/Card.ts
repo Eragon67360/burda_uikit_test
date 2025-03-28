@@ -23,7 +23,7 @@ export const createCard = ({
   onClick = () => { },
 }: CardArgs) => {
   const cardContainer = document.createElement('div');
-  cardContainer.className = `shrink grow min-w-[360px] flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
+  cardContainer.className = `shrink grow w-0 flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
   cardContainer.style.width = maxWidth !== '' ? maxWidth : '384px';
   cardContainer.style.maxWidth = maxWidth !== '' ? maxWidth : '384px';
 
@@ -48,7 +48,7 @@ export const createCard = ({
   if (!!image) {
     const iconContainer = document.createElement('div');
     iconContainer.className = 'md:min-w-24 flex justify-center md:block';
-  
+
     const iconElement = document.createElement('div');
     iconElement.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][image], 96);
     iconContainer.appendChild(iconElement);

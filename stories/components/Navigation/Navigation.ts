@@ -320,15 +320,15 @@ export const createNavigation = ({
     mobileLeftTrigger.appendChild(searchTriggerWrapper);
 
     const mobileMenuContainer = document.createElement('div');
-    mobileMenuContainer.className = "fixed top-[3.25rem] pt-7 left-0 w-full h-[calc(100dvh-3.25rem)] bg-neutral-100 transform translate-x-[-100%] transition-transform duration-300 ease-in-out z-40";
+    mobileMenuContainer.className = "fixed top-[3.25rem] pt-7 left-0 w-full h-[calc(100dvh-3.25rem)] bg-neutral-100 transform translate-x-[-100%] transition-transform duration-300 ease-in-out z-50";
 
+    const searchWrapper = document.createElement('div');
+    const searchInput = document.createElement('input');
     if (hasSearch) {
-        const searchWrapper = document.createElement('div');
         searchWrapper.className = "bg-neutral-200 rounded flex gap-3 mx-7";
         const iconSpan = document.createElement('span');
         iconSpan.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
         iconSpan.className = "m-4"
-        const searchInput = document.createElement('input');
         searchInput.className = "w-full focus-visible:outline-none "
         searchInput.placeholder = searchProps.placeholder;
         searchWrapper.appendChild(iconSpan);
@@ -465,7 +465,7 @@ export const createNavigation = ({
     //     mobileMenuContent.appendChild(mobileLanguageDropdown);
     // }
 
-    const toggleMobileMenu = () => {
+    const toggleMobileMenu = (trigger: "menu" | "search") => {
         isMobileMenuOpen = !isMobileMenuOpen;
 
         mobileMenuContainer.classList.toggle('translate-x-[-100%]');
@@ -481,6 +481,9 @@ export const createNavigation = ({
             setTimeout(() => {
                 searchTrigger.innerHTML = '';
             }, 300);
+            if (trigger === "search") {
+                searchInput.focus()
+            }
         } else {
             menuTrigger.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].menu, 18);
 
@@ -490,8 +493,12 @@ export const createNavigation = ({
         }
     };
 
-    menuTrigger.addEventListener('click', toggleMobileMenu);
-    searchTrigger.addEventListener('click', toggleMobileMenu);
+    menuTrigger.addEventListener('click', () => {
+        toggleMobileMenu("menu")
+    });
+    searchTrigger.addEventListener('click', () => {
+        toggleMobileMenu("search")
+    });
 
     const mobileLogoContainer = document.createElement('div');
     mobileLogoContainer.className = "px-2 py-[0.5625rem] w-fit flex gap-1 items-center w-full "
