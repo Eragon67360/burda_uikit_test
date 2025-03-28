@@ -23,7 +23,7 @@ export const createCard = ({
   onClick = () => { },
 }: CardArgs) => {
   const cardContainer = document.createElement('div');
-  cardContainer.className = `shrink grow w-0 flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
+  cardContainer.className = `shrink grow min-w-[288px] flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
   cardContainer.style.width = maxWidth !== '' ? maxWidth : '384px';
   cardContainer.style.maxWidth = maxWidth !== '' ? maxWidth : '384px';
 
