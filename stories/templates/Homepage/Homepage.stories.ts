@@ -19,7 +19,7 @@ const meta: Meta<HomepageArgs> = {
       description: 'Display the static image hero',
       defaultValue: false
     },
-    staticHeroImageSrc: {
+    staticHeroDesktopImageSrc: {
       control: { type: 'text' },
       description: 'Path of the image',
       if: { arg: 'withStaticHero', eq: true }
@@ -81,7 +81,8 @@ export const HomepageWithSmallSlideshow: Story = {
 export const HomepageWithStaticHero: Story = {
   args: {
     withStaticHero: true,
-    staticHeroImageSrc: 'static-hero-header-example.jpg',
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     staticHeroHref: '#',
     staticHeroImageAltText: 'Static hero'
   },
@@ -99,7 +100,8 @@ export const HomepageWithStaticHero: Story = {
 export const HomepageWith2LinesNavigation: Story = {
   args: {
     withStaticHero: true,
-    staticHeroImageSrc: 'static-hero-header-example.jpg',
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     staticHeroHref: '#',
     staticHeroImageAltText: 'Static hero',
     navigationHas2Lines: true,
@@ -118,7 +120,8 @@ export const HomepageWith2LinesNavigation: Story = {
 export const FocusMobile: Story = {
   args: {
     withStaticHero: true,
-    staticHeroImageSrc: 'static-hero-header-example.jpg',
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     staticHeroHref: '#',
     staticHeroImageAltText: 'Static hero'
   },
@@ -139,7 +142,8 @@ export const MeinSchoenerGartenDesktop: Story = {
     navigationArgs: meinSchoenerGartenNavigation,
     navigationHas2Lines: false,
     withStaticHero: true,
-    staticHeroImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     footerArgs: meinSchoenerGartenFooter
   },
   parameters: {
@@ -167,7 +171,8 @@ export const MeinSchoenerGartenMobile: Story = {
     navigationArgs: meinSchoenerGartenNavigation,
     navigationHas2Lines: false,
     withStaticHero: true,
-    staticHeroImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     footerArgs: meinSchoenerGartenFooter
   },
   parameters: {
@@ -194,7 +199,8 @@ export const AutoMotorUndSport: Story = {
     navigationArgs: autoMotorUndSportNavigation,
     navigationHas2Lines: true,
     withStaticHero: true,
-    staticHeroImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroMobileImageSrc: 'static-hero-mobile.png',
     footerArgs: autoMotorUndSportFooter,
     isPrimaryColorDark: true
   },
