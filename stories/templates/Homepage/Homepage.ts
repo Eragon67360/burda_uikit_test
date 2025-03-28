@@ -3,6 +3,7 @@ import { focusNavigation } from '@/stories/assets/navigationAlternatives';
 import { sampleBigImages, sampleSmallImages } from '@/stories/assets/sampleImages';
 import { CardArgs, createCard } from '@/stories/components/Card/Card';
 import { createFooter, FooterArgs } from '@/stories/components/Footer/Footer';
+import { createGridItems1to3View } from '@/stories/components/GridItems1to3View/GridItems1to3View';
 import { createGridItemView } from '@/stories/components/GridItemView/GridItemView';
 import { createShowcase } from '@/stories/components/Header/Slideshow/Showcase/Showcase';
 import { createStaticHero } from '@/stories/components/Header/StaticHero/StaticHero';
@@ -172,17 +173,15 @@ export const createHomepage = ({
   tagsSection.appendChild(mobileTags);
 
   const cardsSection = document.createElement('section');
-  cardsSection.className = "py-12 w-full max-w-[90rem] mx-auto px-4 md:px-12 flex gap-8 flex-wrap";
+  cardsSection.className = "py-36 w-full max-w-[90rem] px-4 md:px-12";
 
   const cards: CardArgs[] = [
-    cardExample,
-    { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
-    { ...cardExample, image: 'keypad', text: styledCardText, buttonLabel: '' }
+    { ...cardExample, maxWidth: 'unset' },
+    { ...cardExample, maxWidth: 'unset', image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
+    { ...cardExample, maxWidth: 'unset', image: 'keypad', text: styledCardText, buttonLabel: '' }
   ]
-  cards.forEach((card) => {
-    cardsSection.appendChild(createCard({ ...card, maxWidth: 'unset' }))
-  })
 
+  cardsSection.appendChild(createGridItems1to3View({ cards }))
 
   const footer = document.createElement('footer');
   footer.className = "px-4"
