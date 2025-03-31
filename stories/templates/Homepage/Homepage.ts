@@ -48,13 +48,6 @@ export const createHomepage = ({
     buttonLabel: 'zum Angebot',
     onClick: () => console.log('Button clicked'),
   };
-  const styledCardText = `
-    Bei Fragen rund um das Thema Abo erreichen Sie uns unter:
-    <br>
-    <span class="py-2 inline-block font-roboto-serif text-base font-semibold">07816 39 65 20**</span>
-    <br>
-    Bei Fragen rund um das Thema Abo erreichen Sie uns unter: dieser Anruf kostet € 0,20/Verbindung aus allen deutschen Netzen.
-  `;
 
   const container = document.createElement('div');
   container.className = `flex flex-col h-full w-full mx-auto ${navigationHas2Lines ? 'pt-[3.25rem] md:pt-34' : 'pt-[3.25rem] md:pt-26'} px-0 md:px-4`;
