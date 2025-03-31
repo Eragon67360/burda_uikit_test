@@ -176,12 +176,12 @@ export const createHomepage = ({
   cardsSection.className = "py-36 w-full max-w-[90rem] px-4 md:px-12";
 
   const cards: CardArgs[] = [
-    { ...cardExample, maxWidth: 'unset' },
-    { ...cardExample, maxWidth: 'unset', image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
-    { ...cardExample, maxWidth: 'unset', image: 'keypad', text: styledCardText, buttonLabel: '' }
+    { ...cardExample },
+    { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
+    { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
   ]
 
-  cardsSection.appendChild(createGridItems1to3View({ cards }))
+  cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedDoubleGrid: true }));
 
   const footer = document.createElement('footer');
   footer.className = "px-4"

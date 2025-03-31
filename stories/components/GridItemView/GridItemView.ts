@@ -6,6 +6,8 @@ export type GridItemViewArgs = {
   articles?: Array<ArticleArgs>;
   cards?: Array<CardArgs>;
   maxWidth?: string;
+  centerItems?: boolean;
+  fixedDoubleGrid?: boolean;
 };
 
 export const createGridItemView = ({
@@ -13,6 +15,8 @@ export const createGridItemView = ({
   cards = [],
   gridItemType = 'article',
   maxWidth,
+  centerItems = false,
+  fixedDoubleGrid = false,
 }: GridItemViewArgs) => {
 
   let elements = [];
@@ -27,9 +31,16 @@ export const createGridItemView = ({
   container.style.maxWidth = maxWidth ?? 'unset';
 
   const innerContainer = document.createElement('div');
-  innerContainer.className = 'shrink flex gap-5 flex-wrap';
+  innerContainer.className = 'w-full shrink flex gap-5 flex-wrap';
+  if (centerItems) {
+    innerContainer.classList.add('justify-center');
+  }
 
   elements.forEach(element => {
+    if (fixedDoubleGrid) {
+      element.classList.add('!max-w-[calc(50%-20px)]', 'max-md:!max-w-full', 'max-md:!basis-full', '!w-[unset]');
+      element.style.flexBasis = 'calc(50% - 20px)';
+    }
     innerContainer.appendChild(element);
   });
 
