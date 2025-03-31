@@ -70,6 +70,12 @@ const meta: Meta<NavigationArgs> = {
             description: 'Cart button label',
             defaultValue: 'Warenkorb & Kasse'
         },
+        cartItems: {
+            control: {
+                type: 'object',
+            },
+            description: 'Dynamically configurable cart items',
+        },
         cartButtonIcon: {
             control: { type: 'select' },
             options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
