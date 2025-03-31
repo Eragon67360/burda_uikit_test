@@ -54,8 +54,10 @@ export const Outlined: Story = {
 };
 
 export const GrayBackground: Story = {
-    globals: {
-        backgrounds: { value: 'white', grid: false },
+    parameters: {
+        backgrounds: {
+            default: 'white',
+        },
     },
     args: {
         ...SimpleSelection.args,
