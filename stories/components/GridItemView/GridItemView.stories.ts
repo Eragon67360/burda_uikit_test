@@ -189,7 +189,7 @@ export const GridItemViewWithCards: Story = {
     }
 };
 
-export const GrexBackgroundGridItemViewWithArticles: Story = {
+export const GreyBackgroundGridItemViewWithArticles: Story = {
     globals: {
         backgrounds: { value: 'white', grid: false },
     },
@@ -245,12 +245,87 @@ export const GrexBackgroundGridItemViewWithArticles: Story = {
     }
 };
 
-export const GrexBackgroundGridItemViewWithCards: Story = {
+export const GreyBackgroundGridItemViewWithCards: Story = {
     globals: {
         backgrounds: { value: 'white', grid: false },
     },
     args: {
         gridItemType: 'card',
+        cards: [
+            {
+                backgroundColor: 'gray',
+                title: 'Login E-Paper',
+                image: 'documentHand',
+                text: 'Lorem ipsum dolor sit amet consectetur. Euismod feugiat condimentum ipsum pellentesque amet arcu sed ante enim.',
+                buttonLabel: 'Login E-Paper',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Heftreklamation',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zur Heftreklamation',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Kontakt',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zum Kontaktformular',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Geschenkurkunde',
+                image: 'certificate',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Jetzt erstellen',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Bankverbindung',
+                image: 'creditCard',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Daten ändern',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Umzugsservice',
+                image: 'delivery',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse ändern',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Urlaubsservice',
+                image: 'vacation',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Adresse mitteilen',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'Abonnement kündigen',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Rufen Sie uns an',
+            },
+            {
+                backgroundColor: 'gray',
+                title: 'FAQ',
+                text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
+                buttonLabel: 'Zur FAQ Übersicht',
+            },
+        ]
+    }
+};
+
+export const GreyBackgroundGridItemViewWithCardsWithFixedGrid: Story = {
+    globals: {
+        backgrounds: { value: 'white', grid: false },
+    },
+    parameters: {
+        layout: 'fullscreen',
+    },
+    args: {
+        gridItemType: 'card',
+        centerItems: true,
+        fixedDoubleGrid: true,
         cards: [
             {
                 backgroundColor: 'gray',
