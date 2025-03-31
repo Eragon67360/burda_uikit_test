@@ -18,10 +18,8 @@ const meta: Meta<CartAndPayArgs> = {
             defaultValue: 'Cart & Pay'
         },
         icon: {
-            control: {
-                type: 'select',
-                options: Object.keys(IconRegistry[IconCategory.SYSTEM])
-            },
+            control: 'select',
+            options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
             description: 'Icon to display on the button',
             defaultValue: 'cart'
         },
