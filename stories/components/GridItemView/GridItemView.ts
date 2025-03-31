@@ -1,6 +1,6 @@
 import { ArticleArgs, createArticle } from "../Article/Article";
 import { CardArgs, createCard } from "../Card/Card";
-    
+
 export type GridItemViewArgs = {
   gridItemType: 'article' | 'card';
   articles?: Array<ArticleArgs>;

@@ -16,7 +16,7 @@ export const createGridItems1to3View = ({
             ? 'grid grid-cols-1 max-w-full md:max-w-1/2 mx-auto justify-center'
             : cards.length === 2
                 ? 'grid grid-cols-1 md:grid-cols-2'
-                : 'flex flex-wrap justify-center [&>*]:!max-w-[100%] [&>*]:md:!min-w-[24rem] [&>*:nth-child(3)]:lg:!max-w-[50%]'
+                : 'flex flex-wrap justify-center [&>*]:!max-w-[49%] [&>*]:md:!min-w-[24rem] [&>*:nth-child(3)]:lg:!max-w-[50%]'
         }
     gap-5 
     w-full

@@ -178,7 +178,6 @@ export const createHomepage = ({
   const cards: CardArgs[] = [
     { ...cardExample, maxWidth: 'unset' },
     { ...cardExample, maxWidth: 'unset', image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
-    { ...cardExample, maxWidth: 'unset', image: 'keypad', text: styledCardText, buttonLabel: '' }
   ]
 
   cardsSection.appendChild(createGridItems1to3View({ cards }))
