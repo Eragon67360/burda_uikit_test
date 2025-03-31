@@ -36,7 +36,7 @@ export const createCard = ({
   textContainer.className = 'w-auto md:w-0 grow text-center md:text-left';
 
   const titleElement = document.createElement('h4');
-  titleElement.className = 'text-h4 font-roboto-serif hyphens-auto';
+  titleElement.className = 'text-h4 hyphens-auto';
   titleElement.textContent = sanitizeHTML(title);
 
   const textElement = document.createElement('p');

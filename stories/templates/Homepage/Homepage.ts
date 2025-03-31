@@ -92,7 +92,7 @@ export const createHomepage = ({
   subscriptionSection.className = "py-32 w-full max-w-[90rem] mx-auto px-4 flex flex-col gap-8 flex-wrap justify-center"
   const subscriptionHeader = document.createElement('div');
   subscriptionHeader.className = "flex flex-col items-center"
-  subscriptionHeader.innerHTML = `<h1 class="text-h1 font-roboto-serif text-center hyphens-auto">Unsere Zeitschriften</h1>
+  subscriptionHeader.innerHTML = `<h1 class="text-h1 text-center hyphens-auto">Unsere Zeitschriften</h1>
           <h2 class="text-subhead2 font-semibold">Print- und Digitalangebote</h2>`;
 
   const subscriptionPlans = document.createElement('div');
