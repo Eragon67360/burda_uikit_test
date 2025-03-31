@@ -13,9 +13,9 @@ const meta: Meta<CardArgs> = {
       control: 'text',
       description: 'Max width of the card. Any value between 360px and 600px is recommended.',
       table: {
-          defaultValue: { summary: '384px' },
+        defaultValue: { summary: '384px' },
       },
-  },
+    },
     backgroundColor: {
       control: 'radio',
       options: ['white', 'gray'],
@@ -60,7 +60,7 @@ type Story = StoryObj<CardArgs>;
 const styledCardText = `
   Bei Fragen rund um das Thema Abo erreichen Sie uns unter:
   <br>
-  <span class="py-2 inline-block font-roboto-serif text-base font-semibold">07816 39 65 20**</span>
+  <span class="py-2 inline-block text-hotline-footer-small ">07816 39 65 20**</span>
   <br>
   Bei Fragen rund um das Thema Abo erreichen Sie uns unter: dieser Anruf kostet € 0,20/Verbindung aus allen deutschen Netzen.
 `;

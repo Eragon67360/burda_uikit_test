@@ -113,7 +113,7 @@ export const createFooter = ({
             <div class="mb-4">
               <div class="flex items-center gap-4 text-subhead2" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
               ${column1.phone.number ? `
-                <p class="text-hotline-footer-default font-roboto-serif mt-4 w-3/4 proportional-nums">
+                <p class="text-hotline-footer-default mt-4 w-3/4 proportional-nums">
                   <a href="tel:${column1.phone.number.trim().replace(/\s/g, '')}" class="group">
                   ${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2 pl-1 align-top">${column1.phone.extraHint}</span>` : ''}
                     <span>

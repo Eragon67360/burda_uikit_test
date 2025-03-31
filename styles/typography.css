@@ -1,26 +1,26 @@
 @layer utilities {
   .text-h1 {
-    @apply text-h1-mobile md:text-h1-desktop;
+    @apply text-h1-mobile md:text-h1-desktop font-roboto-serif;
   }
 
   .text-h2 {
-    @apply text-h2-mobile md:text-h2-desktop;
+    @apply text-h2-mobile md:text-h2-desktop font-roboto-serif;
   }
 
   .text-h3 {
-    @apply text-h3-mobile md:text-h3-desktop;
+    @apply text-h3-mobile md:text-h3-desktop font-roboto-serif;
   }
 
   .text-h4 {
-    @apply text-h4-mobile md:text-h4-desktop;
+    @apply text-h4-mobile md:text-h4-desktop font-roboto-serif;
   }
 
   .text-h5 {
-    @apply text-h5-mobile md:text-h5-desktop;
+    @apply text-h5-mobile md:text-h5-desktop font-roboto-serif;
   }
 
   .text-h6 {
-    @apply text-h6-mobile md:text-h6-desktop;
+    @apply text-h6-mobile md:text-h6-desktop font-roboto-serif;
   }
 
   .text-subhead1 {
@@ -40,23 +40,23 @@
   }
 
   .text-subscription-default {
-    @apply text-subscription-default-mobile md:text-subscription-default-desktop;
+    @apply text-subscription-default-mobile md:text-subscription-default-desktop font-roboto-serif;
   }
 
   .text-subscription-small {
-    @apply text-subscription-small-mobile md:text-subscription-small-desktop;
+    @apply text-subscription-small-mobile md:text-subscription-small-desktop font-roboto-serif;
   }
 
   .text-order-step {
-    @apply text-order-step-mobile md:text-order-step-desktop;
+    @apply text-order-step-mobile md:text-order-step-desktop font-roboto-serif;
   }
 
   .text-hotline-footer-default {
-    @apply text-hotline-footer-default-mobile md:text-hotline-footer-default-desktop;
+    @apply text-hotline-footer-default-mobile md:text-hotline-footer-default-desktop font-roboto-serif;
   }
 
   .text-hotline-footer-small {
-    @apply text-hotline-footer-small-mobile md:text-hotline-footer-small-desktop;
+    @apply text-hotline-footer-small-mobile md:text-hotline-footer-small-desktop font-roboto-serif;
   }
 
   .text-teaser {
