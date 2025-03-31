@@ -1,9 +1,10 @@
 import { ArticleArgs, createArticle } from '../Article/Article';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createSlideshowNavButton } from '../Header/Slideshow/Navigation/SlideNavButton';
+import { createMobileHorizontalScroller } from '../MobileHorizontalScroller/MobileHorinzontalScroller';
 import { createTabs, TabItem } from '../Tabs/Tabs';
 import './articleTeaser.css'
-    
+
 export type ArticleTeaserArgs = {
   title: string;
   tabItems: [TabItem, TabItem];
@@ -30,66 +31,78 @@ export const createArticleTeaser = ({
           <div class="basis-1/4 max-lg:hidden"></div>
           <div class="sm:basis-1/2 max-sm:grow max-w-[628px]">
             ${createTabs({
-              items: tabItems,
-              variant: 'plain',
-              hasContent: false,
-              selectedId: tabItems[0]?.id,
-              background: backgroundColor,
-              disabled: false,
-            }).outerHTML}
+    items: tabItems,
+    variant: 'plain',
+    hasContent: false,
+    selectedId: tabItems[0]?.id,
+    background: backgroundColor,
+    disabled: false,
+  }).outerHTML}
           </div>
           <div class="basis-1/4 max-lg:basis-1/2 max-sm:hidden">
             ${!!buttonLabel
-              ? `
+      ? `
                 ${createButtonCTA({
-                  variant: ButtonCTAVariant.TERTIARY,
-                  nested: false,
-                  disabled: false,
-                  label: buttonLabel,
-                  icon: 'arrowRight',
-                  onClick: () => { },
-                }).outerHTML}
+        variant: ButtonCTAVariant.TERTIARY,
+        nested: false,
+        disabled: false,
+        label: buttonLabel,
+        icon: 'arrowRight',
+        onClick: () => { },
+      }).outerHTML}
               `
-              : ``
-            }
+      : ``
+    }
           </div>
         </div>
       </div>
-      <div class="w-full flex">
-        <div class="grow shrink px-8 flex gap-4 overflow-auto">
-          ${elements.map((element) => element.outerHTML).join('')}
+      <div class="w-fit flex md:hidden mx-auto">
+            ${createMobileHorizontalScroller({
+      elements: articlesForTab1,
+      currentPage: 0,
+      elementType: 'article',
+    })}
+        
+      </div>
+      <div class="hidden md:flex">
+        <div class="w-full max-w-[90rem] mx-auto flex flex-wrap gap-4 justify-center">
+          ${elements.map(element => `
+            <div class="">
+              ${element.outerHTML}
+            </div>
+          `).join('')}
         </div>
       </div>
-      <div class="w-full px-8 flex gap-4 hidden">
+      <div class="w-full px-8 flex gap-4 md:hidden">
         ${createSlideshowNavButton({
-          mode: 'previous',
-          disabled: false,
-          onClick: () => { },
-        }).outerHTML}
+      mode: 'previous',
+      disabled: false,
+      onClick: () => { },
+    }).outerHTML}
         <div class="grow shrink">
 
         </div>
         ${createSlideshowNavButton({
-          mode: 'next',
-          disabled: false,
-          onClick: () => { },
-        }).outerHTML}
+      mode: 'next',
+      disabled: false,
+      onClick: () => { },
+    }).outerHTML}
       </div>
       <div class="w-full px-8 sm:hidden">
         ${!!buttonLabel
-          ? `
+      ? `
             ${createButtonCTA({
-              variant: ButtonCTAVariant.TERTIARY,
-              nested: false,
-              disabled: false,
-              label: buttonLabel,
-              icon: 'arrowRight',
-              classNames: 'w-full',
-              onClick: () => { },
-            }).outerHTML}
+        variant: ButtonCTAVariant.TERTIARY,
+        nested: false,
+        disabled: false,
+        label: buttonLabel,
+        icon: 'arrowRight',
+        classNames: 'w-full',
+        onClick: () => { },
+      }).outerHTML}
           `
-          : ``
-        }
+      : ``
+    }
       </div>
     </div>
   `
