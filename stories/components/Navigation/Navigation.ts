@@ -6,6 +6,7 @@ import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
 import { isBuffer } from 'util';
+import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -47,6 +48,7 @@ export type NavigationArgs = {
     addNavigationItem?: (item: LinkNavigationItem | FlyoutNavigationItem) => void;
     mobileBackButtonLabel?: string;
     mobileMenuTitle?: string;
+    cartItems: any[],
 };
 
 export const createNavigation = ({
@@ -67,7 +69,8 @@ export const createNavigation = ({
     onClickLoginButton,
     onClickCartButton,
     mobileBackButtonLabel,
-    mobileMenuTitle
+    mobileMenuTitle,
+    cartItems
 }: NavigationArgs) => {
 
     const navigationContainer = document.createElement('div');
@@ -279,7 +282,7 @@ export const createNavigation = ({
     ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${has2LinesNavigation ? '' : 'rounded-ee-lg'}`
 
     const loginButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_LOGIN, nested: false, disabled: false, label: loginButtonText, icon: loginButtonIcon, iconLeft: false, onClick: onClickLoginButton })
-    const cartButton = createButtonCTA({ variant: ButtonCTAVariant.LARGE_CART_PAY, nested: false, disabled: false, label: cartButtonText, icon: cartButtonIcon, iconLeft: false, onClick: onClickCartButton })
+    const cartButton = createCartAndPay({ items: cartItems, disabled: false, label: cartButtonText, icon: cartButtonIcon, onClick: onClickCartButton })
 
     if (loginButtonText.length) ctaContainer.appendChild(loginButton);
     ctaContainer.appendChild(cartButton);
