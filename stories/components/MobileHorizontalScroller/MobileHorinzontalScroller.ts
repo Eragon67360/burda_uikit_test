@@ -1,23 +1,15 @@
-import { IconCategory, IconRegistry } from '@/assets/icons';
-import './mobile.css';
+import { createArticle } from "../Article/Article";
+import { createTag } from "../List/Tags/Tag";
+import './mobileHorizontalScroller.css'
 
-export type MobileTagArgs = {
-    text: string;
-    showIcon?: boolean;
+export type MobileHorizontalScrollerArgs = {
+    elements: Array<any>;
+    currentPage: number;
+    elementType: 'tag' | 'article';
 };
 
-
-export const createMobileTag = ({ text, showIcon = true }: MobileTagArgs) => {
-    return `
-    <div class="inline-flex items-center px-6 py-3 pl-4 my-auto gap-2 rounded-[3.25rem] border border-neutral-200 bg-neutral-50 ">
-      ${IconRegistry[IconCategory.SYSTEM].success}
-      <span class="text-label whitespace-nowrap">${text}</span>
-    </div>
-  `;
-};
-
-export const createMobileTagGroup = (tags: MobileTagArgs[], currentPage: number = 0) => {
-    const totalPages = Math.ceil(tags.length / 2);
+export const createMobileHorizontalScroller = ({ elements = [], currentPage = 0, elementType }: MobileHorizontalScrollerArgs) => {
+    const totalPages = Math.ceil(elements.length / 2);
     const groupId = `tag-group-${Math.random().toString(36).substr(2, 9)}`;
 
     setTimeout(() => {
@@ -100,30 +92,28 @@ export const createMobileTagGroup = (tags: MobileTagArgs[], currentPage: number 
     }, 0);
 
     return `
-    <div id="${groupId}" class="flex flex-col gap-4 w-full max-w-[320px] md:hidden">
-        <div class="scroll-container flex overflow-x-auto items-center scrollbar-hide gap-4 pb-4 snap-x snap-mandatory cursor-grab">
-            ${tags.map(tag => `
-                <div class="snap-start select-none">
-                    ${createMobileTag(tag)}
-                </div>
-            `).join('')}
-        </div>
-        <div class="flex justify-center gap-2">
-            ${Array(totalPages)
+        <div id="${groupId}" class="flex flex-col gap-4 w-full max-w-[320px] md:hidden">
+            <div class="scroll-container flex overflow-x-auto items-center scrollbar-hide gap-4 pb-4 snap-x snap-mandatory cursor-grab">
+                ${elements.map(element => `
+                    <div class="snap-start select-none">
+                        ${elementType === 'tag' ? createTag(element) : createArticle(element).outerHTML}
+                    </div>
+                `).join('')}
+            </div>
+            <div class="flex justify-center gap-2">
+                ${Array(totalPages)
             .fill(0)
             .map((_, index) => `
-                    <button 
-                        class="pagination-dot w-2 h-2 rounded-full border-[1.5px] cursor-pointer transition-all duration-200 ${index === currentPage
+                        <button 
+                            class="pagination-dot w-2 h-2 rounded-full border-[1.5px] cursor-pointer transition-all duration-200 ${index === currentPage
                     ? 'border-secondary-dark bg-secondary-interaction'
                     : 'border-[#949494]'
                 }"
-                        aria-label="Go to page ${index + 1}"
-                    ></button>
-                `).join('')}
+                            aria-label="Go to page ${index + 1}"
+                        ></button>
+                    `).join('')}
+            </div>
         </div>
-    </div>
-    `;
-};
+        `;
 
-
-
+}
