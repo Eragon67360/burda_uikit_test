@@ -7,7 +7,7 @@ import { createStaticHero } from '@/stories/components/Header/StaticHero/StaticH
 import { createTagGroup } from '@/stories/components/List/Tags/Tag';
 import { createNavigation, NavigationArgs } from '@/stories/components/Navigation/Navigation';
 import { createFlyout } from '@/stories/components/Overlay/Flyout/Flyout';
-import { createSubscriptionPlan } from '@/stories/components/SubscriptionPlan/SubscriptionPlan';
+import { createSubscriptionPlanStartPage } from '@/stories/components/SubscriptionPlanStartPage/SubscriptionPlanStartPage';
 import { setPrimaryColorMode } from '@/stories/utils/colorMode';
 
 export interface HomepageArgs {
@@ -87,7 +87,7 @@ export const createHomepage = ({
   const subscriptionPlans = document.createElement('div');
   subscriptionPlans.className = "w-full max-w-[90rem] mx-auto flex flex-wrap gap-8 justify-center items-end";
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_1.png',
     title: 'FOCUS',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -102,7 +102,7 @@ export const createHomepage = ({
     onPrimaryClick: () => console.log('Plan 1 Primary clicked'),
   }))
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_2.png',
     title: 'FOCUS MONEY',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -117,7 +117,7 @@ export const createHomepage = ({
     onPrimaryClick: () => console.log('Plan 2 Primary clicked'),
   }))
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_3.png',
     title: 'FOCUS+',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
