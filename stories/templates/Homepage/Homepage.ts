@@ -44,13 +44,6 @@ export const createHomepage = ({
     buttonLabel: 'zum Angebot',
     onClick: () => console.log('Button clicked'),
   };
-  const styledCardText = `
-    Bei Fragen rund um das Thema Abo erreichen Sie uns unter:
-    <br>
-    <span class="py-2 inline-block font-roboto-serif text-base font-semibold">07816 39 65 20**</span>
-    <br>
-    Bei Fragen rund um das Thema Abo erreichen Sie uns unter: dieser Anruf kostet € 0,20/Verbindung aus allen deutschen Netzen.
-  `;
 
   const container = document.createElement('div');
   container.className = `flex flex-col h-full w-full mx-auto ${navigationHas2Lines ? 'pt-[3.25rem] md:pt-34' : 'pt-[3.25rem] md:pt-26'} px-0 md:px-4`;
@@ -88,7 +81,7 @@ export const createHomepage = ({
   subscriptionSection.className = "py-32 w-full max-w-[90rem] mx-auto px-4 flex flex-col gap-8 flex-wrap justify-center"
   const subscriptionHeader = document.createElement('div');
   subscriptionHeader.className = "flex flex-col items-center"
-  subscriptionHeader.innerHTML = `<h1 class="text-h1 font-roboto-serif text-center hyphens-auto">Unsere Zeitschriften</h1>
+  subscriptionHeader.innerHTML = `<h1 class="text-h1 text-center hyphens-auto">Unsere Zeitschriften</h1>
           <h2 class="text-subhead2 font-semibold">Print- und Digitalangebote</h2>`;
 
   const subscriptionPlans = document.createElement('div');
