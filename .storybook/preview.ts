@@ -73,9 +73,9 @@ const preview: Preview = {
       },
     },
 
-    actions: {
-      argTypesRegex: '^on[A-Z].*'
-    },
+    // actions: {
+    //   argTypesRegex: '^on[A-Z].*'
+    // },
 
     paddings: {
       values: [
