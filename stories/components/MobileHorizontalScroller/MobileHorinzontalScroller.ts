@@ -140,16 +140,9 @@ export const createHorizontalScroller = ({
         initContainer();
         initContentPages();
         initControls();
-
-        setTimeout(() => {
-            removeEventListener();
-            setTimeout(() => {
-                addEventListener();
-                setTimeout(() => {
-                    updateControls();
-                }, 1);
-            }, 1);
-        }, 1);
+        removeEventListener();
+        addEventListener();
+        updateControls();
     }
 
     const handleMouseDown = (e: MouseEvent) => {
