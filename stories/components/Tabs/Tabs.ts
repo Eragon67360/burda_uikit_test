@@ -11,6 +11,7 @@ export type TabsArgs = {
     selectedId?: string;
     background?: 'white' | 'gray';
     disabled?: boolean;
+    onTabSelected?: (id: string) => void;
 };
 
 export const createTabs = ({
@@ -20,6 +21,7 @@ export const createTabs = ({
     selectedId,
     background = 'white',
     disabled = false,
+    onTabSelected = () => { },
 }: TabsArgs) => {
     const defaultSelectedId = selectedId || items[0]?.id;
 
@@ -89,6 +91,7 @@ export const createTabs = ({
                     activeContent?.classList.remove('hidden', 'opacity-0');
                     activeContent?.classList.add('opacity-100');
                 }
+                onTabSelected(item.id);
             });
         }
 

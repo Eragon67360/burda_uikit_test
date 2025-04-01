@@ -1,5 +1,5 @@
 import { IconRegistry, IconCategory } from "@/stories/assets/icons";
-import { createMobileHorizontalScroller } from "../../MobileHorizontalScroller/MobileHorinzontalScroller";
+import { createHorizontalScroller } from "../../MobileHorizontalScroller/MobileHorinzontalScroller";
 
 export type TagArgs = {
     text: string;
@@ -7,15 +7,25 @@ export type TagArgs = {
 };
 
 export const createTag = ({ text, showIcon = true }: TagArgs) => {
-    return `
-    <div class="flex items-center py-3 md:py-4 pr-6 md:pr-8 pl-4 md:pl-5 my-auto gap-2 md:gap-4 rounded-[3.25rem] border border-neutral-200 bg-neutral-50 ">
-      ${showIcon ? IconRegistry[IconCategory.SYSTEM].success : ''}
-      <span class="text-label whitespace-nowrap">${text}</span>
-    </div>
-  `;
+
+  const mainContainerDiv = document.createElement('div');
+  mainContainerDiv.className = 'flex items-center py-3 md:py-4 pr-6 md:pr-8 pl-4 md:pl-5 my-auto gap-2 md:gap-4 rounded-[3.25rem] border border-neutral-200 bg-neutral-50';
+
+  if (showIcon) {
+      const iconDiv = document.createElement('div');
+      iconDiv.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
+      mainContainerDiv.appendChild(iconDiv);
+  }
+
+  const textSpan = document.createElement('span');
+  textSpan.className = 'text-label whitespace-nowrap';
+  textSpan.textContent = text;
+
+  mainContainerDiv.appendChild(textSpan);
+  return mainContainerDiv;
 };
 
-export const createTagGroup = (tags: TagArgs[]) => {
+export const createTagGroup = (tags: Array<TagArgs>) => {
     const container = document.createElement('div');
     container.className = "overflow-hidden w-full max-w-[100dvw] flex items-center justify-center";
 
@@ -24,13 +34,15 @@ export const createTagGroup = (tags: TagArgs[]) => {
 
     tags.forEach(tag => {
         const tagElement = document.createElement('div');
-        tagElement.innerHTML = createTag(tag);
+        tagElement.innerHTML = createTag(tag).outerHTML;
+        console.log('tagElement :', tagElement);
         desktopContainer.appendChild(tagElement);
     })
+    const elements = tags.map(tag => createTag(tag));
     const mobileContainer = document.createElement('div');
     mobileContainer.className = "flex md:hidden flex-wrap justify-center gap-4 w-full max-w-[100dvw] overflow-x-hidden";
 
-    mobileContainer.innerHTML = createMobileHorizontalScroller({ elements: tags, currentPage: 0, elementType: 'tag' });
+    mobileContainer.appendChild(createHorizontalScroller({ elements, currentPage: 1 }));
 
     container.appendChild(desktopContainer);
     container.appendChild(mobileContainer);

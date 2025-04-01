@@ -24,7 +24,7 @@ export const DefaultArticleTeaser: Story = {
             { id: 'new', label: 'NEU' },
             { id: 'topseller', label: 'Topseller' },
         ],
-        buttonLabel: 'zu allen Prämien',
+        tertiaryButtonLabel: 'zu allen Prämien',
         articlesForTab1: [
             {
                 title: 'Just Vegan Heißluftfritteuse',
@@ -73,30 +73,6 @@ export const DefaultArticleTeaser: Story = {
             {
                 title: 'Weinpaket',
                 image: 'wine.png',
-                buttonLabel: 'Details',
-                badgeText: 'Tipp',
-            },
-            {
-                title: 'Clatronic Raclette Grill',
-                image: 'barbecue.png',
-                buttonLabel: 'Details',
-                badgeText: 'Tipp',
-            },
-            {
-                title: 'THE DUKE - Munich Dry Gin',
-                image: 'gin.png',
-                buttonLabel: 'Details',
-                badgeText: 'Tipp',
-            },
-            {
-                title: '70 EUR Amazon.de Gutschein',
-                image: 'amazon.png',
-                buttonLabel: 'Details',
-                badgeText: 'Tipp',
-            },
-            {
-                title: '70 EUR Amazon.de Gutschein',
-                image: 'amazon.png',
                 buttonLabel: 'Details',
                 badgeText: 'Tipp',
             },
