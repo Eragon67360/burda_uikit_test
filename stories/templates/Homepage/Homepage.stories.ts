@@ -60,7 +60,7 @@ export const HomepageWithSlideshow: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'white',
+        default: 'White',
     },
   },
 };
@@ -73,7 +73,7 @@ export const HomepageWithSmallSlideshow: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'white',
+        default: 'White',
     },
   },
 };
@@ -92,7 +92,7 @@ export const HomepageWithStaticHero: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'white',
+        default: 'White',
     },
   },
 };
@@ -112,7 +112,7 @@ export const HomepageWith2LinesNavigation: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'white',
+        default: 'White',
     },
   },
 };
@@ -131,7 +131,7 @@ export const FocusMobile: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-      default: 'white',
+      default: 'White',
     },
   },
 };
@@ -152,7 +152,7 @@ export const MeinSchoenerGartenDesktop: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-      default: 'white',
+      default: 'White',
     },
   },
   render: (args) => {
@@ -181,7 +181,7 @@ export const MeinSchoenerGartenMobile: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-      default: 'white',
+      default: 'White',
     },
   },
   render: (args) => {
@@ -210,7 +210,7 @@ export const AutoMotorUndSport: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-      default: 'white',
+      default: 'White',
     },
   },
   render: (args) => {

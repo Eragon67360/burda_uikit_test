@@ -138,7 +138,7 @@ export const LargeSubscription: Story = {
       },
     },
     backgrounds: {
-      default: 'white',
+      default: 'White',
     },
   },
 };

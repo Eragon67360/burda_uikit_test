@@ -192,7 +192,7 @@ export const GridItemViewWithCards: Story = {
 export const GreyBackgroundGridItemViewWithArticles: Story = {
     parameters: {
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: {
@@ -250,7 +250,7 @@ export const GreyBackgroundGridItemViewWithArticles: Story = {
 export const GreyBackgroundGridItemViewWithCards: Story = {
     parameters: {
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: {
@@ -323,7 +323,7 @@ export const GreyBackgroundGridItemViewWithCardsWithFixedGrid: Story = {
     parameters: {
         layout: 'fullscreen',
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: {

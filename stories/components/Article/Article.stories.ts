@@ -81,7 +81,7 @@ export const GreyBackgroundArticle: Story = {
     },
     parameters: {
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     }
 };

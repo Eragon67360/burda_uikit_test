@@ -165,7 +165,7 @@ export const GrayBackgroundArticleTeaserDesktop: Story = {
             defaultViewport: 'desktop',
         },
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: grayBackgroundArticleTeaser,
@@ -177,7 +177,7 @@ export const GrayBackgroundArticleTeaserMobile: Story = {
             defaultViewport: 'mobile2',
         },
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: grayBackgroundArticleTeaser,

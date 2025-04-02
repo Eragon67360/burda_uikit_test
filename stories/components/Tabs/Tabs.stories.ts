@@ -56,7 +56,7 @@ export const Outlined: Story = {
 export const GrayBackground: Story = {
     parameters: {
         backgrounds: {
-            default: 'white',
+            default: 'White',
         },
     },
     args: {

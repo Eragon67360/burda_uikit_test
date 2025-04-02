@@ -104,7 +104,7 @@ export const GreyBackgroundCard: Story = {
   },
   parameters: {
     backgrounds: {
-        default: 'white',
+        default: 'White',
     },
   }
 };
