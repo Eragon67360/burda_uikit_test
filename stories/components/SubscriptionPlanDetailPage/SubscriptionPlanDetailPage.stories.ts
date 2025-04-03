@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createSubscriptionPlanDetailPage, SubscriptionPlanDetailPageArgs } from './SubscriptionPlanDetailPage';
+import { IconRegistry, IconCategory } from '@/stories/assets/icons';
 
 const meta: Meta<SubscriptionPlanDetailPageArgs> = {
     title: 'Components (Molecules)/SubscriptionPlan/DetailPage',
@@ -8,7 +9,77 @@ const meta: Meta<SubscriptionPlanDetailPageArgs> = {
         controls: { expanded: true },
     },
     argTypes: {
-
+        image: {
+          control: 'text',
+          description: 'URL of the subscription plan image'
+        },
+        imageAltText: {
+          control: 'text',
+          description: 'Alt text for the subscription plan image'
+        },
+        showMoreButtonLabel: {
+          control: 'text',
+          description: 'Label for the expand button'
+        },
+        showLessButtonLabel: {
+            control: 'text',
+            description: 'Alternative label for the collapse button (if not provided, value of showMoreButtonLabel will be used)'
+        },
+        backgroundColor: {
+          control: 'radio',
+          options: ['white', 'gray'],
+          description: 'Background color of the component'
+        },
+        iconButtonIcon: {
+          control: 'select',
+            options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
+          description: 'Icon for the icon button'
+        },
+        onIconButtonClick: {
+            action: 'clicked',
+            description: 'Click event handler for the icon button',
+            table: {
+                category: 'Events',
+                type: { summary: 'function' },
+            },
+        },
+        tertiaryButtonLabel: {
+            control: 'text',
+            description: 'Label for the tertiary button'
+        },
+        tertiaryButtonIcon: {
+          control: 'select',
+            options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
+          description: 'Icon for the icon button'
+        },
+        onTertiaryButtonClick: {
+            action: 'clicked',
+            description: 'Click event handler for the tertiary button',
+            table: {
+                category: 'Events',
+                type: { summary: 'function' },
+            },
+        },
+        table: {
+          control: 'object',
+          description: 'Table data for subscription details'
+        },
+        tabItems: {
+          control: 'object',
+          description: 'Tab configuration for different subscription views'
+        },
+        elements: {
+            control: 'object',
+            description: 'Array of subscription plan elements (only if tabItems are not provided)'
+        },
+        elementsForTab1: {
+            control: 'object',
+            description: 'Array of subscription plan elements for the first tab (only if tabItems are provided)'
+        },
+        elementsForTab2: {
+            control: 'object',
+            description: 'Array of subscription plan elements for the second tab (only if tabItems are provided)'
+        },
     },
     render: (args) => createSubscriptionPlanDetailPage(args as any)
 };
