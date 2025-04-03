@@ -1,9 +1,9 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
 import { createInfoTag } from '@/components/InfoTag/InfoTag';
-import './subscriptionPlan.css';
+import './subscriptionPlanStartPage.css';
 
-export type SubscriptionPlanArgs = {
+export type SubscriptionPlanStartPageArgs = {
     image: string;
     title: string;
     subtitle: string;
@@ -13,7 +13,7 @@ export type SubscriptionPlanArgs = {
     onPrimaryClick: () => void;
 };
 
-export const createSubscriptionPlan = ({
+export const createSubscriptionPlanStartPage = ({
     image,
     title,
     subtitle,
@@ -21,7 +21,7 @@ export const createSubscriptionPlan = ({
     infoLabel,
     primaryCTALabel,
     onPrimaryClick,
-}: SubscriptionPlanArgs) => {
+}: SubscriptionPlanStartPageArgs) => {
     const container = document.createElement('div');
     container.className = 'flex flex-col bg-transparent max-w-[26rem] rounded-b-lg h-full w-full';
 

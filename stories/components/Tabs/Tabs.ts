@@ -7,6 +7,7 @@ export type TabItem = {
 export type TabsArgs = {
     items: TabItem[];
     variant?: 'outline' | 'plain';
+    color?: 'primary' | 'secondary';
     hasContent?: boolean;
     selectedId?: string;
     background?: 'white' | 'gray';
@@ -17,12 +18,19 @@ export type TabsArgs = {
 export const createTabs = ({
     items,
     variant = 'plain',
+    color = 'secondary',
     hasContent = false,
     selectedId,
     background = 'white',
     disabled = false,
     onTabSelected = () => { },
 }: TabsArgs) => {
+    const colorClasses = {
+        default: color === 'primary' ? 'bg-primary-interaction' : 'bg-secondary-interaction',
+        hover: color === 'primary' ? 'hover:bg-primary-light' : 'hover:bg-secondary-light',
+        active: color === 'primary' ? 'active:bg-primary-interaction' : 'active:bg-secondary-interaction',
+    }
+
     const defaultSelectedId = selectedId || items[0]?.id;
 
     const tabsContainer = document.createElement('div');
@@ -61,8 +69,8 @@ export const createTabs = ({
                 ? 'bg-neutral-100 text-neutral-300'
                 : 'bg-transparent text-neutral-300'
             : item.id === defaultSelectedId
-                ? 'bg-secondary-interaction'
-                : 'hover:bg-secondary-light active:bg-secondary-interaction';
+                ? colorClasses.default
+                : [colorClasses.hover, colorClasses.active].join(' ')
 
         tab.className = `${baseClasses} ${stateClasses}`;
         tab.textContent = item.label;
@@ -73,12 +81,12 @@ export const createTabs = ({
                 tab.blur();
 
                 tabsContainer.querySelectorAll('[data-tab-id]').forEach((t) => {
-                    t.classList.remove('bg-secondary-interaction');
-                    t.classList.add('hover:bg-secondary-light');
+                    t.classList.remove(colorClasses.default);
+                    t.classList.add(colorClasses.hover);
                 });
 
-                tab.classList.remove('hover:bg-secondary-light');
-                tab.classList.add('bg-secondary-interaction');
+                tab.classList.remove(colorClasses.hover);
+                tab.classList.add(colorClasses.default);
 
                 if (hasContent) {
                     const contents = tabsContainer.querySelectorAll('[data-content-id]');
