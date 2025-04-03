@@ -85,11 +85,11 @@ export const createNavigation = ({
     const linksWrapper = document.createElement('div');
     const rightWrapper = document.createElement('div');
 
-    navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-[999]`;
+    navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-50`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
     contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
-    linksWrapper.className = ` flex items-center self-stretch justify-between z-[999] ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
-    rightWrapper.className = `flex items-center z-[999] ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
+    linksWrapper.className = ` flex items-center self-stretch justify-between z-50 ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
+    rightWrapper.className = `flex items-center z-50 ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
 
     const updateNavigationLayout = (forceOneLine = false) => {
         if (forceOneLine || currentNavigationLayout === 2) {
