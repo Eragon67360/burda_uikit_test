@@ -7,7 +7,7 @@ export type GridItemViewArgs = {
   cards?: Array<CardArgs>;
   maxWidth?: string;
   centerItems?: boolean;
-  fixedDoubleGrid?: boolean;
+  fixedColumnCount?: number;
 };
 
 export const createGridItemView = ({
@@ -16,7 +16,7 @@ export const createGridItemView = ({
   gridItemType = 'article',
   maxWidth,
   centerItems = false,
-  fixedDoubleGrid = false,
+  fixedColumnCount,
 }: GridItemViewArgs) => {
 
   let elements = [];
@@ -37,9 +37,11 @@ export const createGridItemView = ({
   }
 
   elements.forEach(element => {
-    if (fixedDoubleGrid) {
-      element.classList.add('!max-w-[calc(50%-20px)]', 'max-md:!max-w-full', 'max-md:!basis-full', '!w-[unset]');
-      element.style.flexBasis = 'calc(50% - 20px)';
+    if (!!fixedColumnCount) {
+      const columnWidth = 100 / fixedColumnCount;
+      element.classList.add('max-md:!max-w-full', 'max-md:!basis-full', 'max-xl:!max-w-[calc(50%-20px)]', 'max-xl:!basis-[calc(50%-20px)]', '!w-[unset]');
+      element.style.flexBasis = `calc(${columnWidth}% - 20px)`;
+      element.style.maxWidth = `calc(${columnWidth}% - 20px)`;
     }
     innerContainer.appendChild(element);
   });

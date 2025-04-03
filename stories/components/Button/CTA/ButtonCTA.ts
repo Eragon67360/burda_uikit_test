@@ -16,11 +16,11 @@ export enum ButtonCTAVariant {
 export type ButtonCTAArgs = {
   variant: ButtonCTAVariant;
   nested: boolean;
-  disabled: boolean;
-  iconLeft: boolean;
+  disabled?: boolean;
+  iconLeft?: boolean;
   label: string;
   onClick: () => void;
-  icon: string | null;
+  icon?: string | null;
   classNames?: string;
 };
 

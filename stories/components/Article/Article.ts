@@ -52,7 +52,7 @@ export const createArticle = ({
     imgElement.setAttribute('aria-invalid', 'true');
     imgElement.setAttribute('aria-errormessage', 'Image failed to load');
   };
-  imgElement.className = 'size-full object-contain';
+  imgElement.className = 'size-full object-contain pointer-events-none';
   imageContainer.appendChild(imgElement);
 
   if (badgeText && badgeText.length > 0) {

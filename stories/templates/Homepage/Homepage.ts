@@ -1,17 +1,13 @@
-import { IconCategory, IconRegistry } from '@/stories/assets/icons';
-import { focusNavigation } from '@/stories/assets/navigationAlternatives';
 import { sampleBigImages, sampleSmallImages } from '@/stories/assets/sampleImages';
-import { CardArgs, createCard } from '@/stories/components/Card/Card';
+import { CardArgs } from '@/stories/components/Card/Card';
 import { createFooter, FooterArgs } from '@/stories/components/Footer/Footer';
-import { createGridItems1to3View } from '@/stories/components/GridItems1to3View/GridItems1to3View';
 import { createGridItemView } from '@/stories/components/GridItemView/GridItemView';
 import { createShowcase } from '@/stories/components/Header/Slideshow/Showcase/Showcase';
 import { createStaticHero } from '@/stories/components/Header/StaticHero/StaticHero';
-import { createDesktopTag } from '@/stories/components/List/Tags/Desktop/Desktop';
-import { createMobileTagGroup, MobileTagArgs } from '@/stories/components/List/Tags/Mobile/Mobile';
+import { createTagGroup } from '@/stories/components/List/Tags/Tag';
 import { createNavigation, NavigationArgs } from '@/stories/components/Navigation/Navigation';
 import { createFlyout } from '@/stories/components/Overlay/Flyout/Flyout';
-import { createSubscriptionPlan } from '@/stories/components/SubscriptionPlan/SubscriptionPlan';
+import { createSubscriptionPlanStartPage } from '@/stories/components/SubscriptionPlanStartPage/SubscriptionPlanStartPage';
 import { setPrimaryColorMode } from '@/stories/utils/colorMode';
 
 export interface HomepageArgs {
@@ -91,7 +87,7 @@ export const createHomepage = ({
   const subscriptionPlans = document.createElement('div');
   subscriptionPlans.className = "w-full max-w-[90rem] mx-auto flex flex-wrap gap-8 justify-center items-end";
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_1.png',
     title: 'FOCUS',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -106,7 +102,7 @@ export const createHomepage = ({
     onPrimaryClick: () => console.log('Plan 1 Primary clicked'),
   }))
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_2.png',
     title: 'FOCUS MONEY',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -121,7 +117,7 @@ export const createHomepage = ({
     onPrimaryClick: () => console.log('Plan 2 Primary clicked'),
   }))
 
-  subscriptionPlans.appendChild(createSubscriptionPlan({
+  subscriptionPlans.appendChild(createSubscriptionPlanStartPage({
     image: '/burda_subscriptions_3.png',
     title: 'FOCUS+',
     subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -142,28 +138,17 @@ export const createHomepage = ({
   const tagsSection = document.createElement('section');
   tagsSection.className = "bg-neutral-100 px-12 py-32";
 
-  const desktopTags = document.createElement('div');
-  desktopTags.className = "flex-wrap justify-center gap-4 hidden md:flex"
-  desktopTags.innerHTML = `${createDesktopTag({ text: 'Lorem ipsum dolor sitaemt' })}
-            ${createDesktopTag({ text: 'Lorem ipsum sitaemt' })}
-            ${createDesktopTag({ text: 'Lorem ipsum dolor sitaemt' })}
-            ${createDesktopTag({ text: 'Lorem ipsum dolor sitaemt' })}
-            ${createDesktopTag({ text: 'Lorem dolor sitaemt' })}
-            ${createDesktopTag({ text: 'Lorem ipsum' })}
-            ${createDesktopTag({ text: 'Lorem ipsum dolor sitaemt' })}`
-
-  const mobileTags = document.createElement('div');
-  const mobileTagsContent: MobileTagArgs[] = [
-    { text: 'ipsum dolor sitaemt' },
+  const tags = [
     { text: 'Lorem ipsum dolor sitaemt' },
-    { text: 'Lorem sitaemt' },
     { text: 'Lorem ipsum sitaemt' },
-    { text: 'Lorem  sitaemt' },
+    { text: 'Lorem ipsum dolor sitaemt' },
+    { text: 'Lorem ipsum dolor sitaemt' },
+    { text: 'Lorem dolor sitaemt' },
+    { text: 'Lorem ipsum' },
+    { text: 'Lorem ipsum dolor sitaemt' }
   ]
 
-  mobileTags.innerHTML = `${createMobileTagGroup(mobileTagsContent)}`;
-  tagsSection.appendChild(desktopTags);
-  tagsSection.appendChild(mobileTags);
+  tagsSection.appendChild(createTagGroup(tags));
 
   const cardsSection = document.createElement('section');
   cardsSection.className = "py-36 w-full max-w-[90rem] px-4 md:px-12";
@@ -174,7 +159,7 @@ export const createHomepage = ({
     { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
   ]
 
-  cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedDoubleGrid: true }));
+  cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedColumnCount: 3 }));
 
   const footer = document.createElement('footer');
   footer.className = "px-4"
