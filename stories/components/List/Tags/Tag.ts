@@ -1,5 +1,5 @@
 import { IconRegistry, IconCategory } from "@/stories/assets/icons";
-import { createHorizontalScroller } from "../../MobileHorizontalScroller/MobileHorinzontalScroller";
+import { createHorizontalScroller } from "../../HorizontalScroller/HorizontalScroller";
 
 export type TagArgs = {
     text: string;

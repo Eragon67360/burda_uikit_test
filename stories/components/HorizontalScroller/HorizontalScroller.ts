@@ -1,5 +1,5 @@
 import { createSlideshowNavButton } from "../Header/Slideshow/Navigation/SlideNavButton";
-import './mobileHorizontalScroller.css'
+import './horizontalScroller.css'
 
 export type HorizontalScrollerArgs = {
     elements: Array<any>;
@@ -38,16 +38,16 @@ export const createHorizontalScroller = ({
         } catch {
             contentPages = 1;
         }
-        if (contentPages < 1) {
+        if (contentPages < 1 || isNaN(contentPages)) {
             contentPages = 1;
         }
         if (contentPages === 1) {
-            container.classList.add('items-center');
-            scrollContainer.classList.remove('cursor-grab');
-            scrollContainer.style.removeProperty('cursor');
+            container?.classList.add('items-center');
+            scrollContainer?.classList.remove('cursor-grab');
+            scrollContainer?.style.removeProperty('cursor');
         } else {
-            container.classList.remove('items-center');
-            scrollContainer.classList.add('cursor-grab');
+            container?.classList.remove('items-center');
+            scrollContainer?.classList.add('cursor-grab');
         }
     }
 
@@ -257,10 +257,13 @@ export const createHorizontalScroller = ({
         });
     }
 
-    setTimeout(() => {
-        init();
-        window.addEventListener('resize', handleResize);
-    }, 1);
+    const initializeComponent = () => {
+        requestAnimationFrame(() => {
+            init();
+            window.addEventListener('resize', handleResize);
+        });
+    };
+    initializeComponent()
 
     container = document.createElement('div');
     container.id = groupId;
@@ -291,7 +294,7 @@ export const createHorizontalScroller = ({
         scrollContainer.appendChild(elementDiv);
     });
 
-    container.appendChild(scrollContainer);
+    container?.appendChild(scrollContainer);
 
     return container;
 }

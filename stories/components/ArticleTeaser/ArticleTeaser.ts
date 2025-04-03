@@ -1,6 +1,6 @@
 import { ArticleArgs, createArticle } from '../Article/Article';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
-import { createHorizontalScroller } from '../MobileHorizontalScroller/MobileHorinzontalScroller';
+import { createHorizontalScroller } from '../HorizontalScroller/HorizontalScroller';
 import { createTabs, TabItem } from '../Tabs/Tabs';
 import './articleTeaser.css'
 
@@ -26,8 +26,6 @@ export const createArticleTeaser = ({
   let elements = articlesForTab1.map(article => createArticle({ ...article, backgroundColor }));
 
   const selectTab = (id: string) => {
-    console.log('Selected tab ID:', id);
-    console.log('id === tabItems[1].id :', id === tabItems[1].id);
     if (id === tabItems[1].id) {
       elements = articlesForTab2.map(article => createArticle({ ...article, backgroundColor }));
     } else {
@@ -36,13 +34,21 @@ export const createArticleTeaser = ({
 
     const elementContainer = document.querySelector('.element-container');
     if (!elementContainer) return;
-    elementContainer.innerHTML = '';
-    elementContainer.appendChild(createHorizontalScroller({
-        elements,
-        currentPage: 1,
-        showControls: true,
-        horizontalScrollContainerPadding: '32px',
-    }));
+    elementContainer.classList.add('animate-article-teaser-disappear');
+    setTimeout(() => {
+      elementContainer.innerHTML = '';
+      elementContainer.classList.remove('animate-article-teaser-disappear');
+      elementContainer.classList.add('animate-article-teaser-appear');
+      elementContainer.appendChild(createHorizontalScroller({
+          elements,
+          currentPage: 1,
+          showControls: true,
+          horizontalScrollContainerPadding: '32px',
+      }));
+      setTimeout(() => {
+        elementContainer.classList.remove('animate-article-teaser-appear');
+      }, 200);
+    }, 200);
   }
 
   const container = document.createElement('div');
