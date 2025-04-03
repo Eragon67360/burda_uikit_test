@@ -3,10 +3,11 @@ import { createIcon } from "@/components/Icon/Icon";
 export type SlideshowNavButtonArgs = {
     mode: 'previous' | 'next';
     disabled?: boolean;
+    classNames?: string;
     onClick?: () => void;
 };
 
-export const createSlideshowNavButton = ({ mode, disabled = false, onClick }: SlideshowNavButtonArgs) => {
+export const createSlideshowNavButton = ({ mode, disabled = false, classNames, onClick }: SlideshowNavButtonArgs) => {
     const icon = mode === 'next'
         ? 'chevronRight'
         : 'chevronLeft';
@@ -47,6 +48,9 @@ export const createSlideshowNavButton = ({ mode, disabled = false, onClick }: Sl
 
 
     btnButton.className = baseClasses.join(' ');
+    if (classNames) {
+        btnButton.className += ` ${classNames}`;
+    }
 
     if (disabled) {
         btnButton.disabled = true;

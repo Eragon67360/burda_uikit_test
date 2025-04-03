@@ -11,6 +11,7 @@ export type TabsArgs = {
     selectedId?: string;
     background?: 'white' | 'gray';
     disabled?: boolean;
+    onTabSelected?: (id: string) => void;
 };
 
 export const createTabs = ({
@@ -20,6 +21,7 @@ export const createTabs = ({
     selectedId,
     background = 'white',
     disabled = false,
+    onTabSelected = () => { },
 }: TabsArgs) => {
     const defaultSelectedId = selectedId || items[0]?.id;
 
@@ -36,16 +38,18 @@ export const createTabs = ({
   `;
 
     const tabsList = document.createElement('div');
-    tabsList.className = 'flex gap-2 mx-auto w-fit';
+    tabsList.className = 'flex gap-2';
 
     items.forEach((item) => {
         const tab = document.createElement('button');
         tab.setAttribute('data-tab-id', item.id);
 
         const baseClasses = `
+        grow
         px-4 
         py-2 
         rounded
+        text-button-label
         transition-colors duration-200 ease-in-out
         ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         focus:outline-hidden
@@ -87,6 +91,7 @@ export const createTabs = ({
                     activeContent?.classList.remove('hidden', 'opacity-0');
                     activeContent?.classList.add('opacity-100');
                 }
+                onTabSelected(item.id);
             });
         }
 

@@ -32,7 +32,7 @@ export const createArticle = ({
   const imgElement = document.createElement('img');
   imgElement.src = image;
   imgElement.alt = sanitizeHTML(imageAltText);
-  imgElement.className = 'size-full object-contain';
+  imgElement.className = 'size-full object-contain pointer-events-none';
   imageContainer.appendChild(imgElement);
 
   if (badgeText && badgeText.length > 0) {

@@ -79,7 +79,9 @@ export const GreyBackgroundArticle: Story = {
         buttonLabel: 'Details',
         onClick: () => console.log('Button clicked')
     },
-    globals: {
-        backgrounds: { value: 'white', grid: false },
-    },
+    parameters: {
+        backgrounds: {
+            default: 'White',
+        },
+    }
 };
