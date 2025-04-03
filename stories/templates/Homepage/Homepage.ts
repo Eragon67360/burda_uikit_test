@@ -159,7 +159,7 @@ export const createHomepage = ({
     { ...cardExample, image: 'emailCheck', text: 'Der kostenlose FOCUS-Magazin-Newsletter liefert Ihnen schon freitags die wichtigsten Themen der kommenden Woche.' },
   ]
 
-  cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedDoubleGrid: true }));
+  cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedColumnCount: 3 }));
 
   const footer = document.createElement('footer');
   footer.className = "px-4"

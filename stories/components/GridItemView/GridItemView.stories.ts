@@ -329,7 +329,7 @@ export const GreyBackgroundGridItemViewWithCardsWithFixedGrid: Story = {
     args: {
         gridItemType: 'card',
         centerItems: true,
-        fixedDoubleGrid: true,
+        fixedColumnCount: 3,
         cards: [
             {
                 backgroundColor: 'gray',
