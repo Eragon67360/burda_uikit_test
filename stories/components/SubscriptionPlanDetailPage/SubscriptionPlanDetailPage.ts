@@ -165,11 +165,11 @@ export const createSubscriptionPlanDetailPage = ({
 
   const createElementContainer = (elements: SubscriptionPlanDetailPageItemArgs[], isSecondary = false) => {
     const container = document.createElement('div');
-    container.className = `w-full flex max-lg:flex-col gap-8 lg:gap-6 justify-center ${isSecondary ? 'flex-wrap' : ''}`;
+    container.className = `w-full flex max-lg:flex-col gap-8 lg:gap-6 justify-center transition-all duration-300 ${isSecondary ? 'flex-wrap' : 'items-end'}`;
     const maxWidth = '460px'
     elements.forEach(element => {
       const elementWrapper = document.createElement('div');
-      elementWrapper.className = `max-lg:w-full lg:basis-[calc(33%-20px)] grow ${isSecondary ? 'flex-auto' : ''} flex flex-col gap-8`;
+      elementWrapper.className = `max-lg:w-full lg:basis-[calc(33%-20px)] grow flex flex-col gap-8 transition-all duration-300 ${isSecondary ? 'flex-auto' : 'h-full justify-center'}`;
       elementWrapper.style.maxWidth = maxWidth;
       
       const elementComponent = createSubscriptionPlanDetailPageItem({
@@ -177,7 +177,7 @@ export const createSubscriptionPlanDetailPage = ({
         classNames: isSecondary ? 'h-full' : '',
         maxWidth,
       });
-      
+      elementComponent.classList.add('transition-all', 'duration-300');
       elementWrapper.appendChild(elementComponent);
       container.appendChild(elementWrapper);
     });
@@ -232,6 +232,7 @@ export const createSubscriptionPlanDetailPage = ({
     iconLeft: false,
     icon: 'chevronUp',
   });
+  showLessButton.classList.add('hidden');
 
   buttonContainer.appendChild(showMoreButton);
   buttonContainer.appendChild(showLessButton);
@@ -258,36 +259,94 @@ export const createSubscriptionPlanDetailPage = ({
   }
 
   function selectTab (id?: string) {
-    console.log('Selected tab:', id);
     if (!tabItems) return;
-    getCurrentPrimaryElementsContainer().classList.add('hidden');
-    getCurrentSecondaryElementsContainer().classList.add('hidden');
-    selectedTab = id ?? tabItems[0].id;
-    getCurrentPrimaryElementsContainer().classList.remove('hidden');
-    toggleExpanded(false);
+    if (selectedTab === id) return;
+    getCurrentPrimaryElementsContainer().classList.add('animate-subscription-plan-detail-disappear');
+    getCurrentSecondaryElementsContainer().classList.add('animate-subscription-plan-detail-disappear');
+    setTimeout(() => {
+      getCurrentPrimaryElementsContainer().classList.add('hidden');
+      getCurrentSecondaryElementsContainer().classList.add('hidden');
+      getCurrentPrimaryElementsContainer().classList.remove('animate-subscription-plan-detail-disappear');
+      getCurrentSecondaryElementsContainer().classList.remove('animate-subscription-plan-detail-disappear');
+      selectedTab = id ?? tabItems[0].id;
+      getCurrentPrimaryElementsContainer().classList.add('animate-subscription-plan-detail-appear');
+      getCurrentPrimaryElementsContainer().classList.remove('hidden');
+      setTimeout(() => {
+        getCurrentPrimaryElementsContainer().classList.remove('animate-subscription-plan-detail-appear');
+        toggleExpanded(false);
+      }, 200);
+    }, 200);
   }
 
   function toggleExpanded (newVal: boolean) {
-    console.log('Toggle expanded:', newVal);
     expanded = newVal;
     getCurrentPrimaryElementsContainer().classList.add(expanded ? 'items-end' : 'items-center');
     getCurrentPrimaryElementsContainer().classList.remove(expanded ? 'items-center' : 'items-end');
-    getCurrentSecondaryElementsContainer().classList.toggle('hidden', !expanded);
+    getCurrentPrimaryElementsContainer().childNodes.forEach((child: HTMLElement) => {
+      child.childNodes.forEach((grandChild: HTMLElement) => {
+        grandChild.classList.toggle('grow', expanded);
+      });
+    });
+    if (expanded) {
+      getCurrentSecondaryElementsContainer().classList.add('animate-subscription-plan-detail-appear');
+      getCurrentSecondaryElementsContainer().classList.remove('hidden');
+      setTimeout(() => {
+        getCurrentSecondaryElementsContainer().classList.remove('animate-subscription-plan-detail-appear');
+      }, 200);
+    } else {
+      getCurrentSecondaryElementsContainer().classList.add('animate-subscription-plan-detail-disappear');
+      setTimeout(() => {
+        getCurrentSecondaryElementsContainer().classList.add('hidden');
+        getCurrentSecondaryElementsContainer().classList.remove('animate-subscription-plan-detail-disappear');
+      }, 200);
+    }
     setExpandButton();
   }
 
   function setExpandButton () {
     if (getCurrentSecondaryElements().length === 0) {
-      showMoreButton.classList.add('hidden');
-      showLessButton.classList.add('hidden');
+      showMoreButton.classList.add('animate-subscription-plan-detail-disappear');
+      showLessButton.classList.add('animate-subscription-plan-detail-disappear');
+      setTimeout(() => {
+        showMoreButton.classList.add('hidden');
+        showLessButton.classList.add('hidden');
+        showMoreButton.classList.remove('animate-subscription-plan-detail-disappear');
+        showLessButton.classList.remove('animate-subscription-plan-detail-disappear');
+      }, 200);
       return;
     }
-    showMoreButton.classList.toggle('hidden', expanded);
-    showLessButton.classList.toggle('hidden', !expanded);
+    if (expanded) {
+      if (showMoreButton.classList.contains('hidden') && !showLessButton.classList.contains('hidden')) return;
+      showMoreButton.classList.add('animate-subscription-plan-detail-disappear');
+      setTimeout(() => {
+        showMoreButton.classList.add('hidden');
+        showMoreButton.classList.remove('animate-subscription-plan-detail-disappear');
+        showLessButton.classList.add('animate-subscription-plan-detail-appear');
+        showLessButton.classList.remove('hidden');
+        setTimeout(() => {
+          showLessButton.classList.remove('animate-subscription-plan-detail-appear');
+        }, 200);
+      }
+      , 200);
+      return;
+    }
+    if (showLessButton.classList.contains('hidden') && !showMoreButton.classList.contains('hidden')) return;
+    showLessButton.classList.add('animate-subscription-plan-detail-disappear');
+    setTimeout(() => {
+      showLessButton.classList.add('hidden');
+      showLessButton.classList.remove('animate-subscription-plan-detail-disappear');
+      showMoreButton.classList.add('animate-subscription-plan-detail-appear');
+      showMoreButton.classList.remove('hidden');
+      setTimeout(() => {
+        showMoreButton.classList.remove('animate-subscription-plan-detail-appear');
+      }, 200);
+    }
+    , 200);
+    
   }
 
   function init () {
-    selectTab();
+    selectTab(tabItems ? tabItems[0].id : undefined);
     toggleExpanded(false);
   }
 

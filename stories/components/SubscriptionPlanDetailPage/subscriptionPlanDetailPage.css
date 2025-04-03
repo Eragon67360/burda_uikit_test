@@ -1,0 +1,27 @@
+@keyframes subscriptionPlanDetailDisappear {
+  0% {
+      opacity: 1;
+  }
+
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes subscriptionPlanDetailAppear {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+.animate-subscription-plan-detail-disappear {
+  animation: subscriptionPlanDetailDisappear 0.2s ease-out forwards;
+}
+
+.animate-subscription-plan-detail-appear {
+  animation: subscriptionPlanDetailAppear 0.2s ease-in forwards;
+}

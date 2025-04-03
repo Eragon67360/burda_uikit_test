@@ -60,6 +60,7 @@ const elements = [
     },
     {
         title: 'Jahres-Abo',
+        subtitle: '12 Ausgaben',
         priceInfo: 'nur <span class="text-subscription-default">&nbsp;5,20 €&nbsp;</span> /Ausgabe',
         characteristics: [
             { icon: 'calendar', content: '1 Jahr <span class="font-bold">FOCUS frei Haus</span> für mich' },
