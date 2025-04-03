@@ -1,6 +1,8 @@
 import { IconRegistry, IconCategory } from "@/stories/assets/icons";
 import { createBadge } from "../Badge/Badge";
 import { createButtonCTA, ButtonCTAVariant } from "../Button/CTA/ButtonCTA";
+import { sanitizeHTML, sanitizeHTMLRichContent } from "@/stories/utils/sanitize";
+import { sanitize } from "storybook/internal/csf";
 
 export type SubscriptionPlanDetailPageItemArgs = {
   title: string;
@@ -61,7 +63,7 @@ export const createSubscriptionPlanDetailPageItem = ({
   if (priceInfo) {
     const priceElement = document.createElement('p');
     priceElement.className = 'text-subhead3';
-    priceElement.innerHTML = priceInfo;
+    priceElement.innerHTML = sanitizeHTMLRichContent(priceInfo)
     content.appendChild(priceElement);
   }
 
@@ -74,8 +76,8 @@ export const createSubscriptionPlanDetailPageItem = ({
       listItem.className = 'flex items-start gap-4 text-bulletpoint-copy font-light';
 
       const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = item.icon && IconRegistry[IconCategory.SYSTEM][item.icon] 
-        ? IconRegistry[IconCategory.SYSTEM][item.icon] 
+      iconSpan.innerHTML = item.icon && IconRegistry[IconCategory.SYSTEM][item.icon]
+        ? IconRegistry[IconCategory.SYSTEM][item.icon]
         : item.icon && IconRegistry[IconCategory.SYSTEM].success;
 
       const contentSpan = document.createElement('span');
