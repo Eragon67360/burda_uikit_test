@@ -25,6 +25,7 @@ export type FlyoutNavigationItem = BaseNavigationItem & {
     type: 'flyout';
     label: string;
     flyoutItems: LinkItem[];
+    alwaysFlyout?: boolean;
 }
 
 export type NavigationArgs = {
@@ -33,7 +34,7 @@ export type NavigationArgs = {
     logo2Src?: string;
     logo2AltText?: string;
     has2LinesNavigation: boolean;
-    navigationItems: Array<LinkNavigationItem | FlyoutNavigationItem>;
+    navigationItems: Array<FlyoutNavigationItem>;
     hasSearch: boolean;
     searchProps?: SearchArgs;
     hasLanguageDropdown: boolean;
@@ -75,6 +76,7 @@ export const createNavigation = ({
     const navigationContainer = document.createElement('div');
     let isMobileMenuOpen = false;
     /** ---------------------------------------- DESKTOP ---------------------------------------- */
+
     const sortedNavigationItems = navigationItems.sort((a, b) => a.order - b.order);
     let currentNavigationLayout = has2LinesNavigation ? 2 : 1;
 
@@ -211,6 +213,55 @@ export const createNavigation = ({
                     rightWrapper.replaceChild(languageDropdownContainer, existingLanguageDropdown);
                 }
             }
+            while (leftWrapper.firstChild) {
+                leftWrapper.removeChild(leftWrapper.firstChild);
+            }
+            while (secondLineWrapper.firstChild) {
+                secondLineWrapper.removeChild(secondLineWrapper.firstChild);
+            }
+            sortedNavigationItems.forEach((item) => {
+                if (!item.alwaysFlyout) {
+                    item.flyoutItems.forEach((subItem) => {
+                        const itemButton = document.createElement('a');
+                        itemButton.text = subItem.label;
+                        itemButton.href = subItem.href;
+                        itemButton.className = `
+                        flex 
+                        items-center 
+                        justify-center 
+                        h-full 
+                        gap-2 
+                        px-4 
+                        py-2 
+                        w-fit 
+                        text-nowrap 
+                        flex-nowrap
+                        text-center 
+                        text-sm 
+                        font-semibold 
+                        rounded-none 
+                        transition-all 
+                        duration-300 
+                        cursor-pointer 
+                        hover:bg-secondary-light 
+                    `;
+
+                        secondLineWrapper.appendChild(itemButton);
+                        leftWrapper.appendChild(itemButton.cloneNode(true));
+                    });
+                } else {
+                    // Keep alwaysFlyout items as flyouts
+                    const flyout = createFlyout({
+                        variant: 'sublinks',
+                        triggerLabel: item.label,
+                        linkItems: item.flyoutItems,
+                        has2LinesNavigation: has2LinesNavigation,
+                    });
+
+                    secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                    leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                }
+            });
 
             currentNavigationLayout = 2;
         } else {
@@ -238,6 +289,63 @@ export const createNavigation = ({
             ctaContainer.classList.remove('rounded-se-lg');
             ctaContainer.classList.add('rounded-ee-lg');
             updateNavigationLayout(true);
+
+            if (has2LinesNavigation) {
+                while (leftWrapper.firstChild) {
+                    leftWrapper.removeChild(leftWrapper.firstChild);
+                }
+                while (secondLineWrapper.firstChild) {
+                    secondLineWrapper.removeChild(secondLineWrapper.firstChild);
+                }
+
+                sortedNavigationItems.forEach((item) => {
+                    const shouldConvertToFlyout =
+                        !item.alwaysFlyout &&
+                        item.flyoutItems.length > 1;
+
+                    if (shouldConvertToFlyout) {
+                        const flyout = createFlyout({
+                            variant: 'sublinks',
+                            triggerLabel: item.label,
+                            linkItems: item.flyoutItems,
+                            has2LinesNavigation: has2LinesNavigation,
+                        });
+
+                        secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                        leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                    } else {
+                        // Keep as links or single link
+                        item.flyoutItems.forEach((subItem) => {
+                            const itemButton = document.createElement('a');
+                            itemButton.text = subItem.label;
+                            itemButton.href = subItem.href;
+                            itemButton.className = `
+                                flex 
+                                items-center 
+                                justify-center 
+                                h-full 
+                                gap-2 
+                                px-4 
+                                py-2 
+                                w-fit 
+                                text-nowrap 
+                                flex-nowrap
+                                text-center 
+                                text-sm 
+                                font-semibold 
+                                rounded-none 
+                                transition-all 
+                                duration-300 
+                                cursor-pointer 
+                                hover:bg-secondary-light 
+                            `;
+
+                            secondLineWrapper.appendChild(itemButton);
+                            leftWrapper.appendChild(itemButton.cloneNode(true));
+                        });
+                    }
+                });
+            }
         } else {
             navigationDesktopContainer.classList.add('py-4');
             navigationWrapper.classList.add('rounded-t-lg');
@@ -258,48 +366,107 @@ export const createNavigation = ({
     logo2Container.className = 'h-[2.8rem] w-auto ml-2 mr-3';
 
     sortedNavigationItems.forEach((item) => {
-        if (item.type === 'link') {
-            const itemButton = document.createElement('a');
-            itemButton.text = item.label;
-            itemButton.href = item.href;
-            itemButton.target = item.target;
-            itemButton.className = `
-                flex 
-                items-center 
-                justify-center 
-                h-full 
-                gap-2 
-                px-4 
-                py-2 
-                w-fit 
-                text-nowrap 
-                flex-nowrap
-                text-center 
-                text-sm 
-                font-semibold 
-                rounded-none 
-                transition-all 
-                duration-300 
-                cursor-pointer 
-                hover:bg-secondary-light 
-            `;
+        // Single-line navigation logic
+        if (!has2LinesNavigation) {
+            if (item.alwaysFlyout) {
+                // Always create a flyout if alwaysFlyout is true
+                const flyout = createFlyout({
+                    variant: 'sublinks',
+                    triggerLabel: item.label,
+                    linkItems: item.flyoutItems,
+                    has2LinesNavigation: has2LinesNavigation,
+                });
 
-            secondLineWrapper.appendChild(itemButton.cloneNode(true));
-            leftWrapper.appendChild(itemButton);
+                leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+            } else {
+                // For items without alwaysFlyout, decide based on number of subitems
+                if (item.flyoutItems.length === 1) {
+                    // Single subitem: create a link
+                    const itemButton = document.createElement('a');
+                    itemButton.text = item.flyoutItems[0].label;
+                    itemButton.href = item.flyoutItems[0].href;
+                    itemButton.className = `
+                    flex 
+                    items-center 
+                    justify-center 
+                    h-full 
+                    gap-2 
+                    px-4 
+                    py-2 
+                    w-fit 
+                    text-nowrap 
+                    flex-nowrap
+                    text-center 
+                    text-sm 
+                    font-semibold 
+                    rounded-none 
+                    transition-all 
+                    duration-300 
+                    cursor-pointer 
+                    hover:bg-secondary-light 
+                `;
 
-        } else if (item.type === 'flyout') {
-            const flyout = createFlyout({
-                variant: 'sublinks',
-                triggerLabel: item.label,
-                linkItems: item.flyoutItems,
-                has2LinesNavigation: has2LinesNavigation,
-                createIndependentInstance: true
-            });
+                    leftWrapper.appendChild(itemButton);
+                } else {
+                    // Multiple subitems: create a flyout
+                    const flyout = createFlyout({
+                        variant: 'sublinks',
+                        triggerLabel: item.label,
+                        linkItems: item.flyoutItems,
+                        has2LinesNavigation: has2LinesNavigation,
+                    });
 
-            secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
-            leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                    leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                }
+            }
+        }
+        // Two-line navigation logic
+        else {
+            const renderAsLinks = !item.alwaysFlyout;
+
+            if (renderAsLinks) {
+                item.flyoutItems.forEach((subItem) => {
+                    const itemButton = document.createElement('a');
+                    itemButton.text = subItem.label;
+                    itemButton.href = subItem.href;
+                    itemButton.className = `
+                    flex 
+                    items-center 
+                    justify-center 
+                    h-full 
+                    gap-2 
+                    px-4 
+                    py-2 
+                    w-fit 
+                    text-nowrap 
+                    flex-nowrap
+                    text-center 
+                    text-sm 
+                    font-semibold 
+                    rounded-none 
+                    transition-all 
+                    duration-300 
+                    cursor-pointer 
+                    hover:bg-secondary-light 
+                `;
+
+                    secondLineWrapper.appendChild(itemButton);
+                    leftWrapper.appendChild(itemButton.cloneNode(true));
+                });
+            } else {
+                const flyout = createFlyout({
+                    variant: 'sublinks',
+                    triggerLabel: item.label,
+                    linkItems: item.flyoutItems,
+                    has2LinesNavigation: has2LinesNavigation,
+                });
+
+                secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+                leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+            }
         }
     })
+
 
     if (hasSearch && searchProps) {
         const searchContainer = createSearch({
@@ -400,17 +567,20 @@ export const createNavigation = ({
     const mobileFlyoutContainer = document.createElement('div');
 
     sortedNavigationItems.forEach((item) => {
-        if (item.type === 'link') {
-            const itemLink = document.createElement('a');
-            itemLink.text = item.label;
-            itemLink.href = item.href;
-            itemLink.target = item.target;
-            itemLink.className = `
-            flex 
-            text-offcanvas-level1 
-            hover:bg-gray-100
-        `;
-            mobileMenuContent.appendChild(itemLink);
+        const renderAsLinks = !item.alwaysFlyout && has2LinesNavigation;
+
+        if (renderAsLinks) {
+            item.flyoutItems.forEach((subItem) => {
+                const itemLink = document.createElement('a');
+                itemLink.text = subItem.label;
+                itemLink.href = subItem.href;
+                itemLink.className = `
+                    flex 
+                    text-offcanvas-level1 
+                    hover:bg-gray-100
+                `;
+                mobileMenuContent.appendChild(itemLink);
+            });
         } else if (item.type === 'flyout') {
             const flyoutContainer = document.createElement('div');
             flyoutContainer.className = 'relative';
