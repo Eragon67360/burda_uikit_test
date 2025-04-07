@@ -52,7 +52,6 @@ export const createHomepage = ({
 
   const header = document.createElement('header');
   header.className = `w-full max-w-[90rem] ${(withSmallSlideshow || withStaticHero) ? `${navigationHas2Lines ? 'mt-[3.25rem] md:mt-34' : 'mt-[3.25rem] md:mt-26'}` : ''}`;
-  // header.style.maxWidth = "90rem";
   header.appendChild(createNavigation(navigationArgs))
 
   if (withStaticHero) {

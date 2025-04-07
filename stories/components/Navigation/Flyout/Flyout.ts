@@ -28,6 +28,9 @@ export const createFlyout = ({
     const container = document.createElement('div');
     container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
 
+    let isOpen = false;
+
+
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `
         absolute 
@@ -97,7 +100,6 @@ export const createFlyout = ({
             }
         });
 
-        let isOpen = false;
         triggerButton.addEventListener('click', () => {
             isOpen = !isOpen;
             flyoutWrapper.classList.toggle('hidden', !isOpen);
