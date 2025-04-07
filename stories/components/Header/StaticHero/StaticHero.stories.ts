@@ -14,8 +14,27 @@ export default meta;
 type Story = StoryObj<StaticHeroArgs>;
 
 export const DefaultStaticHero: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'desktop'
+    }
+  },
   args: {
-    imageSrc: 'static-hero-header-example.jpg',
+    desktopImageSrc: 'static-hero-header-example.jpg',
+    altText: 'Example of a static hero image',
+    href: '#',
+  },
+  render: createStaticHero,
+};
+
+export const MobileStaticHero: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1'
+    }
+  },
+  args: {
+    mobileImageSrc: 'static-hero-mobile.png',
     altText: 'Example of a static hero image',
     href: '#',
   },

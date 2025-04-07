@@ -4,7 +4,11 @@ import { createSlideProgress } from '@/stories/components/Header/Slideshow/Slide
 
 export type ShowcaseArgs = {
     isSmall: boolean;
-    images: string[];
+    images: {
+        mobile: string;
+        tablet: string;
+        desktop: string;
+    }[];
     duration?: number;
     isPlaying?: boolean;
 };
@@ -33,18 +37,19 @@ export const createShowcase = ({
     };
 
     const container = document.createElement('div');
-    container.className = 'relative w-full mx-auto';
+    container.className = 'relative w-full min-w-full mx-auto overflow-hidden';
 
     const slideshowContent = document.createElement('div');
 
-    slideshowContent.className = 'relative w-full';
+    slideshowContent.className = `relative w-full min-w-full ${isSmall ? 'h-full' : 'h-screen'}`;
     if (isSmall) {
         slideshowContent.classList.add('aspect-[24/9]');
     } else {
         slideshowContent.classList.add('aspect-video');
     }
+
     const imageContainer = document.createElement('div');
-    imageContainer.className = 'w-full h-full rounded-lg overflow-hidden';
+    imageContainer.className = `w-full h-full ${isSmall ? 'rounded-lg' : 'rounded-none'}  overflow-hidden min-w-full`;
 
     const navigationContainer = document.createElement('div');
     navigationContainer.className = 'absolute inset-0 flex items-center justify-between px-4';
@@ -53,14 +58,40 @@ export const createShowcase = ({
     bottomControls.className = 'absolute bottom-6 left-1/2 -translate-x-1/2';
 
     const preloadImages = async () => {
-        const imagePromises = images.map(src =>
-            new Promise<HTMLImageElement>((resolve, reject) => {
-                const img = new Image();
-                img.src = src;
-                img.alt = `Slide ${images.indexOf(src) + 1}`;
-                img.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
+        const imagePromises = images.map(imageSources =>
+            new Promise<HTMLPictureElement>((resolve, reject) => {
+                const picture = document.createElement('picture');
 
-                img.onload = () => resolve(img);
+                // Create source elements for responsive images
+                const sourceMobile = document.createElement('source');
+                sourceMobile.srcset = imageSources.mobile;
+                sourceMobile.media = '(max-width: 767px)';
+
+                const sourceTablet = document.createElement('source');
+                sourceTablet.srcset = imageSources.tablet;
+                sourceTablet.media = '(min-width: 768px) and (max-width: 1023px)';
+
+                // Desktop image as fallback (mandatory)
+                const img = new Image();
+                img.src = imageSources.desktop;
+                img.alt = `Slide ${images.indexOf(imageSources) + 1}`;
+                img.className = `
+                    w-full 
+                    h-full
+                    object-fill 
+                    top-0 
+                    left-0 
+                    opacity-0 
+                    transition-opacity 
+                    duration-300
+                `;
+
+                // Append sources and img to picture
+                picture.appendChild(sourceMobile);
+                picture.appendChild(sourceTablet);
+                picture.appendChild(img);
+
+                img.onload = () => resolve(picture);
                 img.onerror = reject;
             })
         );
@@ -72,13 +103,16 @@ export const createShowcase = ({
         if (isTransitioning) return;
 
         isTransitioning = true;
-        const newImg = preloadedImages[index];
+        const newPicture = preloadedImages[index];
 
         imageContainer.innerHTML = '';
-        imageContainer.appendChild(newImg);
+        imageContainer.appendChild(newPicture);
+
+        // Get the actual img element within the picture
+        const newImg = newPicture.querySelector('img');
 
         requestAnimationFrame(() => {
-            newImg.classList.remove('opacity-0');
+            newImg?.classList.remove('opacity-0');
 
             setTimeout(() => {
                 isTransitioning = false;
@@ -150,7 +184,7 @@ export const createShowcase = ({
         onClick: handleNext
     });
 
-    let preloadedImages: HTMLImageElement[] = [];
+    let preloadedImages: HTMLPictureElement[] = [];
 
     const initialize = async () => {
         preloadedImages = await preloadImages();
