@@ -26,7 +26,7 @@ export const createFlyout = ({
     has2LinesNavigation
 }: FlyoutArgs) => {
     const container = document.createElement('div');
-    container.className = `relative inline-block z-40 border border-brand ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+    container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
 
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `

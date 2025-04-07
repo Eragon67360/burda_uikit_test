@@ -33,18 +33,19 @@ export const createShowcase = ({
     };
 
     const container = document.createElement('div');
-    container.className = 'relative w-full min-w-full mx-auto';
+    container.className = 'relative w-full min-w-full mx-auto overflow-hidden';
 
     const slideshowContent = document.createElement('div');
 
-    slideshowContent.className = 'relative w-full min-w-full';
+    slideshowContent.className = `relative w-full min-w-full ${isSmall ? 'h-full' : 'h-screen'}`;
     if (isSmall) {
         slideshowContent.classList.add('aspect-[24/9]');
     } else {
         slideshowContent.classList.add('aspect-video');
     }
+
     const imageContainer = document.createElement('div');
-    imageContainer.className = 'w-full h-full rounded-lg overflow-hidden min-w-full';
+    imageContainer.className = `w-full h-full ${isSmall ? 'rounded-lg' : 'rounded-none'}  overflow-hidden min-w-full`;
 
     const navigationContainer = document.createElement('div');
     navigationContainer.className = 'absolute inset-0 flex items-center justify-between px-4';
