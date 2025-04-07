@@ -263,7 +263,7 @@ export const createNavigation = ({
             results: searchProps.results,
             emptyText: searchProps.emptyText,
             isSmall: has2LinesNavigation ? false : searchProps.isSmall,
-            classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
+            classNames: 'mr-4'
         });
         rightWrapper.appendChild(searchContainer);
     }
