@@ -162,7 +162,6 @@ export const createHomepage = ({
   cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedColumnCount: 3 }));
 
   const footer = document.createElement('footer');
-  footer.className = "px-4"
   footer.innerHTML = `${createFooter(footerArgs)}`
 
   const flyout = document.createElement('div');
