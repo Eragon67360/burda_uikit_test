@@ -5,7 +5,7 @@ import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
-import { isBuffer } from 'util';
+import { isBuffer, log } from 'util';
 import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
 
 export type NavigationItemType = 'flyout' | 'link';
@@ -82,14 +82,21 @@ export const createNavigation = ({
     const navigationDesktopContainer = document.createElement('div');
     const navigationWrapper = document.createElement('div');
     const contentWrapper = document.createElement('div');
+    const firstLineWrapper = document.createElement('div');
+    const secondLineWrapper = document.createElement('div');
     const linksWrapper = document.createElement('div');
     const rightWrapper = document.createElement('div');
 
     navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-50`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
-    contentWrapper.className = `w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
-    linksWrapper.className = ` flex items-center self-stretch justify-between z-50 ${has2LinesNavigation ? 'order-2 h-[2.8rem]' : 'order-1 h-full'}`;
-    rightWrapper.className = `flex items-center z-50 ${has2LinesNavigation ? 'order-1 h-[3.5rem]' : 'order-2 h-full'}`;
+    contentWrapper.className = ` w-full h-full flex ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
+
+    firstLineWrapper.className = `flex w-full h-fit z-50 ${has2LinesNavigation ? 'justify-end' : 'justify-between'}`;
+
+    linksWrapper.className = `items-center self-stretch justify-between z-50 h-full ${has2LinesNavigation ? 'hidden' : 'flex'}`;
+    rightWrapper.className = `flex items-center overflow-hidden ${has2LinesNavigation ? 'h-[3.5rem]' : 'h-full'}`;
+
+    secondLineWrapper.className = `justify-start items-center mr-auto w-full z-50 h-[2.8rem] transition-all duration-300 ease-in-out ${has2LinesNavigation ? 'flex' : 'hidden'} overflow-hidden`;
 
     const updateNavigationLayout = (forceOneLine = false) => {
         if (forceOneLine || currentNavigationLayout === 2) {
@@ -99,11 +106,17 @@ export const createNavigation = ({
             contentWrapper.classList.remove('flex-col', 'items-end');
             contentWrapper.classList.add('flex-row', 'items-center', 'justify-between');
 
-            linksWrapper.classList.remove('order-2', 'h-[2.8rem]');
-            linksWrapper.classList.add('order-1', 'h-full');
+            rightWrapper.classList.remove('h-[3.5rem]');
+            rightWrapper.classList.add('h-full');
 
-            rightWrapper.classList.remove('order-1', 'h-[3.5rem]');
-            rightWrapper.classList.add('order-2', 'h-full');
+            secondLineWrapper.classList.add('hidden');
+            secondLineWrapper.classList.remove('flex');
+
+            linksWrapper.classList.add('flex');
+            linksWrapper.classList.remove('hidden');
+
+            firstLineWrapper.classList.add('h-full', 'justify-between');
+            firstLineWrapper.classList.remove('h-fit', 'justify-end');
 
             if (has2LinesNavigation) {
                 if (hasSearch && searchProps) {
@@ -144,11 +157,17 @@ export const createNavigation = ({
             contentWrapper.classList.add('flex-col', 'items-end');
             contentWrapper.classList.remove('flex-row', 'items-center', 'justify-between');
 
-            linksWrapper.classList.add('order-2', 'h-[2.8rem]');
-            linksWrapper.classList.remove('order-1', 'h-full');
+            rightWrapper.classList.add('h-[3.5rem]');
+            rightWrapper.classList.remove('h-full');
 
-            rightWrapper.classList.add('order-1', 'h-[3.5rem]');
-            rightWrapper.classList.remove('order-2', 'h-full');
+            linksWrapper.classList.add('hidden');
+            linksWrapper.classList.remove('flex');
+
+            secondLineWrapper.classList.add('flex');
+            secondLineWrapper.classList.remove('hidden');
+
+            firstLineWrapper.classList.remove('h-full', 'justify-between');
+            firstLineWrapper.classList.add('h-fit', 'justify-end');
 
             if (hasSearch && searchProps) {
                 const searchContainer = createSearch({
@@ -193,19 +212,19 @@ export const createNavigation = ({
 
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        const viewportHeight = 150;
+        const intersectionThreshold = 150;
 
-        if (scrollPosition >= viewportHeight) {
+        if (scrollPosition >= intersectionThreshold) {
             navigationDesktopContainer.classList.remove('py-4');
             navigationWrapper.classList.remove('rounded-t-lg');
             ctaContainer.classList.remove('rounded-se-lg');
-
+            ctaContainer.classList.add('rounded-e-lg');
             updateNavigationLayout(true);
         } else {
             navigationDesktopContainer.classList.add('py-4');
             navigationWrapper.classList.add('rounded-t-lg');
+            ctaContainer.classList.remove('rounded-e-lg');
             ctaContainer.classList.add('rounded-se-lg');
-
             resetNavigationLayout();
         }
     });
@@ -221,6 +240,7 @@ export const createNavigation = ({
     logo2Container.className = 'h-[2.8rem] w-auto ml-2 mr-3';
 
     sortedNavigationItems.forEach((item, index) => {
+        let itemButton;
         if (item.type === 'link') {
             const itemButton = document.createElement('a');
             itemButton.text = item.label;
@@ -234,7 +254,9 @@ export const createNavigation = ({
                 gap-2 
                 px-4 
                 py-2 
-                w-full
+                w-fit 
+                text-nowrap 
+                flex-nowrap
                 text-center 
                 text-sm 
                 font-semibold 
@@ -243,9 +265,11 @@ export const createNavigation = ({
                 duration-300 
                 cursor-pointer 
                 hover:bg-secondary-light 
-                ${(has2LinesNavigation && (index === sortedNavigationItems.length - 1)) && 'rounded-ee-lg'}
             `;
+
+            secondLineWrapper.appendChild(itemButton.cloneNode(true));
             linksWrapper.appendChild(itemButton);
+
         } else if (item.type === 'flyout') {
             const flyout = createFlyout({
                 variant: 'sublinks',
@@ -253,6 +277,7 @@ export const createNavigation = ({
                 linkItems: item.flyoutItems,
                 has2LinesNavigation: has2LinesNavigation
             });
+            secondLineWrapper.appendChild(flyout);
             linksWrapper.appendChild(flyout);
         }
     })
@@ -288,12 +313,17 @@ export const createNavigation = ({
     ctaContainer.appendChild(cartButton);
 
     rightWrapper.appendChild(ctaContainer);
-    contentWrapper.appendChild(linksWrapper);
-    contentWrapper.appendChild(rightWrapper);
+
+    firstLineWrapper.appendChild(linksWrapper);
+    firstLineWrapper.appendChild(rightWrapper);
+    contentWrapper.appendChild(firstLineWrapper);
+    contentWrapper.appendChild(secondLineWrapper);
     navigationWrapper.appendChild(logoContainer);
+
     if (logo2Src) {
         navigationWrapper.appendChild(logo2Container);
     }
+
     navigationWrapper.appendChild(contentWrapper);
     navigationDesktopContainer.appendChild(navigationWrapper);
 

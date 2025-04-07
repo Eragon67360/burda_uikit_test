@@ -29,3 +29,15 @@
 .animate-search-appear {
     animation: searchAppear 0.3s ease-in forwards;
 }
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translateY(10px);
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translateY(0);
+}
