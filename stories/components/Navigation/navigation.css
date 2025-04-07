@@ -30,14 +30,17 @@
     animation: searchAppear 0.3s ease-in forwards;
 }
 
-.fade-out {
+.fade-in {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: translateY(10px);
+    transition: opacity 0.3s ease-in-out;
 }
 
-.fade-in {
+.fade-out {
     opacity: 1;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: translateY(0);
+    transition: opacity 0.3s ease-in-out;
 }
+
+/* .hidden {
+    opacity: 0;
+    pointer-events: none;
+} */
