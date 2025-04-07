@@ -33,18 +33,18 @@ export const createShowcase = ({
     };
 
     const container = document.createElement('div');
-    container.className = 'relative w-full mx-auto';
+    container.className = 'relative w-full min-w-full mx-auto';
 
     const slideshowContent = document.createElement('div');
 
-    slideshowContent.className = 'relative w-full';
+    slideshowContent.className = 'relative w-full min-w-full';
     if (isSmall) {
         slideshowContent.classList.add('aspect-[24/9]');
     } else {
         slideshowContent.classList.add('aspect-video');
     }
     const imageContainer = document.createElement('div');
-    imageContainer.className = 'w-full h-full rounded-lg overflow-hidden';
+    imageContainer.className = 'w-full h-full rounded-lg overflow-hidden min-w-full';
 
     const navigationContainer = document.createElement('div');
     navigationContainer.className = 'absolute inset-0 flex items-center justify-between px-4';
@@ -58,8 +58,16 @@ export const createShowcase = ({
                 const img = new Image();
                 img.src = src;
                 img.alt = `Slide ${images.indexOf(src) + 1}`;
-                img.className = 'w-full h-full object-cover opacity-0 transition-opacity duration-300';
-
+                img.className = `
+                w-full 
+                h-full
+                object-fill 
+                top-0 
+                left-0 
+                opacity-0 
+                transition-opacity 
+                duration-300
+            `;
                 img.onload = () => resolve(img);
                 img.onerror = reject;
             })

@@ -27,8 +27,12 @@ const meta: Meta<ShowcaseArgs> = {
         isSmall: false
     },
     render: (args) => {
+        const container = document.createElement('div');
+        container.className = 'container w-screen max-w-[90rem] mx-auto';
+        container.style.height = 'auto';
         const { element } = createShowcase(args);
-        return element
+        container.appendChild(element);
+        return container
     }
 };
 
