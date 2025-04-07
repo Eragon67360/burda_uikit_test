@@ -8,21 +8,21 @@ export type TagArgs = {
 
 export const createTag = ({ text, showIcon = true }: TagArgs) => {
 
-  const mainContainerDiv = document.createElement('div');
-  mainContainerDiv.className = 'flex items-center py-3 md:py-4 pr-6 md:pr-8 pl-4 md:pl-5 my-auto gap-2 md:gap-4 rounded-[3.25rem] border border-neutral-200 bg-neutral-50';
+    const mainContainerDiv = document.createElement('div');
+    mainContainerDiv.className = 'flex items-center py-3 md:py-4 pr-6 md:pr-8 pl-4 md:pl-5 my-auto gap-2 md:gap-4 rounded-[3.25rem] border border-neutral-200 bg-neutral-50';
 
-  if (showIcon) {
-      const iconDiv = document.createElement('div');
-      iconDiv.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
-      mainContainerDiv.appendChild(iconDiv);
-  }
+    if (showIcon) {
+        const iconDiv = document.createElement('div');
+        iconDiv.innerHTML = IconRegistry[IconCategory.SYSTEM].success;
+        mainContainerDiv.appendChild(iconDiv);
+    }
 
-  const textSpan = document.createElement('span');
-  textSpan.className = 'text-label whitespace-nowrap';
-  textSpan.textContent = text;
+    const textSpan = document.createElement('span');
+    textSpan.className = 'text-label whitespace-nowrap';
+    textSpan.textContent = text;
 
-  mainContainerDiv.appendChild(textSpan);
-  return mainContainerDiv;
+    mainContainerDiv.appendChild(textSpan);
+    return mainContainerDiv;
 };
 
 export const createTagGroup = (tags: Array<TagArgs>) => {
@@ -35,7 +35,6 @@ export const createTagGroup = (tags: Array<TagArgs>) => {
     tags.forEach(tag => {
         const tagElement = document.createElement('div');
         tagElement.innerHTML = createTag(tag).outerHTML;
-        console.log('tagElement :', tagElement);
         desktopContainer.appendChild(tagElement);
     })
     const elements = tags.map(tag => createTag(tag));
