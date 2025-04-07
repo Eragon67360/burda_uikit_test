@@ -59,10 +59,10 @@ export const HomepageWithSlideshow: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
+    backgrounds: {
+        default: 'White',
+    },
   },
-  globals: {
-    backgrounds: { value: 'white' },
-  }
 };
 
 export const HomepageWithSmallSlideshow: Story = {
@@ -72,10 +72,10 @@ export const HomepageWithSmallSlideshow: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
+    backgrounds: {
+        default: 'White',
+    },
   },
-  globals: {
-    backgrounds: { value: 'white' },
-  }
 };
 
 export const HomepageWithStaticHero: Story = {
@@ -91,10 +91,10 @@ export const HomepageWithStaticHero: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
+    backgrounds: {
+        default: 'White',
+    },
   },
-  globals: {
-    backgrounds: { value: 'white' },
-  }
 };
 
 export const HomepageWith2LinesNavigation: Story = {
@@ -111,10 +111,10 @@ export const HomepageWith2LinesNavigation: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
+    backgrounds: {
+        default: 'White',
+    },
   },
-  globals: {
-    backgrounds: { value: 'white' },
-  }
 };
 
 export const FocusMobile: Story = {
@@ -130,10 +130,10 @@ export const FocusMobile: Story = {
       defaultViewport: 'mobile1',
     },
     layout: 'fullscreen',
+    backgrounds: {
+      default: 'White',
+    },
   },
-  globals: {
-    backgrounds: { value: 'white' },
-  }
 };
 
 
@@ -151,9 +151,9 @@ export const MeinSchoenerGartenDesktop: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
-  },
-  globals: {
-    backgrounds: { value: 'white' },
+    backgrounds: {
+      default: 'White',
+    },
   },
   render: (args) => {
     const wrapper = document.createElement('div');
@@ -180,9 +180,9 @@ export const MeinSchoenerGartenMobile: Story = {
       defaultViewport: 'mobile1',
     },
     layout: 'fullscreen',
-  },
-  globals: {
-    backgrounds: { value: 'white' },
+    backgrounds: {
+      default: 'White',
+    },
   },
   render: (args) => {
     const wrapper = document.createElement('div');
@@ -209,9 +209,9 @@ export const AutoMotorUndSport: Story = {
       defaultViewport: 'widescreen',
     },
     layout: 'fullscreen',
-  },
-  globals: {
-    backgrounds: { value: 'white' },
+    backgrounds: {
+      default: 'White',
+    },
   },
   render: (args) => {
     const wrapper = document.createElement('div');

@@ -102,9 +102,11 @@ export const GreyBackgroundCard: Story = {
       }
     }
   },
-  globals: {
-    backgrounds: { value: 'white', grid: false },
-  },
+  parameters: {
+    backgrounds: {
+        default: 'White',
+    },
+  }
 };
 
 export const StyledTextCard: Story = {

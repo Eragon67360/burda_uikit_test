@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/html';
-import { createSubscriptionPlan, SubscriptionPlanArgs } from './SubscriptionPlan';
+import { createSubscriptionPlanStartPage, SubscriptionPlanStartPageArgs } from './SubscriptionPlanStartPage';
 
-const meta: Meta<SubscriptionPlanArgs> = {
-    title: 'Components (Molecules)/SubscriptionPlan',
+const meta: Meta<SubscriptionPlanStartPageArgs> = {
+    title: 'Components (Molecules)/SubscriptionPlan/StartPage',
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
@@ -16,11 +16,11 @@ const meta: Meta<SubscriptionPlanArgs> = {
         primaryCTALabel: { control: 'text' },
         onPrimaryClick: { action: 'primary clicked' },
     },
-    render: (args) => createSubscriptionPlan(args as any)
+    render: (args) => createSubscriptionPlanStartPage(args as any)
 };
 
 export default meta;
-type Story = StoryObj<SubscriptionPlanArgs>;
+type Story = StoryObj<SubscriptionPlanStartPageArgs>;
 
 export const Default: Story = {
     args: {
@@ -44,7 +44,7 @@ export const ThreePlans: Story = {
         const container = document.createElement('div');
         container.className = 'flex gap-8 items-end';
 
-        const plan1 = createSubscriptionPlan({
+        const plan1 = createSubscriptionPlanStartPage({
             image: '/burda_subscriptions_1.png',
             title: 'FOCUS',
             subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -59,7 +59,7 @@ export const ThreePlans: Story = {
             onPrimaryClick: () => console.log('Plan 1 Primary clicked'),
         });
 
-        const plan2 = createSubscriptionPlan({
+        const plan2 = createSubscriptionPlanStartPage({
             image: '/burda_subscriptions_2.png',
             title: 'FOCUS MONEY',
             subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',
@@ -74,7 +74,7 @@ export const ThreePlans: Story = {
             onPrimaryClick: () => console.log('Plan 2 Primary clicked'),
         });
 
-        const plan3 = createSubscriptionPlan({
+        const plan3 = createSubscriptionPlanStartPage({
             image: '/burda_subscriptions_3.png',
             title: 'FOCUS+',
             subtitle: 'Das FOCUS Komplett-Paket aus Print-Heft und digitalen Inhalten',

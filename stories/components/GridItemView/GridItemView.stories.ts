@@ -190,8 +190,10 @@ export const GridItemViewWithCards: Story = {
 };
 
 export const GreyBackgroundGridItemViewWithArticles: Story = {
-    globals: {
-        backgrounds: { value: 'white', grid: false },
+    parameters: {
+        backgrounds: {
+            default: 'White',
+        },
     },
     args: {
         gridItemType: 'article',
@@ -246,8 +248,10 @@ export const GreyBackgroundGridItemViewWithArticles: Story = {
 };
 
 export const GreyBackgroundGridItemViewWithCards: Story = {
-    globals: {
-        backgrounds: { value: 'white', grid: false },
+    parameters: {
+        backgrounds: {
+            default: 'White',
+        },
     },
     args: {
         gridItemType: 'card',
@@ -316,16 +320,16 @@ export const GreyBackgroundGridItemViewWithCards: Story = {
 };
 
 export const GreyBackgroundGridItemViewWithCardsWithFixedGrid: Story = {
-    globals: {
-        backgrounds: { value: 'white', grid: false },
-    },
     parameters: {
         layout: 'fullscreen',
+        backgrounds: {
+            default: 'White',
+        },
     },
     args: {
         gridItemType: 'card',
         centerItems: true,
-        fixedDoubleGrid: true,
+        fixedColumnCount: 3,
         cards: [
             {
                 backgroundColor: 'gray',

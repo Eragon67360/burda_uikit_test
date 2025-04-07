@@ -1,6 +1,7 @@
-export const createBadge = (badgeLabel: string, size: number, color: "primary" | "secondary") => {
+export const createBadge = (badgeLabel: string, size: number, color: "primary" | "secondary", classNames?: string) => {
     const badgeElement = document.createElement('div');
     badgeElement.className = `absolute top-0 left-0 p-2 aspect-square bg-${color}-interaction rounded-full flex items-center justify-center`;
+    badgeElement.classList.add(...classNames?.split(' ') ?? []);
     badgeElement.style.minWidth = `${size}px`;
     badgeElement.style.minHeight = `${size}px`;
 
