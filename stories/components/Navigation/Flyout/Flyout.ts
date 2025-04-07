@@ -23,10 +23,14 @@ export const createFlyout = ({
     linkItems = [],
     searchProps,
     triggerLabel = 'Menu',
-    has2LinesNavigation
-}: FlyoutArgs) => {
+    has2LinesNavigation,
+    createIndependentInstance = false
+}: FlyoutArgs & { createIndependentInstance?: boolean }) => {
     const container = document.createElement('div');
     container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+
+    let isOpen = false;
+
 
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `
@@ -97,7 +101,6 @@ export const createFlyout = ({
             }
         });
 
-        let isOpen = false;
         triggerButton.addEventListener('click', () => {
             isOpen = !isOpen;
             flyoutWrapper.classList.toggle('hidden', !isOpen);
@@ -111,15 +114,35 @@ export const createFlyout = ({
             }
         });
 
-        document.addEventListener('click', (event) => {
-            if (isOpen && !container.contains(event.target as Node)) {
-                flyoutWrapper.classList.add('hidden');
-                triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
-                chevronIcon.classList.remove('scale-y-[-1]');
-                isOpen = false;
-            }
-        });
-
+        // document.addEventListener('click', (event) => {
+        //     if (isOpen && !container.contains(event.target as Node)) {
+        //         flyoutWrapper.classList.add('hidden');
+        //         triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
+        //         chevronIcon.classList.remove('scale-y-[-1]');
+        //         isOpen = false;
+        //     }
+        // });
+        if (!createIndependentInstance) {
+            // Existing global event listener logic
+            document.addEventListener('click', (event) => {
+                if (isOpen && !container.contains(event.target as Node)) {
+                    flyoutWrapper.classList.add('hidden');
+                    triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
+                    chevronIcon.classList.remove('scale-y-[-1]');
+                    isOpen = false;
+                }
+            });
+        } else {
+            // Create independent event listeners for this instance
+            document.addEventListener('click', (event) => {
+                if (isOpen && !container.contains(event.target as Node)) {
+                    flyoutWrapper.classList.add('hidden');
+                    triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
+                    chevronIcon.classList.remove('scale-y-[-1]');
+                    isOpen = false;
+                }
+            });
+        }
         container.appendChild(triggerButton);
         container.appendChild(flyoutWrapper);
 

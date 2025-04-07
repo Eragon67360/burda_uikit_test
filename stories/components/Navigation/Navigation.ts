@@ -99,7 +99,7 @@ export const createNavigation = ({
         z-50 
         flex 
         transition-all duration-300 
-        ${has2LinesNavigation ? 'opacity-0 !w-0 pointer-events-none translate-y-4 !h-full' : 'opacity-100 w-fit pointer-events-auto translate-y-0 h-0'}
+        ${has2LinesNavigation ? 'opacity-0 !w-0 pointer-events-none translate-y-4 !h-full' : 'opacity-100 w-fit pointer-events-auto translate-y-0 h-full'}
     `;
 
     rightWrapper.className = `flex items-center ${has2LinesNavigation ? 'h-[3.5rem]' : 'h-full'}`;
@@ -112,7 +112,6 @@ export const createNavigation = ({
     z-40 flex
      transition-[opacity,height] duration-300 
     ${has2LinesNavigation ? 'opacity-100 !h-[2.875rem] pointer-events-auto translate-y-0 w-fit' : 'opacity-0 h-0 pointer-events-none translate-y-4 !w-0'}
-    overflow-hidden
     `;
 
     const updateNavigationLayout = (forceOneLine = false) => {
@@ -218,7 +217,7 @@ export const createNavigation = ({
             if (hasSearch && searchProps) {
                 const searchContainer = createSearch({
                     ...searchProps,
-                    classNames: hasLanguageDropdown ? 'mr-0' : 'mr-4'
+                    classNames: 'mr-4'
                 });
 
                 const existingSearch = rightWrapper.querySelector('.search-container');
@@ -293,10 +292,12 @@ export const createNavigation = ({
                 variant: 'sublinks',
                 triggerLabel: item.label,
                 linkItems: item.flyoutItems,
-                has2LinesNavigation: has2LinesNavigation
+                has2LinesNavigation: has2LinesNavigation,
+                createIndependentInstance: true
             });
-            secondLineWrapper.appendChild(flyout);
-            leftWrapper.appendChild(flyout);
+
+            secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
+            leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
         }
     })
 
@@ -500,22 +501,6 @@ export const createNavigation = ({
         }
     });
 
-    // if (hasSearch && searchProps) {
-    //     const mobileSearchContainer = createSearch({
-    //         ...searchProps,
-    //         classNames: 'w-full mb-4'
-    //     });
-    //     mobileMenuContent.appendChild(mobileSearchContainer);
-    // }
-
-    // if (hasLanguageDropdown && languageProps) {
-    //     const mobileLanguageDropdown = createLanguageDropdown({
-    //         ...languageProps,
-    //         isCompressed: false
-    //     });
-    //     mobileMenuContent.appendChild(mobileLanguageDropdown);
-    // }
-
     const toggleMobileMenu = (trigger: "menu" | "search") => {
         isMobileMenuOpen = !isMobileMenuOpen;
 
@@ -602,3 +587,44 @@ export const createNavigation = ({
     navigationContainer.appendChild(navigationMobileContainer);
     return navigationContainer;
 }
+
+
+function cloneFlyoutWithListeners(originalFlyout: HTMLElement) {
+    const clonedFlyout = originalFlyout.cloneNode(true) as HTMLElement;
+
+    // Find the trigger button and flyout wrapper in the cloned element
+    const originalTriggerButton = originalFlyout.querySelector('button');
+    const originalFlyoutWrapper = originalFlyout.querySelector('.hidden');
+
+    const clonedTriggerButton = clonedFlyout.querySelector('button');
+    const clonedFlyoutWrapper = clonedFlyout.querySelector('.hidden');
+
+    if (clonedTriggerButton && clonedFlyoutWrapper && originalTriggerButton && originalFlyoutWrapper) {
+        let isOpen = false;
+
+        clonedTriggerButton.addEventListener('click', () => {
+            isOpen = !isOpen;
+            clonedFlyoutWrapper.classList.toggle('hidden', !isOpen);
+
+            if (isOpen) {
+                clonedTriggerButton.classList.add('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
+                clonedTriggerButton.querySelector('div')?.classList.add('scale-y-[-1]');
+            } else {
+                clonedTriggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
+                clonedTriggerButton.querySelector('div')?.classList.remove('scale-y-[-1]');
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (isOpen && !clonedFlyout.contains(event.target as Node)) {
+                clonedFlyoutWrapper.classList.add('hidden');
+                clonedTriggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
+                clonedTriggerButton.querySelector('div')?.classList.remove('scale-y-[-1]');
+                isOpen = false;
+            }
+        });
+    }
+
+    return clonedFlyout;
+}
+
