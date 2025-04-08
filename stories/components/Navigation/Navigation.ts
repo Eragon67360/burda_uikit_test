@@ -7,6 +7,7 @@ import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
+import { createButtonLink } from '../Button/ButtonLink/ButtonLink';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -538,8 +539,45 @@ export const createNavigation = ({
     const searchInput = document.createElement('input');
     const mobileSearchContainer = document.createElement('div');
     mobileSearchContainer.className = 'flex gap-1 items-center justify-between mx-7';
+    const mobileSearchResultsPanel = document.createElement('div');
+    if (hasSearch && searchProps) {
 
-    if (hasSearch) {
+        mobileSearchResultsPanel.className = `
+        fixed 
+        bottom-0 
+        left-0 
+        w-full 
+        bg-white 
+        z-[100] 
+        shadow-2xl 
+        transform 
+        translate-y-full 
+        transition-transform 
+        duration-300 
+        ease-in-out 
+        h-full 
+        max-h-[calc(100dvh-142px)] 
+        overflow-y-auto
+    `;
+        const searchResultsContainer = document.createElement('div');
+        searchResultsContainer.className = 'p-4';
+
+        const noResultsMessage = document.createElement('p');
+        noResultsMessage.textContent = searchProps.emptyText || 'No results found';
+        noResultsMessage.className = 'text-center text-gray-500 hidden';
+
+        searchResultsContainer.appendChild(noResultsMessage);
+        if (searchProps.results && searchProps.results.length > 0) {
+            searchProps.results.forEach(result => {
+                const searchLinksResult = createButtonLink({ label: result.label, href: result.href, target: result.target });
+                searchResultsContainer.appendChild(searchLinksResult);
+            });
+        } else {
+            noResultsMessage.classList.remove('hidden');
+        }
+
+        mobileSearchResultsPanel.appendChild(searchResultsContainer);
+
         searchWrapper.className = "bg-neutral-200 rounded flex gap-3 transition-all duration-300";
         const iconSpan = document.createElement('span');
         iconSpan.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
@@ -572,7 +610,8 @@ export const createNavigation = ({
                 event.preventDefault();
                 return;
             }
-
+            mobileSearchResultsPanel.classList.remove('translate-y-0');
+            mobileSearchResultsPanel.classList.add('translate-y-full');
             searchWrapper.classList.add('border-b-0');
             searchWrapper.classList.remove('bg-base-white');
             searchWrapper.classList.remove('border-b-[5px]', 'border-secondary-dark');
@@ -583,6 +622,10 @@ export const createNavigation = ({
             searchInput.classList.remove('mx-5');
         });
 
+        mobileSearchResultsPanel.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+        });
         searchWrapper.addEventListener('mousedown', (event) => {
             if (event.target !== trashButton && !trashButton.contains(event.target as Node)) {
                 if (event.target !== searchInput && !searchInput.contains(event.target as Node)) {
@@ -593,8 +636,21 @@ export const createNavigation = ({
             }
         });
 
-        searchInput.addEventListener('input', () => {
+        searchInput.addEventListener('input', (event) => {
             trashButton.disabled = searchInput.value.length === 0;
+            const inputValue = (event.target as HTMLInputElement).value.trim();
+
+            if (searchProps.onSearch) {
+                searchProps.onSearch(inputValue);
+            }
+
+            if (inputValue) {
+                mobileSearchResultsPanel.classList.remove('translate-y-full');
+                mobileSearchResultsPanel.classList.add('translate-y-0');
+            } else {
+                mobileSearchResultsPanel.classList.remove('translate-y-0');
+                mobileSearchResultsPanel.classList.add('translate-y-full');
+            }
         });
 
         searchWrapper.appendChild(iconSpan);
@@ -903,7 +959,7 @@ export const createNavigation = ({
     navigationMobileContainer.appendChild(mobileRightTrigger);
     mobileMenuContainer.appendChild(mobileMenuContent);
     navigationContainer.appendChild(mobileMenuContainer);
-
+    navigationContainer.appendChild(mobileSearchResultsPanel);
     navigationContainer.appendChild(navigationDesktopContainer);
     navigationContainer.appendChild(navigationMobileContainer);
     return navigationContainer;
