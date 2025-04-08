@@ -258,14 +258,8 @@ export const DynamicNavigation: Story = {
                     { label: 'FOCUS', href: '/', target: '_blank' },
                     { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
                     { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
-                ]
-            },
-            {
-                type: 'link',
-                order: 2,
-                label: 'FOCUS+',
-                href: '/focus',
-                target: '_self'
+                ],
+                alwaysFlyout: true
             }
         ],
         hasSearch: true,

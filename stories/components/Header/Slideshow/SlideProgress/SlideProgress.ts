@@ -91,7 +91,7 @@ export const createSlideProgress = ({
 
     const createProgressSection = (index: number): HTMLElement => {
         const section = document.createElement('div');
-        section.className = 'flex-1 h-2 bg-neutral-100 z-0 rounded overflow-hidden cursor-pointer hover:bg-secondary-dark hover:z-[999] transition-colors duration-300';
+        section.className = 'flex-1 h-1 md:h-2 bg-neutral-100 z-0 rounded overflow-hidden cursor-pointer hover:bg-secondary-dark hover:z-[999] transition-colors duration-300';
 
         if (index === state.currentStep) {
             const progress = document.createElement('div');
@@ -149,15 +149,15 @@ export const createSlideProgress = ({
     };
 
     const container = document.createElement('div');
-    container.className = 'flex items-center gap-3 w-[22.75rem] max-w-[22.75rem]';
+    container.className = 'flex items-center gap-2 md:gap-3 w-[288px] md:w-[22.75rem] max-w-[22.75rem]';
 
     const progressContainer = document.createElement('div');
     progressContainer.className = 'flex-1 flex gap-2 p-2 rounded-[0.5rem] bg-base-white';
 
     const playPauseButton = document.createElement('button');
     playPauseButton.className = [
-        'w-8 h-8 cursor-pointer',
-        'flex items-center justify-center',
+        'w-8 h-8 cursor-pointer hidden md:flex',
+        'items-center justify-center',
         'rounded-full bg-base-white',
         'hover:bg-secondary-extra-light active:bg-secondary-light',
         'transition-colors duration-300'

@@ -1,6 +1,6 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
+import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
 import { getSizedIcon } from '@/utils/iconUtils';
-import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink'
 
 export type SearchArgs = {
     placeholder?: string;
@@ -8,6 +8,7 @@ export type SearchArgs = {
         label: string;
         href: string;
         onClick?: () => void;
+        target?: '_blank' | '_self' | '_parent' | '_top'
     }>;
     onSearch?: (value: string) => void;
     emptyText?: string;
@@ -149,7 +150,7 @@ export const createSearch = ({
             // Reset small input
             if (isSmall) {
                 smallInput.value = '';
-                resultsPopover.innerHTML = ''; // Clear results
+                resultsPopover.innerHTML = '';
                 smallInputContainer.appendChild(smallSearchIcon);
                 smallInputContainer.appendChild(smallInput);
             }
@@ -174,8 +175,15 @@ export const createSearch = ({
         handleSearch(inputValue);
     });
 
+    input.addEventListener('focus', () => {
+        if (input.value.trim()) {
+            resultsPopover.style.display = 'flex';
+        }
+    });
+
     input.addEventListener('blur', () => {
         setTimeout(() => {
+            resultsPopover.style.display = 'none';
             if (!input.value.trim()) {
                 resultsPopover.style.display = 'none';
             }

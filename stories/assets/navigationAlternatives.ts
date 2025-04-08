@@ -1,4 +1,4 @@
-import { NavigationArgs } from "../components/Navigation/Navigation";
+import { NavigationArgs } from "../components/Navigation/Navigation"
 
 export const focusNavigation: NavigationArgs = {
     logoSrc: '/burda_logo.png',
@@ -13,21 +13,24 @@ export const focusNavigation: NavigationArgs = {
                 { label: 'FOCUS', href: '/', target: '_blank' },
                 { label: 'FOCUS MONEY', href: '/about', target: '_blank' },
                 { label: 'FOCUS GESUNDHEIT', href: '/contact', target: '_blank' }
+            ],
+            alwaysFlyout: true
+        },
+        {
+            type: 'flyout',
+            order: 2,
+            label: 'FOCUS+',
+            flyoutItems: [
+                { label: 'FOCUS+', href: '/focus', target: '_self' }
             ]
         },
         {
-            type: 'link',
-            order: 2,
-            label: 'FOCUS+',
-            href: '/focus',
-            target: '_self'
-        },
-        {
-            type: 'link',
+            type: 'flyout',
             order: 3,
             label: 'Einzelausgaben',
-            href: '/einzelausgaben',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Einzelausgaben', href: '/einzelausgaben', target: '_self' }
+            ]
         }
     ],
     hasLanguageDropdown: true,
@@ -70,32 +73,36 @@ export const meinSchoenerGartenNavigation: NavigationArgs = {
     has2LinesNavigation: false,
     navigationItems: [
         {
-            type: 'link',
+            type: 'flyout',
             order: 1,
             label: 'Zeitschriften',
-            href: '/focus',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Zeitschriften', href: '/focus', target: '_self' }
+            ]
         },
         {
-            type: 'link',
+            type: 'flyout',
             order: 2,
             label: 'Digital',
-            href: '/einzelausgaben',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Digital', href: '/einzelausgaben', target: '_self' }
+            ]
         },
         {
-            type: 'link',
+            type: 'flyout',
             order: 3,
             label: 'Aboarten',
-            href: '/focus',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Aboarten', href: '/focus', target: '_self' }
+            ]
         },
         {
-            type: 'link',
+            type: 'flyout',
             order: 4,
             label: 'Prämien',
-            href: '/einzelausgaben',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Prämien', href: '/einzelausgaben', target: '_self' }
+            ]
         }
     ],
     hasSearch: true,
@@ -110,7 +117,6 @@ export const meinSchoenerGartenNavigation: NavigationArgs = {
         isSmall: false
     },
     hasLanguageDropdown: false,
-
     loginButtonText: '',
     loginButtonIcon: 'userCircle',
     cartButtonText: 'Warenkorb & Kasse',
@@ -128,39 +134,33 @@ export const autoMotorUndSportNavigation: NavigationArgs = {
     has2LinesNavigation: true,
     navigationItems: [
         {
-            type: 'link',
+            type: 'flyout',
             order: 1,
-            label: 'Heft-Abo',
-            href: '/focus',
-            target: '_self'
+            label: 'Abos',
+            flyoutItems: [
+                { label: 'Heft-Abo', href: '/focus', target: '_self' },
+                { label: 'Digital-Abo', href: '/einzelausgaben', target: '_self' },
+                { label: 'Kombi-Abo', href: '/focus', target: '_self' }
+            ],
+            alwaysFlyout: false
         },
         {
-            type: 'link',
+            type: 'flyout',
             order: 2,
-            label: 'Digital-Abo',
-            href: '/einzelausgaben',
-            target: '_self'
-        },
-        {
-            type: 'link',
-            order: 3,
-            label: 'Kombi-Abo',
-            href: '/focus',
-            target: '_self'
-        },
-        {
-            type: 'link',
-            order: 4,
             label: 'Einzelhefte & Produkte',
-            href: '/einzelausgaben',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Einzelhefte & Produkte', href: '/einzelausgaben', target: '_self' }
+            ],
+            alwaysFlyout: false
         },
         {
-            type: 'link',
-            order: 5,
+            type: 'flyout',
+            order: 3,
             label: 'Events',
-            href: '/focus',
-            target: '_self'
+            flyoutItems: [
+                { label: 'Events', href: '/focus', target: '_self' }
+            ],
+            alwaysFlyout: false
         }
     ],
     hasLanguageDropdown: true,

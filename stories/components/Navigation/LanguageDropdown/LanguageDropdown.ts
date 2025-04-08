@@ -64,7 +64,7 @@ export const createLanguageDropdown = ({
 
     const dropdownContainer = document.createElement('div');
     dropdownContainer.className = `
-        absolute z-10 mt-2 left-1/2 -translate-x-1/2 py-3 pl-2 pr-4 w-fit 
+        absolute z-50 mt-2 left-1/2 -translate-x-1/2 py-3 pl-2 pr-4 w-fit 
         bg-base-white shadow-lg rounded-lg 
         hidden 
     `.trim();

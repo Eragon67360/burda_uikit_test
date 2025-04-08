@@ -26,7 +26,10 @@ export const createFlyout = ({
     has2LinesNavigation
 }: FlyoutArgs) => {
     const container = document.createElement('div');
-    container.className = `relative inline-block z-[999] ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+    container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+
+    let isOpen = false;
+
 
     const flyoutWrapper = document.createElement('div');
     flyoutWrapper.className = `
@@ -46,7 +49,7 @@ export const createFlyout = ({
     `;
 
     if (variant === 'search') {
-        const searchComponent = createSearch(searchProps || {});
+        const searchComponent = createSearch(searchProps);
         return searchComponent;
     }
 
@@ -97,7 +100,6 @@ export const createFlyout = ({
             }
         });
 
-        let isOpen = false;
         triggerButton.addEventListener('click', () => {
             isOpen = !isOpen;
             flyoutWrapper.classList.toggle('hidden', !isOpen);

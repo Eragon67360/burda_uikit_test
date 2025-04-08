@@ -46,13 +46,12 @@ export const createHomepage = ({
   };
 
   const container = document.createElement('div');
-  container.className = `flex flex-col h-full w-full mx-auto ${navigationHas2Lines ? 'pt-[3.25rem] md:pt-34' : 'pt-[3.25rem] md:pt-26'} px-0 md:px-4`;
+  container.className = `flex flex-col h-full w-full mx-auto ${withSmallSlideshow || withStaticHero ? ' px-4' : 'px-0'}`;
   container.style.maxWidth = "90rem";
   setPrimaryColorMode(isPrimaryColorDark);
 
   const header = document.createElement('header');
-  header.className = "w-full max-w-[90rem] mx-auto";
-  header.style.maxWidth = "90rem";
+  header.className = `w-full max-w-[90rem] ${(withSmallSlideshow || withStaticHero) ? `${navigationHas2Lines ? 'mt-[3.25rem] md:mt-34' : 'mt-[3.25rem] md:mt-26'}` : ''}`;
   header.appendChild(createNavigation(navigationArgs))
 
   if (withStaticHero) {
@@ -162,7 +161,6 @@ export const createHomepage = ({
   cardsSection.appendChild(createGridItemView({ cards, gridItemType: 'card', centerItems: true, fixedColumnCount: 3 }));
 
   const footer = document.createElement('footer');
-  footer.className = "px-4"
   footer.innerHTML = `${createFooter(footerArgs)}`
 
   const flyout = document.createElement('div');

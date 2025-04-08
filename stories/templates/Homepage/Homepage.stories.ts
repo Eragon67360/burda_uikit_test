@@ -60,7 +60,7 @@ export const HomepageWithSlideshow: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'White',
+      default: 'White',
     },
   },
 };
@@ -73,7 +73,7 @@ export const HomepageWithSmallSlideshow: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'White',
+      default: 'White',
     },
   },
 };
@@ -92,7 +92,7 @@ export const HomepageWithStaticHero: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'White',
+      default: 'White',
     },
   },
 };
@@ -105,6 +105,7 @@ export const HomepageWith2LinesNavigation: Story = {
     staticHeroHref: '#',
     staticHeroImageAltText: 'Static hero',
     navigationHas2Lines: true,
+    navigationArgs: autoMotorUndSportNavigation
   },
   parameters: {
     viewport: {
@@ -112,7 +113,7 @@ export const HomepageWith2LinesNavigation: Story = {
     },
     layout: 'fullscreen',
     backgrounds: {
-        default: 'White',
+      default: 'White',
     },
   },
 };
