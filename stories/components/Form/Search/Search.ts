@@ -8,6 +8,7 @@ export type SearchArgs = {
         label: string;
         href: string;
         onClick?: () => void;
+        target?: '_blank' | '_self' | '_parent' | '_top'
     }>;
     onSearch?: (value: string) => void;
     emptyText?: string;

@@ -1,11 +1,13 @@
 import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
 import { getSizedIcon } from '@/stories/utils/iconUtils';
+import { ButtonIconVariant, createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
 import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
+import { createButtonLink } from '../Button/ButtonLink/ButtonLink';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -90,7 +92,7 @@ export const createNavigation = ({
 
     navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-50`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} transition-all duration-300 rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
-    contentWrapper.className = ` w-full h-full flex transition-all duration-300 ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
+    contentWrapper.className = ` w-full h-full flex transition-opacity duration-300 ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
 
     firstLineWrapper.className = `flex w-full z-50 transition-al duration-300 items-start ${has2LinesNavigation ? 'justify-end h-[3.5rem]' : 'justify-between h-full'}`;
 
@@ -250,7 +252,6 @@ export const createNavigation = ({
                         leftWrapper.appendChild(itemButton.cloneNode(true));
                     });
                 } else {
-                    // Keep alwaysFlyout items as flyouts
                     const flyout = createFlyout({
                         variant: 'sublinks',
                         triggerLabel: item.label,
@@ -314,7 +315,6 @@ export const createNavigation = ({
                         secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
                         leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
                     } else {
-                        // Keep as links or single link
                         item.flyoutItems.forEach((subItem) => {
                             const itemButton = document.createElement('a');
                             itemButton.text = subItem.label;
@@ -366,10 +366,8 @@ export const createNavigation = ({
     logo2Container.className = 'h-[2.8rem] w-auto ml-2 mr-3';
 
     sortedNavigationItems.forEach((item) => {
-        // Single-line navigation logic
         if (!has2LinesNavigation) {
             if (item.alwaysFlyout) {
-                // Always create a flyout if alwaysFlyout is true
                 const flyout = createFlyout({
                     variant: 'sublinks',
                     triggerLabel: item.label,
@@ -379,9 +377,7 @@ export const createNavigation = ({
 
                 leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
             } else {
-                // For items without alwaysFlyout, decide based on number of subitems
                 if (item.flyoutItems.length === 1) {
-                    // Single subitem: create a link
                     const itemButton = document.createElement('a');
                     itemButton.text = item.flyoutItems[0].label;
                     itemButton.href = item.flyoutItems[0].href;
@@ -408,7 +404,6 @@ export const createNavigation = ({
 
                     leftWrapper.appendChild(itemButton);
                 } else {
-                    // Multiple subitems: create a flyout
                     const flyout = createFlyout({
                         variant: 'sublinks',
                         triggerLabel: item.label,
@@ -420,7 +415,6 @@ export const createNavigation = ({
                 }
             }
         }
-        // Two-line navigation logic
         else {
             const renderAsLinks = !item.alwaysFlyout;
 
@@ -541,21 +535,139 @@ export const createNavigation = ({
     const mobileMenuContainer = document.createElement('div');
     mobileMenuContainer.className = "fixed top-[3.25rem] pt-7 left-0 w-full h-[calc(100dvh-3.25rem)] bg-neutral-100 transform translate-x-[-100%] transition-transform duration-300 ease-in-out z-50";
 
-    const searchWrapper = document.createElement('div');
+    const searchWrapper = document.createElement('button');
     const searchInput = document.createElement('input');
-    if (hasSearch) {
-        searchWrapper.className = "bg-neutral-200 rounded flex gap-3 mx-7";
+    const mobileSearchContainer = document.createElement('div');
+    mobileSearchContainer.className = 'flex gap-1 items-center justify-between mx-7';
+    const mobileSearchResultsPanel = document.createElement('div');
+    if (hasSearch && searchProps) {
+
+        mobileSearchResultsPanel.className = `
+        fixed 
+        bottom-0 
+        left-0 
+        w-full 
+        bg-white 
+        z-[100] 
+        shadow-2xl 
+        transform 
+        translate-y-full 
+        transition-transform 
+        duration-300 
+        ease-in-out 
+        h-full 
+        max-h-[calc(100dvh-142px)] 
+        overflow-y-auto
+    `;
+        const searchResultsContainer = document.createElement('div');
+        searchResultsContainer.className = 'p-4';
+
+        const noResultsMessage = document.createElement('p');
+        noResultsMessage.textContent = searchProps.emptyText || 'No results found';
+        noResultsMessage.className = 'text-center text-gray-500 hidden';
+
+        searchResultsContainer.appendChild(noResultsMessage);
+        if (searchProps.results && searchProps.results.length > 0) {
+            searchProps.results.forEach(result => {
+                const searchLinksResult = createButtonLink({ label: result.label, href: result.href, target: result.target });
+                searchResultsContainer.appendChild(searchLinksResult);
+            });
+        } else {
+            noResultsMessage.classList.remove('hidden');
+        }
+
+        mobileSearchResultsPanel.appendChild(searchResultsContainer);
+
+        searchWrapper.className = "bg-neutral-200 rounded flex gap-3 transition-all duration-300";
         const iconSpan = document.createElement('span');
         iconSpan.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
-        iconSpan.className = "m-4"
-        searchInput.className = "w-full focus-visible:outline-none "
+        iconSpan.className = "m-4 order-1";
+
+        searchInput.className = "w-full focus-visible:outline-none order-2 bg-transparent";
         searchInput.placeholder = searchProps.placeholder;
+        const trashButton = createButtonIcon({
+            variant: ButtonIconVariant.SMALL,
+            icon: 'trash',
+            onClick: () => { },
+            disabled: true
+        });
+
+        searchInput.addEventListener('focus', () => {
+            searchWrapper.classList.remove('bg-neutral-200');
+            searchWrapper.classList.add('bg-base-white');
+            searchWrapper.classList.add('border-b-[5px]', 'border-secondary-dark');
+            searchWrapper.classList.remove('border-b-0');
+
+            iconSpan.classList.add('order-2');
+            iconSpan.classList.remove('order-1');
+            searchInput.classList.remove('order-2');
+            searchInput.classList.add('order-1');
+            searchInput.classList.add('mx-5');
+        });
+
+        searchInput.addEventListener('blur', (event: FocusEvent) => {
+            if (event.relatedTarget === trashButton) {
+                event.preventDefault();
+                return;
+            }
+            mobileSearchResultsPanel.classList.remove('translate-y-0');
+            mobileSearchResultsPanel.classList.add('translate-y-full');
+            searchWrapper.classList.add('border-b-0');
+            searchWrapper.classList.remove('bg-base-white');
+            searchWrapper.classList.remove('border-b-[5px]', 'border-secondary-dark');
+            iconSpan.classList.add('order-1');
+            iconSpan.classList.remove('order-2');
+            searchInput.classList.add('order-2');
+            searchInput.classList.remove('order-1');
+            searchInput.classList.remove('mx-5');
+        });
+
+        mobileSearchResultsPanel.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+        searchWrapper.addEventListener('mousedown', (event) => {
+            if (event.target !== trashButton && !trashButton.contains(event.target as Node)) {
+                if (event.target !== searchInput && !searchInput.contains(event.target as Node)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    searchInput.focus();
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', (event) => {
+            trashButton.disabled = searchInput.value.length === 0;
+            const inputValue = (event.target as HTMLInputElement).value.trim();
+
+            if (searchProps.onSearch) {
+                searchProps.onSearch(inputValue);
+            }
+
+            if (inputValue) {
+                mobileSearchResultsPanel.classList.remove('translate-y-full');
+                mobileSearchResultsPanel.classList.add('translate-y-0');
+            } else {
+                mobileSearchResultsPanel.classList.remove('translate-y-0');
+                mobileSearchResultsPanel.classList.add('translate-y-full');
+            }
+        });
+
         searchWrapper.appendChild(iconSpan);
         searchWrapper.appendChild(searchInput);
+        mobileSearchContainer.appendChild(searchWrapper);
+        mobileSearchContainer.appendChild(trashButton);
+        mobileMenuContainer.appendChild(mobileSearchContainer);
 
-        mobileMenuContainer.appendChild(searchWrapper)
+        trashButton.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+            trashButton.disabled = true;
+        });
+
     }
 
+    let backButtonAdded = false;
     const mobileMenuContent = document.createElement('div');
     mobileMenuContent.className = "flex flex-col gap-3 p-8";
     if (mobileMenuTitle) {
@@ -567,76 +679,176 @@ export const createNavigation = ({
     const mobileFlyoutContainer = document.createElement('div');
 
     sortedNavigationItems.forEach((item) => {
-        const renderAsLinks = !item.alwaysFlyout && has2LinesNavigation;
-
-        if (renderAsLinks) {
-            item.flyoutItems.forEach((subItem) => {
+        if (!item.alwaysFlyout) {
+            if (item.flyoutItems.length === 1) {
+                const subItem = item.flyoutItems[0];
                 const itemLink = document.createElement('a');
                 itemLink.text = subItem.label;
                 itemLink.href = subItem.href;
                 itemLink.className = `
+                flex 
+                text-offcanvas-level1 
+                hover:bg-gray-100
+            `;
+                mobileMenuContent.appendChild(itemLink);
+            }
+            else if (item.flyoutItems.length > 1) {
+                const flyoutContainer = document.createElement('div');
+                flyoutContainer.className = 'relative';
+
+                const flyoutTitle = document.createElement('div');
+                flyoutTitle.textContent = item.label;
+                flyoutTitle.className = `
+                text-offcanvas-level1
+                cursor-pointer
+                flex
+                items-center
+                justify-between
+            `;
+
+                const chevronIcon = document.createElement('span');
+                chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 18);
+                flyoutTitle.appendChild(chevronIcon);
+
+                mobileFlyoutContainer.className = `
+                fixed 
+                ${hasSearch ? 'top-36' : 'top-20'}
+                p-7 
+                left-0 
+                w-full 
+                h-full 
+                bg-neutral-100 
+                z-[100] 
+                transform 
+                -translate-x-full 
+                transition-transform 
+                duration-500 
+                ease-in-out
+            `;
+
+                if (!backButtonAdded) {
+                    const flyoutHeader = document.createElement('button');
+                    flyoutHeader.className = `
                     flex 
-                    text-offcanvas-level1 
+                    items-center 
+                    justify-start 
+                    gap-3 
+                    cursor-pointer 
+                `;
+
+                    const backButton = document.createElement('span');
+                    backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
+                    backButton.ariaLabel = 'Back';
+
+                    const flyoutHeaderTitle = document.createElement('h2');
+                    flyoutHeaderTitle.textContent = mobileBackButtonLabel;
+                    flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
+
+                    flyoutHeader.appendChild(backButton);
+                    flyoutHeader.appendChild(flyoutHeaderTitle);
+
+                    mobileFlyoutContainer.appendChild(flyoutHeader);
+
+                    flyoutHeader.addEventListener('click', () => {
+                        mobileFlyoutContainer.classList.remove('translate-x-0');
+                        mobileFlyoutContainer.classList.add('-translate-x-full');
+                    });
+
+                    backButtonAdded = true;
+                }
+
+                const flyoutContent = document.createElement('div');
+                flyoutContent.className = 'pl-8 gap-3 flex flex-col';
+
+                item.flyoutItems.forEach((subItem) => {
+                    const subLink = document.createElement('a');
+                    subLink.text = subItem.label;
+                    subLink.href = subItem.href;
+                    subLink.className = `
+                    block 
+                    text-offcanvas-level2
                     hover:bg-gray-100
                 `;
-                mobileMenuContent.appendChild(itemLink);
-            });
-        } else if (item.type === 'flyout') {
+                    flyoutContent.appendChild(subLink);
+                });
+
+                mobileFlyoutContainer.appendChild(flyoutContent);
+
+                flyoutTitle.addEventListener('click', () => {
+                    mobileFlyoutContainer.classList.remove('-translate-x-full');
+                    mobileFlyoutContainer.classList.add('translate-x-0');
+                });
+
+                flyoutContainer.appendChild(flyoutTitle);
+                mobileMenuContent.appendChild(flyoutContainer);
+                navigationContainer.appendChild(mobileFlyoutContainer);
+            }
+        }
+        else {
             const flyoutContainer = document.createElement('div');
             flyoutContainer.className = 'relative';
 
             const flyoutTitle = document.createElement('div');
             flyoutTitle.textContent = item.label;
             flyoutTitle.className = `
-            text-offcanvas-level1
-            cursor-pointer
-            flex
-            items-center
-            justify-between
-        `;
+                text-offcanvas-level1
+                cursor-pointer
+                flex
+                items-center
+                justify-between
+            `;
 
             const chevronIcon = document.createElement('span');
             chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 18);
             flyoutTitle.appendChild(chevronIcon);
 
             mobileFlyoutContainer.className = `
-            fixed 
-            ${hasSearch ? 'top-36' : 'top-20'}
-            p-7 
-            left-0 
-            w-full 
-            h-full 
-            bg-neutral-100 
-            z-[100] 
-            transform 
-            -translate-x-full 
-            transition-transform 
-            duration-500 
-            ease-in-out
-        `;
+                fixed 
+                ${hasSearch ? 'top-36' : 'top-20'}
+                p-7 
+                left-0 
+                w-full 
+                h-full 
+                bg-neutral-100 
+                z-[100] 
+                transform 
+                -translate-x-full 
+                transition-transform 
+                duration-500 
+                ease-in-out
+            `;
 
-            // Flyout header
-            const flyoutHeader = document.createElement('button');
-            flyoutHeader.className = `
-            flex 
-            items-center 
-            justify-start 
-            gap-3 
-            cursor-pointer 
-        `;
+            if (!backButtonAdded) {
+                const flyoutHeader = document.createElement('button');
+                flyoutHeader.className = `
+                    flex 
+                    items-center 
+                    justify-start 
+                    gap-3 
+                    cursor-pointer 
+                `;
 
-            const backButton = document.createElement('span');
-            backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
-            backButton.ariaLabel = 'Back';
+                const backButton = document.createElement('span');
+                backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
+                backButton.ariaLabel = 'Back';
 
-            const flyoutHeaderTitle = document.createElement('h2');
-            flyoutHeaderTitle.textContent = mobileBackButtonLabel;
-            flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
+                const flyoutHeaderTitle = document.createElement('h2');
+                flyoutHeaderTitle.textContent = mobileBackButtonLabel;
+                flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
 
-            flyoutHeader.appendChild(backButton);
-            flyoutHeader.appendChild(flyoutHeaderTitle);
+                flyoutHeader.appendChild(backButton);
+                flyoutHeader.appendChild(flyoutHeaderTitle);
 
-            // Flyout content
+                mobileFlyoutContainer.appendChild(flyoutHeader);
+
+                flyoutHeader.addEventListener('click', () => {
+                    mobileFlyoutContainer.classList.remove('translate-x-0');
+                    mobileFlyoutContainer.classList.add('-translate-x-full');
+                });
+
+                backButtonAdded = true;
+            }
+
             const flyoutContent = document.createElement('div');
             flyoutContent.className = 'pl-8 gap-3 flex flex-col';
 
@@ -645,14 +857,13 @@ export const createNavigation = ({
                 subLink.text = subItem.label;
                 subLink.href = subItem.href;
                 subLink.className = `
-                block 
-                text-offcanvas-level2
-                hover:bg-gray-100
-            `;
+                    block 
+                    text-offcanvas-level2
+                    hover:bg-gray-100
+                `;
                 flyoutContent.appendChild(subLink);
             });
 
-            mobileFlyoutContainer.appendChild(flyoutHeader);
             mobileFlyoutContainer.appendChild(flyoutContent);
 
             flyoutTitle.addEventListener('click', () => {
@@ -660,14 +871,10 @@ export const createNavigation = ({
                 mobileFlyoutContainer.classList.add('translate-x-0');
             });
 
-            flyoutHeader.addEventListener('click', () => {
-                mobileFlyoutContainer.classList.remove('translate-x-0');
-                mobileFlyoutContainer.classList.add('-translate-x-full');
-            });
-
             flyoutContainer.appendChild(flyoutTitle);
             mobileMenuContent.appendChild(flyoutContainer);
             navigationContainer.appendChild(mobileFlyoutContainer);
+
         }
     });
 
@@ -752,7 +959,7 @@ export const createNavigation = ({
     navigationMobileContainer.appendChild(mobileRightTrigger);
     mobileMenuContainer.appendChild(mobileMenuContent);
     navigationContainer.appendChild(mobileMenuContainer);
-
+    navigationContainer.appendChild(mobileSearchResultsPanel);
     navigationContainer.appendChild(navigationDesktopContainer);
     navigationContainer.appendChild(navigationMobileContainer);
     return navigationContainer;
@@ -762,7 +969,6 @@ export const createNavigation = ({
 function cloneFlyoutWithListeners(originalFlyout: HTMLElement) {
     const clonedFlyout = originalFlyout.cloneNode(true) as HTMLElement;
 
-    // Find the trigger button and flyout wrapper in the cloned element
     const originalTriggerButton = originalFlyout.querySelector('button');
     const originalFlyoutWrapper = originalFlyout.querySelector('.hidden');
 

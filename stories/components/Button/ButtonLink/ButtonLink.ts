@@ -6,7 +6,7 @@ export type ButtonLinkArgs = {
     disabled?: boolean;
     iconLeft?: boolean;
     label: string;
-    onClick?: () => void;
+    onClick?: (event: MouseEvent) => void;
     icon?: string | null;
     href: string;
     target?: '_blank' | '_self' | '_parent' | '_top'
@@ -19,10 +19,11 @@ export const createButtonLink = ({
     href = "example.com",
     icon = 'arrowRight',
     iconLeft = false,
-    target = "_blank"
+    target = "_self"
 }: ButtonLinkArgs) => {
 
     const link = document.createElement('a');
+    link.href = href;
     link.target = target
 
     if (disabled) {
@@ -31,11 +32,28 @@ export const createButtonLink = ({
         link.href = '#';
         link.setAttribute('tabindex', '-1');
     } else {
-        link.href = href;
         if (onClick) {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                onClick();
+                // Call the onClick handler first
+                onClick(e);
+
+                // If the default hasn't been prevented, navigate
+                if (!e.defaultPrevented) {
+                    // If it's not a new tab/window, manually navigate
+                    if (target === '_self') {
+                        e.preventDefault();
+                        window.location.href = href;
+                    }
+                }
+            });
+        } else {
+            // If no onClick, ensure standard link behavior
+            link.addEventListener('click', (e) => {
+                // For '_self' target, use programmatic navigation
+                if (target === '_self') {
+                    e.preventDefault();
+                    window.location.href = href;
+                }
             });
         }
     }

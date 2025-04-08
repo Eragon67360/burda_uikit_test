@@ -11,7 +11,7 @@ export enum ButtonIconVariant {
 export type ButtonIconArgs = {
     variant: ButtonIconVariant;
     disabled: boolean;
-    onClick: () => void;
+    onClick: (event: MouseEvent) => void;
     icon: keyof typeof IconRegistry[IconCategory.SYSTEM];
     backgroundColor?: 'neutral-100' | 'neutral-200';
     ariaLabel?: string
@@ -36,11 +36,12 @@ export const createButtonIcon = ({
         });
     }
 
-    if (!disabled) {
+    if (onClick && !disabled) {
         btnButton.addEventListener('click', onClick);
     }
     const baseClasses = [
         'group',
+        'shrink-0',
         'transition-[color,opacity]',
         'duration-300',
         'focus:outline-hidden',
