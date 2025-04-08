@@ -251,7 +251,6 @@ export const createNavigation = ({
                         leftWrapper.appendChild(itemButton.cloneNode(true));
                     });
                 } else {
-                    // Keep alwaysFlyout items as flyouts
                     const flyout = createFlyout({
                         variant: 'sublinks',
                         triggerLabel: item.label,
@@ -315,7 +314,6 @@ export const createNavigation = ({
                         secondLineWrapper.appendChild(cloneFlyoutWithListeners(flyout));
                         leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
                     } else {
-                        // Keep as links or single link
                         item.flyoutItems.forEach((subItem) => {
                             const itemButton = document.createElement('a');
                             itemButton.text = subItem.label;
@@ -367,10 +365,8 @@ export const createNavigation = ({
     logo2Container.className = 'h-[2.8rem] w-auto ml-2 mr-3';
 
     sortedNavigationItems.forEach((item) => {
-        // Single-line navigation logic
         if (!has2LinesNavigation) {
             if (item.alwaysFlyout) {
-                // Always create a flyout if alwaysFlyout is true
                 const flyout = createFlyout({
                     variant: 'sublinks',
                     triggerLabel: item.label,
@@ -380,9 +376,7 @@ export const createNavigation = ({
 
                 leftWrapper.appendChild(cloneFlyoutWithListeners(flyout));
             } else {
-                // For items without alwaysFlyout, decide based on number of subitems
                 if (item.flyoutItems.length === 1) {
-                    // Single subitem: create a link
                     const itemButton = document.createElement('a');
                     itemButton.text = item.flyoutItems[0].label;
                     itemButton.href = item.flyoutItems[0].href;
@@ -409,7 +403,6 @@ export const createNavigation = ({
 
                     leftWrapper.appendChild(itemButton);
                 } else {
-                    // Multiple subitems: create a flyout
                     const flyout = createFlyout({
                         variant: 'sublinks',
                         triggerLabel: item.label,
@@ -421,7 +414,6 @@ export const createNavigation = ({
                 }
             }
         }
-        // Two-line navigation logic
         else {
             const renderAsLinks = !item.alwaysFlyout;
 
@@ -619,7 +611,7 @@ export const createNavigation = ({
 
     }
 
-
+    let backButtonAdded = false;
     const mobileMenuContent = document.createElement('div');
     mobileMenuContent.className = "flex flex-col gap-3 p-8";
     if (mobileMenuTitle) {
@@ -631,76 +623,176 @@ export const createNavigation = ({
     const mobileFlyoutContainer = document.createElement('div');
 
     sortedNavigationItems.forEach((item) => {
-        const renderAsLinks = !item.alwaysFlyout && has2LinesNavigation;
-
-        if (renderAsLinks) {
-            item.flyoutItems.forEach((subItem) => {
+        if (!item.alwaysFlyout) {
+            if (item.flyoutItems.length === 1) {
+                const subItem = item.flyoutItems[0];
                 const itemLink = document.createElement('a');
                 itemLink.text = subItem.label;
                 itemLink.href = subItem.href;
                 itemLink.className = `
+                flex 
+                text-offcanvas-level1 
+                hover:bg-gray-100
+            `;
+                mobileMenuContent.appendChild(itemLink);
+            }
+            else if (item.flyoutItems.length > 1) {
+                const flyoutContainer = document.createElement('div');
+                flyoutContainer.className = 'relative';
+
+                const flyoutTitle = document.createElement('div');
+                flyoutTitle.textContent = item.label;
+                flyoutTitle.className = `
+                text-offcanvas-level1
+                cursor-pointer
+                flex
+                items-center
+                justify-between
+            `;
+
+                const chevronIcon = document.createElement('span');
+                chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 18);
+                flyoutTitle.appendChild(chevronIcon);
+
+                mobileFlyoutContainer.className = `
+                fixed 
+                ${hasSearch ? 'top-36' : 'top-20'}
+                p-7 
+                left-0 
+                w-full 
+                h-full 
+                bg-neutral-100 
+                z-[100] 
+                transform 
+                -translate-x-full 
+                transition-transform 
+                duration-500 
+                ease-in-out
+            `;
+
+                if (!backButtonAdded) {
+                    const flyoutHeader = document.createElement('button');
+                    flyoutHeader.className = `
                     flex 
-                    text-offcanvas-level1 
+                    items-center 
+                    justify-start 
+                    gap-3 
+                    cursor-pointer 
+                `;
+
+                    const backButton = document.createElement('span');
+                    backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
+                    backButton.ariaLabel = 'Back';
+
+                    const flyoutHeaderTitle = document.createElement('h2');
+                    flyoutHeaderTitle.textContent = mobileBackButtonLabel;
+                    flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
+
+                    flyoutHeader.appendChild(backButton);
+                    flyoutHeader.appendChild(flyoutHeaderTitle);
+
+                    mobileFlyoutContainer.appendChild(flyoutHeader);
+
+                    flyoutHeader.addEventListener('click', () => {
+                        mobileFlyoutContainer.classList.remove('translate-x-0');
+                        mobileFlyoutContainer.classList.add('-translate-x-full');
+                    });
+
+                    backButtonAdded = true;
+                }
+
+                const flyoutContent = document.createElement('div');
+                flyoutContent.className = 'pl-8 gap-3 flex flex-col';
+
+                item.flyoutItems.forEach((subItem) => {
+                    const subLink = document.createElement('a');
+                    subLink.text = subItem.label;
+                    subLink.href = subItem.href;
+                    subLink.className = `
+                    block 
+                    text-offcanvas-level2
                     hover:bg-gray-100
                 `;
-                mobileMenuContent.appendChild(itemLink);
-            });
-        } else if (item.type === 'flyout') {
+                    flyoutContent.appendChild(subLink);
+                });
+
+                mobileFlyoutContainer.appendChild(flyoutContent);
+
+                flyoutTitle.addEventListener('click', () => {
+                    mobileFlyoutContainer.classList.remove('-translate-x-full');
+                    mobileFlyoutContainer.classList.add('translate-x-0');
+                });
+
+                flyoutContainer.appendChild(flyoutTitle);
+                mobileMenuContent.appendChild(flyoutContainer);
+                navigationContainer.appendChild(mobileFlyoutContainer);
+            }
+        }
+        else {
             const flyoutContainer = document.createElement('div');
             flyoutContainer.className = 'relative';
 
             const flyoutTitle = document.createElement('div');
             flyoutTitle.textContent = item.label;
             flyoutTitle.className = `
-            text-offcanvas-level1
-            cursor-pointer
-            flex
-            items-center
-            justify-between
-        `;
+                text-offcanvas-level1
+                cursor-pointer
+                flex
+                items-center
+                justify-between
+            `;
 
             const chevronIcon = document.createElement('span');
             chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 18);
             flyoutTitle.appendChild(chevronIcon);
 
             mobileFlyoutContainer.className = `
-            fixed 
-            ${hasSearch ? 'top-36' : 'top-20'}
-            p-7 
-            left-0 
-            w-full 
-            h-full 
-            bg-neutral-100 
-            z-[100] 
-            transform 
-            -translate-x-full 
-            transition-transform 
-            duration-500 
-            ease-in-out
-        `;
+                fixed 
+                ${hasSearch ? 'top-36' : 'top-20'}
+                p-7 
+                left-0 
+                w-full 
+                h-full 
+                bg-neutral-100 
+                z-[100] 
+                transform 
+                -translate-x-full 
+                transition-transform 
+                duration-500 
+                ease-in-out
+            `;
 
-            // Flyout header
-            const flyoutHeader = document.createElement('button');
-            flyoutHeader.className = `
-            flex 
-            items-center 
-            justify-start 
-            gap-3 
-            cursor-pointer 
-        `;
+            if (!backButtonAdded) {
+                const flyoutHeader = document.createElement('button');
+                flyoutHeader.className = `
+                    flex 
+                    items-center 
+                    justify-start 
+                    gap-3 
+                    cursor-pointer 
+                `;
 
-            const backButton = document.createElement('span');
-            backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
-            backButton.ariaLabel = 'Back';
+                const backButton = document.createElement('span');
+                backButton.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 20);
+                backButton.ariaLabel = 'Back';
 
-            const flyoutHeaderTitle = document.createElement('h2');
-            flyoutHeaderTitle.textContent = mobileBackButtonLabel;
-            flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
+                const flyoutHeaderTitle = document.createElement('h2');
+                flyoutHeaderTitle.textContent = mobileBackButtonLabel;
+                flyoutHeaderTitle.className = 'text-offcanvas-level2 text-base-black';
 
-            flyoutHeader.appendChild(backButton);
-            flyoutHeader.appendChild(flyoutHeaderTitle);
+                flyoutHeader.appendChild(backButton);
+                flyoutHeader.appendChild(flyoutHeaderTitle);
 
-            // Flyout content
+                mobileFlyoutContainer.appendChild(flyoutHeader);
+
+                flyoutHeader.addEventListener('click', () => {
+                    mobileFlyoutContainer.classList.remove('translate-x-0');
+                    mobileFlyoutContainer.classList.add('-translate-x-full');
+                });
+
+                backButtonAdded = true;
+            }
+
             const flyoutContent = document.createElement('div');
             flyoutContent.className = 'pl-8 gap-3 flex flex-col';
 
@@ -709,14 +801,13 @@ export const createNavigation = ({
                 subLink.text = subItem.label;
                 subLink.href = subItem.href;
                 subLink.className = `
-                block 
-                text-offcanvas-level2
-                hover:bg-gray-100
-            `;
+                    block 
+                    text-offcanvas-level2
+                    hover:bg-gray-100
+                `;
                 flyoutContent.appendChild(subLink);
             });
 
-            mobileFlyoutContainer.appendChild(flyoutHeader);
             mobileFlyoutContainer.appendChild(flyoutContent);
 
             flyoutTitle.addEventListener('click', () => {
@@ -724,14 +815,10 @@ export const createNavigation = ({
                 mobileFlyoutContainer.classList.add('translate-x-0');
             });
 
-            flyoutHeader.addEventListener('click', () => {
-                mobileFlyoutContainer.classList.remove('translate-x-0');
-                mobileFlyoutContainer.classList.add('-translate-x-full');
-            });
-
             flyoutContainer.appendChild(flyoutTitle);
             mobileMenuContent.appendChild(flyoutContainer);
             navigationContainer.appendChild(mobileFlyoutContainer);
+
         }
     });
 
