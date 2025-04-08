@@ -1,6 +1,7 @@
 import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
 import { getSizedIcon } from '@/stories/utils/iconUtils';
+import { ButtonIconVariant, createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
 import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
@@ -90,7 +91,7 @@ export const createNavigation = ({
 
     navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-50`;
     navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} transition-all duration-300 rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
-    contentWrapper.className = ` w-full h-full flex transition-all duration-300 ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
+    contentWrapper.className = ` w-full h-full flex transition-opacity duration-300 ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
 
     firstLineWrapper.className = `flex w-full z-50 transition-al duration-300 items-start ${has2LinesNavigation ? 'justify-end h-[3.5rem]' : 'justify-between h-full'}`;
 
@@ -541,20 +542,83 @@ export const createNavigation = ({
     const mobileMenuContainer = document.createElement('div');
     mobileMenuContainer.className = "fixed top-[3.25rem] pt-7 left-0 w-full h-[calc(100dvh-3.25rem)] bg-neutral-100 transform translate-x-[-100%] transition-transform duration-300 ease-in-out z-50";
 
-    const searchWrapper = document.createElement('div');
+    const searchWrapper = document.createElement('button');
     const searchInput = document.createElement('input');
+    const mobileSearchContainer = document.createElement('div');
+    mobileSearchContainer.className = 'flex gap-1 items-center justify-between mx-7';
+
     if (hasSearch) {
-        searchWrapper.className = "bg-neutral-200 rounded flex gap-3 mx-7";
+        searchWrapper.className = "bg-neutral-200 rounded flex gap-3 transition-all duration-300";
         const iconSpan = document.createElement('span');
         iconSpan.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
-        iconSpan.className = "m-4"
-        searchInput.className = "w-full focus-visible:outline-none "
+        iconSpan.className = "m-4 order-1";
+
+        searchInput.className = "w-full focus-visible:outline-none order-2 bg-transparent";
         searchInput.placeholder = searchProps.placeholder;
+        const trashButton = createButtonIcon({
+            variant: ButtonIconVariant.SMALL,
+            icon: 'trash',
+            onClick: () => { },
+            disabled: true
+        });
+
+        searchInput.addEventListener('focus', () => {
+            searchWrapper.classList.remove('bg-neutral-200');
+            searchWrapper.classList.add('bg-base-white');
+            searchWrapper.classList.add('border-b-[5px]', 'border-secondary-dark');
+            searchWrapper.classList.remove('border-b-0');
+
+            iconSpan.classList.add('order-2');
+            iconSpan.classList.remove('order-1');
+            searchInput.classList.remove('order-2');
+            searchInput.classList.add('order-1');
+            searchInput.classList.add('mx-5');
+        });
+
+        searchInput.addEventListener('blur', (event: FocusEvent) => {
+            if (event.relatedTarget === trashButton) {
+                event.preventDefault();
+                return;
+            }
+
+            searchWrapper.classList.add('border-b-0');
+            searchWrapper.classList.remove('bg-base-white');
+            searchWrapper.classList.remove('border-b-[5px]', 'border-secondary-dark');
+            iconSpan.classList.add('order-1');
+            iconSpan.classList.remove('order-2');
+            searchInput.classList.add('order-2');
+            searchInput.classList.remove('order-1');
+            searchInput.classList.remove('mx-5');
+        });
+
+        searchWrapper.addEventListener('mousedown', (event) => {
+            if (event.target !== trashButton && !trashButton.contains(event.target as Node)) {
+                if (event.target !== searchInput && !searchInput.contains(event.target as Node)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    searchInput.focus();
+                }
+            }
+        });
+
+        searchInput.addEventListener('input', () => {
+            trashButton.disabled = searchInput.value.length === 0;
+        });
+
         searchWrapper.appendChild(iconSpan);
         searchWrapper.appendChild(searchInput);
+        mobileSearchContainer.appendChild(searchWrapper);
+        mobileSearchContainer.appendChild(trashButton);
+        mobileMenuContainer.appendChild(mobileSearchContainer);
 
-        mobileMenuContainer.appendChild(searchWrapper)
+        trashButton.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+            trashButton.disabled = true;
+        });
+
     }
+
 
     const mobileMenuContent = document.createElement('div');
     mobileMenuContent.className = "flex flex-col gap-3 p-8";
@@ -762,7 +826,6 @@ export const createNavigation = ({
 function cloneFlyoutWithListeners(originalFlyout: HTMLElement) {
     const clonedFlyout = originalFlyout.cloneNode(true) as HTMLElement;
 
-    // Find the trigger button and flyout wrapper in the cloned element
     const originalTriggerButton = originalFlyout.querySelector('button');
     const originalFlyoutWrapper = originalFlyout.querySelector('.hidden');
 
