@@ -1,0 +1,161 @@
+import { Meta, Canvas, Controls, Source, Stories } from "@storybook/blocks";
+import * as ArticleStories from "./Article.stories";
+
+<Meta of={ArticleStories} />
+
+# Article Component
+
+The Article component is a flexible, reusable molecule that displays an image, title, and optional button with potential badge.
+
+## Component Structure
+
+<Canvas of={ArticleStories.DefaultArticle} />
+
+## Props
+
+<Controls />
+
+## HTML Structure
+
+The component is built using pure HTML and TailwindCSS, making it easily adaptable to various environments.
+
+<Source language="html" code={`
+<!-- Article Component HTML Structure -->
+<article class="shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 bg-base-white rounded">
+  <div class="relative h-0 grow w-full px-2.5">
+    <img 
+      src="path/to/image.png" 
+      alt="Image description" 
+      class="size-full object-contain pointer-events-none"
+    />
+    <!-- Optional Badge -->
+    <div class="badge">Optional Badge</div>
+  </div>
+  
+  <p class="text-label text-center">Article Title</p>
+  
+  <button class="button-cta">Details</button>
+</article>
+`} />
+
+## JavaScript Implementation
+
+The JavaScript implementation of the Article component is designed to be flexible and reusable. Below is a TypeScript function that creates an article element with optional parameters for customization.
+
+```typescript
+export const createArticle = ({
+  backgroundColor = "white",
+  title,
+  image,
+  imageAltText = title,
+  buttonLabel,
+  badgeText,
+  onClick = () => {},
+}: ArticleArgs) => {
+  // Create main article element
+  const articleElement = document.createElement("article");
+  articleElement.className = `shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 ${
+    backgroundColor === "gray" ? "bg-neutral-100" : "bg-base-white"
+  } rounded`;
+
+  // Create image container
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "relative h-0 grow w-full px-2.5";
+
+  // Create image element
+  const imgElement = document.createElement("img");
+  imgElement.src = image;
+  imgElement.alt = imageAltText;
+  imgElement.className = "size-full object-contain pointer-events-none";
+  imageContainer.appendChild(imgElement);
+
+  // Optional Badge
+  if (badgeText && badgeText.length > 0) {
+    const badgeElement = createBadge(badgeText, 42, "primary");
+    imageContainer.appendChild(badgeElement);
+  }
+
+  // Title element
+  const titleElement = document.createElement("p");
+  titleElement.className = "text-label text-center";
+  titleElement.textContent = title;
+
+  // Assemble the article
+  articleElement.appendChild(imageContainer);
+  articleElement.appendChild(titleElement);
+
+  // Optional CTA Button
+  if (buttonLabel) {
+    articleElement.appendChild(
+      createButtonCTA({
+        label: buttonLabel,
+        onClick,
+        variant: ButtonCTAVariant.PRIMARY,
+        // ... other button configurations
+      })
+    );
+  }
+
+  return articleElement;
+};
+```
+
+## Oxid Template Example
+
+For Oxid integration, you can adapt the component like this:
+
+```php
+[{* Oxid Template *}]
+
+<article class="shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 bg-base-white rounded">
+  <div class="relative h-0 grow w-full px-2.5">
+    <img
+      src="[{$product->getIconUrl()}]"
+      alt="[{$product->getTitle()}]"
+      class="size-full object-contain pointer-events-none"
+    />
+
+    [{if $product->hasSpecialOffer()}]
+      <div class="badge">Offer</div>
+    [{/if}]
+
+  </div>
+
+  <p class="text-label text-center">[{$product->getTitle()}]</p>
+
+  <button
+    class="button-cta"
+    onclick="window.location.href='[{$product->getLink()}]'"
+  >
+    Details
+  </button>
+</article>
+```
+
+<Stories>
+
+### Default Article
+
+<Canvas of={ArticleStories.DefaultArticle} />
+
+### Article with Badge
+
+<Canvas of={ArticleStories.ArticleWithBadge} />
+
+### Grey Background Article
+
+<Canvas of={ArticleStories.GreyBackgroundArticle} />
+
+</Stories>
+## Best Practices
+
+- Always provide an alt text for images
+- Use meaningful titles
+- Ensure the image aspect ratio is consistent
+- Handle optional elements like badges gracefully
+
+## Accessibility Considerations
+
+- Use semantic HTML (`<article>` tag)
+- Provide alternative text for images
+- Ensure color contrast meets WCAG guidelines
