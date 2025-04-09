@@ -40,6 +40,10 @@ const config: StorybookConfig = {
     return config;
   },
   staticDirs: ['../public'],
-
+  typescript: {
+    check: false,
+    checkOptions: {},
+    skipCompiler: false,
+  },
 };
 export default config;

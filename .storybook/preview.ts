@@ -89,7 +89,7 @@ const preview: Preview = {
 
     options: {
       storySort: {
-        order: ['Welcome', 'Getting Started', 'Willkommen', 'Erste Schritte'],
+        order: ['Welcome', 'Getting Started', 'Willkommen', 'Erste Schritte', 'Design System', 'Components (Atoms)', 'Components (Molecules)', 'Components (Organisms)', 'Templates'],
       },
     },
   },

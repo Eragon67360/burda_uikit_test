@@ -2,6 +2,17 @@ import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
 import { createBadge } from "../Badge/Badge";
 import { sanitizeHTML } from "@/stories/utils/sanitize";
 
+/**
+ * @component  
+ * @param backgroundColor - Background color of the article 
+ * @defaultValue 'white' 
+ * @param title - Title of the article 
+ * @param image - Image of the article 
+ * @param imageAltText - Alternative text for the image (if undefined, the title will be used) 
+ * @param buttonLabel - Label of the button 
+ * @param badgeText - Text for the optional badge (if empty, no badge will be shown) 
+ * @param onClick - Callback function when the button is clicked 
+ */
 export type ArticleArgs = {
   backgroundColor?: 'white' | 'gray';
   title: string;
@@ -12,6 +23,17 @@ export type ArticleArgs = {
   onClick?: () => void;
 };
 
+/**
+ * @component  
+ * @param backgroundColor - Background color of the article 
+ * @defaultValue 'white' 
+ * @param title - Title of the article 
+ * @param image - Image of the article 
+ * @param imageAltText - Alternative text for the image (if undefined, the title will be used) 
+ * @param buttonLabel - Label of the button 
+ * @param badgeText - Text for the optional badge (if empty, no badge will be shown) 
+ * @param onClick - Callback function when the button is clicked 
+ */
 export const createArticle = ({
   backgroundColor = 'white',
   title,

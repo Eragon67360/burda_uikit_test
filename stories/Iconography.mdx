@@ -1,0 +1,58 @@
+import { Meta, IconGallery, IconItem } from "@storybook/blocks";
+import { IconRegistry, IconCategory } from "./assets/icons";
+
+<Meta title="Design System/Iconography" />
+
+# Iconography
+
+## System Icons
+
+<IconGallery>
+  {Object.entries(IconRegistry[IconCategory.SYSTEM]).map(([name, svg]) => (
+    <IconItem key={name} name={name}>
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Slider Icons
+
+<IconGallery>
+  {Object.entries(IconRegistry[IconCategory.SLIDER]).map(([name, svg]) => (
+    <IconItem key={name} name={name}>
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Social Icons
+
+<IconGallery>
+  {Object.entries(IconRegistry[IconCategory.SOCIAL]).map(([name, svg]) => (
+    <IconItem key={name} name={name}>
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Large Icons
+
+<IconGallery>
+  {Object.entries(IconRegistry[IconCategory.LARGE]).map(([name, svg]) => (
+    <IconItem key={name} name={name}>
+      <div className="shrink-0 grow flex items-center justify-center">
+        <div dangerouslySetInnerHTML={{ __html: svg }} />
+      </div>
+    </IconItem>
+  ))}
+</IconGallery>
+
+## Flag Icons
+
+<IconGallery>
+  {Object.entries(IconRegistry[IconCategory.FLAGS]).map(([name, svg]) => (
+    <IconItem key={name} name={name}>
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+    </IconItem>
+  ))}
+</IconGallery>
