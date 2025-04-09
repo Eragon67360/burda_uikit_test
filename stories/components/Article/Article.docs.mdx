@@ -1,11 +1,19 @@
-import { Meta, Canvas, Controls, Source, Stories } from "@storybook/blocks";
+import {
+  Meta,
+  Canvas,
+  Controls,
+  Source,
+  Stories,
+  Description,
+  ArgTypes,
+} from "@storybook/blocks";
 import * as ArticleStories from "./Article.stories";
 
 <Meta of={ArticleStories} />
 
 # Article Component
 
-The Article component is a flexible, reusable molecule that displays an image, title, and optional button with potential badge.
+<Description of={ArticleStories} />
 
 ## Component Structure
 
@@ -19,7 +27,7 @@ The Article component is a flexible, reusable molecule that displays an image, t
 
 The component is built using pure HTML and TailwindCSS, making it easily adaptable to various environments.
 
-<Source language="html" code={`
+<Source language="html" dark code={`
 <!-- Article Component HTML Structure -->
 <article class="shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 bg-base-white rounded">
   <div class="relative h-0 grow w-full px-2.5">
@@ -105,6 +113,22 @@ export const createArticle = ({
 For Oxid integration, you can adapt the component like this:
 
 ```php
+function generateStrongPassword($length = 12) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    $password = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[random_int(0, strlen($chars) - 1)];
+    }
+
+    return $password;
+}
+
+echo generateStrongPassword();
+```
+
+<Source language="php" code={`
+<?php
 [{* Oxid Template *}]
 
 <article class="shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 bg-base-white rounded">
@@ -130,23 +154,15 @@ For Oxid integration, you can adapt the component like this:
     Details
   </button>
 </article>
+?>
+`}/>
+
+```php
+
 ```
 
-<Stories>
+<Stories />
 
-### Default Article
-
-<Canvas of={ArticleStories.DefaultArticle} />
-
-### Article with Badge
-
-<Canvas of={ArticleStories.ArticleWithBadge} />
-
-### Grey Background Article
-
-<Canvas of={ArticleStories.GreyBackgroundArticle} />
-
-</Stories>
 ## Best Practices
 
 - Always provide an alt text for images

@@ -4,7 +4,6 @@ import { IconCategory, IconRegistry } from '@/assets/icons';
 
 const meta: Meta<ButtonIconArgs> = {
     title: 'Components (Atoms)/Button/ButtonIcon',
-
     parameters: {
         controls: { expanded: true },
     },

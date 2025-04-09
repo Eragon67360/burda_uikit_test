@@ -68,7 +68,7 @@ export const createProcess = ({
         iconElement.innerHTML = getSizedIcon(IconRegistry[IconCategory.LARGE][item.icon], 48)
 
         const descriptionElement = document.createElement('p');
-        descriptionElement.className = `text-sm text-gray-600`;
+        descriptionElement.className = `text-sm text-base-black`;
         descriptionElement.textContent = item.description;
 
         processItemElement.appendChild(orderBadge);
