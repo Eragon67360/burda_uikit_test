@@ -1,0 +1,13 @@
+
+#!/bin/sh
+
+echo "Running pre-commit hook..."
+
+npm run build
+if [ $? -ne 0 ]; then
+  echo "Build failed. Please fix the errors before committing."
+  exit 1
+fi
+echo "Build succeeded."
+
+exit 0
