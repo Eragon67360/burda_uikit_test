@@ -1,6 +1,5 @@
 import { Meta, Canvas, Controls, Source, Stories } from "@storybook/blocks";
-import * as HorizontalScrollerStories from './HorizontalScroller.stories';
-
+import * as HorizontalScrollerStories from "./HorizontalScroller.stories";
 
 <Meta of={HorizontalScrollerStories} />
 
@@ -15,7 +14,6 @@ The HorizontalScroller component is designed to display a series of elements in 
 ## Props
 
 <Controls />
-
 
 ## Usage
 
@@ -59,17 +57,24 @@ The HorizontalScroller component is designed to display a series of elements in 
 
 ### Register JavaScript globally
 
-<Source language="html" dark code={`
+<Source
+  language="html"
+  dark
+  code={`
 <script src="horizontalScroller.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         loadHorizontalScroller('<ID USED IN MARKUP>', <VALUE FOR showControls>, '<VALUE FOR horizontalScrollContainerPadding>');
     });
 </script>
-`} />
+`}
+/>
 
 ### JavaScript Implementation
 
+<details>
+
+<summary> Expand code block </summary>
 <Source language="javascript" dark code={`
 {/* horizontalScroller.js */}
 
@@ -307,11 +312,14 @@ class HorizontalScroller {
         this.nextButton?.removeEventListener('click', this.handleNextButtonClick.bind(this));
         window.removeEventListener('resize', this.handleResize.bind(this));
     }
+
 }
 
 const loadHorizontalScroller = (id, showControls, padding) => {
-    new HorizontalScroller(id, showControls, padding);
+new HorizontalScroller(id, showControls, padding);
 }
 `} />
 
+</details>
+<br/>
 <Stories includePrimary={false} />
