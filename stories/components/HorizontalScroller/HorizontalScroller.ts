@@ -6,6 +6,7 @@ export type HorizontalScrollerArgs = {
     currentPage: number;
     showControls?: boolean;
     horizontalScrollContainerPadding?: string;
+    backgroundColor?: 'white' | 'gray';
 };
 
 export const createHorizontalScroller = ({
@@ -13,6 +14,7 @@ export const createHorizontalScroller = ({
     currentPage = 1,
     showControls = false,
     horizontalScrollContainerPadding = '0',
+    backgroundColor = 'white',
 }: HorizontalScrollerArgs) => {
     const groupId = `tag-group-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -91,6 +93,7 @@ export const createHorizontalScroller = ({
             mode: 'previous',
             disabled: false,
             classNames: 'prev-button',
+            backgroundColor,
             onClick: () => handlePrevButtonClick(),
         })
 
@@ -98,6 +101,7 @@ export const createHorizontalScroller = ({
             mode: 'next',
             disabled: false,
             classNames: 'next-button',
+            backgroundColor,
             onClick: () => handleNextButtonClick(),
         })
 
