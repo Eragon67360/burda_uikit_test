@@ -6,9 +6,6 @@ const meta: Meta<SlideshowNavButtonArgs> = {
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
-        backgrounds: {
-            default: 'light',
-        },
         viewport: {
             defaultViewport: 'responsive',
             viewports: {
@@ -38,6 +35,11 @@ const meta: Meta<SlideshowNavButtonArgs> = {
         disabled: {
             control: 'boolean',
             description: 'Disabled state of the button',
+        },
+        backgroundColor: {
+            control: 'radio',
+            options: ['white', 'gray'],
+            description: 'Background color of the button',
         },
         onClick: {
             action: 'clicked',
@@ -82,6 +84,32 @@ export const DisabledPrevious: Story = {
     args: {
         mode: 'previous',
         disabled: true,
+    },
+};
+
+export const GrayBackgroundNext: Story = {
+    args: {
+        mode: 'next',
+        disabled: false,
+        backgroundColor: 'gray',
+    },
+    parameters: {
+        backgrounds: {
+            default: 'White',
+        },
+    }
+};
+
+export const GrayBackgroundDisabledPrevious: Story = {
+    args: {
+        mode: 'previous',
+        disabled: true,
+        backgroundColor: 'gray',
+    },
+    parameters: {
+        backgrounds: {
+            default: 'White',
+        },
     },
 };
 
