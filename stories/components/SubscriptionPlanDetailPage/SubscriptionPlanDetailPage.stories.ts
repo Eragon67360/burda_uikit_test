@@ -288,7 +288,7 @@ export const SubscriptionPlanDetailPageWithTabs: Story = {
 export const GrayBackgroundSubscriptionPlanDetailPage: Story = {
     parameters: {
         backgrounds: {
-            default: 'white',
+            default: 'White',
         }
     },
     args: {
