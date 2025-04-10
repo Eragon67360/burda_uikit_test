@@ -64,7 +64,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
     ? 'list-decimal marker:text-bulletpoint-copy pl-5'
     : 'list-disc pl-5';
 
-  items.forEach(item => {
+  items.forEach((item: TextItem) => {
     if ('text' in item) {
       const li = document.createElement('li');
       li.className = 'mb-2';

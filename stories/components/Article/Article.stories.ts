@@ -4,7 +4,7 @@ import { createArticle, ArticleArgs } from './Article';
 
 const meta: Meta<ArticleArgs> = {
     title: 'Components (Molecules)/Article',
-    tags: ['autodocs'],
+    tags: ['!autodocs'],
     parameters: {
         layout: 'centered',
         controls: { expanded: true },
@@ -18,8 +18,8 @@ const meta: Meta<ArticleArgs> = {
         },
         docs: {
             description: {
-                component: 'An article component that displays product information with optional badge and CTA button.'
-            }
+                component: 'The Article component is a flexible, reusable molecule that displays an image, title, and optional button with potential badge.',
+            },
         }
     },
     argTypes: {

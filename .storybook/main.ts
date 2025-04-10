@@ -40,6 +40,12 @@ const config: StorybookConfig = {
 
   docs: {
     autodocs: true
-  }
+  },
+
+  typescript: {
+    check: false,
+    checkOptions: {},
+    skipCompiler: false,
+  },
 };
 export default config;
