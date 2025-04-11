@@ -15,27 +15,32 @@ export enum ButtonCTAVariant {
 
 export type ButtonCTAArgs = {
   variant: ButtonCTAVariant;
-  nested: boolean;
-  disabled?: boolean;
-  iconLeft?: boolean;
   label: string;
+  icon?: string | undefined;
+  iconLeft?: boolean;
+  nested?: boolean;
+  disabled?: boolean;
+  classNames?: string | undefined;
   onClick: () => void;
-  icon?: string | null;
-  classNames?: string;
 };
 
 export const createButtonCTA = ({
-  variant = ButtonCTAVariant.PRIMARY,
+  variant,
+  label,
+  icon,
+  iconLeft = false,
   nested = false,
   disabled = false,
-  label,
-  onClick,
-  icon = null,
-  iconLeft = false,
   classNames,
+  onClick,
 }: ButtonCTAArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
+  btnButton.addEventListener('click', onClick);
+
+  if (disabled) {
+    btnButton.disabled = true;
+  }
 
   const isPrimaryColorDark = getPrimaryColorMode();
 
@@ -66,11 +71,8 @@ export const createButtonCTA = ({
     btnButton.appendChild(contentDiv);
   }
 
-  if (!disabled) {
-    btnButton.addEventListener('click', onClick);
-  }
   const baseClasses = [
-    'group ',
+    'group',
     'transition-all',
     'duration-500',
     'focus:outline-hidden',
@@ -276,10 +278,6 @@ export const createButtonCTA = ({
   const classes = [...baseClasses, ...variantClasses[variant]];
 
   btnButton.className = classes.join(' ');
-
-  if (disabled) {
-    btnButton.disabled = true;
-  }
 
   return btnButton;
 };

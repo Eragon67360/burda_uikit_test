@@ -1,60 +1,117 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonCTAArgs, ButtonCTAVariant, createButtonCTA } from './ButtonCTA';
+import { fn } from '@storybook/test';
+import { ArgsCategory } from '@/stories/types/story';
+import { play } from './ButtonCTA.tests';
 
 const meta: Meta<ButtonCTAArgs> = {
   title: 'Components (Atoms)/Button/ButtonCTA',
 
   parameters: {
     controls: { expanded: true },
+    docs: {
+      description: {
+        component: 'A versatile Call-to-Action button component supporting multiple variants and states.',
+      },
+    },
   },
+
   args: {
-    icon: null,
+    variant: ButtonCTAVariant.PRIMARY,
+    label: 'Primary Button',
+    icon: undefined,
     iconLeft: false,
     nested: false,
     disabled: false,
+    classNames: undefined,
+    onClick: fn(),
   },
+
   argTypes: {
     variant: {
-      control: { type: 'select' },
+      control: 'select',
       options: Object.values(ButtonCTAVariant),
-      description: 'Button variant',
-    },
-    nested: {
-      control: 'boolean',
-      description: 'Nested state',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disabled state',
+      description: 'Defines the visual style and behavior of the button. Each variant has its own unique design and purpose.',
+      type: { name: 'string', required: true },
+      table: {
+        category: ArgsCategory.PROPS,
+      },
     },
     label: {
       control: 'text',
-      description: 'Button label (not applicable for icon buttons)',
+      description: 'Label to be displayed on the button.',
+      type: { name: 'string', required: true },
+      table: {
+        category: ArgsCategory.PROPS,
+      },
+    },
+    icon: {
+      control: 'select',
+      options: [undefined, ...Object.keys(IconRegistry[IconCategory.SYSTEM])],
+      description: 'Icon to be displayed on the button. If not provided, no icon will be shown.',
+      table: {
+        type: { summary: 'string | undefined' },
+        defaultValue: { summary: 'undefined' },
+        category: ArgsCategory.PROPS,
+      },
     },
     iconLeft: {
       control: 'boolean',
-      description: 'Icon on the left of the label',
+      description: 'Position of the icon. If true, the icon appears on the left side of the label. If false, it appears on the right.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: ArgsCategory.PROPS,
+      },
     },
-    icon: {
-      control: { type: 'select' },
-      options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
-      description: 'Select an icon',
+    nested: {
+      control: 'boolean',
+      description: 'Indicates if the button is nested within another element.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: ArgsCategory.PROPS,
+      },
     },
-    onClick: { action: 'clicked' },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the button, preventing user interaction.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: ArgsCategory.PROPS,
+      },
+    },
+    classNames: {
+      control: 'text',
+      description: 'Additional CSS classes for custom styling.',
+      table: {
+        type: { summary: 'string | undefined' },
+        defaultValue: { summary: 'undefined' },
+        category: ArgsCategory.PROPS,
+      },
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Callback function triggered on button click.',
+      table: {
+        type: { summary: '() => void' },
+        defaultValue: { summary: 'undefined' },
+        category: ArgsCategory.EVENTS,
+      },
+    },
   },
+
   render: (args) => createButtonCTA(args),
+  play,
 };
+
 export default meta;
+
 type Story = StoryObj<ButtonCTAArgs>;
 
 export const Primary: Story = {
-  args: {
-    variant: ButtonCTAVariant.PRIMARY,
-    nested: false,
-    disabled: false,
-    label: 'Primary Button',
-  },
   parameters: {
     docs: {
       description: {
@@ -68,7 +125,6 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: ButtonCTAVariant.SECONDARY,
-    nested: false,
     label: 'Secondary Button',
   },
   parameters: {
@@ -84,7 +140,6 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     variant: ButtonCTAVariant.TERTIARY,
-    nested: false,
     label: 'Tertiary Button',
   },
   parameters: {
@@ -100,7 +155,6 @@ export const Tertiary: Story = {
 export const Large: Story = {
   args: {
     variant: ButtonCTAVariant.LARGE,
-    nested: false,
     label: 'Large Button',
   },
   parameters: {
@@ -116,7 +170,6 @@ export const Large: Story = {
 export const LargeLight: Story = {
   args: {
     variant: ButtonCTAVariant.LARGE_LIGHT,
-    nested: false,
     label: 'Large Light Button',
   },
   parameters: {
@@ -132,7 +185,6 @@ export const LargeLight: Story = {
 export const LargeSubscription: Story = {
   args: {
     variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
-    nested: false,
     label: 'Subscribe Now',
   },
   parameters: {
@@ -144,6 +196,20 @@ export const LargeSubscription: Story = {
     },
     backgrounds: {
       default: 'White',
+    },
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Disabled Primary Button',
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled state of the button. The button is not clickable and has a different visual style to indicate its disabled state.',
+      },
     },
   },
 };
