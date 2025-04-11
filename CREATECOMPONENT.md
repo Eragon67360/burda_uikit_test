@@ -71,12 +71,12 @@ export const createButtonCTA = ({}) => {};
 Without Atomic Type:
 
 ```typescript
-import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
+import type { Meta, StoryObj } from '@storybook/html';
+import { createButtonCTA, ButtonCTAArgs } from './ButtonCTA';
 
 const meta: Meta<ButtonCTAArgs> = {
-  title: "Components/Button/ButtonCTA",
-  tags: ["autodocs"],
+  title: 'Components/Button/ButtonCTA',
+  tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
   },
@@ -88,12 +88,12 @@ const meta: Meta<ButtonCTAArgs> = {
 With Atomic Type:
 
 ```typescript
-import type { Meta, StoryObj } from "@storybook/html";
-import { createButtonCTA, ButtonCTAArgs } from "./ButtonCTA";
+import type { Meta, StoryObj } from '@storybook/html';
+import { createButtonCTA, ButtonCTAArgs } from './ButtonCTA';
 
 const meta: Meta<ButtonCTAArgs> = {
-  title: "Components (Atoms)/Button/ButtonCTA",
-  tags: ["autodocs"],
+  title: 'Components (Atoms)/Button/ButtonCTA',
+  tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
   },

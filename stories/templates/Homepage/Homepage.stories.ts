@@ -17,36 +17,36 @@ const meta: Meta<HomepageArgs> = {
     withStaticHero: {
       control: { type: 'boolean' },
       description: 'Display the static image hero',
-      defaultValue: false
+      defaultValue: false,
     },
     staticHeroDesktopImageSrc: {
       control: { type: 'text' },
       description: 'Path of the image',
-      if: { arg: 'withStaticHero', eq: true }
+      if: { arg: 'withStaticHero', eq: true },
     },
     staticHeroHref: {
       control: { type: 'text' },
       description: 'Link for the image',
-      if: { arg: 'withStaticHero', eq: true }
+      if: { arg: 'withStaticHero', eq: true },
     },
     staticHeroImageAltText: {
       control: { type: 'text' },
       description: 'Alternative text',
-      if: { arg: 'withStaticHero', eq: true }
+      if: { arg: 'withStaticHero', eq: true },
     },
     navigationHas2Lines: {
       control: { type: 'boolean' },
       description: 'Display a 2 lines navigation',
-      defaultValue: false
+      defaultValue: false,
     },
   },
   args: {
     withStaticHero: false,
     withSmallSlideshow: false,
     footerArgs: focusFooter,
-    navigationArgs: focusNavigation
+    navigationArgs: focusNavigation,
   },
-  render: (args) => createHomepage(args)
+  render: (args) => createHomepage(args),
 };
 
 export default meta;
@@ -84,7 +84,7 @@ export const HomepageWithStaticHero: Story = {
     staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
     staticHeroMobileImageSrc: 'static-hero-mobile.png',
     staticHeroHref: '#',
-    staticHeroImageAltText: 'Static hero'
+    staticHeroImageAltText: 'Static hero',
   },
   parameters: {
     viewport: {
@@ -105,7 +105,7 @@ export const HomepageWith2LinesNavigation: Story = {
     staticHeroHref: '#',
     staticHeroImageAltText: 'Static hero',
     navigationHas2Lines: true,
-    navigationArgs: autoMotorUndSportNavigation
+    navigationArgs: autoMotorUndSportNavigation,
   },
   parameters: {
     viewport: {
@@ -124,7 +124,7 @@ export const FocusMobile: Story = {
     staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
     staticHeroMobileImageSrc: 'static-hero-mobile.png',
     staticHeroHref: '#',
-    staticHeroImageAltText: 'Static hero'
+    staticHeroImageAltText: 'Static hero',
   },
   parameters: {
     viewport: {
@@ -137,15 +137,14 @@ export const FocusMobile: Story = {
   },
 };
 
-
 export const MeinSchoenerGartenDesktop: Story = {
   args: {
     navigationArgs: meinSchoenerGartenNavigation,
     navigationHas2Lines: false,
     withStaticHero: true,
-    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
     staticHeroMobileImageSrc: 'static-hero-mobile.png',
-    footerArgs: meinSchoenerGartenFooter
+    footerArgs: meinSchoenerGartenFooter,
   },
   parameters: {
     viewport: {
@@ -161,20 +160,19 @@ export const MeinSchoenerGartenDesktop: Story = {
     wrapper.style.setProperty('--color-primary-interaction', 'hsla(88, 63%, 44%, 1)');
     wrapper.style.setProperty('--color-primary-extra-light', 'hsla(86, 33%, 91%,1)');
     wrapper.style.setProperty('--color-brand', 'hsla(88, 63%, 44%, 1)');
-    wrapper.appendChild(createHomepage(args))
+    wrapper.appendChild(createHomepage(args));
     return wrapper;
-  }
-}
-
+  },
+};
 
 export const MeinSchoenerGartenMobile: Story = {
   args: {
     navigationArgs: meinSchoenerGartenNavigation,
     navigationHas2Lines: false,
     withStaticHero: true,
-    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
     staticHeroMobileImageSrc: 'static-hero-mobile.png',
-    footerArgs: meinSchoenerGartenFooter
+    footerArgs: meinSchoenerGartenFooter,
   },
   parameters: {
     viewport: {
@@ -190,20 +188,20 @@ export const MeinSchoenerGartenMobile: Story = {
     wrapper.style.setProperty('--color-primary-interaction', 'hsla(88, 63%, 44%, 1)');
     wrapper.style.setProperty('--color-primary-extra-light', 'hsla(86, 33%, 91%,1)');
     wrapper.style.setProperty('--color-brand', 'hsla(88, 63%, 44%, 1)');
-    wrapper.appendChild(createHomepage(args))
+    wrapper.appendChild(createHomepage(args));
     return wrapper;
-  }
-}
+  },
+};
 
 export const AutoMotorUndSport: Story = {
   args: {
     navigationArgs: autoMotorUndSportNavigation,
     navigationHas2Lines: true,
     withStaticHero: true,
-    staticHeroDesktopImageSrc: "static-hero-header-example.jpg",
+    staticHeroDesktopImageSrc: 'static-hero-header-example.jpg',
     staticHeroMobileImageSrc: 'static-hero-mobile.png',
     footerArgs: autoMotorUndSportFooter,
-    isPrimaryColorDark: true
+    isPrimaryColorDark: true,
   },
   parameters: {
     viewport: {
@@ -221,7 +219,7 @@ export const AutoMotorUndSport: Story = {
     wrapper.style.setProperty('--color-secondary-interaction', 'hsla(179, 95%, 25%, 1)');
     wrapper.style.setProperty('--color-secondary-light', 'hsla(179, 100%, 34%, 1)');
     wrapper.style.setProperty('--color-brand', 'hsla(186, 14%, 15%)');
-    wrapper.appendChild(createHomepage(args))
+    wrapper.appendChild(createHomepage(args));
     return wrapper;
-  }
-}
+  },
+};

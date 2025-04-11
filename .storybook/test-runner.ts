@@ -8,26 +8,26 @@ import { injectAxe, checkA11y, configureAxe } from 'axe-playwright';
  * to learn more about the test-runner hooks API.
  */
 const config: TestRunnerConfig = {
-    async preVisit(page) {
-        await injectAxe(page);
-    },
-    async postVisit(page, context) {
-        // Get the entire context of a story, including parameters, args, argTypes, etc.
-        const storyContext = await getStoryContext(page, context);
+  async preVisit(page) {
+    await injectAxe(page);
+  },
+  async postVisit(page, context) {
+    // Get the entire context of a story, including parameters, args, argTypes, etc.
+    const storyContext = await getStoryContext(page, context);
 
-        // Apply story-level a11y rules
-        await configureAxe(page, {
-            rules: storyContext.parameters?.a11y?.config?.rules,
-        });
+    // Apply story-level a11y rules
+    await configureAxe(page, {
+      rules: storyContext.parameters?.a11y?.config?.rules,
+    });
 
-        const element = storyContext.parameters?.a11y?.element ?? 'body';
-        await checkA11y(page, element, {
-            detailedReport: true,
-            detailedReportOptions: {
-                html: true,
-            },
-        });
-    },
+    const element = storyContext.parameters?.a11y?.element ?? 'body';
+    await checkA11y(page, element, {
+      detailedReport: true,
+      detailedReportOptions: {
+        html: true,
+      },
+    });
+  },
 };
 
 export default config;

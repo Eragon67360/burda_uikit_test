@@ -1,6 +1,6 @@
 // .storybook/preview.ts
 import type { Preview } from '@storybook/html';
-import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import './tailwind.css';
 import './variables.css';
 
@@ -19,8 +19,7 @@ const extendedVP = {
       height: '900px',
     },
   },
-
-}
+};
 const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
@@ -46,8 +45,8 @@ const preview: Preview = {
     viewport: {
       viewports: {
         ...MINIMAL_VIEWPORTS,
-        ...extendedVP
-      }
+        ...extendedVP,
+      },
     },
 
     docs: {
@@ -89,7 +88,17 @@ const preview: Preview = {
 
     options: {
       storySort: {
-        order: ['Welcome', 'Getting Started', 'Willkommen', 'Erste Schritte', 'Design System', 'Components (Atoms)', 'Components (Molecules)', 'Components (Organisms)', 'Templates'],
+        order: [
+          'Welcome',
+          'Getting Started',
+          'Willkommen',
+          'Erste Schritte',
+          'Design System',
+          'Components (Atoms)',
+          'Components (Molecules)',
+          'Components (Organisms)',
+          'Templates',
+        ],
       },
     },
   },

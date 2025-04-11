@@ -3,29 +3,29 @@ import { addons } from '@storybook/manager-api';
 import { create } from '@storybook/theming/create';
 
 const burdaTheme = create({
-    base: 'light',
-    brandTitle: 'FOCUS Abo-Shop UI Kit',
-    brandUrl: 'https://focus-abo.de/',
-    brandImage: '/burda.svg',
-    colorPrimary: '#E61F24',
-    colorSecondary: '#8ACBBF'
+  base: 'light',
+  brandTitle: 'FOCUS Abo-Shop UI Kit',
+  brandUrl: 'https://focus-abo.de/',
+  brandImage: '/burda.svg',
+  colorPrimary: '#E61F24',
+  colorSecondary: '#8ACBBF',
 });
 
 addons.setConfig({
-    theme: burdaTheme,
+  theme: burdaTheme,
 
-    toolbar: {
-        title: { hidden: false },
-        zoom: { hidden: false },
-        eject: { hidden: false },
-        copy: { hidden: false },
-        fullscreen: { hidden: false },
-    },
+  toolbar: {
+    title: { hidden: false },
+    zoom: { hidden: false },
+    eject: { hidden: false },
+    copy: { hidden: false },
+    fullscreen: { hidden: false },
+  },
 
-    enableShortcuts: true,
-    showToolbar: true,
-    showNav: true,
-    showPanel: true,
-    panelPosition: 'right',
-    selectedPanel: 'docs',
+  enableShortcuts: true,
+  showToolbar: true,
+  showNav: true,
+  showPanel: true,
+  panelPosition: 'right',
+  selectedPanel: 'docs',
 });

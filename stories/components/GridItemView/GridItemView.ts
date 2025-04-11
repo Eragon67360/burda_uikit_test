@@ -1,6 +1,6 @@
-import { ArticleArgs, createArticle } from "../Article/Article";
-import { CardArgs, createCard } from "../Card/Card";
-    
+import { ArticleArgs, createArticle } from '../Article/Article';
+import { CardArgs, createCard } from '../Card/Card';
+
 export type GridItemViewArgs = {
   gridItemType: 'article' | 'card';
   articles?: Array<ArticleArgs>;
@@ -18,12 +18,11 @@ export const createGridItemView = ({
   centerItems = false,
   fixedColumnCount,
 }: GridItemViewArgs) => {
-
   let elements = [];
   if (gridItemType === 'card') {
-    elements = cards.map(card => createCard(card));
+    elements = cards.map((card) => createCard(card));
   } else {
-    elements = articles.map(article => createArticle(article));
+    elements = articles.map((article) => createArticle(article));
   }
 
   const container = document.createElement('div');
@@ -36,10 +35,16 @@ export const createGridItemView = ({
     innerContainer.classList.add('justify-center');
   }
 
-  elements.forEach(element => {
+  elements.forEach((element) => {
     if (!!fixedColumnCount) {
       const columnWidth = 100 / fixedColumnCount;
-      element.classList.add('max-md:!max-w-full', 'max-md:!basis-full', 'max-xl:!max-w-[calc(50%-20px)]', 'max-xl:!basis-[calc(50%-20px)]', '!w-[unset]');
+      element.classList.add(
+        'max-md:!max-w-full',
+        'max-md:!basis-full',
+        'max-xl:!max-w-[calc(50%-20px)]',
+        'max-xl:!basis-[calc(50%-20px)]',
+        '!w-[unset]'
+      );
       element.style.flexBasis = `calc(${columnWidth}% - 20px)`;
       element.style.maxWidth = `calc(${columnWidth}% - 20px)`;
     }
@@ -49,4 +54,4 @@ export const createGridItemView = ({
   container.appendChild(innerContainer);
 
   return container;
-}
+};

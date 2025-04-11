@@ -1,5 +1,5 @@
-import { IconCategory, IconRegistry } from "@/assets/icons";
-import { ButtonCTAVariant, createButtonCTA } from "@/components/Button/CTA/ButtonCTA";
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
 
 export type ModalArgs = {
   isOpen: boolean;
@@ -24,14 +24,7 @@ export type ModalArgs = {
   };
 };
 
-export const createModal = ({
-  isOpen,
-  onClose,
-  title,
-  content,
-  triggerButton,
-  actions
-}: ModalArgs) => {
+export const createModal = ({ isOpen, onClose, title, content, triggerButton, actions }: ModalArgs) => {
   const wrapper = document.createElement('div');
 
   const modalContainer = document.createElement('div');
@@ -56,33 +49,42 @@ export const createModal = ({
             <div class="modal-content"></div>
           </div>
 
-          ${actions ? `
+          ${
+            actions
+              ? `
             <div class="flex ">
-              ${actions.primary ?
-        createButtonCTA({
-          variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
-          nested: false,
-          disabled: false,
-          iconLeft: false,
-          icon: actions.primary.icon,
-          label: actions.primary.label,
-          onClick: actions.primary.onClick,
-          classNames: "w-full primary-action"
-        }).outerHTML
-        :
-        ''}
-              ${actions.secondary ? createButtonCTA({
-          variant: ButtonCTAVariant.LARGE,
-          nested: false,
-          disabled: false,
-          iconLeft: false,
-          icon: actions.secondary.icon,
-          label: actions.secondary.label,
-          onClick: actions.secondary.onClick,
-          classNames: "w-full secondary-action"
-        }).outerHTML : ''}
+              ${
+                actions.primary
+                  ? createButtonCTA({
+                      variant: ButtonCTAVariant.LARGE_SUBSCRIPTION,
+                      nested: false,
+                      disabled: false,
+                      iconLeft: false,
+                      icon: actions.primary.icon,
+                      label: actions.primary.label,
+                      onClick: actions.primary.onClick,
+                      classNames: 'w-full primary-action',
+                    }).outerHTML
+                  : ''
+              }
+              ${
+                actions.secondary
+                  ? createButtonCTA({
+                      variant: ButtonCTAVariant.LARGE,
+                      nested: false,
+                      disabled: false,
+                      iconLeft: false,
+                      icon: actions.secondary.icon,
+                      label: actions.secondary.label,
+                      onClick: actions.secondary.onClick,
+                      classNames: 'w-full secondary-action',
+                    }).outerHTML
+                  : ''
+              }
             </div>
-          ` : ''}
+          `
+              : ''
+          }
         </div>
       </div>
     `;
@@ -115,7 +117,7 @@ export const createModal = ({
         modalContent?.classList.add('translate-y-0', 'opacity-100', 'scale-100');
       }, 10);
     },
-    classNames: ''
+    classNames: '',
   });
 
   const closeModal = () => {

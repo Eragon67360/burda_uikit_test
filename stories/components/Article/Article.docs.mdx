@@ -1,13 +1,5 @@
-import {
-  Meta,
-  Canvas,
-  Controls,
-  Source,
-  Stories,
-  Description,
-  ArgTypes,
-} from "@storybook/blocks";
-import * as ArticleStories from "./Article.stories";
+import { Meta, Canvas, Controls, Source, Stories, Description, ArgTypes } from '@storybook/blocks';
+import * as ArticleStories from './Article.stories';
 
 <Meta of={ArticleStories} />
 
@@ -52,7 +44,7 @@ The JavaScript implementation of the Article component is designed to be flexibl
 
 ```typescript
 export const createArticle = ({
-  backgroundColor = "white",
+  backgroundColor = 'white',
   title,
   image,
   imageAltText = title,
@@ -61,31 +53,31 @@ export const createArticle = ({
   onClick = () => {},
 }: ArticleArgs) => {
   // Create main article element
-  const articleElement = document.createElement("article");
+  const articleElement = document.createElement('article');
   articleElement.className = `shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 ${
-    backgroundColor === "gray" ? "bg-neutral-100" : "bg-base-white"
+    backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white'
   } rounded`;
 
   // Create image container
-  const imageContainer = document.createElement("div");
-  imageContainer.className = "relative h-0 grow w-full px-2.5";
+  const imageContainer = document.createElement('div');
+  imageContainer.className = 'relative h-0 grow w-full px-2.5';
 
   // Create image element
-  const imgElement = document.createElement("img");
+  const imgElement = document.createElement('img');
   imgElement.src = image;
   imgElement.alt = imageAltText;
-  imgElement.className = "size-full object-contain pointer-events-none";
+  imgElement.className = 'size-full object-contain pointer-events-none';
   imageContainer.appendChild(imgElement);
 
   // Optional Badge
   if (badgeText && badgeText.length > 0) {
-    const badgeElement = createBadge(badgeText, 42, "primary");
+    const badgeElement = createBadge(badgeText, 42, 'primary');
     imageContainer.appendChild(badgeElement);
   }
 
   // Title element
-  const titleElement = document.createElement("p");
-  titleElement.className = "text-label text-center";
+  const titleElement = document.createElement('p');
+  titleElement.className = 'text-label text-center';
   titleElement.textContent = title;
 
   // Assemble the article

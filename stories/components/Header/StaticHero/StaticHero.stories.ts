@@ -7,7 +7,7 @@ const meta: Meta<StaticHeroArgs> = {
   parameters: {
     layout: 'centered',
   },
-  render: (args) => createStaticHero(args)
+  render: (args) => createStaticHero(args),
 };
 
 export default meta;
@@ -16,8 +16,8 @@ type Story = StoryObj<StaticHeroArgs>;
 export const DefaultStaticHero: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
-    }
+      defaultViewport: 'desktop',
+    },
   },
   args: {
     desktopImageSrc: 'static-hero-header-example.jpg',
@@ -30,8 +30,8 @@ export const DefaultStaticHero: Story = {
 export const MobileStaticHero: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
-    }
+      defaultViewport: 'mobile1',
+    },
   },
   args: {
     mobileImageSrc: 'static-hero-mobile.png',

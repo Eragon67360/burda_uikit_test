@@ -1,26 +1,21 @@
-import { IconCategory, IconRegistry } from "@/assets/icons";
-import { getSizedIcon } from "@/utils/iconUtils";
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { getSizedIcon } from '@/utils/iconUtils';
 
 export type PaginationArgs = {
-    variant?: 'white' | 'grey';
-    currentPage: number;
-    totalPages: number;
-    onPageChange?: (page: number) => void;
+  variant?: 'white' | 'grey';
+  currentPage: number;
+  totalPages: number;
+  onPageChange?: (page: number) => void;
 };
 
-export const createPagination = ({
-    variant = 'white',
-    currentPage,
-    totalPages,
-    onPageChange,
-}: PaginationArgs) => {
-    const baseClasses = 'flex items-center gap-2';
-    const variantClasses = variant === 'grey' ? 'bg-neutral-100' : 'bg-white';
+export const createPagination = ({ variant = 'white', currentPage, totalPages, onPageChange }: PaginationArgs) => {
+  const baseClasses = 'flex items-center gap-2';
+  const variantClasses = variant === 'grey' ? 'bg-neutral-100' : 'bg-white';
 
-    const createPageButton = (pageNum: number, currentPage: number) => {
-        const isSelected = pageNum === currentPage;
+  const createPageButton = (pageNum: number, currentPage: number) => {
+    const isSelected = pageNum === currentPage;
 
-        return `
+    return `
     <button
         class="relative w-12 h-12 flex items-center justify-center text-button-label-large
                overflow-hidden group
@@ -34,19 +29,17 @@ export const createPagination = ({
         <span class="relative z-20 flex items-center justify-center">${pageNum}</span>
     </button>
     `;
-    };
+  };
 
+  const createChevronButton = (direction: 'left' | 'right', currentPage: number, totalPages: number) => {
+    const icon =
+      direction === 'left'
+        ? getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 16)
+        : getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 16);
 
-    const createChevronButton = (direction: 'left' | 'right', currentPage: number, totalPages: number) => {
-        const icon = direction === 'left'
-            ? getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronLeft, 16)
-            : getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronRight, 16);
+    const isDisabled = direction === 'left' ? currentPage === 1 : currentPage === totalPages;
 
-        const isDisabled = direction === 'left'
-            ? currentPage === 1
-            : currentPage === totalPages;
-
-        return `
+    return `
         <button
         class="relative w-12 h-12 flex items-center justify-center
                overflow-hidden group
@@ -60,62 +53,61 @@ export const createPagination = ({
         <span class="relative z-20 flex items-center justify-center">${icon}</span>
       </button>
         `;
-    };
+  };
 
+  const calculateVisiblePages = (page: number, totalPages: number): number[] => {
+    if (totalPages <= 3) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
 
-    const calculateVisiblePages = (page: number, totalPages: number): number[] => {
-        if (totalPages <= 3) {
-            return Array.from({ length: totalPages }, (_, i) => i + 1);
-        }
+    if (page <= 2) {
+      return [1, 2, 3];
+    }
 
-        if (page <= 2) {
-            return [1, 2, 3];
-        }
+    if (page >= totalPages - 1) {
+      return [totalPages - 2, totalPages - 1, totalPages];
+    }
 
-        if (page >= totalPages - 1) {
-            return [totalPages - 2, totalPages - 1, totalPages];
-        }
+    return [page - 1, page, page + 1];
+  };
 
-        return [page - 1, page, page + 1];
-    };
+  const element = document.createElement('div');
+  element.className = `${baseClasses} ${variantClasses} p-2 rounded-lg`;
 
-    const element = document.createElement('div');
-    element.className = `${baseClasses} ${variantClasses} p-2 rounded-lg`;
+  const renderPagination = (page: number) => {
+    const visiblePages = calculateVisiblePages(page, totalPages);
 
-    const renderPagination = (page: number) => {
-        const visiblePages = calculateVisiblePages(page, totalPages);
-
-        element.innerHTML = `
+    element.innerHTML = `
             ${createChevronButton('left', page, totalPages)}
-            ${visiblePages.map(p => createPageButton(p, page)).join('')}
+            ${visiblePages.map((p) => createPageButton(p, page)).join('')}
             ${createChevronButton('right', page, totalPages)}
         `;
-    };
+  };
 
-    renderPagination(currentPage);
+  renderPagination(currentPage);
 
-    element.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        const button = target.closest('button');
-        if (!button || button.disabled) return;
+  element.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const button = target.closest('button');
+    if (!button || button.disabled) return;
 
-        const page = button.dataset.page;
-        const direction = button.dataset.direction;
+    const page = button.dataset.page;
+    const direction = button.dataset.direction;
 
-        let newPage = currentPage;
+    let newPage = currentPage;
 
-        if (page) {
-            newPage = parseInt(page);
-        } else if (direction) {
-            newPage = direction === 'left' ? currentPage - 1 : currentPage + 1;
-        }
+    if (page) {
+      newPage = parseInt(page);
+    } else if (direction) {
+      newPage = direction === 'left' ? currentPage - 1 : currentPage + 1;
+    }
 
-        if (newPage >= 1 && newPage <= totalPages) {
-            onPageChange?.(newPage);
-            currentPage = newPage;
-            renderPagination(currentPage);
-        }
-    });
+    if (newPage >= 1 && newPage <= totalPages) {
+      onPageChange?.(newPage);
+      currentPage = newPage;
+      renderPagination(currentPage);
+    }
+  });
 
-    return element;
+  return element;
 };

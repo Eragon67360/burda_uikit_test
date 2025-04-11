@@ -49,9 +49,9 @@ const meta: Meta<CardArgs> = {
     onClick: {
       action: 'clicked',
       description: 'Optional click handler for the button',
-    }
+    },
   },
-  render: (args) => createCard(args)
+  render: (args) => createCard(args),
 };
 
 export default meta;
@@ -73,7 +73,7 @@ export const DefaultCard: Story = {
     title: 'Card ipsum',
     text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
     buttonLabel: 'zum Angebot',
-    onClick: () => console.log('Button clicked')
+    onClick: () => console.log('Button clicked'),
   },
 };
 
@@ -82,7 +82,7 @@ export const WithoutLinkCard: Story = {
     backgroundColor: 'white',
     image: 'burdaMag',
     title: 'Card ipsum',
-    text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!'
+    text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
   },
 };
 
@@ -93,20 +93,20 @@ export const GreyBackgroundCard: Story = {
     image: 'burdaMag',
     text: 'Als FOCUS Magazin Abonnent erhalten Sie FOCUS digital zum Vorteilspreis! Woche für Woche bereits ab Donnerstag, 16.00 Uhr!',
     buttonLabel: 'zum Angebot',
-    onClick: () => console.log('Button clicked')
+    onClick: () => console.log('Button clicked'),
   },
   argTypes: {
     backgroundColor: {
       table: {
-        disable: true
-      }
-    }
+        disable: true,
+      },
+    },
   },
   parameters: {
     backgrounds: {
-        default: 'White',
+      default: 'White',
     },
-  }
+  },
 };
 
 export const StyledTextCard: Story = {

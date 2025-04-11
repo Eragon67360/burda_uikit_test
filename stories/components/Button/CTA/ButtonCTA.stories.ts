@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/html';
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonCTAArgs, ButtonCTAVariant, createButtonCTA } from './ButtonCTA';
@@ -44,7 +43,7 @@ const meta: Meta<ButtonCTAArgs> = {
     },
     onClick: { action: 'clicked' },
   },
-  render: (args) => createButtonCTA(args as any)
+  render: (args) => createButtonCTA(args as any),
 };
 export default meta;
 type Story = StoryObj<ButtonCTAArgs>;
@@ -59,7 +58,8 @@ export const Primary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Primary variant with brand background color. This is the main call-to-action button style, used for the most important actions in the interface. Features a distinctive hover state and clear disabled state.',
+        story:
+          'Primary variant with brand background color. This is the main call-to-action button style, used for the most important actions in the interface. Features a distinctive hover state and clear disabled state.',
       },
     },
   },
@@ -74,7 +74,8 @@ export const Secondary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Secondary variant with interaction color background. Used for important but not primary actions. Includes a unique fill animation on hover and maintains hierarchy through subtle styling.',
+        story:
+          'Secondary variant with interaction color background. Used for important but not primary actions. Includes a unique fill animation on hover and maintains hierarchy through subtle styling.',
       },
     },
   },
@@ -89,7 +90,8 @@ export const Tertiary: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Tertiary variant with transparent background and border. Ideal for less prominent actions or in contexts where visual weight needs to be minimized. Features a subtle hover effect and maintains accessibility.',
+        story:
+          'Tertiary variant with transparent background and border. Ideal for less prominent actions or in contexts where visual weight needs to be minimized. Features a subtle hover effect and maintains accessibility.',
       },
     },
   },
@@ -104,7 +106,8 @@ export const Large: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Large variant with black background and white text. Typically used for primary actions in hero sections or prominent areas.',
+        story:
+          'Large variant with black background and white text. Typically used for primary actions in hero sections or prominent areas.',
       },
     },
   },
@@ -119,7 +122,8 @@ export const LargeLight: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Large light variant with white background and black text. Suitable for use on dark backgrounds or when a lighter emphasis is needed.',
+        story:
+          'Large light variant with white background and black text. Suitable for use on dark backgrounds or when a lighter emphasis is needed.',
       },
     },
   },
@@ -134,7 +138,8 @@ export const LargeSubscription: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Special large variant designed specifically for subscription CTAs. Features a distinct primary interaction color and hover effects.',
+        story:
+          'Special large variant designed specifically for subscription CTAs. Features a distinct primary interaction color and hover effects.',
       },
     },
     backgrounds: {

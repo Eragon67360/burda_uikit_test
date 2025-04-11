@@ -27,7 +27,7 @@ const meta: Meta<TooltipArgs> = {
       description: 'Additional classes for the tooltip wrapper',
     },
   },
-  render: (args) => createTooltip(args as any)
+  render: (args) => createTooltip(args as any),
 };
 
 export default meta;
@@ -64,26 +64,29 @@ export const CustomTrigger: Story = {
 };
 
 export const ShortContent: Story = {
-  render: () => createTooltip({
-    content: 'Short tooltip content',
-  }),
+  render: () =>
+    createTooltip({
+      content: 'Short tooltip content',
+    }),
 };
 
 export const LongContent: Story = {
-  render: () => createTooltip({
-    content: `
+  render: () =>
+    createTooltip({
+      content: `
       <div class="space-y-2">
         <p>This is a longer tooltip content that will expand to fit the content but won't exceed 400px in width. 
            It will wrap naturally when it reaches that limit.</p>
         <p>Multiple paragraphs are handled gracefully.</p>
       </div>
     `,
-  }),
+    }),
 };
 
 export const WithList: Story = {
-  render: () => createTooltip({
-    content: `
+  render: () =>
+    createTooltip({
+      content: `
       <div class="space-y-2">
         <h3 class="font-semibold">Features:</h3>
         <ul class="list-disc pl-4 space-y-1">
@@ -94,7 +97,7 @@ export const WithList: Story = {
         </ul>
       </div>
     `,
-  }),
+    }),
 };
 
 const createShowcaseTemplate = () => {

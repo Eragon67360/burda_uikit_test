@@ -1,9 +1,12 @@
 import { IconRegistry, IconCategory } from '@/stories/assets/icons';
 import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
-import './subscriptionPlanDetailPage.css'
+import './subscriptionPlanDetailPage.css';
 import { ButtonIconVariant, createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
 import { createTabs, TabItem } from '../Tabs/Tabs';
-import { SubscriptionPlanDetailPageItemArgs, createSubscriptionPlanDetailPageItem } from '../SubscriptionPlanDetailPageItem/SubscriptionPlanDetailPageItem';
+import {
+  SubscriptionPlanDetailPageItemArgs,
+  createSubscriptionPlanDetailPageItem,
+} from '../SubscriptionPlanDetailPageItem/SubscriptionPlanDetailPageItem';
 
 export type SubscriptionPlanDetailPageArgs = {
   image?: string;
@@ -11,7 +14,7 @@ export type SubscriptionPlanDetailPageArgs = {
   showMoreButtonLabel: string;
   showLessButtonLabel?: string;
   backgroundColor?: 'white' | 'gray';
-  iconButtonIcon?: keyof typeof IconRegistry[IconCategory.SYSTEM];
+  iconButtonIcon?: keyof (typeof IconRegistry)[IconCategory.SYSTEM];
   onIconButtonClick?: () => void;
   tertiaryButtonLabel?: string;
   tertiaryButtonIcon?: string;
@@ -100,19 +103,19 @@ export const createSubscriptionPlanDetailPage = ({
 
   if (table) {
     const tableElement = document.createElement('table');
-    
+
     table.forEach((item, index) => {
       const desktopRow = document.createElement('tr');
       desktopRow.className = `max-md:hidden xl:hidden ${index % 2 === 0 ? 'bg-neutral-50' : 'bg-neutral-100'} ${index > 0 ? 'border-t border-neutral-200' : ''}`;
-      
+
       const titleCell = document.createElement('td');
       titleCell.className = 'px-4 py-3 text-copy font-bold';
       titleCell.textContent = item.title;
-      
+
       const textCell = document.createElement('td');
       textCell.className = 'px-4 py-3 text-copy';
       textCell.textContent = item.text;
-      
+
       desktopRow.appendChild(titleCell);
       desktopRow.appendChild(textCell);
       tableElement.appendChild(desktopRow);
@@ -123,14 +126,14 @@ export const createSubscriptionPlanDetailPage = ({
       mobileTitleCell.className = 'px-4 py-3 text-copy font-bold';
       mobileTitleCell.textContent = item.title;
       mobileTitleRow.appendChild(mobileTitleCell);
-      
+
       const mobileTextRow = document.createElement('tr');
       mobileTextRow.className = 'md:hidden xl:table-row bg-neutral-100';
       const mobileTextCell = document.createElement('td');
       mobileTextCell.className = 'px-4 py-3 text-copy';
       mobileTextCell.textContent = item.text;
       mobileTextRow.appendChild(mobileTextCell);
-      
+
       tableElement.appendChild(mobileTitleRow);
       tableElement.appendChild(mobileTextRow);
     });
@@ -147,7 +150,7 @@ export const createSubscriptionPlanDetailPage = ({
   if (tabItems) {
     const tabsContainer = document.createElement('div');
     tabsContainer.className = 'w-full max-w-[740px] pb-8';
-    
+
     const tabs = createTabs({
       items: tabItems,
       selectedId: tabItems[0].id,
@@ -158,7 +161,7 @@ export const createSubscriptionPlanDetailPage = ({
       disabled: false,
       onTabSelected: selectTab,
     });
-    
+
     tabsContainer.appendChild(tabs);
     mainContentContainer.appendChild(tabsContainer);
   }
@@ -166,12 +169,12 @@ export const createSubscriptionPlanDetailPage = ({
   const createElementContainer = (elements: SubscriptionPlanDetailPageItemArgs[], isSecondary = false) => {
     const container = document.createElement('div');
     container.className = `w-full flex max-lg:flex-col gap-8 lg:gap-6 justify-center transition-all duration-300 ${isSecondary ? 'flex-wrap' : 'items-end'}`;
-    const maxWidth = '460px'
-    elements.forEach(element => {
+    const maxWidth = '460px';
+    elements.forEach((element) => {
       const elementWrapper = document.createElement('div');
       elementWrapper.className = `max-lg:w-full lg:basis-[calc(33%-20px)] grow flex flex-col gap-8 transition-all duration-300 ${isSecondary ? 'flex-auto' : 'h-full justify-center'}`;
       elementWrapper.style.maxWidth = maxWidth;
-      
+
       const elementComponent = createSubscriptionPlanDetailPageItem({
         ...element,
         classNames: isSecondary ? 'h-full' : '',
@@ -212,7 +215,7 @@ export const createSubscriptionPlanDetailPage = ({
 
   const buttonContainer = document.createElement('div');
   buttonContainer.className = 'w-full flex justify-center pt-10';
-  
+
   const showMoreButton = createButtonCTA({
     label: showMoreButtonLabel,
     onClick: () => toggleExpanded(!expanded),
@@ -240,25 +243,25 @@ export const createSubscriptionPlanDetailPage = ({
 
   container.appendChild(mainContentContainer);
 
-  function getCurrentSecondaryElements () {
+  function getCurrentSecondaryElements() {
     if (!tabItems) return secondaryElements;
     if (selectedTab === tabItems[0].id) return secondaryElementsForTab1;
     return secondaryElementsForTab2;
   }
 
-  function getCurrentPrimaryElementsContainer () {
+  function getCurrentPrimaryElementsContainer() {
     if (!tabItems) return primaryElementsContainer;
     if (selectedTab === tabItems[0].id) return primaryElementsForTab1Container;
     return primaryElementsForTab2Container;
   }
 
-  function getCurrentSecondaryElementsContainer () {
+  function getCurrentSecondaryElementsContainer() {
     if (!tabItems) return secondaryElementsContainer;
     if (selectedTab === tabItems[0].id) return secondaryElementsForTab1Container;
     return secondaryElementsForTab2Container;
   }
 
-  function selectTab (id?: string) {
+  function selectTab(id?: string) {
     if (!tabItems) return;
     if (selectedTab === id) return;
     getCurrentPrimaryElementsContainer().classList.add('animate-subscription-plan-detail-disappear');
@@ -278,7 +281,7 @@ export const createSubscriptionPlanDetailPage = ({
     }, 200);
   }
 
-  function toggleExpanded (newVal: boolean) {
+  function toggleExpanded(newVal: boolean) {
     expanded = newVal;
     getCurrentPrimaryElementsContainer().classList.add(expanded ? 'items-end' : 'items-center');
     getCurrentPrimaryElementsContainer().classList.remove(expanded ? 'items-center' : 'items-end');
@@ -303,7 +306,7 @@ export const createSubscriptionPlanDetailPage = ({
     setExpandButton();
   }
 
-  function setExpandButton () {
+  function setExpandButton() {
     if (getCurrentSecondaryElements().length === 0) {
       showMoreButton.classList.add('animate-subscription-plan-detail-disappear');
       showLessButton.classList.add('animate-subscription-plan-detail-disappear');
@@ -326,8 +329,7 @@ export const createSubscriptionPlanDetailPage = ({
         setTimeout(() => {
           showLessButton.classList.remove('animate-subscription-plan-detail-appear');
         }, 200);
-      }
-      , 200);
+      }, 200);
       return;
     }
     if (showLessButton.classList.contains('hidden') && !showMoreButton.classList.contains('hidden')) return;
@@ -340,12 +342,10 @@ export const createSubscriptionPlanDetailPage = ({
       setTimeout(() => {
         showMoreButton.classList.remove('animate-subscription-plan-detail-appear');
       }, 200);
-    }
-    , 200);
-    
+    }, 200);
   }
 
-  function init () {
+  function init() {
     selectTab(tabItems ? tabItems[0].id : undefined);
     toggleExpanded(false);
   }

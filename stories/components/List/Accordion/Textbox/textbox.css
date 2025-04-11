@@ -1,18 +1,18 @@
 .textbox-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .textbox-content {
-    will-change: max-height, opacity;
+  will-change: max-height, opacity;
 }
 
-[data-button="top"],
-[data-button="bottom"] {
-    will-change: opacity;
-    pointer-events: none;
+[data-button='top'],
+[data-button='bottom'] {
+  will-change: opacity;
+  pointer-events: none;
 }
 
-[data-button="top"] button,
-[data-button="bottom"] button {
-    pointer-events: auto;
+[data-button='top'] button,
+[data-button='bottom'] button {
+  pointer-events: auto;
 }

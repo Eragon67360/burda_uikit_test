@@ -1,14 +1,16 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonLinkArgs, createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
-import './text.css'
+import './text.css';
 
 type LinkItem = ButtonLinkArgs & {
   href: string;
 };
 
-type TextItem = {
-  text: string;
-} | LinkItem;
+type TextItem =
+  | {
+      text: string;
+    }
+  | LinkItem;
 
 export type TextArgs<T extends 'ordered' | 'unordered' | 'links' = 'ordered' | 'unordered' | 'links'> = {
   variant: T;
@@ -17,7 +19,6 @@ export type TextArgs<T extends 'ordered' | 'unordered' | 'links' = 'ordered' | '
 };
 
 export const createText = ({ variant, title, items }: TextArgs) => {
-
   const container = document.createElement('div');
   container.className = 'flex flex-col';
 
@@ -32,7 +33,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
     const ul = document.createElement('ul');
     ul.className = 'list-none';
 
-    items.forEach(item => {
+    items.forEach((item) => {
       const li = document.createElement('li');
       li.className = 'mb-1';
 
@@ -46,7 +47,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
           href: item.href,
           disabled: item.disabled || false,
           iconLeft: item.iconLeft || false,
-          onClick: item.onClick || (() => { }),
+          onClick: item.onClick || (() => {}),
           icon: item.icon || 'arrowRight',
         });
         li.appendChild(buttonLink);
@@ -60,9 +61,7 @@ export const createText = ({ variant, title, items }: TextArgs) => {
   }
 
   const list = document.createElement(variant === 'ordered' ? 'ol' : 'ul');
-  list.className = variant === 'ordered'
-    ? 'list-decimal marker:text-bulletpoint-copy pl-5'
-    : 'list-disc pl-5';
+  list.className = variant === 'ordered' ? 'list-decimal marker:text-bulletpoint-copy pl-5' : 'list-disc pl-5';
 
   items.forEach((item: TextItem) => {
     if ('text' in item) {
