@@ -1,8 +1,9 @@
-import { expect, userEvent } from '@storybook/test';
+import { expect, Mock, userEvent } from '@storybook/test';
 import { within } from '@testing-library/dom';
-import { PlayFunction } from 'storybook/internal/types';
+import { PlayFunction, Renderer } from 'storybook/internal/types';
+import { ButtonCTAArgs } from './ButtonCTA';
 
-export const play: PlayFunction = async ({ canvasElement, args }) => {
+export const play: PlayFunction<Renderer, ButtonCTAArgs> = async ({ canvasElement, args }) => {
   const canvas = within(canvasElement);
   const button = canvas.getByRole('button');
 
@@ -15,7 +16,7 @@ export const play: PlayFunction = async ({ canvasElement, args }) => {
   } else {
     await expect(button).toHaveFocus();
   }
-  args.onClick.mockClear();
+  (args.onClick as Mock).mockClear();
 
   const checkIfClicked = async () => {
     if (args.disabled) {
@@ -23,7 +24,7 @@ export const play: PlayFunction = async ({ canvasElement, args }) => {
     } else {
       await expect(args.onClick).toHaveBeenCalled();
     }
-    args.onClick.mockClear();
+    (args.onClick as Mock).mockClear();
   };
 
   await userEvent.keyboard('[Enter]');

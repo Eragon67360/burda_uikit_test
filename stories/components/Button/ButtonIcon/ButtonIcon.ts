@@ -30,7 +30,7 @@ export const createButtonIcon = ({
     btnButton.innerHTML = createIcon({
       name: icon,
       size: 16,
-      className: disabled ? 'opacity-50' : 'z-10',
+      classNames: disabled ? 'opacity-50' : 'z-10',
     });
   }
 
