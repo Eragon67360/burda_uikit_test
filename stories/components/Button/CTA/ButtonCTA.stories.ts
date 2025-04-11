@@ -43,7 +43,7 @@ const meta: Meta<ButtonCTAArgs> = {
     },
     onClick: { action: 'clicked' },
   },
-  render: createButtonCTA,
+  render: (args) => createButtonCTA(args),
 };
 export default meta;
 type Story = StoryObj<ButtonCTAArgs>;

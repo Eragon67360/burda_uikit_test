@@ -9,7 +9,7 @@ const meta: Meta<ArticleTeaserArgs> = {
     controls: { expanded: true },
   },
   argTypes: {},
-  render: createArticleTeaser,
+  render: (args) => createArticleTeaser(args),
 };
 
 export default meta;

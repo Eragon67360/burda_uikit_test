@@ -16,7 +16,7 @@ const meta: Meta<SubscriptionPlanStartPageArgs> = {
     primaryCTALabel: { control: 'text' },
     onPrimaryClick: { action: 'primary clicked' },
   },
-  render: createSubscriptionPlanStartPage,
+  render: (args) => createSubscriptionPlanStartPage(args),
 };
 
 export default meta;

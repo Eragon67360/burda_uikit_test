@@ -81,7 +81,7 @@ const meta: Meta<SubscriptionPlanDetailPageArgs> = {
       description: 'Array of subscription plan elements for the second tab (only if tabItems are provided)',
     },
   },
-  render: createSubscriptionPlanDetailPage,
+  render: (args) => createSubscriptionPlanDetailPage(args),
 };
 
 export default meta;

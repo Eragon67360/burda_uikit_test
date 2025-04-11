@@ -27,7 +27,7 @@ const meta: Meta<TooltipArgs> = {
       description: 'Additional classes for the tooltip wrapper',
     },
   },
-  render: createTooltip,
+  render: (args) => createTooltip(args),
 };
 
 export default meta;

@@ -92,7 +92,7 @@ const meta: Meta<SubscriptionPlanDetailPageItemArgs> = {
       },
     },
   },
-  render: createSubscriptionPlanDetailPageItem,
+  render: (args) => createSubscriptionPlanDetailPageItem(args),
 };
 
 export default meta;

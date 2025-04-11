@@ -24,7 +24,7 @@ export const DefaultStaticHero: Story = {
     altText: 'Example of a static hero image',
     href: '#',
   },
-  render: createStaticHero,
+  render: (args) => createStaticHero(args),
 };
 
 export const MobileStaticHero: Story = {
@@ -38,5 +38,5 @@ export const MobileStaticHero: Story = {
     altText: 'Example of a static hero image',
     href: '#',
   },
-  render: createStaticHero,
+  render: (args) => createStaticHero(args),
 };

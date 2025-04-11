@@ -119,7 +119,7 @@ const meta: Meta<NavigationArgs> = {
     },
   },
   args: focusNavigation,
-  render: createNavigation,
+  render: (args) => createNavigation(args),
 };
 
 export default meta;

@@ -33,7 +33,7 @@ const meta: Meta<CheckboxArgs> = {
       description: 'Callback function when checkbox state changes',
     },
   },
-  render: createCheckbox,
+  render: (args) => createCheckbox(args),
 };
 
 export default meta;
