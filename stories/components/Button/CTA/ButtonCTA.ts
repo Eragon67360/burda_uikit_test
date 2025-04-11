@@ -21,7 +21,7 @@ export type ButtonCTAArgs = {
   nested?: boolean;
   disabled?: boolean;
   classNames?: string | undefined;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const createButtonCTA = ({
@@ -32,7 +32,7 @@ export const createButtonCTA = ({
   nested = false,
   disabled = false,
   classNames,
-  onClick,
+  onClick = () => {},
 }: ButtonCTAArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
@@ -276,7 +276,6 @@ export const createButtonCTA = ({
   };
 
   const classes = [...baseClasses, ...variantClasses[variant]];
-
   btnButton.className = classes.join(' ');
 
   return btnButton;
