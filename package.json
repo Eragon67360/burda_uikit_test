@@ -8,6 +8,7 @@
     "build": "storybook build",
     "dev": "concurrently --kill-others \"npm run watch:tailwindcss\" \"npm run watch:storybook\"",
     "preview-storybook": "serve storybook-static -s -l 6007",
+    "format": "prettier --write .",
     "preinstall": "git config core.hooksPath hooks"
   },
   "repository": {
