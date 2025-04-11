@@ -13,7 +13,7 @@ export type SearchArgs = {
   onSearch?: (value: string) => void;
   emptyText?: string;
   classNames?: string;
-  isSmall: boolean;
+  isSmall?: boolean;
 };
 
 export const createSearch = ({

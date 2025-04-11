@@ -49,7 +49,7 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    check: false,
+    check: true,
     checkOptions: {},
     skipCompiler: false,
   },

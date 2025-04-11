@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "downlevelIteration": true,
     "baseUrl": ".",
     "paths": {
       "@/stories/*": ["stories/*"],
