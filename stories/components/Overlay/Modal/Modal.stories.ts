@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createModal, ModalArgs } from './Modal';
-import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
+import { ButtonCTAVariant } from '@/components/Button/CTA/ButtonCTA';
 import { createTextbox } from '@/components/List/Accordion/Textbox/Textbox';
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { createInfoTag } from '@/components/InfoTag/InfoTag';

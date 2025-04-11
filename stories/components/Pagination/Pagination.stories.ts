@@ -26,7 +26,7 @@ const meta: Meta<PaginationArgs> = {
       description: 'Callback when page is changed',
     },
   },
-  render: (args) => createPagination(args as any),
+  render: createPagination,
 };
 
 export default meta;

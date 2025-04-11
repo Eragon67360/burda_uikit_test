@@ -7,7 +7,7 @@ export const getSizedIcon = (svg: string, size?: number): string => {
 
   if (!svgElement) return svg;
 
-  const viewBox = svgElement.getAttribute('viewBox');
+  // const viewBox = svgElement.getAttribute('viewBox');
 
   svgElement.setAttribute('width', `${size}`);
   svgElement.setAttribute('height', `${size}`);

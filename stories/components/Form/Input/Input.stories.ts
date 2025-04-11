@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { InputArgs, createInput } from './Input';
-import { createTooltip } from '@/components/Overlay/Tooltip/Tooltip';
 
 const meta: Meta<InputArgs> = {
   title: 'Components (Atoms)/Form/Input',

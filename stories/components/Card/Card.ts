@@ -46,7 +46,7 @@ export const createCard = ({
   textContainer.appendChild(titleElement);
   textContainer.appendChild(textElement);
 
-  if (!!image) {
+  if (image) {
     const iconContainer = document.createElement('div');
     iconContainer.className = 'md:min-w-24 flex justify-center md:block';
 

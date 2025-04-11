@@ -49,7 +49,7 @@ const meta: Meta<{component_name}Args> = {{
     argTypes: {{
 
     }},
-    render: (args) => create{component_name}(args as any)
+    render: create{component_name},
 }};
 
 export default meta;

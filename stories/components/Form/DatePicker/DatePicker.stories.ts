@@ -30,7 +30,7 @@ type Story = StoryObj<DatePickerArgs>;
 export const Primary: Story = {
   args: {
     label: 'Select Date',
-    placeholder: 'DD.MM.YYYY',
+    placeholder: 'MM/DD/YYYY',
     language: 'EN',
   },
 };
@@ -38,7 +38,7 @@ export const Primary: Story = {
 export const WithValue: Story = {
   args: {
     label: 'Select Date',
-    value: '15.04.2024',
+    value: '04/15/2024',
     language: 'EN',
   },
 };
@@ -47,6 +47,14 @@ export const German: Story = {
   args: {
     label: 'Datum auswählen',
     placeholder: 'TT.MM.JJJJ',
+    language: 'DE',
+  },
+};
+
+export const GermanWithValue: Story = {
+  args: {
+    label: 'Datum auswählen',
+    value: '15.04.2024',
     language: 'DE',
   },
 };

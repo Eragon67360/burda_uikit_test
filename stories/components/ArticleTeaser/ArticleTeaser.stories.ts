@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createArticleTeaser, ArticleTeaserArgs } from './ArticleTeaser';
-import { background } from 'storybook/internal/theming';
 
 const meta: Meta<ArticleTeaserArgs> = {
   title: 'Components (Organisms)/ArticleTeaser',
@@ -10,7 +9,7 @@ const meta: Meta<ArticleTeaserArgs> = {
     controls: { expanded: true },
   },
   argTypes: {},
-  render: (args) => createArticleTeaser(args as any),
+  render: createArticleTeaser,
 };
 
 export default meta;

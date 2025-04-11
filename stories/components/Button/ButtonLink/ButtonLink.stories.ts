@@ -33,7 +33,7 @@ const meta: Meta<ButtonLinkArgs> = {
     },
     onClick: { action: 'clicked' },
   },
-  render: (args) => createButtonLink(args as any),
+  render: createButtonLink,
 };
 
 export default meta;

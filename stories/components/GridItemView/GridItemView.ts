@@ -36,7 +36,7 @@ export const createGridItemView = ({
   }
 
   elements.forEach((element) => {
-    if (!!fixedColumnCount) {
+    if (fixedColumnCount) {
       const columnWidth = 100 / fixedColumnCount;
       element.classList.add(
         'max-md:!max-w-full',

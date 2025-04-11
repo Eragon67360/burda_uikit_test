@@ -1,13 +1,22 @@
 
 #!/bin/sh
 
-echo "Running pre-commit hook..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "ESLint failed. Aborting commit."
+  exit 1
+fi
 
 npm run build
 if [ $? -ne 0 ]; then
-  echo "Build failed. Please fix the errors before committing."
+  echo "Build failed. Aborting commit."
   exit 1
 fi
-echo "Build succeeded."
+
+npm audit
+if [ $? -ne 0 ]; then
+  echo "Audit. Aborting commit."
+  exit 1
+fi
 
 exit 0

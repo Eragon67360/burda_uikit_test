@@ -18,7 +18,7 @@ const meta: Meta<TagArgs> = {
       defaultValue: true,
     },
   },
-  render: (args) => createTag(args as any),
+  render: createTag,
 };
 
 export default meta;

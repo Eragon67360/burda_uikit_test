@@ -32,7 +32,7 @@ const meta: Meta<GridItemViewArgs> = {
         'Max width of the grid item container (any valid CSS rule). If not set, the container will take the full width of the parent.',
     },
   },
-  render: (args) => createGridItemView(args as any),
+  render: createGridItemView,
 };
 
 export default meta;

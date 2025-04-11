@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createProcess, ProcessArgs } from './Process';
-import { IconCategory } from '@/stories/assets/icons';
 
 const meta: Meta<ProcessArgs> = {
   title: 'Components (Organisms)/List/Process',

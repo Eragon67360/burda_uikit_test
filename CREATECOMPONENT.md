@@ -81,7 +81,7 @@ const meta: Meta<ButtonCTAArgs> = {
     controls: { expanded: true },
   },
   argTypes: {},
-  render: (args) => createButtonCTA(args as any),
+  render: createButtonCTA,
 };
 ```
 
@@ -98,7 +98,7 @@ const meta: Meta<ButtonCTAArgs> = {
     controls: { expanded: true },
   },
   argTypes: {},
-  render: (args) => createButtonCTA(args as any),
+  render: createButtonCTA,
 };
 ```
 

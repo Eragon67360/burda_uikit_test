@@ -13,7 +13,7 @@ const meta: Meta<InfoTagArgs> = {
       description: 'Tag label',
     },
   },
-  render: (args) => createInfoTag(args as any),
+  render: createInfoTag,
 };
 
 export default meta;

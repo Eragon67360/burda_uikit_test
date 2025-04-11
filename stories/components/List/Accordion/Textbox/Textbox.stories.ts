@@ -31,7 +31,7 @@ const meta: Meta<TextboxArgs> = {
       description: 'Icon to replace the chevron',
     },
   },
-  render: (args) => createTextbox(args as any),
+  render: createTextbox,
 };
 
 export default meta;

@@ -19,10 +19,10 @@ interface ShowcaseReturn {
 
 export const createShowcase = ({ isSmall = false, images, duration = 5, isPlaying = true }: ShowcaseArgs): ShowcaseReturn => {
   let progressComponent: ReturnType<typeof createSlideProgress> | null = null;
-  let localIsPlaying = isPlaying;
+  const localIsPlaying = isPlaying;
   let isTransitioning = false;
 
-  let animationFrameId: number | null = null;
+  const animationFrameId: number | null = null;
 
   const state = {
     currentIndex: 0,

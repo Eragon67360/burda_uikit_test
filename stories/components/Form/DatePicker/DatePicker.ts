@@ -31,9 +31,13 @@ const parseDate = (dateString: string): Date => {
 };
 
 const formatDate = (date: Date, language: 'EN' | 'DE'): string => {
+  console.log('formatDate :', date, language);
   const day = date.getDate().toString().padStart(2, '0');
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear();
+  if (language === 'EN') {
+    return `${month}/${day}/${year}`;
+  }
   return `${day}.${month}.${year}`;
 };
 
@@ -41,10 +45,10 @@ export const createDatePicker = ({
   label,
   required = false,
   error,
-  placeholder = 'DD.MM.YYYY',
   disabled = false,
   value = '',
   language = 'EN',
+  placeholder = language === 'EN' ? 'MM/DD/YYYY' : 'DD.MM.YYYY',
   onChange,
 }: DatePickerArgs) => {
   const element = document.createElement('div');
@@ -131,7 +135,11 @@ export const createDatePicker = ({
                             day !== ''
                               ? `<button type="button"
                         class="day-btn size-[2.3rem] transition-all cursor-pointer rounded hover:bg-secondary-light 
-                                                ${day === currentDate.getDate() ? 'bg-secondary-interaction text-base-black hover:bg-secondary-light' : ''}"
+                                                ${
+                                                  day === currentDate.getDate()
+                                                    ? 'bg-secondary-interaction text-base-black hover:bg-secondary-light'
+                                                    : ''
+                                                }"
                         data-date="${day}">
                         ${day}
                     </button>`

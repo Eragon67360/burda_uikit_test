@@ -26,7 +26,7 @@ const meta: Meta<SelectionListArgs> = {
       description: 'Background color of the radio set',
     },
   },
-  render: (args) => createSelectionList(args as any),
+  render: createSelectionList,
 };
 
 export default meta;

@@ -27,7 +27,7 @@ const meta: Meta<HorizontalScrollerArgs> = {
       description: 'Padding for the horizontal scroll container',
     },
   },
-  render: (args) => createHorizontalScroller(args as any),
+  render: createHorizontalScroller,
 };
 
 const sampleElement = (index: number) => {

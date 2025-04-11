@@ -75,7 +75,7 @@ export class ToastManager {
   }
 
   public clearAll(): void {
-    this.toasts.forEach((toast, id) => {
+    this.toasts.forEach((toast) => {
       clearTimeout(toast.timerId);
       toast.element.remove();
     });

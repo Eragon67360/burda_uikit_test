@@ -1,4 +1,4 @@
-type IconType = string;
+// type IconType = string;
 
 export enum IconCategory {
   SYSTEM = 'system',
@@ -1027,8 +1027,8 @@ export const IconRegistry = {
 } as const;
 
 // Type safety
-type IconRegistryType = {
-  [K in IconCategory]: {
-    [key: string]: IconType;
-  };
-};
+// type IconRegistryType = {
+//   [K in IconCategory]: {
+//     [key: string]: IconType;
+//   };
+// };

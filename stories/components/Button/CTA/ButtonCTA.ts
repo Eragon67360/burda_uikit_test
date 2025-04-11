@@ -52,7 +52,7 @@ export const createButtonCTA = ({
       contentDiv.className = 'relative z-10 flex items-center justify-center gap-3 group-disabled:gap-3 transition-all';
     }
 
-    let arrowSpan = document.createElement('span');
+    const arrowSpan = document.createElement('span');
     if (icon) {
       arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
     }

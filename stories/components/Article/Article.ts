@@ -56,7 +56,7 @@ export const createArticle = ({
   onClick = () => {},
   ariaLabel,
   role = 'article',
-  focusable = true,
+  // focusable = true,
 }: AccessibleArticleArgs) => {
   const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
 

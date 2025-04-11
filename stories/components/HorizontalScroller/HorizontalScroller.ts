@@ -68,13 +68,13 @@ export const createHorizontalScroller = ({
       return;
     }
 
-    if (!!controlContainer) {
+    if (controlContainer) {
       controlContainer.innerHTML = '';
     } else {
       controlContainer = document.createElement('div');
     }
     controlContainer.className = 'control-container w-full flex items-center justify-between gap-2';
-    if (!!horizontalScrollContainerPadding) {
+    if (horizontalScrollContainerPadding) {
       controlContainer.style.paddingLeft = horizontalScrollContainerPadding;
       controlContainer.style.paddingRight = horizontalScrollContainerPadding;
     }

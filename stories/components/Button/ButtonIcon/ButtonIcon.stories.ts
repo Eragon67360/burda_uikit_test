@@ -53,7 +53,7 @@ const meta: Meta<ButtonIconArgs> = {
       description: 'Select an icon',
     },
   },
-  render: (args) => createButtonIcon(args as any),
+  render: createButtonIcon,
 };
 
 export default meta;
