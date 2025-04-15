@@ -17,8 +17,8 @@ const meta: Meta<InputArgs> = {
   },
 
   args: {
-    name: 'sample-input',
     id: 'uuid',
+    name: 'sample-input',
     variant: 'input',
     type: 'text',
     label: 'Label',
@@ -37,17 +37,17 @@ const meta: Meta<InputArgs> = {
   },
 
   argTypes: {
-    name: {
+    id: {
       control: 'text',
-      description: 'Name of the input field, used for form submission.',
+      description: 'Unique identifier for the input field.',
       type: { name: 'string', required: true },
       table: {
         category: ArgsCategory.PROPS,
       },
     },
-    id: {
+    name: {
       control: 'text',
-      description: 'Unique identifier for the input field.',
+      description: 'Name of the input field, used for form submission.',
       type: { name: 'string', required: true },
       table: {
         category: ArgsCategory.PROPS,
@@ -197,7 +197,15 @@ const meta: Meta<InputArgs> = {
 export default meta;
 type Story = StoryObj<InputArgs>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default input field with a label. This is the most common use case for input fields in forms.',
+      },
+    },
+  },
+};
 
 export const WithError: Story = {
   args: {
