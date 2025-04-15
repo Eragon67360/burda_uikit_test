@@ -36,7 +36,7 @@ export const createButtonCTA = ({
 }: ButtonCTAArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
-  btnButton.addEventListener('click', onClick);
+  btnButton.onclick = onClick;
 
   if (disabled) {
     btnButton.disabled = true;

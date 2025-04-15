@@ -29,7 +29,7 @@ export const createButtonIcon = ({
 }: ButtonIconArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
-  btnButton.addEventListener('click', onClick);
+  btnButton.onclick = onClick;
 
   if (ariaLabel) {
     btnButton.setAttribute('aria-label', ariaLabel);

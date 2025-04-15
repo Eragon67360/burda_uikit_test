@@ -40,6 +40,11 @@ export const play: PlayFunction<Renderer, InputArgs> = async ({ canvasElement, a
     await expect(input).not.toHaveFocus();
   } else {
     await expect(input).toHaveFocus();
+    if (!args.value) {
+      await userEvent.type(input, 'Test input');
+      await expect(input).toHaveValue('Test input');
+      await userEvent.clear(input);
+    }
   }
 
   if (args.required) {
