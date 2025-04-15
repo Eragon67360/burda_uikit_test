@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://bitbucket.org:avenit/nodejs_burda_uikit.git"
   },
-  "author": "Avenit AG",
+  "author": "avenit AG",
   "license": "UNLICENSED",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -27,7 +27,6 @@
     "@storybook/addon-backgrounds": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
-    "@storybook/addon-mdx-gfm": "^8.6.12",
     "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/addon-webpack5-compiler-swc": "^2.1.0",
     "@storybook/blocks": "^8.6.12",
@@ -37,6 +36,7 @@
     "@storybook/test": "^8.6.12",
     "@storybook/test-runner": "^0.22.0",
     "@storybook/theming": "^8.6.12",
+    "@swc/core": "^1.11.21",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/node": "^22.13.10",
