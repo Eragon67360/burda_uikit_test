@@ -7,37 +7,53 @@ export type LabelPosition = 'top' | 'side';
 export type InputState = 'default' | 'error' | 'success' | 'highlighted' | 'tooltip';
 
 export type InputArgs = {
+  name: string;
+  id?: string;
   variant?: InputVariant;
   type?: InputType;
-  label?: string;
+  label?: string | undefined;
   labelPosition?: LabelPosition;
-  placeholder?: string;
+  placeholder?: string | undefined;
+  value?: string;
   required?: boolean;
   disabled?: boolean;
+  autocomplete?: string | undefined;
   state?: InputState;
-  errorMessage?: string;
-  value?: string;
-  tooltipContent?: string;
+  errorMessage?: string | undefined;
+  tooltipContent?: string | undefined;
+} & AccessibilityArgs;
+
+type AccessibilityArgs = {
+  ariaLabel?: string;
+  ariaLabelTooltipTrigger?: string;
+  ariaLabelTooltipClose?: string;
 };
 
 export const createInput = ({
+  name,
+  id = `input-field-${Math.random().toString(36).substring(2, 9)}`,
   variant = 'input',
   type = 'text',
-  label = '',
+  label,
   labelPosition = 'top',
   placeholder = '',
+  value = '',
   required = false,
   disabled = false,
+  autocomplete,
   state = 'default',
   errorMessage = '',
-  value = '',
   tooltipContent = '',
+  ariaLabel,
+  ariaLabelTooltipTrigger,
+  ariaLabelTooltipClose,
 }: InputArgs) => {
   const wrapper = document.createElement('div');
   wrapper.className = `input-wrapper ${labelPosition === 'side' ? 'flex items-center gap-4' : 'flex flex-col gap-2'}`;
 
   if (label) {
     const labelElement = document.createElement('label');
+    labelElement.setAttribute('for', id);
     labelElement.className = `
         text-sm font-medium  pl-4 ml-px
         ${disabled ? 'text-neutral-400' : state === 'error' ? 'text-red-700' : state === 'success' ? 'text-green-700' : 'text-gray-700'}
@@ -46,6 +62,7 @@ export const createInput = ({
     labelElement.appendChild(labelText);
     if (required) {
       const asterisk = document.createElement('span');
+      asterisk.setAttribute('aria-hidden', 'true');
       asterisk.className = 'text-red-700';
       asterisk.textContent = ' *';
       labelElement.appendChild(asterisk);
@@ -58,6 +75,9 @@ export const createInput = ({
   inputContainer.className = 'relative w-full';
 
   const inputElement = document.createElement(variant);
+  inputElement.setAttribute('id', id);
+  inputElement.setAttribute('name', name);
+
   const baseClasses = `
     w-full
     border
@@ -113,8 +133,23 @@ export const createInput = ({
   inputElement.placeholder = placeholder;
   inputElement.disabled = disabled;
   inputElement.required = required;
+  inputElement.setAttribute('aria-required', required ? 'true' : 'false');
+
+  if (ariaLabel) {
+    inputElement.setAttribute('aria-label', ariaLabel);
+  }
+
+  if (autocomplete) {
+    inputElement.setAttribute('autocomplete', autocomplete);
+  }
+
   if (value) {
     inputElement.value = value;
+  }
+
+  if (state === 'error' && errorMessage) {
+    inputElement.setAttribute('aria-invalid', 'true');
+    inputElement.setAttribute('aria-describedby', `${id}-error`);
   }
 
   if (state === 'error' || state === 'success' || state === 'tooltip') {
@@ -137,6 +172,9 @@ export const createInput = ({
       const tooltip = createTooltip({
         content: tooltipContent,
         position: 'top',
+        ariaLabelTrigger: ariaLabelTooltipTrigger,
+        ariaLabelClose: ariaLabelTooltipClose,
+        ariaControlsId: `${id}-tooltip`,
       });
       iconWrapper.appendChild(tooltip);
     }
@@ -148,6 +186,8 @@ export const createInput = ({
 
   if (state === 'error' && errorMessage) {
     const errorElement = document.createElement('p');
+    errorElement.id = `${id}-error`;
+    errorElement.setAttribute('role', 'alert');
     errorElement.className = 'mt-1 pl-4 ml-px text-sm text-red-700 font-bold';
     errorElement.textContent = errorMessage;
     inputContainer.appendChild(errorElement);
