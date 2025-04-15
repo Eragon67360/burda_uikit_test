@@ -40,6 +40,7 @@
 
 - [ ] Add aria-labels where necessary
 - [ ] Implement proper ARIA roles
+- [ ] Avoid duplicating roles (e.g., if a button contains an image, ensure the image does not have a separate role or aria-label; use `aria-hidden="true"` for decorative images within interactive elements)
 - [ ] Set aria-expanded states for expandable content
 - [ ] Add aria-controls for related elements
 - [ ] Use aria-live for dynamic content
@@ -51,6 +52,9 @@
 - [ ] Add skip links for main content
 - [ ] Ensure all interactive elements are keyboard accessible
 - [ ] Provide visible focus indicators
+- [ ] Ensure proper keyboard interaction for interactive elements:
+  - Use the spacebar for selection controls (e.g., checkboxes, radio buttons, dropdowns).
+  - Support both the spacebar and Enter key for action elements (e.g., buttons, links).
 
 ### 4. Forms
 
@@ -62,7 +66,7 @@
 
 ### 5. Images and Media
 
-- [ ] Add alt text for images
+- [ ] Add alt text for all images (if image is just decorative, alt text has to be empty but needs to be set)
 - [ ] Provide captions for videos
 - [ ] Ensure media controls are keyboard accessible
 - [ ] Add transcripts for audio content
