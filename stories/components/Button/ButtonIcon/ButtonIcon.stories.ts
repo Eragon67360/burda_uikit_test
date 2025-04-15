@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { createButtonIcon, ButtonIconArgs, ButtonIconVariant } from './ButtonIcon';
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { fn } from '@storybook/test';
-import { play } from './ButtonIcon.tests';
+import { play } from './ButtonIcon.test';
 import { ArgsCategory } from '@/stories/types/story';
 
 const meta: Meta<ButtonIconArgs> = {

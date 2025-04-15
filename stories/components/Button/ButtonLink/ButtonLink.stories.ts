@@ -3,7 +3,7 @@ import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonLinkArgs, createButtonLink } from './ButtonLink';
 import { fn } from '@storybook/test';
 import { ArgsCategory } from '@/stories/types/story';
-import { play } from './ButtonLink.tests';
+import { play } from './ButtonLink.test';
 
 const meta: Meta<ButtonLinkArgs> = {
   title: 'Components (Atoms)/Button/ButtonLink',

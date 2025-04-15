@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { InputArgs, createInput } from './Input';
 import { ArgsCategory } from '@/stories/types/story';
-import { play } from './Input.tests';
+import { play } from './Input.test';
 
 const meta: Meta<InputArgs> = {
   title: 'Components (Atoms)/Form/InputField',

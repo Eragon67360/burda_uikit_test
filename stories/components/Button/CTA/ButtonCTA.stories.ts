@@ -3,7 +3,7 @@ import { IconCategory, IconRegistry } from '@/assets/icons';
 import { ButtonCTAArgs, ButtonCTAVariant, createButtonCTA } from './ButtonCTA';
 import { fn } from '@storybook/test';
 import { ArgsCategory } from '@/stories/types/story';
-import { play } from './ButtonCTA.tests';
+import { play } from './ButtonCTA.test';
 
 const meta: Meta<ButtonCTAArgs> = {
   title: 'Components (Atoms)/Button/ButtonCTA',
