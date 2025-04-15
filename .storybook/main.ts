@@ -17,7 +17,6 @@ const config: StorybookConfig = {
     '@storybook/addon-styling-webpack',
     '@storybook/addon-backgrounds',
     '@storybook/addon-a11y',
-    '@storybook/addon-mdx-gfm',
     '@chromatic-com/storybook',
   ],
 
