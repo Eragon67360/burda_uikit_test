@@ -1,5 +1,5 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
+import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { getSizedIcon } from '@/utils/iconUtils';
 import { sanitizeHTML } from '@/stories/utils/sanitize';
 
@@ -20,7 +20,7 @@ export const createCard = ({
   text,
   buttonLabel,
   maxWidth = '384px',
-  onClick = () => { },
+  onClick = () => {},
 }: CardArgs) => {
   const cardContainer = document.createElement('div');
   cardContainer.className = `shrink grow max-md:!max-w-full max-w-full max-md:!w-full w-full flex flex-col justify-stretch ${backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-white'} rounded`;
@@ -46,8 +46,7 @@ export const createCard = ({
   textContainer.appendChild(titleElement);
   textContainer.appendChild(textElement);
 
-
-  if (!!image) {
+  if (image) {
     const iconContainer = document.createElement('div');
     iconContainer.className = 'md:min-w-24 flex justify-center md:block';
 

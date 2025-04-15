@@ -112,10 +112,10 @@
   }
 
   .text-offcanvas-level1 {
-    @apply text-offcanvas-level1-mobile
+    @apply text-offcanvas-level1-mobile;
   }
 
   .text-offcanvas-level2 {
-    @apply text-offcanvas-level2-mobile
+    @apply text-offcanvas-level2-mobile;
   }
 }

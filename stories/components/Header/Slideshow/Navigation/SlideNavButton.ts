@@ -1,77 +1,73 @@
-import { createIcon } from "@/components/Icon/Icon";
+import { createIcon } from '@/components/Icon/Icon';
 
 export type SlideshowNavButtonArgs = {
-    mode: 'previous' | 'next';
-    disabled?: boolean;
-    backgroundColor?: 'white' | 'gray';
-    classNames?: string;
-    onClick?: () => void;
+  mode: 'previous' | 'next';
+  disabled?: boolean;
+  backgroundColor?: 'white' | 'gray';
+  classNames?: string;
+  onClick?: () => void;
 };
 
 export const createSlideshowNavButton = ({ mode, disabled = false, classNames, backgroundColor, onClick }: SlideshowNavButtonArgs) => {
-    const icon = mode === 'next'
-        ? 'chevronRight'
-        : 'chevronLeft';
+  const icon = mode === 'next' ? 'chevronRight' : 'chevronLeft';
 
-    const btnButton = document.createElement('button');
-    btnButton.type = 'button';
+  const btnButton = document.createElement('button');
+  btnButton.type = 'button';
 
-    if (icon) {
-        btnButton.innerHTML = createIcon({
-            name: icon,
-            size: 16,
-            className: disabled ? 'opacity-50' : 'z-10'
-        });
-    }
+  if (icon) {
+    btnButton.innerHTML = createIcon({
+      name: icon,
+      size: 16,
+      className: disabled ? 'opacity-50' : 'z-10',
+    });
+  }
 
-    const baseClasses = [
-        'group',
-        'cursor-pointer',
-        'bg-base-white',
-        'transition-all',
-        'duration-300',
-        'hover:bg-secondary-light',
-        'focus:outline-hidden',
-        'focus:ring-none',
-        'focus:border-transparent',
-        'disabled:cursor-not-allowed',
-        'relative z-40',
-        'overflow-hidden',
-        'flex items-center justify-center',
-        'text-base-black',
-        'size-11 md:size-12 p-1 rounded-lg',
-        'focus:ring-base-black',
-        'disabled:text-neutral-400',
-        'disabled:border-neutral-300',
-        'disabled:bg-base-white',
-        'active:bg-secondary-dark',
-    ];
+  const baseClasses = [
+    'group',
+    'cursor-pointer',
+    'bg-base-white',
+    'transition-all',
+    'duration-300',
+    'hover:bg-secondary-light',
+    'focus:outline-hidden',
+    'focus:ring-none',
+    'focus:border-transparent',
+    'disabled:cursor-not-allowed',
+    'relative z-40',
+    'overflow-hidden',
+    'flex items-center justify-center',
+    'text-base-black',
+    'size-11 md:size-12 p-1 rounded-lg',
+    'focus:ring-base-black',
+    'disabled:text-neutral-400',
+    'disabled:border-neutral-300',
+    'disabled:bg-base-white',
+    'active:bg-secondary-dark',
+  ];
 
+  btnButton.className = baseClasses.join(' ');
 
-    btnButton.className = baseClasses.join(' ');
+  if (backgroundColor === 'gray') {
+    btnButton.classList.add('bg-neutral-100', 'disabled:bg-neutral-100');
+  }
 
-    if (backgroundColor === 'gray') {
-        btnButton.classList.add('bg-neutral-100', 'disabled:bg-neutral-100');
-    }
+  if (classNames) {
+    btnButton.className += ` ${classNames}`;
+  }
 
-    if (classNames) {
-        btnButton.className += ` ${classNames}`;
-    }
+  if (disabled) {
+    btnButton.disabled = true;
+  }
+  btnButton.setAttribute('type', 'button');
+  btnButton.setAttribute('aria-label', `${mode} slide`);
 
-    if (disabled) {
-        btnButton.disabled = true;
-    }
-    btnButton.setAttribute('type', 'button');
-    btnButton.setAttribute('aria-label', `${mode} slide`);
+  if (disabled) {
+    btnButton.setAttribute('disabled', 'true');
+    btnButton.setAttribute('aria-disabled', 'true');
+  }
 
-    if (disabled) {
-        btnButton.setAttribute('disabled', 'true');
-        btnButton.setAttribute('aria-disabled', 'true');
-    }
-
-    if (!disabled && onClick) {
-        btnButton.addEventListener('click', onClick);
-    }
-    return btnButton;
-
+  if (!disabled && onClick) {
+    btnButton.addEventListener('click', onClick);
+  }
+  return btnButton;
 };

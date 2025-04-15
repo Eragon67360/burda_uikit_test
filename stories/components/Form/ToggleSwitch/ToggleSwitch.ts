@@ -1,23 +1,17 @@
-import './toggleSwitch.css'
+import './toggleSwitch.css';
 
 export type ToggleSwitchArgs = {
-    label?: string;
-    checked?: boolean;
-    disabled?: boolean;
-    id?: string;
+  label?: string;
+  checked?: boolean;
+  disabled?: boolean;
+  id?: string;
 };
 
-export const createToggleSwitch = ({
-    label,
-    checked = false,
-    disabled = false,
-    id = 'toggle-switch',
-}: ToggleSwitchArgs) => {
-    const wrapper = document.createElement('label');
-    wrapper.className = `inline-flex items-center ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-        }`;
+export const createToggleSwitch = ({ label, checked = false, disabled = false, id = 'toggle-switch' }: ToggleSwitchArgs) => {
+  const wrapper = document.createElement('label');
+  wrapper.className = `inline-flex items-center ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`;
 
-    const html = `
+  const html = `
     <input type="checkbox" 
            class="sr-only peer" 
            id="${id}"
@@ -42,16 +36,15 @@ export const createToggleSwitch = ({
                 peer-checked:peer-disabled:border-neutral-200
                 peer-checked:peer-disabled:bg-neutral-200
                 peer-checked:peer-disabled:after:bg-base-white
-                ${disabled ? '' : 'peer-hover:bg-base-white peer-checked:peer-hover:bg-primary-700'
-        }">
+                ${disabled ? '' : 'peer-hover:bg-base-white peer-checked:peer-hover:bg-primary-700'}">
     </div>
-    ${label
-            ? `<span class="ms-3 text-sm font-medium text-gray-900 ${disabled ? 'text-gray-500 cursor-not-allowed' : ''
-            }">${label}</span>`
-            : ''
-        }
+    ${
+      label
+        ? `<span class="ms-3 text-sm font-medium text-gray-900 ${disabled ? 'text-gray-500 cursor-not-allowed' : ''}">${label}</span>`
+        : ''
+    }
   `;
 
-    wrapper.innerHTML = html;
-    return wrapper;
+  wrapper.innerHTML = html;
+  return wrapper;
 };

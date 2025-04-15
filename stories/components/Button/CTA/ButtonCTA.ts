@@ -10,7 +10,7 @@ export enum ButtonCTAVariant {
   LARGE_LIGHT = 'large_light',
   LARGE_SUBSCRIPTION = 'large_subscription',
   LARGE_CART_PAY = 'large_cart_pay',
-  LARGE_LOGIN = 'large_login'
+  LARGE_LOGIN = 'large_login',
 }
 
 export type ButtonCTAArgs = {
@@ -34,7 +34,6 @@ export const createButtonCTA = ({
   iconLeft = false,
   classNames,
 }: ButtonCTAArgs) => {
-
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
 
@@ -46,14 +45,14 @@ export const createButtonCTA = ({
     }
   } else {
     const labelSpan = document.createElement('span');
-    labelSpan.className = 'relative z-10'
+    labelSpan.className = 'relative z-10';
     labelSpan.innerText = label;
     const contentDiv = document.createElement('div');
     if (icon) {
       contentDiv.className = 'relative z-10 flex items-center justify-center gap-3 group-disabled:gap-3 transition-all';
     }
 
-    let arrowSpan = document.createElement('span');
+    const arrowSpan = document.createElement('span');
     if (icon) {
       arrowSpan.innerHTML = IconRegistry[IconCategory.SYSTEM][icon];
     }
@@ -81,7 +80,7 @@ export const createButtonCTA = ({
     'relative',
     'overflow-hidden',
     'cursor-pointer',
-    classNames
+    classNames,
   ];
 
   const variantClasses: Record<ButtonCTAVariant, readonly string[]> = {
@@ -106,11 +105,7 @@ export const createButtonCTA = ({
       'focus:ring-base-black',
       'hover:before:w-full',
       'before:rounded-l-none',
-      ...(nested ? [
-        'rounded-nested',
-      ] : [
-        'rounded',
-      ])
+      ...(nested ? ['rounded-nested'] : ['rounded']),
     ] as const,
 
     [ButtonCTAVariant.SECONDARY]: [
@@ -136,11 +131,7 @@ export const createButtonCTA = ({
       'before:ease-in-out',
       'before:z-0',
       'hover:before:w-full',
-      ...nested ? [
-        'rounded-nested',
-      ] : [
-        'rounded',
-      ]
+      ...(nested ? ['rounded-nested'] : ['rounded']),
     ] as const,
 
     [ButtonCTAVariant.TERTIARY]: [
@@ -165,11 +156,7 @@ export const createButtonCTA = ({
       'before:ease-in-out',
       'before:-z-10',
       'hover:before:w-full',
-      ...nested ? [
-        'rounded-nested',
-      ] : [
-        'rounded',
-      ]
+      ...(nested ? ['rounded-nested'] : ['rounded']),
     ] as const,
 
     [ButtonCTAVariant.LARGE]: [
@@ -286,10 +273,7 @@ export const createButtonCTA = ({
     ] as const,
   };
 
-  const classes = [
-    ...baseClasses,
-    ...variantClasses[variant],
-  ];
+  const classes = [...baseClasses, ...variantClasses[variant]];
 
   btnButton.className = classes.join(' ');
 

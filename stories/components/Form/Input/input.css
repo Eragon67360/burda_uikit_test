@@ -1,7 +1,7 @@
-.input-wrapper input.pr-12~div:has(.tooltip) {
-    right: 12px;
+.input-wrapper input.pr-12 ~ div:has(.tooltip) {
+  right: 12px;
 }
 
-.input-wrapper input.pr-12~div:has(.tooltip)+div {
-    right: 3px;
+.input-wrapper input.pr-12 ~ div:has(.tooltip) + div {
+  right: 3px;
 }

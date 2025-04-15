@@ -242,6 +242,5 @@
   --font-weight-normal: 400;
   --font-weight-bold: 700;
 
-  --shadow-popover: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
-
+  --shadow-popover: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
 }

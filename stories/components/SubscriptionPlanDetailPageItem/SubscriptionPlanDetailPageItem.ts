@@ -1,15 +1,14 @@
-import { IconRegistry, IconCategory } from "@/stories/assets/icons";
-import { createBadge } from "../Badge/Badge";
-import { createButtonCTA, ButtonCTAVariant } from "../Button/CTA/ButtonCTA";
-import { sanitizeHTML, sanitizeHTMLRichContent } from "@/stories/utils/sanitize";
-import { sanitize } from "storybook/internal/csf";
+import { IconRegistry, IconCategory } from '@/stories/assets/icons';
+import { createBadge } from '../Badge/Badge';
+import { createButtonCTA, ButtonCTAVariant } from '../Button/CTA/ButtonCTA';
+import { sanitizeHTMLRichContent } from '@/stories/utils/sanitize';
 
 export type SubscriptionPlanDetailPageItemArgs = {
   title: string;
   subtitle?: string;
   badgeLabel?: string;
   priceInfo?: string;
-  characteristics?: { icon?: string, content: string }[];
+  characteristics?: { icon?: string; content: string }[];
   backgroundColor?: 'white' | 'gray';
   maxWidth?: string;
   classNames?: string;
@@ -63,7 +62,7 @@ export const createSubscriptionPlanDetailPageItem = ({
   if (priceInfo) {
     const priceElement = document.createElement('p');
     priceElement.className = 'text-subhead3';
-    priceElement.innerHTML = sanitizeHTMLRichContent(priceInfo)
+    priceElement.innerHTML = sanitizeHTMLRichContent(priceInfo);
     content.appendChild(priceElement);
   }
 
@@ -71,14 +70,15 @@ export const createSubscriptionPlanDetailPageItem = ({
     const list = document.createElement('ul');
     list.className = 'flex flex-col items-start gap-5 self-stretch px-8';
 
-    characteristics.forEach(item => {
+    characteristics.forEach((item) => {
       const listItem = document.createElement('li');
       listItem.className = 'flex items-start gap-4 text-bulletpoint-copy font-light';
 
       const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = item.icon && IconRegistry[IconCategory.SYSTEM][item.icon]
-        ? IconRegistry[IconCategory.SYSTEM][item.icon]
-        : item.icon && IconRegistry[IconCategory.SYSTEM].success;
+      iconSpan.innerHTML =
+        item.icon && IconRegistry[IconCategory.SYSTEM][item.icon]
+          ? IconRegistry[IconCategory.SYSTEM][item.icon]
+          : item.icon && IconRegistry[IconCategory.SYSTEM].success;
 
       const contentSpan = document.createElement('span');
       contentSpan.innerHTML = item.content;
@@ -101,7 +101,7 @@ export const createSubscriptionPlanDetailPageItem = ({
     nested: true,
     iconLeft: false,
     icon: '',
-    classNames: 'rounded-t-none rounded-b-lg'
+    classNames: 'rounded-t-none rounded-b-lg',
   });
 
   container.appendChild(button);

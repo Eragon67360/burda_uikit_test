@@ -5,14 +5,9 @@ export interface StaticHeroArgs {
   altText?: string;
 }
 
-export const createStaticHero = ({
-  desktopImageSrc,
-  mobileImageSrc,
-  href,
-  altText,
-}: StaticHeroArgs) => {
+export const createStaticHero = ({ desktopImageSrc, mobileImageSrc, href, altText }: StaticHeroArgs) => {
   const wrapper = document.createElement('div');
-  wrapper.className = "w-full";
+  wrapper.className = 'w-full';
 
   const link = document.createElement('a');
   link.href = href;
@@ -21,17 +16,17 @@ export const createStaticHero = ({
     const image = document.createElement('picture');
 
     const mobileSource = document.createElement('source');
-    mobileSource.media = "(max-width: 767px)";
+    mobileSource.media = '(max-width: 767px)';
     mobileSource.srcset = mobileImageSrc;
 
     const desktopSource = document.createElement('source');
-    desktopSource.media = "(min-width: 768px)";
+    desktopSource.media = '(min-width: 768px)';
     desktopSource.srcset = desktopImageSrc;
 
     const fallbackImg = document.createElement('img');
     fallbackImg.src = desktopImageSrc;
     fallbackImg.alt = altText || '';
-    fallbackImg.className = "w-full h-auto";
+    fallbackImg.className = 'w-full h-auto';
 
     image.appendChild(mobileSource);
     image.appendChild(desktopSource);
@@ -42,7 +37,7 @@ export const createStaticHero = ({
     const image = document.createElement('img');
     image.src = desktopImageSrc;
     image.alt = altText || '';
-    image.className = "w-full h-auto";
+    image.className = 'w-full h-auto';
 
     link.appendChild(image);
   }

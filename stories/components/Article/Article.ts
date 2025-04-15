@@ -1,17 +1,17 @@
-import { ButtonCTAVariant, createButtonCTA } from "../Button/CTA/ButtonCTA";
-import { createBadge } from "../Badge/Badge";
-import { sanitizeHTML } from "@/stories/utils/sanitize";
+import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
+import { createBadge } from '../Badge/Badge';
+import { sanitizeHTML } from '@/stories/utils/sanitize';
 
 /**
- * @component  
- * @param backgroundColor - Background color of the article 
- * @defaultValue 'white' 
- * @param title - Title of the article 
- * @param image - Image of the article 
- * @param imageAltText - Alternative text for the image (if undefined, the title will be used) 
- * @param buttonLabel - Label of the button 
- * @param badgeText - Text for the optional badge (if empty, no badge will be shown) 
- * @param onClick - Callback function when the button is clicked 
+ * @component
+ * @param backgroundColor - Background color of the article
+ * @defaultValue 'white'
+ * @param title - Title of the article
+ * @param image - Image of the article
+ * @param imageAltText - Alternative text for the image (if undefined, the title will be used)
+ * @param buttonLabel - Label of the button
+ * @param badgeText - Text for the optional badge (if empty, no badge will be shown)
+ * @param onClick - Callback function when the button is clicked
  */
 export type ArticleArgs = {
   backgroundColor?: 'white' | 'gray';
@@ -36,15 +36,15 @@ type AccessibleArticleArgs = ArticleArgs & {
 };
 
 /**
- * @component  
- * @param backgroundColor - Background color of the article 
- * @defaultValue 'white' 
- * @param title - Title of the article 
- * @param image - Image of the article 
- * @param imageAltText - Alternative text for the image (if undefined, the title will be used) 
- * @param buttonLabel - Label of the button 
- * @param badgeText - Text for the optional badge (if empty, no badge will be shown) 
- * @param onClick - Callback function when the button is clicked 
+ * @component
+ * @param backgroundColor - Background color of the article
+ * @defaultValue 'white'
+ * @param title - Title of the article
+ * @param image - Image of the article
+ * @param imageAltText - Alternative text for the image (if undefined, the title will be used)
+ * @param buttonLabel - Label of the button
+ * @param badgeText - Text for the optional badge (if empty, no badge will be shown)
+ * @param onClick - Callback function when the button is clicked
  */
 export const createArticle = ({
   backgroundColor = 'white',
@@ -53,10 +53,10 @@ export const createArticle = ({
   imageAltText = title,
   buttonLabel,
   badgeText,
-  onClick = () => { },
+  onClick = () => {},
   ariaLabel,
   role = 'article',
-  focusable = true,
+  // focusable = true,
 }: AccessibleArticleArgs) => {
   const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
 
@@ -84,7 +84,7 @@ export const createArticle = ({
   imageContainer.appendChild(imgElement);
 
   if (badgeText && badgeText.length > 0) {
-    const badgeElement = createBadge(badgeText, 42, "primary");
+    const badgeElement = createBadge(badgeText, 42, 'primary');
     imageContainer.appendChild(badgeElement);
   }
 
@@ -96,16 +96,18 @@ export const createArticle = ({
   articleElement.appendChild(titleElement);
 
   if (buttonLabel) {
-    articleElement.appendChild(createButtonCTA({
-      label: buttonLabel,
-      onClick,
-      disabled: false,
-      variant: ButtonCTAVariant.PRIMARY,
-      nested: true,
-      iconLeft: false,
-      icon: 'arrowRight',
-    }));
+    articleElement.appendChild(
+      createButtonCTA({
+        label: buttonLabel,
+        onClick,
+        disabled: false,
+        variant: ButtonCTAVariant.PRIMARY,
+        nested: true,
+        iconLeft: false,
+        icon: 'arrowRight',
+      })
+    );
   }
 
   return articleElement;
-}
+};

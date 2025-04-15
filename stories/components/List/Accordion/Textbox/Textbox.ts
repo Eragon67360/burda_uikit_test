@@ -2,28 +2,28 @@ import { IconCategory, IconRegistry } from '@/assets/icons';
 import './textbox.css';
 
 export type TextboxArgs = {
-    expandText?: string;
-    collapseText?: string;
-    content?: string;
-    className?: string;
-    chevronIcon?: string;
+  expandText?: string;
+  collapseText?: string;
+  content?: string;
+  className?: string;
+  chevronIcon?: string;
 };
 
 export const createTextbox = ({
-    expandText = 'See more',
-    collapseText = 'See less',
-    content = '',
-    className = '',
-    chevronIcon = IconRegistry[IconCategory.SYSTEM].chevronDown
+  expandText = 'See more',
+  collapseText = 'See less',
+  content = '',
+  className = '',
+  chevronIcon = IconRegistry[IconCategory.SYSTEM].chevronDown as string,
 }) => {
-    const wrapper = document.createElement('div');
-    wrapper.className = `textbox-wrapper ${className}`;
+  const wrapper = document.createElement('div');
+  wrapper.className = `textbox-wrapper ${className}`;
 
-    let isExpanded = false;
+  let isExpanded = false;
 
-    const uniqueId = `textbox-${Math.random().toString(36).substr(2, 9)}`;
+  const uniqueId = `textbox-${Math.random().toString(36).substr(2, 9)}`;
 
-    wrapper.innerHTML = `
+  wrapper.innerHTML = `
     <div class="w-full">
         <div class="flex flex-col">
             <div class="flex items-center justify-center transition-opacity duration-200" data-button="top">
@@ -73,44 +73,43 @@ export const createTextbox = ({
     </div>
   `;
 
-    const topButtonContainer = wrapper.querySelector('[data-button="top"]') as HTMLElement;
-    const bottomButtonContainer = wrapper.querySelector('[data-button="bottom"]') as HTMLElement;
-    const contentElement = wrapper.querySelector('.textbox-content') as HTMLElement;
-    const topButton = wrapper.querySelector('#' + uniqueId + '-trigger-top') as HTMLButtonElement;
-    const bottomButton = wrapper.querySelector('#' + uniqueId + '-trigger-bottom') as HTMLButtonElement;
+  const topButtonContainer = wrapper.querySelector('[data-button="top"]') as HTMLElement;
+  const bottomButtonContainer = wrapper.querySelector('[data-button="bottom"]') as HTMLElement;
+  const contentElement = wrapper.querySelector('.textbox-content') as HTMLElement;
+  const topButton = wrapper.querySelector('#' + uniqueId + '-trigger-top') as HTMLButtonElement;
+  const bottomButton = wrapper.querySelector('#' + uniqueId + '-trigger-bottom') as HTMLButtonElement;
 
-    const toggleContent = () => {
+  const toggleContent = () => {
+    isExpanded = !isExpanded;
 
-        isExpanded = !isExpanded;
+    topButton.setAttribute('aria-expanded', isExpanded.toString());
+    bottomButton.setAttribute('aria-expanded', isExpanded.toString());
 
-        topButton.setAttribute('aria-expanded', isExpanded.toString());
-        bottomButton.setAttribute('aria-expanded', isExpanded.toString());
+    if (isExpanded) {
+      topButtonContainer.style.display = 'none';
+      bottomButtonContainer.style.display = 'flex';
+      setTimeout(() => {
+        bottomButtonContainer.style.opacity = '1';
+      }, 0);
+    } else {
+      bottomButtonContainer.style.opacity = '0';
+      setTimeout(() => {
+        topButtonContainer.style.display = 'flex';
+        bottomButtonContainer.style.display = 'none';
+      }, 200);
+    }
 
-        if (isExpanded) {
-            topButtonContainer.style.display = 'none';
-            bottomButtonContainer.style.display = 'flex';
-            setTimeout(() => {
-                bottomButtonContainer.style.opacity = '1';
-            }, 0);
-        } else {
-            bottomButtonContainer.style.opacity = '0';
-            setTimeout(() => {
-                topButtonContainer.style.display = 'flex';
-                bottomButtonContainer.style.display = 'none';
-            }, 200);
-        }
+    if (isExpanded) {
+      contentElement.style.maxHeight = `${contentElement.scrollHeight}px`;
+      contentElement.style.opacity = '1';
+    } else {
+      contentElement.style.maxHeight = '0';
+      contentElement.style.opacity = '0';
+    }
+  };
 
-        if (isExpanded) {
-            contentElement.style.maxHeight = `${contentElement.scrollHeight}px`;
-            contentElement.style.opacity = '1';
-        } else {
-            contentElement.style.maxHeight = '0';
-            contentElement.style.opacity = '0';
-        }
-    };
+  topButton.addEventListener('click', toggleContent);
+  bottomButton.addEventListener('click', toggleContent);
 
-    topButton.addEventListener('click', toggleContent);
-    bottomButton.addEventListener('click', toggleContent);
-
-    return wrapper;
+  return wrapper;
 };

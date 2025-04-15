@@ -3,17 +3,22 @@ import path from 'path';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
-  stories: [
-    '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-  ],
+  stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 
-  addons: ['@storybook/addon-webpack5-compiler-swc', {
-    name: '@storybook/addon-essentials',
-    options: {
-      backgrounds: false,
+  addons: [
+    '@storybook/addon-webpack5-compiler-swc',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false,
+      },
     },
-  }, '@storybook/addon-interactions', '@storybook/addon-styling-webpack', '@storybook/addon-backgrounds', '@storybook/addon-a11y', '@storybook/addon-mdx-gfm', '@chromatic-com/storybook'],
+    '@storybook/addon-interactions',
+    '@storybook/addon-styling-webpack',
+    '@storybook/addon-backgrounds',
+    '@storybook/addon-a11y',
+    '@chromatic-com/storybook',
+  ],
 
   framework: {
     name: '@storybook/html-webpack5',
@@ -30,7 +35,7 @@ const config: StorybookConfig = {
       ];
       config.resolve.alias = {
         ...config.resolve.alias,
-        '@': path.resolve(__dirname, "@/components/stories/"),
+        '@': path.resolve(__dirname, '@/components/stories/'),
       };
     }
     return config;
@@ -39,11 +44,11 @@ const config: StorybookConfig = {
   staticDirs: ['../public'],
 
   docs: {
-    autodocs: true
+    autodocs: true,
   },
 
   typescript: {
-    check: false,
+    check: true,
     checkOptions: {},
     skipCompiler: false,
   },

@@ -1,5 +1,5 @@
-import { IconRegistry, IconCategory } from "@/assets/icons";
-import { createButtonLink } from "@/components/Button/ButtonLink/ButtonLink";
+import { IconRegistry, IconCategory } from '@/assets/icons';
+import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
 export interface FooterArgs {
   // First Column - Completely Configurable
   column1: {
@@ -85,11 +85,7 @@ export interface FooterArgs {
   };
 }
 
-export const createFooter = ({
-  column1 = {},
-  column2 = {},
-  column3 = {}
-}: FooterArgs) => {
+export const createFooter = ({ column1 = {}, column2 = {}, column3 = {} }: FooterArgs) => {
   return `
     <footer class="bg-transparent">
       <div class="container max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-3">
@@ -97,7 +93,9 @@ export const createFooter = ({
         <!-- First Column -->
         <div class="bg-base-black text-base-white px-4 pt-4 w-full">
           <div class="bg-brand w-full h-fit md:h-[11.125rem] pr-6 md:pr-20 pl-6 md:pl-12 py-7 md:py-0 flex justify-start items-center rounded-sm">
-          ${column1.logo ? `
+          ${
+            column1.logo
+              ? `
             <img
               src="${column1.logo.src}"
               alt="${column1.logo.alt || 'Logo'}"
@@ -106,13 +104,19 @@ export const createFooter = ({
               class="scale-80 md:scale-100 max-md:!w-[11.75rem]"
               style="width: ${column1.logo.width}px;"
             />
-          ` : ''}
+          `
+              : ''
+          }
           </div>
           <div class="pl-2 md:pl-12 pt-14 md:pt-16 pr-2 md:pr-8 pb-14 md:pb-16 flex flex-col" >
-            ${column1.phone ? `
+            ${
+              column1.phone
+                ? `
             <div class="mb-4">
               <div class="flex items-center gap-4 text-subhead2" >${IconRegistry[IconCategory.SYSTEM].phone}<p class="font-bold">${column1.phone.label || 'Phone'}</p></div>
-              ${column1.phone.number ? `
+              ${
+                column1.phone.number
+                  ? `
                 <p class="text-hotline-footer-default mt-4 w-3/4 proportional-nums">
                   <a href="tel:${column1.phone.number.trim().replace(/\s/g, '')}" class="group">
                   ${column1.phone.number}${column1.phone.extraHint ? `<span class="text-footer-phone-hint text-subhead2 pl-1 align-top">${column1.phone.extraHint}</span>` : ''}
@@ -124,99 +128,155 @@ export const createFooter = ({
                     </span>
                   </a>
                 </p>
-              `: ''}
+              `
+                  : ''
+              }
               <p class="text-footer-copy mt-3">${column1.phone.description || ''}</p>
             </div>
-            ` : ''}
+            `
+                : ''
+            }
 
             <div class="mt-14 md:mt-32">
-              ${column1.hints?.firstHint ? `
+              ${
+                column1.hints?.firstHint
+                  ? `
                 <div class="flex gap-2 items-center flex-wrap">
                   <span class="text-footer-copy md:text-footer-copy">${column1.hints.firstHint.text}</span>
-                  ${column1.hints.firstHint.linkText
-        ? createButtonLink({
-          label: column1.hints.firstHint.linkText,
-          href: column1.hints.firstHint.linkHref || '#'
-        }).outerHTML
-        : ''}
+                  ${
+                    column1.hints.firstHint.linkText
+                      ? createButtonLink({
+                          label: column1.hints.firstHint.linkText,
+                          href: column1.hints.firstHint.linkHref || '#',
+                        }).outerHTML
+                      : ''
+                  }
                 </div>
-              ` : ''}
+              `
+                  : ''
+              }
 
-              ${column1.hints?.secondHint ? `
+              ${
+                column1.hints?.secondHint
+                  ? `
                 <p class="text-footer-copy md:text-footer-copy mt-2">${column1.hints.secondHint}</p>
-              ` : ''}
+              `
+                  : ''
+              }
 
-              ${column1.copyright ? `
+              ${
+                column1.copyright
+                  ? `
                 <p class="text-footer-copy md:text-footer-copy mt-8">${column1.copyright}</p>
-              ` : ''}
+              `
+                  : ''
+              }
             </div>
           </div>
         </div>
 
         <div class="bg-neutral-100 text-base-black px-6 md:px-16 py-14 md:py-16 flex flex-col gap-8 w-full">
           <div class="flex flex-col gap-4" >
-            ${column2.title ? `
+            ${
+              column2.title
+                ? `
             <h2 class="text-subhead2 md:text-subhead2">${column2.title}</h2>
-            ` : ''}
+            `
+                : ''
+            }
 
-            ${column2.links ? `
+            ${
+              column2.links
+                ? `
               <ul class="">
-                ${column2.links.map(link => `
+                ${column2.links
+                  .map(
+                    (link) => `
                   <li>
-                    ${link
-            ? createButtonLink({
-              label: link.text,
-              href: link.href || '#',
-              iconLeft: true
-            }).outerHTML
-            : ''}
+                    ${
+                      link
+                        ? createButtonLink({
+                            label: link.text,
+                            href: link.href || '#',
+                            iconLeft: true,
+                          }).outerHTML
+                        : ''
+                    }
                   </li>
-                `).join('')}
+                `
+                  )
+                  .join('')}
               </ul>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
           <div class="flex flex-col gap-4">
-              ${column2.paymentSection ? `
+              ${
+                column2.paymentSection
+                  ? `
             <p class="text-subhead3 md:text-subhead3 mb-2">${column2.paymentSection.title || 'Payment Methods'}</p>
             <div class="flex gap-2 mb-4 self-stretch items-start content-start flex-wrap">
-              ${column2.paymentSection.icons?.map(icon => `
+              ${column2.paymentSection.icons
+                ?.map(
+                  (icon) => `
                 <img
                   src="${icon.src}"
                   alt="${icon.alt}"
                   width="${icon.width || 50}"
                   height="${icon.height || 30}"
                 />
-              `).join('')}
+              `
+                )
+                .join('')}
             </div>
-          ` : ''}
+          `
+                  : ''
+              }
           </div>
           <div class="flex flex-col gap-4">
-              ${column2.qualitySection ? `
+              ${
+                column2.qualitySection
+                  ? `
             <p class="text-subhead3 md:text-subhead3 mb-2">${column2.qualitySection.title || 'Sicher & Nachhaltig'}</p>
             <div class="flex gap-8 items-start">
-              ${column2.qualitySection.icons?.map(icon => `
+              ${column2.qualitySection.icons
+                ?.map(
+                  (icon) => `
                 <img
                   src="${icon.src}"
                   alt="${icon.alt}"
                   width="${icon.width || 50}"
                   height="${icon.height || 30}"
                 />
-              `).join('')}
+              `
+                )
+                .join('')}
             </div>
-          ` : ''}
+          `
+                  : ''
+              }
           </div>
           <div class="flex flex-col gap-4">
-          ${column2.socialSection ? `
+          ${
+            column2.socialSection
+              ? `
             <p class="text-subhead3 md:text-subhead3">${column2.socialSection.title || 'Follow Us'}</p>
             <div class="flex gap-8">
-              ${column2.socialSection.networks?.map(network => `
+              ${column2.socialSection.networks
+                ?.map(
+                  (network) => `
                 <a href="${network.href}">
                 ${network.svg}
 
                 </a>
-              `).join('')}
+              `
+                )
+                .join('')}
             </div>
-          ` : ''}
+          `
+              : ''
+          }
           </div>
 
         </div>
@@ -224,7 +284,9 @@ export const createFooter = ({
         <!-- Third Column -->
         <div class="bg-base-white text-base-black w-full flex flex-col gap-8 px-6 md:px-16 py-14 md:py-16">
           <div class="flex flex-col gap-5">
-            ${column3.logo ? `
+            ${
+              column3.logo
+                ? `
             <img
               src="${column3.logo.src}"
               alt="${column3.logo.alt || 'Logo'}"
@@ -232,55 +294,91 @@ export const createFooter = ({
               height="${column3.logo.height || 50}"
               class="mb-4"
             />
-          ` : ''}
+          `
+                : ''
+            }
 
-          ${column3.description ? `
+          ${
+            column3.description
+              ? `
             <p class="text-footer-copy md:text-footer-copy">
               <span class="font-bold">${column3.description.title || ''}: </span>
               ${column3.description.text || ''}
             </p>
-          ` : ''}
+          `
+              : ''
+          }
 
-          ${column3.linkColumns ? `
+          ${
+            column3.linkColumns
+              ? `
             <div class="grid grid-cols-2 gap-2 uppercase text-linkt-link font-bold">
               <div>
-                ${column3.linkColumns.column1?.map(link => `
+                ${column3.linkColumns.column1
+                  ?.map(
+                    (link) => `
                   <a href="${link.href}" class="block">${link.text}</a>
-                `).join('')}
+                `
+                  )
+                  .join('')}
               </div>
               <div>
-                ${column3.linkColumns.column2?.map(link => `
+                ${column3.linkColumns.column2
+                  ?.map(
+                    (link) => `
                   <a href="${link.href}" class="block">${link.text}</a>
-                `).join('')}
+                `
+                  )
+                  .join('')}
               </div>
             </div>
-          ` : ''}
+          `
+              : ''
+          }
 
           </div>
 
           <div class="flex flex-col gap-4" >
-          ${column3.secondSection ? `
+          ${
+            column3.secondSection
+              ? `
             <h4 class="text-subhead3t-subhead3">${column3.secondSection.title || ''}</h4>
             <p class="text-footer-copy md:text-footer-copy">${column3.secondSection.description || ''}</p>
-          ` : ''}
+          `
+              : ''
+          }
 
-          ${column3.specialLinks ? `
+          ${
+            column3.specialLinks
+              ? `
             <div class="grid grid-cols-2 gap-0">
-              ${column3.specialLinks.map(link => `
-                    ${link
-                ? createButtonLink({
-                  label: link.text,
-                  href: link.href || '#',
-                  iconLeft: true
-                }).outerHTML
-                : ''}
-                  `).join('')}
+              ${column3.specialLinks
+                .map(
+                  (link) => `
+                    ${
+                      link
+                        ? createButtonLink({
+                            label: link.text,
+                            href: link.href || '#',
+                            iconLeft: true,
+                          }).outerHTML
+                        : ''
+                    }
+                  `
+                )
+                .join('')}
             </div>
-          ` : ''}
+          `
+              : ''
+          }
 
-          ${column3.finalDescription ? `
+          ${
+            column3.finalDescription
+              ? `
             <p class="text-footer-copy md:text-footer-copy">${column3.finalDescription}</p>
-          ` : ''}
+          `
+              : ''
+          }
           </div>
         </div>
       </div>

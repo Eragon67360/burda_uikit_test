@@ -1,11 +1,11 @@
-import { Meta, Typeset } from "@storybook/blocks";
+import { Meta, Typeset } from '@storybook/blocks';
 
 <Meta title="Design System/Typography" />
 
 export const typography = {
   fonts: {
-    primary: "var(--font-instrument-sans)",
-    serif: "var(--font-roboto-serif)",
+    primary: 'var(--font-instrument-sans)',
+    serif: 'var(--font-roboto-serif)',
   },
   weights: {
     normal: 400,
@@ -41,7 +41,7 @@ export const typography = {
   },
 };
 
-export const SampleText = "Lorem ipsum dolor sit amet momentum";
+export const SampleText = 'Lorem ipsum dolor sit amet momentum';
 
 # Typography System
 
@@ -92,10 +92,7 @@ export const SampleText = "Lorem ipsum dolor sit amet momentum";
 ## Subhead Styles (Desktop)
 
 <Typeset
-  fontSizes={[
-    typography.sizes.desktop.subhead1,
-    typography.sizes.desktop.subhead2,
-  ]}
+  fontSizes={[typography.sizes.desktop.subhead1, typography.sizes.desktop.subhead2]}
   fontWeight={typography.weights.semibold}
   sampleText={SampleText}
   fontFamily={typography.fonts.primary}
@@ -104,10 +101,7 @@ export const SampleText = "Lorem ipsum dolor sit amet momentum";
 ## Subhead Styles (Mobile)
 
 <Typeset
-  fontSizes={[
-    typography.sizes.mobile.subhead1,
-    typography.sizes.mobile.subhead2,
-  ]}
+  fontSizes={[typography.sizes.mobile.subhead1, typography.sizes.mobile.subhead2]}
   fontWeight={typography.weights.semibold}
   sampleText={SampleText}
   fontFamily={typography.fonts.primary}
@@ -116,10 +110,7 @@ export const SampleText = "Lorem ipsum dolor sit amet momentum";
 ## Text Styles (Desktop)
 
 <Typeset
-  fontSizes={[
-    typography.sizes.desktop.copy,
-    typography.sizes.desktop.copySmall,
-  ]}
+  fontSizes={[typography.sizes.desktop.copy, typography.sizes.desktop.copySmall]}
   fontWeight={typography.weights.normal}
   sampleText={SampleText}
   fontFamily={typography.fonts.primary}

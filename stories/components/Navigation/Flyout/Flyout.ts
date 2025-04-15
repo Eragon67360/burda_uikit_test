@@ -5,34 +5,27 @@ import { IconCategory, IconRegistry } from '@/assets/icons';
 import { getSizedIcon } from '@/utils/iconUtils';
 
 export type LinkItem = {
-    label: string;
-    href: string;
-    target: '_blank' | '_self' | '_parent' | '_top';
-}
-
-export type FlyoutArgs = {
-    variant: 'search' | 'sublinks';
-    linkItems?: LinkItem[];
-    searchProps?: SearchArgs;
-    triggerLabel?: string;
-    has2LinesNavigation?: boolean;
+  label: string;
+  href: string;
+  target: '_blank' | '_self' | '_parent' | '_top';
 };
 
-export const createFlyout = ({
-    variant,
-    linkItems = [],
-    searchProps,
-    triggerLabel = 'Menu',
-    has2LinesNavigation
-}: FlyoutArgs) => {
-    const container = document.createElement('div');
-    container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
+export type FlyoutArgs = {
+  variant: 'search' | 'sublinks';
+  linkItems?: LinkItem[];
+  searchProps?: SearchArgs;
+  triggerLabel?: string;
+  has2LinesNavigation?: boolean;
+};
 
-    let isOpen = false;
+export const createFlyout = ({ variant, linkItems = [], searchProps, triggerLabel = 'Menu', has2LinesNavigation }: FlyoutArgs) => {
+  const container = document.createElement('div');
+  container.className = `relative inline-block z-40 ${has2LinesNavigation ? 'h-full' : 'h-[4.5rem]'}`;
 
+  let isOpen = false;
 
-    const flyoutWrapper = document.createElement('div');
-    flyoutWrapper.className = `
+  const flyoutWrapper = document.createElement('div');
+  flyoutWrapper.className = `
         absolute 
         top-full 
         left-0 
@@ -48,14 +41,14 @@ export const createFlyout = ({
         hidden
     `;
 
-    if (variant === 'search') {
-        const searchComponent = createSearch(searchProps);
-        return searchComponent;
-    }
+  if (variant === 'search') {
+    const searchComponent = createSearch(searchProps);
+    return searchComponent;
+  }
 
-    if (variant === 'sublinks') {
-        const triggerButton = document.createElement('button');
-        triggerButton.className = `
+  if (variant === 'sublinks') {
+    const triggerButton = document.createElement('button');
+    triggerButton.className = `
             flex 
             items-center 
             h-full 
@@ -71,62 +64,62 @@ export const createFlyout = ({
             hover:bg-secondary-light
         `;
 
-        const chevronIcon = document.createElement('div');
-        chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 14);
-        chevronIcon.className = 'transition-transform duration-300';
+    const chevronIcon = document.createElement('div');
+    chevronIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 14);
+    chevronIcon.className = 'transition-transform duration-300';
 
-        const labelSpan = document.createElement('span');
-        labelSpan.textContent = triggerLabel;
+    const labelSpan = document.createElement('span');
+    labelSpan.textContent = triggerLabel;
 
-        triggerButton.appendChild(labelSpan);
-        triggerButton.appendChild(chevronIcon);
+    triggerButton.appendChild(labelSpan);
+    triggerButton.appendChild(chevronIcon);
 
-        linkItems.forEach((item, index) => {
-            const link = createButtonLink({
-                label: item.label,
-                href: item.href,
-                target: item.target,
-                icon: 'arrowRight',
-                disabled: false,
-                iconLeft: false
-            });
+    linkItems.forEach((item, index) => {
+      const link = createButtonLink({
+        label: item.label,
+        href: item.href,
+        target: item.target,
+        icon: 'arrowRight',
+        disabled: false,
+        iconLeft: false,
+      });
 
-            flyoutWrapper.appendChild(link);
+      flyoutWrapper.appendChild(link);
 
-            if (index < linkItems.length - 1) {
-                const separator = document.createElement('div');
-                separator.className = 'h-px bg-neutral-200 w-full';
-                flyoutWrapper.appendChild(separator);
-            }
-        });
+      if (index < linkItems.length - 1) {
+        const separator = document.createElement('div');
+        separator.className = 'h-px bg-neutral-200 w-full';
+        flyoutWrapper.appendChild(separator);
+      }
+    });
 
-        triggerButton.addEventListener('click', () => {
-            isOpen = !isOpen;
-            flyoutWrapper.classList.toggle('hidden', !isOpen);
+    triggerButton.addEventListener('click', () => {
+      isOpen = !isOpen;
+      flyoutWrapper.classList.toggle('hidden', !isOpen);
 
-            if (isOpen) {
-                triggerButton.classList.add('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
-                chevronIcon.classList.add('scale-y-[-1]');
-            } else {
-                triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
-                chevronIcon.classList.remove('scale-y-[-1]');
-            }
-        });
+      if (isOpen) {
+        triggerButton.classList.add('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
+        chevronIcon.classList.add('scale-y-[-1]');
+      } else {
+        triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction', 'pb-[0.313rem]');
+        chevronIcon.classList.remove('scale-y-[-1]');
+      }
+    });
 
-        document.addEventListener('click', (event) => {
-            if (isOpen && !container.contains(event.target as Node)) {
-                flyoutWrapper.classList.add('hidden');
-                triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
-                chevronIcon.classList.remove('scale-y-[-1]');
-                isOpen = false;
-            }
-        });
+    document.addEventListener('click', (event) => {
+      if (isOpen && !container.contains(event.target as Node)) {
+        flyoutWrapper.classList.add('hidden');
+        triggerButton.classList.remove('bg-base-white', 'border-b-[3px]', 'border-secondary-interaction');
+        chevronIcon.classList.remove('scale-y-[-1]');
+        isOpen = false;
+      }
+    });
 
-        container.appendChild(triggerButton);
-        container.appendChild(flyoutWrapper);
+    container.appendChild(triggerButton);
+    container.appendChild(flyoutWrapper);
 
-        return container;
-    }
+    return container;
+  }
 
-    return document.createElement('div');
+  return document.createElement('div');
 };

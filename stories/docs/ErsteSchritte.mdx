@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/addon-docs";
+import { Meta } from '@storybook/addon-docs';
 
 <Meta
   title="Erste Schritte"
@@ -10,10 +10,7 @@ import { Meta } from "@storybook/addon-docs";
 <div className="flex items-center gap-4">
   # Erste Schritte
   <br />
-  <a
-    href="/?path=/docs/getting-started--docs"
-    className="text-xs text-blue-500 sb-unstyled"
-  >
+  <a href="/?path=/docs/getting-started--docs" className="text-xs text-blue-500 sb-unstyled">
     🇬🇧 English Version
   </a>
 </div>
@@ -312,8 +309,8 @@ Unsere Komponenten sind Framework-unabhängig und können in jedes JavaScript-Pr
 #### Für React:
 
 ```tsx
-import { useEffect, useRef } from "react";
-import { createImage, ImageArgs } from "./Image";
+import { useEffect, useRef } from 'react';
+import { createImage, ImageArgs } from './Image';
 
 const Image = (props: ImageArgs) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -321,7 +318,7 @@ const Image = (props: ImageArgs) => {
   useEffect(() => {
     if (containerRef.current) {
       const imageElement = createImage(props);
-      containerRef.current.innerHTML = "";
+      containerRef.current.innerHTML = '';
       containerRef.current.appendChild(imageElement);
     }
   }, [props]);
@@ -373,7 +370,7 @@ const MyPage = () => {
 1. **TypeScript**: Verwenden Sie immer die bereitgestellten TypeScript-Typen für eine korrekte Typ-Überprüfung:
 
 ```ts
-import type { ImageArgs } from "./Image";
+import type { ImageArgs } from './Image';
 ```
 
 2. **CSS-Klassen**: Unsere Komponenten verwenden TailwindCSS-Klassen. Stellen Sie sicher, dass Ihr Build-Prozess diese Klassen in Ihrem finalen CSS-Bundle enthält.

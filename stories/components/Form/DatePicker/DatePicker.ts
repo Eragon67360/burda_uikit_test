@@ -1,92 +1,94 @@
 import './datePicker.css';
 import { IconRegistry, IconCategory } from '@/assets/icons';
 export type DatePickerArgs = {
-    label?: string;
-    required?: boolean;
-    error?: string;
-    placeholder?: string;
-    disabled?: boolean;
-    value?: string;
-    language?: 'EN' | 'DE';
-    onChange?: (date: string) => void;
+  label?: string;
+  required?: boolean;
+  error?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  value?: string;
+  language?: 'EN' | 'DE';
+  onChange?: (date: string) => void;
 };
 
 const LOCALE_CONFIG = {
-    EN: {
-        days: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        months: ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'],
-        resetButton: 'Reset',
-        yearSelector: 'Select Year'
-    },
-    DE: {
-        days: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-        months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-        resetButton: 'Zurücksetzen',
-        yearSelector: 'Jahr auswählen'
-    }
+  EN: {
+    days: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    resetButton: 'Reset',
+    yearSelector: 'Select Year',
+  },
+  DE: {
+    days: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+    months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+    resetButton: 'Zurücksetzen',
+    yearSelector: 'Jahr auswählen',
+  },
 };
 const parseDate = (dateString: string): Date => {
-    const [day, month, year] = dateString.split('.').map(Number);
-    return new Date(year, month - 1, day);
+  const [day, month, year] = dateString.split('.').map(Number);
+  return new Date(year, month - 1, day);
 };
 
 const formatDate = (date: Date, language: 'EN' | 'DE'): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
+  console.log('formatDate :', date, language);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  if (language === 'EN') {
+    return `${month}/${day}/${year}`;
+  }
+  return `${day}.${month}.${year}`;
 };
 
 export const createDatePicker = ({
-    label,
-    required = false,
-    error,
-    placeholder = 'DD.MM.YYYY',
-    disabled = false,
-    value = '',
-    language = 'EN',
-    onChange
+  label,
+  required = false,
+  error,
+  disabled = false,
+  value = '',
+  language = 'EN',
+  placeholder = language === 'EN' ? 'MM/DD/YYYY' : 'DD.MM.YYYY',
+  onChange,
 }: DatePickerArgs) => {
-    const element = document.createElement('div');
-    let currentDate = value ? parseDate(value) : new Date();
-    let isYearView = false;
+  const element = document.createElement('div');
+  let currentDate = value ? parseDate(value) : new Date();
+  let isYearView = false;
 
-    const generateCalendar = (date: Date): (number | '')[][] => {
-        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-        const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        const startingDay = firstDay.getDay();
-        const monthLength = lastDay.getDate();
+  const generateCalendar = (date: Date): (number | '')[][] => {
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const startingDay = firstDay.getDay();
+    const monthLength = lastDay.getDate();
 
-        const weeks: (number | '')[][] = [];
-        let week: (number | '')[] = [];
+    const weeks: (number | '')[][] = [];
+    let week: (number | '')[] = [];
 
-        for (let i = 0; i < startingDay; i++) {
-            week.push('');
-        }
+    for (let i = 0; i < startingDay; i++) {
+      week.push('');
+    }
 
-        for (let day = 1; day <= monthLength; day++) {
-            week.push(day);
-            if ((day + startingDay) % 7 === 0 || day === monthLength) {
-                weeks.push(week);
-                week = [];
-            }
-        }
+    for (let day = 1; day <= monthLength; day++) {
+      week.push(day);
+      if ((day + startingDay) % 7 === 0 || day === monthLength) {
+        weeks.push(week);
+        week = [];
+      }
+    }
 
-        return weeks;
-    };
-    const createYearGrid = (currentDate: Date): string => {
-        const currentYear = currentDate.getFullYear();
-        const startYear = currentYear - 50;
-        const endYear = currentYear + 50;
+    return weeks;
+  };
+  const createYearGrid = (currentDate: Date): string => {
+    const currentYear = currentDate.getFullYear();
+    const startYear = currentYear - 50;
+    const endYear = currentYear + 50;
 
-        return `
+    return `
             <div class="year-selector overflow-y-auto max-h-[300px] scrollbar-thin">
                 <div class="grid grid-cols-3 gap-2 p-2">
                     ${Array.from({ length: endYear - startYear + 1 }, (_, i) => {
-            const year = startYear + i;
-            return `
+                      const year = startYear + i;
+                      return `
                 <button type="button" 
                         class="year-btn p-2 rounded transition-all duration-300 cursor-pointer hover:bg-secondary-light 
                                 ${year === currentYear ? 'bg-secondary-interaction text-base-black' : ''}"
@@ -94,22 +96,22 @@ export const createDatePicker = ({
                     ${year}
                 </button>
             `;
-        }).join('')}
+                    }).join('')}
                 </div>
             </div>
         `;
-    };
+  };
 
-    const updateCalendarContent = (date: Date): void => {
-        const calendar = element.querySelector('.calendar-content');
-        if (!calendar) return;
+  const updateCalendarContent = (date: Date): void => {
+    const calendar = element.querySelector('.calendar-content');
+    if (!calendar) return;
 
-        if (isYearView) {
-            calendar.innerHTML = createYearGrid(date);
-            attachYearEventListeners();
-        } else {
-            const weeks = generateCalendar(date);
-            calendar.innerHTML = `
+    if (isYearView) {
+      calendar.innerHTML = createYearGrid(date);
+      attachYearEventListeners();
+    } else {
+      const weeks = generateCalendar(date);
+      calendar.innerHTML = `
                 <div class="flex justify-between items-center mb-4 gap-2">
                     <button type="button" class="prev-month p-2 rounded cursor-pointer hover:bg-secondary-extra-light transition-all flex items-center justify-center">
                         ${IconRegistry[IconCategory.SYSTEM].chevronLeft}
@@ -125,103 +127,113 @@ export const createDatePicker = ({
                     </button>
                 </div>
                 <div class="grid grid-cols-7 gap-1 text-center">
-                    ${LOCALE_CONFIG[language].days
-                    .map(day => `<div class="text-xs font-medium text-gray-500">${day}</div>`)
-                    .join('')}
-                    ${weeks.map(week =>
-                        week.map(day =>
-                            day !== '' ?
-                                `<button type="button"
+                    ${LOCALE_CONFIG[language].days.map((day) => `<div class="text-xs font-medium text-gray-500">${day}</div>`).join('')}
+                    ${weeks
+                      .map((week) =>
+                        week
+                          .map((day) =>
+                            day !== ''
+                              ? `<button type="button"
                         class="day-btn size-[2.3rem] transition-all cursor-pointer rounded hover:bg-secondary-light 
-                                                ${day === currentDate.getDate() ? 'bg-secondary-interaction text-base-black hover:bg-secondary-light' : ''}"
+                                                ${
+                                                  day === currentDate.getDate()
+                                                    ? 'bg-secondary-interaction text-base-black hover:bg-secondary-light'
+                                                    : ''
+                                                }"
                         data-date="${day}">
                         ${day}
-                    </button>` :
-                                '<div class="size-[2.3rem]"></div>'
-                        ).join('')
-                    ).join('')}
+                    </button>`
+                              : '<div class="size-[2.3rem]"></div>'
+                          )
+                          .join('')
+                      )
+                      .join('')}
                 </div>
             `;
-            attachCalendarEventListeners();
+      attachCalendarEventListeners();
+    }
+  };
+
+  const attachCalendarEventListeners = () => {
+    const calendar = element.querySelector('.calendar-content');
+    const prevMonth = calendar?.querySelector('.prev-month');
+    const nextMonth = calendar?.querySelector('.next-month');
+    const monthYearSelector = calendar?.querySelector('.month-year-selector');
+
+    prevMonth?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      updateCalendarContent(currentDate);
+    });
+
+    nextMonth?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      updateCalendarContent(currentDate);
+    });
+
+    monthYearSelector?.addEventListener('click', () => {
+      isYearView = true;
+      updateCalendarContent(currentDate);
+    });
+
+    const dayButtons = calendar?.querySelectorAll('.day-btn');
+    dayButtons?.forEach((button) => {
+      button.addEventListener('click', () => {
+        const day = button.textContent;
+        if (day) {
+          currentDate.setDate(parseInt(day));
+          const input = element.querySelector('input');
+          const calendarWrapper = element.querySelector('.calendar-wrapper');
+          if (input) {
+            input.value = formatDate(currentDate, language);
+          }
+          onChange?.(formatDate(currentDate, language));
+          calendarWrapper?.classList.add('hidden');
         }
-    };
+      });
+    });
+  };
 
-    const attachCalendarEventListeners = () => {
-        const calendar = element.querySelector('.calendar-content');
-        const prevMonth = calendar?.querySelector('.prev-month');
-        const nextMonth = calendar?.querySelector('.next-month');
-        const monthYearSelector = calendar?.querySelector('.month-year-selector');
+  const attachYearEventListeners = () => {
+    const calendar = element.querySelector('.calendar-content');
+    const yearButtons = calendar?.querySelectorAll('.year-btn');
 
-        prevMonth?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            updateCalendarContent(currentDate);
-        });
-
-        nextMonth?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            updateCalendarContent(currentDate);
-        });
-
-        monthYearSelector?.addEventListener('click', () => {
-            isYearView = true;
-            updateCalendarContent(currentDate);
-        });
-
-        const dayButtons = calendar?.querySelectorAll('.day-btn');
-        dayButtons?.forEach((button) => {
-            button.addEventListener('click', () => {
-                const day = button.textContent;
-                if (day) {
-                    currentDate.setDate(parseInt(day));
-                    const input = element.querySelector('input');
-                    const calendarWrapper = element.querySelector('.calendar-wrapper');
-                    if (input) {
-                        input.value = formatDate(currentDate, language);
-                    }
-                    onChange?.(formatDate(currentDate, language));
-                    calendarWrapper?.classList.add('hidden');
-                }
-            });
-        });
-    };
-
-    const attachYearEventListeners = () => {
-        const calendar = element.querySelector('.calendar-content');
-        const yearButtons = calendar?.querySelectorAll('.year-btn');
-
-        yearButtons?.forEach((button) => {
-            button.addEventListener('click', () => {
-                const year = button.getAttribute('data-year');
-                if (year) {
-                    currentDate.setFullYear(parseInt(year));
-                    isYearView = false;
-                    updateCalendarContent(currentDate);
-                }
-            });
-        });
-    };
-
-    const handleInputChange = (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const value = input.value;
-
-        if (/^\d{2}\.\d{2}\.\d{4}$/.test(value)) {
-            const date = parseDate(value);
-            if (!isNaN(date.getTime())) {
-                currentDate = date;
-                updateCalendarContent(date);
-                onChange?.(formatDate(date, language));
-            }
+    yearButtons?.forEach((button) => {
+      button.addEventListener('click', () => {
+        const year = button.getAttribute('data-year');
+        if (year) {
+          currentDate.setFullYear(parseInt(year));
+          isYearView = false;
+          updateCalendarContent(currentDate);
         }
-    };
+      });
+    });
+  };
 
-    element.innerHTML = `
+  const handleInputChange = (e: Event) => {
+    const input = e.target as HTMLInputElement;
+    const value = input.value;
+
+    if (/^\d{2}\.\d{2}\.\d{4}$/.test(value)) {
+      const date = parseDate(value);
+      if (!isNaN(date.getTime())) {
+        currentDate = date;
+        updateCalendarContent(date);
+        onChange?.(formatDate(date, language));
+      }
+    }
+  };
+
+  element.innerHTML = `
     <div class="flex flex-col gap-2">
-        ${label ? `<label class="text-sm font-medium text-gray-700">
+        ${
+          label
+            ? `<label class="text-sm font-medium text-gray-700">
             ${label}${required ? ' *' : ''}
-        </label>` : ''}
+        </label>`
+            : ''
+        }
 
         <div class="relative max-w-lg">
             <div class="absolute inset-y-0 end-4 flex items-center ps-3.5 pointer-events-none">
@@ -284,39 +296,34 @@ export const createDatePicker = ({
     </div>
     `;
 
+  const input = element.querySelector('input');
+  input?.addEventListener('input', handleInputChange);
+  input?.addEventListener('click', () => {
+    if (!disabled) {
+      const calendarWrapper = element.querySelector('.calendar-wrapper');
+      calendarWrapper?.classList.toggle('hidden');
+      updateCalendarContent(currentDate);
+    }
+  });
+  const resetButton = element.querySelector('.reset-date');
+  resetButton?.addEventListener('click', () => {
+    if (input) {
+      input.value = '';
+      onChange?.('');
+      const calendarWrapper = element.querySelector('.calendar-wrapper');
+      calendarWrapper?.classList.add('hidden');
+    }
+  });
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as Node;
+    const calendarWrapper = element.querySelector('.calendar-wrapper');
+    const isNavigationButton = (target as Element).closest('.prev-month, .next-month');
+    const isCalendarButton = (target as Element).closest('.day-btn, .year-btn, .month-year-selector');
+    const isResetButton = (target as Element).closest('.reset-date');
 
-    const input = element.querySelector('input');
-    input?.addEventListener('input', handleInputChange);
-    input?.addEventListener('click', () => {
-        if (!disabled) {
-            const calendarWrapper = element.querySelector('.calendar-wrapper');
-            calendarWrapper?.classList.toggle('hidden');
-            updateCalendarContent(currentDate);
-        }
-    });
-    const resetButton = element.querySelector('.reset-date');
-    resetButton?.addEventListener('click', () => {
-        if (input) {
-            input.value = '';
-            onChange?.('');
-            const calendarWrapper = element.querySelector('.calendar-wrapper');
-            calendarWrapper?.classList.add('hidden');
-        }
-    });
-    document.addEventListener('click', (e: MouseEvent) => {
-        const target = e.target as Node;
-        const calendarWrapper = element.querySelector('.calendar-wrapper');
-        const isNavigationButton = (target as Element).closest('.prev-month, .next-month');
-        const isCalendarButton = (target as Element).closest('.day-btn, .year-btn, .month-year-selector');
-        const isResetButton = (target as Element).closest('.reset-date');
-
-        if (!element.contains(target) &&
-            !isNavigationButton &&
-            !isCalendarButton &&
-            !isResetButton) {
-            calendarWrapper?.classList.add('hidden');
-        }
-    });
-    return element;
-
+    if (!element.contains(target) && !isNavigationButton && !isCalendarButton && !isResetButton) {
+      calendarWrapper?.classList.add('hidden');
+    }
+  });
+  return element;
 };
