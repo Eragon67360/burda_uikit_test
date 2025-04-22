@@ -78,7 +78,8 @@ const meta: Meta<RadioGroupArgs> = {
     },
     required: {
       control: 'boolean',
-      description: 'Indicates if the radio group is required for form submission. If true, the user must select an option before submitting the form. An asterisk will be added to the field label.',
+      description:
+        'Indicates if the radio group is required for form submission. If true, the user must select an option before submitting the form. An asterisk will be added to the field label.',
       type: { name: 'boolean' },
       defaultValue: { summary: false },
       table: {

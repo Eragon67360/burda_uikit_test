@@ -1,0 +1,74 @@
+import { Meta, Canvas, Controls, Source, Stories } from '@storybook/blocks';
+import * as ButtonIconStories from './ButtonIcon.stories';
+
+<Meta of={ButtonIconStories} />
+
+# ButtonIcon Component
+
+The ButtonIcon component is a versatile button that displays an icon. It supports various states and can be customized for accessibility.
+
+## Component Demo
+
+<Canvas of={ButtonIconStories.Small} withToolbar />
+
+## Props
+
+<Controls of={ButtonIconStories.Small} sort="requiredFirst" />
+
+## Usage
+
+### Basic Usage
+
+<Source 
+  language="html" 
+  dark 
+  code={`
+<!-- Button Icon with Small Variant -->
+<button 
+  type="button" 
+  class="group shrink-0 transition-[color,opacity] duration-300 focus:outline-hidden focus:ring-none focus:border-transparent disabled:cursor-not-allowed relative rounded-lg overflow-hidden flex items-center justify-center cursor-pointer bg-transparent border-none text-base-black hover:text-secondary-dark active:bg-transparent active:opacity-60 focus-visible:bg-base-white focus-visible:ring-2 focus-visible:ring-secondary-dark disabled:bg-base-white disabled:text-neutral-400 disabled:border-none size-10 p-1"
+  aria-label="Delete item"
+>
+  <!-- Icon Component -->
+  <svg>...</svg>
+</button>
+  `} 
+/>
+
+### Variants
+
+#### Small Variant
+
+<Canvas of={ButtonIconStories.Small} />
+
+#### Big Variant
+
+<Canvas of={ButtonIconStories.Big} />
+
+### Disabled State
+
+<Canvas of={ButtonIconStories.Disabled} />
+
+## Accessibility
+
+The ButtonIcon component supports accessibility through the `ariaLabel` prop. This label is crucial for screen readers to provide context about the button's function.
+
+### Example
+
+```html
+<button type="button" aria-label="Close modal" class="...">
+  <!-- Icon -->
+</button>
+```
+
+## Customization
+
+The component supports different:
+
+- Variants (Small, Big)
+- Background colors (neutral-100, neutral-200)
+- Icons from the system icon registry
+- Disabled states
+
+<br />
+<Stories includePrimary={false} />

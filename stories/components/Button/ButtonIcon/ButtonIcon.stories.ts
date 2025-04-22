@@ -7,7 +7,7 @@ import { ArgsCategory } from '@/stories/types/story';
 
 const meta: Meta<ButtonIconArgs> = {
   title: 'Components (Atoms)/Button/ButtonIcon',
-
+  tags: ['!autodocs'],
   parameters: {
     controls: { expanded: true },
     docs: {
@@ -91,7 +91,9 @@ const meta: Meta<ButtonIconArgs> = {
 export default meta;
 type Story = StoryObj<ButtonIconArgs>;
 
-export const Small: Story = {};
+export const Small: Story = {
+  args: {},
+};
 
 export const Big: Story = {
   args: {
