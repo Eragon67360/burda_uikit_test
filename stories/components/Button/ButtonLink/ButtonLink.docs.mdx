@@ -1,0 +1,146 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as ButtonLinkStories from './ButtonLink.stories';
+
+<Meta of={ButtonLinkStories} />
+
+<Title of={ButtonLinkStories} />
+
+<Description of={ButtonLinkStories} />
+
+<Primary />
+
+<Controls of={ButtonLinkStories.WithRightIcon} sort="requiredFirst" />
+
+## Usage
+
+The ButtonLink component provides a link-styled button that can be used for navigation or action triggers. It supports icons, different states, and custom styling.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Basic ButtonLink -->
+<a 
+  href="#" 
+  class="group w-fit flex flex-nowrap text-nowrap items-center m-1 gap-2 border-b-[0.1875rem] border-b-transparent border-t-0 border-x-0 ring-2 ring-offset-0 ring-transparent text-button-label transition-[border-color,opacity,gap] duration-300 outline-hidden hover:border-b-secondary-light active:border-b-secondary-dark focus:outline-hidden focus:border-transparent focus-visible:active:border-b-transparent py-1 focus-visible:px-3 focus-visible:ring-secondary-dark focus-visible:rounded-md"
+>
+  Link Button
+</a>
+
+<!-- ButtonLink with right icon -->
+
+<a
+  href="#"
+  class="group w-fit flex flex-nowrap text-nowrap items-center m-1 gap-2 border-b-[0.1875rem] border-b-transparent border-t-0 border-x-0 ring-2 ring-offset-0 ring-transparent text-button-label transition-[border-color,opacity,gap] duration-300 outline-hidden hover:border-b-secondary-light active:border-b-secondary-dark focus:outline-hidden focus:border-transparent focus-visible:active:border-b-transparent py-1 focus-visible:px-3 focus-visible:ring-secondary-dark focus-visible:rounded-md"
+>
+  Link Button
+  <svg aria-hidden="true" width="20" height="20">
+    <use href="#icon-arrowRight" />
+  </svg>
+</a>
+
+<!-- Disabled ButtonLink -->
+
+<a
+  href="#"
+  aria-disabled="true"
+  tabindex="-1"
+  class="group w-fit flex flex-nowrap text-nowrap items-center m-1 gap-2 border-b-[0.1875rem] border-b-transparent border-t-0 border-x-0 ring-2 ring-offset-0 ring-transparent text-button-label transition-[border-color,opacity,gap] duration-300 outline-hidden cursor-not-allowed text-neutral-400 hover:border-b-transparent active:border-b-transparent"
+  style="pointer-events: none;"
+>
+  Disabled Link
+</a>
+`} />
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="buttonLink.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttonLink = createButtonLink({
+      label: 'Link Button',
+      href: '/path',
+      icon: 'arrowRight',
+      onClick: (e) => {
+        // Custom click handler
+      }
+    });
+    document.body.appendChild(buttonLink);
+  });
+</script>
+`}
+/>
+
+### JavaScript Implementation
+
+<details>
+<summary>Expand code block</summary>
+<Source
+  language="typescript"
+  dark
+  code={`
+type ButtonLinkArgs = {
+  label: string;
+  href?: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  icon?: string;
+  iconLeft?: boolean;
+  disabled?: boolean;
+  classNames?: string;
+  onClick?: (event: MouseEvent) => void;
+};
+
+const createButtonLink = ({
+label,
+href = '#',
+target = '\_self',
+icon,
+iconLeft = false,
+disabled = false,
+classNames,
+onClick,
+}: ButtonLinkArgs) => {
+const link = document.createElement('a');
+// Implementation details...
+return link;
+};
+`}
+/>
+
+</details>
+
+<br />
+<Stories includePrimary={false} />
+
+## Accessibility
+
+### Best practices
+
+The ButtonLink component follows accessibility best practices:
+
+- Uses semantic `<a>` element for proper navigation
+- Supports keyboard navigation and focus states
+- Provides proper ARIA attributes for disabled state
+- Maintains sufficient color contrast
+- Icons are marked as decorative with `aria-hidden="true"`
+- Focus indicators are visible and meet WCAG requirements
+
+### Keyboard Navigation
+
+- <kbd>Tab</kbd>: Focuses the button link
+- <kbd>Enter</kbd>/<kbd>Space</kbd>: Activates the link
+- When disabled, the link is removed from tab order
+
+## Customization
+
+The component supports different:
+
+- Icon positions (Left, Right)
+- Icons from the system icon registry
+- States (Default, Hover, Active, Focus and Disabled)

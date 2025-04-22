@@ -7,12 +7,13 @@ import { play } from './ButtonLink.test';
 
 const meta: Meta<ButtonLinkArgs> = {
   title: 'Components (Atoms)/Button/ButtonLink',
-
+  tags: ['!autodocs'],
   parameters: {
     controls: { expanded: true },
     docs: {
       description: {
-        component: 'The ButtonLink component is a versatile button that acts as a link. It supports various states.',
+        component:
+          'The ButtonLink component is a versatile button that acts as a link. It combines the visual appearance of a link with button-like behavior, supporting various states, icons, and customization options.',
       },
     },
   },
@@ -116,7 +117,7 @@ export const WithRightIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: '',
+        story: 'The default variant displays an icon on the right side of the label.',
       },
     },
   },
@@ -130,7 +131,7 @@ export const WithLeftIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: '',
+        story: 'Places the icon on the left side of the label, useful for back navigation or similar actions.',
       },
     },
   },
@@ -143,7 +144,7 @@ export const WithoutIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: '',
+        story: 'A simple text-only link button.',
       },
     },
   },
@@ -156,7 +157,7 @@ export const Disabled: Story = {
   parameters: {
     docs: {
       description: {
-        story: '',
+        story: 'The button in a disabled state, preventing user interaction.',
       },
     },
   },

@@ -1,23 +1,19 @@
-import { Meta, Canvas, Controls, Source, Stories } from '@storybook/blocks';
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
 import * as ButtonIconStories from './ButtonIcon.stories';
 
 <Meta of={ButtonIconStories} />
 
-# ButtonIcon Component
+<Title of={ButtonIconStories} />
 
-The ButtonIcon component is a versatile button that displays an icon. It supports various states and can be customized for accessibility.
+<Description of={ButtonIconStories} />
 
-## Component Demo
-
-<Canvas of={ButtonIconStories.Small} withToolbar />
-
-## Props
+<Primary />
 
 <Controls of={ButtonIconStories.Small} sort="requiredFirst" />
 
 ## Usage
 
-### Basic Usage
+### Component Markup
 
 <Source 
   language="html" 
@@ -35,19 +31,8 @@ The ButtonIcon component is a versatile button that displays an icon. It support
   `} 
 />
 
-### Variants
-
-#### Small Variant
-
-<Canvas of={ButtonIconStories.Small} />
-
-#### Big Variant
-
-<Canvas of={ButtonIconStories.Big} />
-
-### Disabled State
-
-<Canvas of={ButtonIconStories.Disabled} />
+<br />
+<Stories includePrimary={false} />
 
 ## Accessibility
 
@@ -66,9 +51,6 @@ The ButtonIcon component supports accessibility through the `ariaLabel` prop. Th
 The component supports different:
 
 - Variants (Small, Big)
-- Background colors (neutral-100, neutral-200)
+- Background colors (`neutral-100`, `neutral-200`)
 - Icons from the system icon registry
 - Disabled states
-
-<br />
-<Stories includePrimary={false} />
