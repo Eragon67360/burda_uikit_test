@@ -9,34 +9,43 @@ export enum ButtonIconVariant {
 
 export type ButtonIconArgs = {
   variant: ButtonIconVariant;
-  disabled: boolean;
-  onClick: (event: MouseEvent) => void;
   icon: keyof (typeof IconRegistry)[IconCategory.SYSTEM];
+  disabled?: boolean;
   backgroundColor?: 'neutral-100' | 'neutral-200';
+  onClick?: () => void;
+} & AccessibilityArgs;
+
+type AccessibilityArgs = {
   ariaLabel?: string;
 };
 
 export const createButtonIcon = ({
-  variant = ButtonIconVariant.SMALL,
+  variant,
+  icon,
   disabled = false,
-  onClick,
-  icon = 'trash',
   backgroundColor = 'neutral-100',
+  onClick = () => {},
+  ariaLabel,
 }: ButtonIconArgs) => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
+  btnButton.onclick = onClick;
 
-  if (icon) {
-    btnButton.innerHTML = createIcon({
-      name: icon,
-      size: 16,
-      className: disabled ? 'opacity-50' : 'z-10',
-    });
+  if (ariaLabel) {
+    btnButton.setAttribute('aria-label', ariaLabel);
   }
 
-  if (onClick && !disabled) {
-    btnButton.addEventListener('click', onClick);
+  if (disabled) {
+    btnButton.disabled = true;
   }
+
+  btnButton.innerHTML = createIcon({
+    name: icon,
+    size: 16,
+    classNames: disabled ? 'opacity-50' : 'z-10',
+    ariaHidden: true,
+  });
+
   const baseClasses = [
     'group',
     'shrink-0',
@@ -85,12 +94,7 @@ export const createButtonIcon = ({
   };
 
   const classes = [...baseClasses, ...variantClasses[variant]];
-
   btnButton.className = classes.join(' ');
-
-  if (disabled) {
-    btnButton.disabled = true;
-  }
 
   return btnButton;
 };

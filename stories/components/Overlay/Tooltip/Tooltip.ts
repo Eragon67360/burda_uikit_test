@@ -5,19 +5,44 @@ export type TooltipArgs = {
   content: string | HTMLElement;
   triggerIcon?: string;
   position?: 'top' | 'right' | 'bottom' | 'left';
-  className?: string;
+  classNames?: string | undefined;
+} & AccessibilityArgs;
+
+type AccessibilityArgs = {
+  ariaLabelTrigger?: string;
+  ariaLabelClose?: string;
+  ariaControlsId?: string;
 };
 
 export const createTooltip = ({
   content,
   triggerIcon = IconRegistry[IconCategory.SYSTEM].info,
   position = 'top',
-  className = '',
+  classNames,
+  ariaLabelTrigger,
+  ariaLabelClose,
+  ariaControlsId,
 }: TooltipArgs) => {
   const wrapper = document.createElement('div');
-  wrapper.className = `relative inline-block ${className}`;
+  wrapper.className = 'relative inline-block';
+
+  if (classNames) {
+    wrapper.classList.add(...classNames.split(' '));
+  }
 
   const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.setAttribute('aria-haspopup', 'true');
+  trigger.setAttribute('aria-expanded', 'false');
+
+  if (ariaControlsId) {
+    trigger.setAttribute('aria-controls', ariaControlsId);
+  }
+
+  if (ariaLabelTrigger) {
+    trigger.setAttribute('aria-label', ariaLabelTrigger);
+  }
+
   trigger.className = `
     p-2 rounded-full transition-colors
     text-base-black hover:text-secondary-dark
@@ -26,6 +51,13 @@ export const createTooltip = ({
   trigger.innerHTML = triggerIcon;
 
   const tooltipContent = document.createElement('div');
+
+  tooltipContent.setAttribute('role', 'tooltip');
+
+  if (ariaControlsId) {
+    tooltipContent.id = ariaControlsId;
+  }
+
   tooltipContent.className = `
     invisible opacity-0 scale-95 absolute z-50 
     min-w-[200px] max-w-[400px] w-max
@@ -35,6 +67,12 @@ export const createTooltip = ({
   `;
 
   const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.tabIndex = -1;
+  if (ariaLabelClose) {
+    closeButton.setAttribute('aria-label', ariaLabelClose);
+  }
+
   closeButton.className = 'absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full transition-colors';
   closeButton.innerHTML = IconRegistry[IconCategory.SYSTEM].close;
 
@@ -48,32 +86,52 @@ export const createTooltip = ({
   tooltipContent.appendChild(closeButton);
   tooltipContent.appendChild(contentWrapper);
 
+  const openTooltip = () => {
+    tooltipContent.classList.remove('invisible', 'opacity-0', 'scale-95');
+    tooltipContent.classList.add('visible', 'opacity-100', 'scale-100');
+    trigger.setAttribute('data-active', 'true');
+    trigger.setAttribute('aria-expanded', 'true');
+    closeButton.setAttribute('tabindex', '0');
+  };
+
+  const closeTooltip = () => {
+    tooltipContent.classList.remove('visible', 'opacity-100', 'scale-100');
+    tooltipContent.classList.add('invisible', 'opacity-0', 'scale-95');
+    trigger.setAttribute('data-active', 'false');
+    trigger.setAttribute('aria-expanded', 'false');
+    closeButton.setAttribute('tabindex', '-1');
+  };
+
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
     const isVisible = !tooltipContent.classList.contains('invisible');
 
     if (isVisible) {
-      tooltipContent.classList.remove('visible', 'opacity-100', 'scale-100');
-      tooltipContent.classList.add('invisible', 'opacity-0', 'scale-95');
-      trigger.setAttribute('data-active', 'false');
+      closeTooltip();
     } else {
-      tooltipContent.classList.remove('invisible', 'opacity-0', 'scale-95');
-      tooltipContent.classList.add('visible', 'opacity-100', 'scale-100');
-      trigger.setAttribute('data-active', 'true');
+      openTooltip();
+    }
+  });
+
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTooltip();
     }
   });
 
   closeButton.addEventListener('click', () => {
-    tooltipContent.classList.remove('visible', 'opacity-100', 'scale-100');
-    tooltipContent.classList.add('invisible', 'opacity-0', 'scale-95');
-    trigger.setAttribute('data-active', 'false');
+    closeTooltip();
+  });
+
+  closeButton.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTooltip();
+    }
   });
 
   document.addEventListener('click', (e) => {
     if (!wrapper.contains(e.target as Node)) {
-      tooltipContent.classList.remove('visible', 'opacity-100', 'scale-100');
-      tooltipContent.classList.add('invisible', 'opacity-0', 'scale-95');
-      trigger.setAttribute('data-active', 'false');
+      closeTooltip();
     }
   });
 

@@ -3,23 +3,25 @@ import { getSizedIcon } from '@/utils/iconUtils';
 import './buttonLink.css';
 
 export type ButtonLinkArgs = {
-  disabled?: boolean;
-  iconLeft?: boolean;
   label: string;
-  onClick?: (event: MouseEvent) => void;
-  icon?: string | null;
-  href: string;
+  href?: string;
   target?: '_blank' | '_self' | '_parent' | '_top';
+  icon?: string | undefined;
+  iconLeft?: boolean;
+  disabled?: boolean;
+  classNames?: string | undefined;
+  onClick?: (event: MouseEvent) => void;
 };
 
 export const createButtonLink = ({
-  disabled = false,
   label,
-  onClick,
-  href = 'example.com',
-  icon = 'arrowRight',
-  iconLeft = false,
+  href = '#',
   target = '_self',
+  icon,
+  iconLeft = false,
+  disabled = false,
+  classNames,
+  onClick = () => {},
 }: ButtonLinkArgs) => {
   const link = document.createElement('a');
   link.href = href;
@@ -57,6 +59,13 @@ export const createButtonLink = ({
     }
   }
 
+  const iconHtml = icon ? getSizedIcon(IconRegistry[IconCategory.SYSTEM][icon], 20) : '';
+  link.innerHTML = `
+      ${iconLeft ? iconHtml : ''}
+      ${label}
+      ${!iconLeft ? iconHtml : ''}
+  `;
+
   const baseClasses = [
     'group',
     'w-fit',
@@ -82,19 +91,10 @@ export const createButtonLink = ({
     'focus-visible:ring-secondary-dark',
     'focus-visible:rounded-md',
     disabled ? ['cursor-not-allowed', 'text-neutral-400', 'hover:border-b-transparent', 'active:border-b-transparent'].join(' ') : '',
+    classNames,
   ].filter(Boolean);
 
-  const iconHtml = icon ? getSizedIcon(IconRegistry[IconCategory.SYSTEM][icon], 20) : '';
-
-  link.innerHTML = `
-        ${iconLeft ? iconHtml : ''}
-        ${label}
-        ${!iconLeft ? iconHtml : ''}
-    `;
-
   link.className = baseClasses.join(' ');
-
-  link.setAttribute('role', 'link');
 
   return link;
 };

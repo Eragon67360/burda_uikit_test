@@ -5,47 +5,78 @@ import { IconCategory, IconRegistry } from '@/stories/assets/icons';
 export type CartAndPayArgs = {
   label: string;
   icon: string;
-  onClick: () => void;
-  classNames?: string;
-  disabled: boolean;
+  disabled?: boolean;
   items: any[];
+  classNames?: string;
+  onClick: () => void;
+} & AccessibilityArgs;
+
+type AccessibilityArgs = {
+  ariaLabelCartCount?: string;
 };
 
-export const createCartAndPay = ({ label, icon, onClick, classNames, disabled = false, items = [] }: CartAndPayArgs) => {
+export const createCartAndPay = ({
+  label,
+  icon,
+  disabled = false,
+  items = [],
+  classNames,
+  onClick,
+  ariaLabelCartCount,
+}: CartAndPayArgs) => {
   const buttonContainer = document.createElement('button');
-  buttonContainer.className = `
-        ${items.length > 0 ? 'bg-primary-interaction hover:bg-primary-light active:bg-primary-dark' : 'bg-neutral-300 hover:bg-secondary-light active:bg-secondary-dark'}
-        text-base-black text-button-label
-        border-none disabled:border
-        focus:ring-base-black
-        disabled:text-neutral-400
-        disabled:border-neutral-300
-        disabled:bg-base-white
-        px-6 gap-2
-        min-w-fit w-fit text-nowrap
-        h-18
-        active:text-neutral-600
-        rounded-none
-        cursor-pointer
-        transition-all
-        duration-300 
-        flex items-center
-    `;
-  if (classNames) {
-    buttonContainer.classList.add(classNames);
-  }
-  buttonContainer.disabled = disabled;
+  buttonContainer.type = 'button';
   buttonContainer.onclick = onClick;
 
   buttonContainer.setAttribute('aria-label', label);
-  buttonContainer.setAttribute('aria-disabled', String(disabled));
-  buttonContainer.setAttribute('role', 'button');
-  buttonContainer.setAttribute('tabindex', '0');
-  buttonContainer.setAttribute('data-testid', 'cart-and-pay-button');
-  buttonContainer.setAttribute('data-icon', icon);
+  buttonContainer.setAttribute('aria-describedby', 'cart-count');
+
+  if (disabled) {
+    buttonContainer.disabled = true;
+  }
+
+  buttonContainer.classList.add(classNames);
+
+  const baseClasses = [
+    'text-base-black',
+    'text-button-label',
+    'border-none',
+    'disabled:border',
+    'focus:outline-hidden',
+    'focus-visible:ring-2',
+    'focus-visible:ring-offset-0',
+    'focus:ring-base-black',
+    'disabled:text-neutral-400',
+    'disabled:border-neutral-300',
+    'disabled:bg-base-white',
+    'disabled:cursor-not-allowed',
+    'px-6',
+    'gap-2',
+    'min-w-fit',
+    'w-fit',
+    'text-nowrap',
+    'h-18',
+    'active:text-neutral-600',
+    'rounded-none',
+    'cursor-pointer',
+    'transition-all',
+    'duration-300',
+    'flex',
+    'items-center',
+  ];
+
+  const classesWithItems = ['bg-primary-interaction', 'hover:bg-primary-light', 'active:bg-primary-dark'];
+  const classesWithoutItems = ['bg-neutral-300', 'hover:bg-secondary-light', 'active:bg-secondary-dark'];
+
+  buttonContainer.classList.add(...baseClasses, ...(items.length > 0 ? classesWithItems : classesWithoutItems));
+
+  if (classNames) {
+    buttonContainer.classList.add(...classNames.split(' '));
+  }
+
   const textLabel = document.createElement('span');
-  textLabel.className = 'text-base-black text-sm font-semibold';
   textLabel.textContent = label;
+  textLabel.className = 'text-base-black text-sm font-semibold';
   buttonContainer.appendChild(textLabel);
 
   const iconContainer = document.createElement('div');
@@ -56,8 +87,14 @@ export const createCartAndPay = ({ label, icon, onClick, classNames, disabled = 
     iconBadge.className = 'absolute -top-1.5 -right-1/2 bg-base-white rounded-full size-[15px] flex items-center justify-center';
 
     const badgeText = document.createElement('span');
-    badgeText.className = 'font-bold text-xs text-base-black';
     badgeText.textContent = items.length.toString();
+    badgeText.id = 'cart-count';
+
+    if (ariaLabelCartCount) {
+      badgeText.setAttribute('aria-label', ariaLabelCartCount);
+    }
+
+    badgeText.className = 'font-bold text-xs text-base-black';
 
     iconBadge.appendChild(badgeText);
     iconContainer.appendChild(iconBadge);

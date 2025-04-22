@@ -1,32 +1,96 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { createTooltip, TooltipArgs } from './Tooltip';
 import { IconRegistry, IconCategory } from '@/assets/icons';
+import { ArgsCategory } from '@/stories/types/story';
 
 const meta: Meta<TooltipArgs> = {
   title: 'Components (Atoms)/Overlay/Tooltip',
 
   parameters: {
     layout: 'centered',
+    controls: { expanded: true },
+    docs: {
+      description: {
+        component:
+          'The Tooltip component provides contextual information about an element when hovered or focused. It can display text, HTML content, and supports various positions and styles.',
+      },
+    },
   },
+
+  args: {
+    content: 'This is a tooltip',
+    triggerIcon: IconRegistry[IconCategory.SYSTEM].info,
+    position: 'top',
+    classNames: undefined,
+    ariaLabelTrigger: 'Sample Tooltip',
+    ariaLabelClose: 'Close tooltip',
+    ariaControlsId: 'sample-tooltip',
+  },
+
   argTypes: {
     content: {
       control: 'text',
-      description: 'Content to display in the tooltip',
+      description: 'Content to be displayed inside the tooltip. Can be plain text or HTML.',
+      type: { name: 'string', required: true },
+      table: {
+        type: { summary: 'string | HTMLElement' },
+        category: ArgsCategory.PROPS,
+      },
     },
     triggerIcon: {
-      control: 'text',
-      description: 'Icon to use as trigger (defaults to info icon)',
+      control: 'select',
+      options: Object.keys(IconRegistry[IconCategory.SYSTEM]),
+      description: 'Icon to be displayed as the trigger for the tooltip.',
+      type: { name: 'string', required: true },
+      table: {
+        category: ArgsCategory.PROPS,
+      },
     },
     position: {
       control: 'select',
-      options: ['top', 'right', 'bottom', 'left'],
-      description: 'Position of the tooltip relative to the trigger',
+      options: ['top', 'bottom', 'left', 'right'],
+      description: 'Position of the tooltip relative to the trigger element. Default is "top".',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'top' },
+        category: ArgsCategory.PROPS,
+      },
     },
-    className: {
+    classNames: {
       control: 'text',
-      description: 'Additional classes for the tooltip wrapper',
+      description: 'Additional CSS classes for custom styling.',
+      table: {
+        type: { summary: 'string | undefined' },
+        defaultValue: { summary: 'undefined' },
+        category: ArgsCategory.PROPS,
+      },
+    },
+    ariaLabelTrigger: {
+      control: 'text',
+      description: 'Accessible label for the tooltip, used for screen readers.',
+      type: { name: 'string', required: false },
+      table: {
+        category: ArgsCategory.ACCESSIBILITY,
+      },
+    },
+    ariaLabelClose: {
+      control: 'text',
+      description: 'Accessible label for the close button of the tooltip, used for screen readers.',
+      type: { name: 'string', required: false },
+      table: {
+        category: ArgsCategory.ACCESSIBILITY,
+      },
+    },
+    ariaControlsId: {
+      control: 'text',
+      description: 'ID of the element controlled by the tooltip. Useful for accessibility.',
+      type: { name: 'string', required: false },
+      table: {
+        category: ArgsCategory.ACCESSIBILITY,
+      },
     },
   },
+
   render: (args) => createTooltip(args),
 };
 
@@ -128,7 +192,7 @@ const createShowcaseTemplate = () => {
           </a>
         </div>
       `,
-    className: 'absolute left-full -translate-x-full -top-10',
+    classNames: 'absolute left-full -translate-x-full -top-10',
   });
 
   inputContainer.appendChild(input);
