@@ -6,7 +6,7 @@ import { ArgsCategory } from '@/stories/types/story';
 
 const meta: Meta<CartAndPayArgs> = {
   title: 'Components (Atoms)/Button/CartAndPay',
-
+  tags: ['!autodocs'],
   parameters: {
     layout: 'centered',
     backgrounds: {
@@ -15,7 +15,8 @@ const meta: Meta<CartAndPayArgs> = {
     controls: { expanded: true },
     docs: {
       description: {
-        component: 'A button component designed for cart and payment actions, featuring an icon and optional item count.',
+        component:
+          "A button component designed for cart and payment actions, featuring an icon and optional item count. It provides visual feedback for different states and supports accessibility features for cart count announcements. The button's appearance changes based on whether there are items in the cart.",
       },
     },
   },
@@ -59,14 +60,16 @@ const meta: Meta<CartAndPayArgs> = {
     },
     items: {
       control: 'object',
-      description: 'Array of items associated with the cart and pay action. Number of items will be displayed on the button.',
+      description:
+        'Array of items associated with the cart and pay action. The length of this array determines the count displayed on the button. Empty array shows no count.',
       table: {
+        type: { summary: 'any[]' },
         category: ArgsCategory.PROPS,
       },
     },
     classNames: {
       control: 'text',
-      description: 'Additional CSS classes for custom styling.',
+      description: 'Additional CSS classes for custom styling. Multiple classes should be space-separated.',
       table: {
         type: { summary: 'string | undefined' },
         defaultValue: { summary: 'undefined' },
@@ -116,7 +119,8 @@ export const WithItems: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Button with cart icon and 3 items.',
+        story:
+          'Button with cart icon and 3 items. Shows how the badge appears and how the background color changes to indicate items presence.',
       },
     },
   },
