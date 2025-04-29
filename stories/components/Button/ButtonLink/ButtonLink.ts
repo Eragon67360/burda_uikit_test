@@ -7,24 +7,6 @@ import { ButtonLinkArgs } from '@/stories/types';
  * Creates a styled anchor element that looks and behaves like a button
  * @param {ButtonLinkArgs} props - The button link configuration options
  * @returns {HTMLAnchorElement} The created anchor element with button-like styling and behavior
- *
- * @example
- * const simpleLink = createButtonLink({
- *   label: 'Visit Website',
- *   href: 'https://example.com',
- *   target: '_blank'
- * });
- *
- * @example
- * const iconLink = createButtonLink({
- *   label: 'Download',
- *   icon: 'download',
- *   iconLeft: true,
- *   onClick: (e) => {
- *     e.preventDefault();
- *     handleDownload();
- *   }
- * });
  */
 export const createButtonLink = ({
   label,

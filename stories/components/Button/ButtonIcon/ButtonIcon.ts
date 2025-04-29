@@ -6,13 +6,6 @@ import { ButtonIconArgs, ButtonIconVariant } from '@/stories/types';
  * Creates a button with an icon component
  * @param {ButtonIconArgs} props - The button configuration options
  * @returns {HTMLButtonElement} The created button element
- *
- * @example
- * const closeButton = createButtonIcon({
- *   variant: ButtonIconVariant.SMALL,
- *   icon: 'close',
- *   ariaLabel: 'Close dialog'
- * });
  */
 export const createButtonIcon = ({
   variant,

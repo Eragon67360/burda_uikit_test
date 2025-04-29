@@ -7,24 +7,6 @@ import { CartAndPayArgs } from '@/stories/types';
  * Creates a Cart and Pay button component with item counter and icon
  * @param {CartAndPayArgs} props - The button configuration options
  * @returns {HTMLButtonElement} The created button element
- *
- * @example
- * const cartButton = createCartAndPay({
- *   label: 'Cart & Pay',
- *   icon: 'cart',
- *   items: [{id: 1}, {id: 2}],
- *   onClick: () => handlePayment(),
- *   ariaLabelCartCount: '2 items in cart'
- * });
- *
- * @example
- * const emptyCartButton = createCartAndPay({
- *   label: 'Cart Empty',
- *   icon: 'cart',
- *   items: [],
- *   disabled: true,
- *   onClick: () => {},
- * });
  */
 export const createCartAndPay = ({
   label,

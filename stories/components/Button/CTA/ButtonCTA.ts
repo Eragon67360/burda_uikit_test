@@ -7,20 +7,6 @@ import './buttonCTA.css';
  * Creates a ButtonCTA component with specified configuration
  * @param {ButtonCTAArgs} props - The button configuration options
  * @returns {HTMLButtonElement} The created button element
- *
- * @example
- * const primaryButton = createButtonCTA({
- *   variant: ButtonCTAVariant.PRIMARY,
- *   label: 'Click Me',
- *   icon: 'arrow-right'
- * });
- *
- * @example
- * const disabledButton = createButtonCTA({
- *   variant: ButtonCTAVariant.SECONDARY,
- *   label: 'Disabled',
- *   disabled: true
- * });
  */
 export const createButtonCTA = ({
   variant,
