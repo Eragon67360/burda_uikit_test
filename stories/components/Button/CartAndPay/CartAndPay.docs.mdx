@@ -82,25 +82,19 @@ document.body.appendChild(cartButton);
 
 </details>
 
-<br />
-
-<Stories includePrimary={false} />
-
 ## Accessibility
 
 The CartAndPay component implements several accessibility features:
 
 1. **ARIA Labels**:
 
-   - Uses `aria-label` for button description
-   - `aria-describedby` connects to cart count
-   - Custom `ariaLabelCartCount` for screen readers
+   - `aria-label` for inner count badge to describe amount of items in cart
 
 2. **Keyboard Navigation**:
 
-   - Focusable with keyboard
-   - Visual focus indicators
-   - Proper tab order
+- Focusable with keyboard
+- Visual focus indicators
+- Proper tab order
 
 3. **States**:
 
@@ -112,3 +106,7 @@ The CartAndPay component implements several accessibility features:
    - Meaningful cart count announcements
    - Icon is properly hidden from screen readers
    - Clear button purpose indication
+
+<br />
+
+<Stories includePrimary={false} />
