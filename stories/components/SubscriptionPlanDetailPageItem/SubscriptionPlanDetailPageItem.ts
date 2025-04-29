@@ -1,7 +1,8 @@
 import { IconRegistry, IconCategory } from '@/stories/assets/icons';
 import { createBadge } from '../Badge/Badge';
-import { createButtonCTA, ButtonCTAVariant } from '../Button/CTA/ButtonCTA';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { sanitizeHTMLRichContent } from '@/stories/utils/sanitize';
+import { ButtonCTAVariant } from '@/stories/types';
 
 export type SubscriptionPlanDetailPageItemArgs = {
   title: string;

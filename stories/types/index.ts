@@ -1,0 +1,4 @@
+export * from './buttonIcon.type';
+export * from './buttonCTA.type';
+export * from './buttonLink.type';
+export * from './cartAndPay.type';

@@ -1,24 +1,19 @@
-import { IconCategory, IconRegistry } from '@/assets/icons';
 import { createIcon } from '@/components/Icon/Icon';
 import './buttonIcon.css';
+import { ButtonIconArgs, ButtonIconVariant } from '@/stories/types';
 
-export enum ButtonIconVariant {
-  SMALL = 'small',
-  BIG = 'big',
-}
-
-export type ButtonIconArgs = {
-  variant: ButtonIconVariant;
-  icon: keyof (typeof IconRegistry)[IconCategory.SYSTEM];
-  disabled?: boolean;
-  backgroundColor?: 'neutral-100' | 'neutral-200';
-  onClick?: () => void;
-} & AccessibilityArgs;
-
-type AccessibilityArgs = {
-  ariaLabel?: string;
-};
-
+/**
+ * Creates a button with an icon component
+ * @param {ButtonIconArgs} props - The button configuration options
+ * @returns {HTMLButtonElement} The created button element
+ *
+ * @example
+ * const closeButton = createButtonIcon({
+ *   variant: ButtonIconVariant.SMALL,
+ *   icon: 'close',
+ *   ariaLabel: 'Close dialog'
+ * });
+ */
 export const createButtonIcon = ({
   variant,
   icon,
@@ -26,7 +21,7 @@ export const createButtonIcon = ({
   backgroundColor = 'neutral-100',
   onClick = () => {},
   ariaLabel,
-}: ButtonIconArgs) => {
+}: ButtonIconArgs): HTMLButtonElement => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
   btnButton.onclick = onClick;
@@ -39,6 +34,7 @@ export const createButtonIcon = ({
     btnButton.disabled = true;
   }
 
+  // Create icon with appropriate styling
   btnButton.innerHTML = createIcon({
     name: icon,
     size: 16,
@@ -46,6 +42,7 @@ export const createButtonIcon = ({
     ariaHidden: true,
   });
 
+  // Base classes shared between all variants
   const baseClasses = [
     'group',
     'shrink-0',
@@ -57,10 +54,12 @@ export const createButtonIcon = ({
     'disabled:cursor-not-allowed',
     'relative',
     'rounded-lg',
-    'overflow-hidden ',
+    'overflow-hidden',
     'flex items-center justify-center',
     'cursor-pointer',
-  ];
+  ] as const;
+
+  // Variant-specific classes
   const variantClasses: Record<ButtonIconVariant, readonly string[]> = {
     [ButtonIconVariant.SMALL]: [
       'bg-transparent border-none',
@@ -73,14 +72,14 @@ export const createButtonIcon = ({
       'disabled:bg-base-white',
       'disabled:text-neutral-400',
       'disabled:border-none',
-      'size-10 p-1',
+      'size-10 p-1', // 40px x 40px
     ] as const,
 
     [ButtonIconVariant.BIG]: [
       ...(backgroundColor === 'neutral-100' ? ['bg-neutral-100'] : ['bg-neutral-200']),
       'text-base-black',
       'border-none',
-      'size-11 p-1 rounded-lg',
+      'size-11 p-1 rounded-lg', // 44px x 44px
       'focus:ring-base-black',
       'disabled:text-neutral-400',
       'disabled:border-neutral-300',

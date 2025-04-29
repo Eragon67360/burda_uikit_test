@@ -1,7 +1,7 @@
+import { ButtonLinkArgs } from '@/stories/types';
 import { expect, Mock, userEvent } from '@storybook/test';
 import { within } from '@testing-library/dom';
 import { PlayFunction, Renderer } from 'storybook/internal/types';
-import { ButtonLinkArgs } from './ButtonLink';
 
 export const play: PlayFunction<Renderer, ButtonLinkArgs> = async ({ canvasElement, args }) => {
   const canvas = within(canvasElement);

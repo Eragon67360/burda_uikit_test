@@ -1,29 +1,27 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import './buttonCTA.css';
+import { ButtonCTAArgs, ButtonCTAVariant } from '@/stories/types';
 import { getPrimaryColorMode } from '@/stories/utils/colorMode';
+import './buttonCTA.css';
 
-export enum ButtonCTAVariant {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-  LARGE = 'large',
-  LARGE_LIGHT = 'large_light',
-  LARGE_SUBSCRIPTION = 'large_subscription',
-  LARGE_CART_PAY = 'large_cart_pay',
-  LARGE_LOGIN = 'large_login',
-}
-
-export type ButtonCTAArgs = {
-  variant: ButtonCTAVariant;
-  label: string;
-  icon?: string | undefined;
-  iconLeft?: boolean;
-  nested?: boolean;
-  disabled?: boolean;
-  classNames?: string | undefined;
-  onClick?: () => void;
-};
-
+/**
+ * Creates a ButtonCTA component with specified configuration
+ * @param {ButtonCTAArgs} props - The button configuration options
+ * @returns {HTMLButtonElement} The created button element
+ *
+ * @example
+ * const primaryButton = createButtonCTA({
+ *   variant: ButtonCTAVariant.PRIMARY,
+ *   label: 'Click Me',
+ *   icon: 'arrow-right'
+ * });
+ *
+ * @example
+ * const disabledButton = createButtonCTA({
+ *   variant: ButtonCTAVariant.SECONDARY,
+ *   label: 'Disabled',
+ *   disabled: true
+ * });
+ */
 export const createButtonCTA = ({
   variant,
   label,
@@ -33,7 +31,7 @@ export const createButtonCTA = ({
   disabled = false,
   classNames,
   onClick = () => {},
-}: ButtonCTAArgs) => {
+}: ButtonCTAArgs): HTMLButtonElement => {
   const btnButton = document.createElement('button');
   btnButton.type = 'button';
   btnButton.onclick = onClick;

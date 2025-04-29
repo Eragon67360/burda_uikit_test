@@ -1,5 +1,6 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
+import { createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
+import { ButtonCTAVariant } from '@/stories/types';
 
 export type ModalArgs = {
   isOpen: boolean;

@@ -1,12 +1,13 @@
 import { IconRegistry, IconCategory } from '@/stories/assets/icons';
-import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import './subscriptionPlanDetailPage.css';
-import { ButtonIconVariant, createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
+import { createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
 import { createTabs, TabItem } from '../Tabs/Tabs';
 import {
   SubscriptionPlanDetailPageItemArgs,
   createSubscriptionPlanDetailPageItem,
 } from '../SubscriptionPlanDetailPageItem/SubscriptionPlanDetailPageItem';
+import { ButtonCTAVariant, ButtonIconVariant } from '@/stories/types';
 
 export type SubscriptionPlanDetailPageArgs = {
   image?: string;
@@ -57,7 +58,9 @@ export const createSubscriptionPlanDetailPage = ({
   container.className = 'pt-8 flex max-xl:flex-col gap-20 xl:gap-10 max-xl:items-center';
 
   const infoContainer = document.createElement('div');
-  infoContainer.className = `xl:max-w-[256px] flex max-md:flex-col xl:flex-col items-start max-xl:items-center gap-10 max-xl:justify-center ${!tabItems ? 'xl:pt-10' : ''}`;
+  infoContainer.className = `xl:max-w-[256px] flex max-md:flex-col xl:flex-col items-start max-xl:items-center gap-10 max-xl:justify-center ${
+    !tabItems ? 'xl:pt-10' : ''
+  }`;
 
   if (image) {
     const img = document.createElement('img');
@@ -106,7 +109,9 @@ export const createSubscriptionPlanDetailPage = ({
 
     table.forEach((item, index) => {
       const desktopRow = document.createElement('tr');
-      desktopRow.className = `max-md:hidden xl:hidden ${index % 2 === 0 ? 'bg-neutral-50' : 'bg-neutral-100'} ${index > 0 ? 'border-t border-neutral-200' : ''}`;
+      desktopRow.className = `max-md:hidden xl:hidden ${index % 2 === 0 ? 'bg-neutral-50' : 'bg-neutral-100'} ${
+        index > 0 ? 'border-t border-neutral-200' : ''
+      }`;
 
       const titleCell = document.createElement('td');
       titleCell.className = 'px-4 py-3 text-copy font-bold';
@@ -168,11 +173,15 @@ export const createSubscriptionPlanDetailPage = ({
 
   const createElementContainer = (elements: SubscriptionPlanDetailPageItemArgs[], isSecondary = false) => {
     const container = document.createElement('div');
-    container.className = `w-full flex max-lg:flex-col gap-8 lg:gap-6 justify-center transition-all duration-300 ${isSecondary ? 'flex-wrap' : 'items-end'}`;
+    container.className = `w-full flex max-lg:flex-col gap-8 lg:gap-6 justify-center transition-all duration-300 ${
+      isSecondary ? 'flex-wrap' : 'items-end'
+    }`;
     const maxWidth = '460px';
     elements.forEach((element) => {
       const elementWrapper = document.createElement('div');
-      elementWrapper.className = `max-lg:w-full lg:basis-[calc(33%-20px)] grow flex flex-col gap-8 transition-all duration-300 ${isSecondary ? 'flex-auto' : 'h-full justify-center'}`;
+      elementWrapper.className = `max-lg:w-full lg:basis-[calc(33%-20px)] grow flex flex-col gap-8 transition-all duration-300 ${
+        isSecondary ? 'flex-auto' : 'h-full justify-center'
+      }`;
       elementWrapper.style.maxWidth = maxWidth;
 
       const elementComponent = createSubscriptionPlanDetailPageItem({

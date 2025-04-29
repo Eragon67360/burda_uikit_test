@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { ButtonLinkArgs, createButtonLink } from './ButtonLink';
+import { createButtonLink } from './ButtonLink';
 import { fn } from '@storybook/test';
 import { ArgsCategory } from '@/stories/types/story';
 import { play } from './ButtonLink.test';
+import { ButtonLinkArgs } from '@/stories/types';
 
 const meta: Meta<ButtonLinkArgs> = {
   title: 'Components (Atoms)/Button/ButtonLink',

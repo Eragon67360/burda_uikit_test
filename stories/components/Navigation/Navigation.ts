@@ -1,13 +1,14 @@
 import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
 import { getSizedIcon } from '@/stories/utils/iconUtils';
-import { ButtonIconVariant, createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
+import { createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
 import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
-import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
 import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
 import { createButtonLink } from '../Button/ButtonLink/ButtonLink';
+import { ButtonCTAVariant, ButtonIconVariant } from '@/stories/types';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -90,10 +91,16 @@ export const createNavigation = ({
   const rightWrapper = document.createElement('div');
 
   navigationDesktopContainer.className = `hidden md:block w-full max-w-[90rem] fixed top-0 left-1/2 -translate-x-1/2 bg-transparent px-4 py-4 mx-auto transition-all duration-300 ease-in-out z-50`;
-  navigationWrapper.className = `${has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'} transition-all duration-300 rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
-  contentWrapper.className = ` w-full h-full flex transition-opacity duration-300 ${has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'}`;
+  navigationWrapper.className = `${
+    has2LinesNavigation ? 'h-[6.375rem]' : 'h-18'
+  } transition-all duration-300 rounded-t-lg rounded-b-lg w-full bg-neutral-100 shadow mx-auto flex items-center pl-4`;
+  contentWrapper.className = ` w-full h-full flex transition-opacity duration-300 ${
+    has2LinesNavigation ? 'flex-col items-end' : 'flex-row items-center justify-between'
+  }`;
 
-  firstLineWrapper.className = `flex w-full z-50 transition-al duration-300 items-start ${has2LinesNavigation ? 'justify-end h-[3.5rem]' : 'justify-between h-full'}`;
+  firstLineWrapper.className = `flex w-full z-50 transition-al duration-300 items-start ${
+    has2LinesNavigation ? 'justify-end h-[3.5rem]' : 'justify-between h-full'
+  }`;
 
   leftWrapper.className = `
         mr-auto 
@@ -102,7 +109,11 @@ export const createNavigation = ({
         z-50 
         flex 
         transition-all duration-300 
-        ${has2LinesNavigation ? 'opacity-0 !w-0 pointer-events-none translate-y-4 !h-full' : 'opacity-100 w-fit pointer-events-auto translate-y-0 h-full'}
+        ${
+          has2LinesNavigation
+            ? 'opacity-0 !w-0 pointer-events-none translate-y-4 !h-full'
+            : 'opacity-100 w-fit pointer-events-auto translate-y-0 h-full'
+        }
     `;
 
   rightWrapper.className = `flex items-center ${has2LinesNavigation ? 'h-[3.5rem]' : 'h-full'}`;
@@ -114,7 +125,11 @@ export const createNavigation = ({
     w-full 
     z-40 flex
      transition-[opacity,height] duration-300 
-    ${has2LinesNavigation ? 'opacity-100 !h-[2.875rem] pointer-events-auto translate-y-0 w-fit' : 'opacity-0 h-0 pointer-events-none translate-y-4 !w-0'}
+    ${
+      has2LinesNavigation
+        ? 'opacity-100 !h-[2.875rem] pointer-events-auto translate-y-0 w-fit'
+        : 'opacity-0 h-0 pointer-events-none translate-y-4 !w-0'
+    }
     `;
 
   const updateNavigationLayout = (forceOneLine = false) => {
@@ -477,7 +492,9 @@ export const createNavigation = ({
   }
 
   const ctaContainer = document.createElement('div');
-  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${has2LinesNavigation ? '' : 'rounded-ee-lg'}`;
+  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${
+    has2LinesNavigation ? '' : 'rounded-ee-lg'
+  }`;
 
   const loginButton = createButtonCTA({
     variant: ButtonCTAVariant.LARGE_LOGIN,

@@ -1,8 +1,9 @@
 import { ArticleArgs, createArticle } from '../Article/Article';
-import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createHorizontalScroller } from '../HorizontalScroller/HorizontalScroller';
 import { createTabs, TabItem } from '../Tabs/Tabs';
 import './articleTeaser.css';
+import { ButtonCTAVariant } from '@/stories/types';
 
 export type ArticleTeaserArgs = {
   title: string;

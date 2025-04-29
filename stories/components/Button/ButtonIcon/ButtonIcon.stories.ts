@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import { createButtonIcon, ButtonIconArgs, ButtonIconVariant } from './ButtonIcon';
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { fn } from '@storybook/test';
-import { play } from './ButtonIcon.test';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { fn } from '@storybook/test';
+import { createButtonIcon } from './ButtonIcon';
+import { play } from './ButtonIcon.test';
+import { ButtonIconArgs, ButtonIconVariant } from '@/stories/types';
 
 const meta: Meta<ButtonIconArgs> = {
   title: 'Components (Atoms)/Button/ButtonIcon',

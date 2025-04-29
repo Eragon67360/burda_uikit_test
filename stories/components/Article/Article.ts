@@ -1,6 +1,7 @@
-import { ButtonCTAVariant, createButtonCTA } from '../Button/CTA/ButtonCTA';
-import { createBadge } from '../Badge/Badge';
 import { sanitizeHTML } from '@/stories/utils/sanitize';
+import { createBadge } from '../Badge/Badge';
+import { ButtonCTAVariant } from '@/stories/types';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 
 /**
  * @component
@@ -56,8 +57,8 @@ export const createArticle = ({
   onClick = () => {},
   ariaLabel,
   role = 'article',
-  // focusable = true,
-}: AccessibleArticleArgs) => {
+}: // focusable = true,
+AccessibleArticleArgs) => {
   const bgColor = backgroundColor === 'gray' ? 'bg-neutral-100' : 'bg-base-white';
 
   const articleElement = document.createElement('article');

@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import { createCartAndPay, CartAndPayArgs } from './CartAndPay';
-import { IconRegistry, IconCategory } from '@/stories/assets/icons';
-import { fn } from '@storybook/test';
+import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { CartAndPayArgs } from '@/stories/types';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { fn } from '@storybook/test';
+import { createCartAndPay } from './CartAndPay';
 
 const meta: Meta<CartAndPayArgs> = {
   title: 'Components (Atoms)/Button/CartAndPay',
