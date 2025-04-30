@@ -1,18 +1,13 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
 import { getSizedIcon } from '@/utils/iconUtils';
 import './buttonLink.css';
+import { ButtonLinkArgs } from '@/stories/types';
 
-export type ButtonLinkArgs = {
-  label: string;
-  href?: string;
-  target?: '_blank' | '_self' | '_parent' | '_top';
-  icon?: string | undefined;
-  iconLeft?: boolean;
-  disabled?: boolean;
-  classNames?: string | undefined;
-  onClick?: (event: MouseEvent) => void;
-};
-
+/**
+ * Creates a styled anchor element that looks and behaves like a button
+ * @param {ButtonLinkArgs} props - The button link configuration options
+ * @returns {HTMLAnchorElement} The created anchor element with button-like styling and behavior
+ */
 export const createButtonLink = ({
   label,
   href = '#',

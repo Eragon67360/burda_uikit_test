@@ -1,6 +1,7 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { ButtonCTAVariant, createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
+import { createButtonCTA } from '@/components/Button/CTA/ButtonCTA';
 import { createInfoTag } from '@/components/InfoTag/InfoTag';
+import { ButtonCTAVariant } from '@/stories/types';
 import './subscriptionPlanStartPage.css';
 
 export type SubscriptionPlanStartPageArgs = {

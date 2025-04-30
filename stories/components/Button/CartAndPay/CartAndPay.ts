@@ -1,20 +1,13 @@
 import { getSizedIcon } from '@/stories/utils/iconUtils';
 import './cartAndPay.css';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { CartAndPayArgs } from '@/stories/types';
 
-export type CartAndPayArgs = {
-  label: string;
-  icon: string;
-  disabled?: boolean;
-  items: any[];
-  classNames?: string;
-  onClick: () => void;
-} & AccessibilityArgs;
-
-type AccessibilityArgs = {
-  ariaLabelCartCount?: string;
-};
-
+/**
+ * Creates a Cart and Pay button component with item counter and icon
+ * @param {CartAndPayArgs} props - The button configuration options
+ * @returns {HTMLButtonElement} The created button element
+ */
 export const createCartAndPay = ({
   label,
   icon,

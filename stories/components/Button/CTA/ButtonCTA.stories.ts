@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { ButtonCTAArgs, ButtonCTAVariant, createButtonCTA } from './ButtonCTA';
+import { createButtonCTA } from './ButtonCTA';
 import { fn } from '@storybook/test';
 import { ArgsCategory } from '@/stories/types/story';
 import { play } from './ButtonCTA.test';
+import { ButtonCTAArgs, ButtonCTAVariant } from '@/stories/types';
 
 const meta: Meta<ButtonCTAArgs> = {
   title: 'Components (Atoms)/Button/ButtonCTA',
-
+  tags: ['!autodocs'],
   parameters: {
     controls: { expanded: true },
     docs: {

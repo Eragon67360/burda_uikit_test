@@ -1,5 +1,6 @@
-import { ButtonLinkArgs, createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
+import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
 import './text.css';
+import { ButtonLinkArgs } from '@/stories/types';
 
 type LinkItem = ButtonLinkArgs & {
   href: string;
