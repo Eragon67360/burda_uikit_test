@@ -1,4 +1,5 @@
-import { ArticleArgs, createArticle } from '../Article/Article';
+import { ArticleArgs } from '@/stories/types';
+import { createArticle } from '../Article/Article';
 import { CardArgs, createCard } from '../Card/Card';
 
 export type GridItemViewArgs = {

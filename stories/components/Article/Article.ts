@@ -1,52 +1,14 @@
 import { sanitizeHTML } from '@/stories/utils/sanitize';
 import { createBadge } from '../Badge/Badge';
-import { ButtonCTAVariant } from '@/stories/types';
+import { AccessibleArticleArgs, ButtonCTAVariant } from '@/stories/types';
 import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 
 /**
- * @component
- * @param backgroundColor - Background color of the article
- * @defaultValue 'white'
- * @param title - Title of the article
- * @param image - Image of the article
- * @param imageAltText - Alternative text for the image (if undefined, the title will be used)
- * @param buttonLabel - Label of the button
- * @param badgeText - Text for the optional badge (if empty, no badge will be shown)
- * @param onClick - Callback function when the button is clicked
+ * Creates an accessible Article component with image, title, optional badge, and CTA button
+ * @param {AccessibleArticleArgs} props - The configuration options
+ * @returns {HTMLElement} The article element
  */
-export type ArticleArgs = {
-  backgroundColor?: 'white' | 'gray';
-  title: string;
-  image: string;
-  imageAltText?: string;
-  buttonLabel: string;
-  badgeText?: string;
-  onClick?: () => void;
-};
 
-/**
- * @component
- * @param ariaLabel - Accessible label for the article
- * @param role - ARIA role for the article
- * @param focusable - Whether the article is focusable
- */
-type AccessibleArticleArgs = ArticleArgs & {
-  ariaLabel?: string;
-  role?: 'article' | 'region';
-  focusable?: boolean;
-};
-
-/**
- * @component
- * @param backgroundColor - Background color of the article
- * @defaultValue 'white'
- * @param title - Title of the article
- * @param image - Image of the article
- * @param imageAltText - Alternative text for the image (if undefined, the title will be used)
- * @param buttonLabel - Label of the button
- * @param badgeText - Text for the optional badge (if empty, no badge will be shown)
- * @param onClick - Callback function when the button is clicked
- */
 export const createArticle = ({
   backgroundColor = 'white',
   title,

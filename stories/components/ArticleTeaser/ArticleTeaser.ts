@@ -1,9 +1,9 @@
-import { ArticleArgs, createArticle } from '../Article/Article';
+import { createArticle } from '../Article/Article';
 import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createHorizontalScroller } from '../HorizontalScroller/HorizontalScroller';
 import { createTabs, TabItem } from '../Tabs/Tabs';
 import './articleTeaser.css';
-import { ButtonCTAVariant } from '@/stories/types';
+import { ArticleArgs, ButtonCTAVariant } from '@/stories/types';
 
 export type ArticleTeaserArgs = {
   title: string;
@@ -14,7 +14,6 @@ export type ArticleTeaserArgs = {
   backgroundColor?: 'white' | 'gray';
   onTertiaryButtonClick?: () => void;
 };
-
 export const createArticleTeaser = ({
   title,
   tabItems,

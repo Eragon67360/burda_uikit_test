@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/html';
 import { expect, fn, userEvent, within } from '@storybook/test';
-import { createArticle, ArticleArgs } from './Article';
+import { createArticle } from './Article';
+import { ArticleArgs } from '@/stories/types';
 
 const meta: Meta<ArticleArgs> = {
   title: 'Components (Molecules)/Article',
@@ -24,7 +25,6 @@ const meta: Meta<ArticleArgs> = {
     },
   },
   argTypes: {
-    // Enhanced ArgTypes with more detailed controls
     backgroundColor: {
       control: 'radio',
       options: ['white', 'gray'],
