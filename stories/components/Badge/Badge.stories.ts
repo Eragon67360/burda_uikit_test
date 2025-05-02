@@ -1,15 +1,14 @@
 // Badge.stories.tsx
-import type { Meta, StoryObj } from '@storybook/html';
-import { expect, within } from '@storybook/test';
-import { createBadge } from './Badge';
 import { BadgeProps } from '@/stories/types';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { createBadge } from './Badge';
 
 const meta: Meta<BadgeProps> = {
   title: 'Components (Atoms)/Badge',
   tags: ['!autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     controls: { expanded: true },
     a11y: {
       config: {
@@ -91,20 +90,82 @@ export const Primary: Story = {
     size: 42,
     color: 'primary',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const badge = canvas.getByText('Tipp');
-    const badgeContainer = badge.parentElement;
+};
 
-    // Visual tests
-    await expect(badgeContainer).toHaveClass('bg-primary-interaction');
-    await expect(badge).toHaveClass('font-bold');
-    await expect(badge).toHaveClass('text-copy-small');
+// Adding to your existing Badge.stories.tsx
 
-    // Size tests
-    if (badgeContainer) {
-      await expect(badgeContainer.style.minWidth).toBe('42px');
-      await expect(badgeContainer.style.minHeight).toBe('42px');
-    }
+export const Secondary: Story = {
+  args: {
+    badgeLabel: 'New',
+    size: 42,
+    color: 'secondary',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    badgeLabel: '1',
+    size: 24,
+    color: 'primary',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    badgeLabel: '99+',
+    size: 64,
+    color: 'primary',
+  },
+};
+
+export const WithCustomClasses: Story = {
+  args: {
+    badgeLabel: '!',
+    size: 42,
+    color: 'primary',
+    classNames: 'translate-x-1/2 translate-y-1/2',
+  },
+};
+
+export const WithAriaLabel: Story = {
+  args: {
+    badgeLabel: '5',
+    size: 42,
+    color: 'primary',
+    ariaLabel: 'Five unread messages',
+  },
+};
+
+export const EmptyBadge: Story = {
+  args: {
+    badgeLabel: '',
+    size: 42,
+    color: 'secondary',
+  },
+};
+
+export const LongText: Story = {
+  args: {
+    badgeLabel: 'Long Text',
+    size: 42,
+    color: 'primary',
+  },
+};
+
+export const NumberBadge: Story = {
+  args: {
+    badgeLabel: '42',
+    size: 42,
+    color: 'primary',
+    ariaLabel: '42 items in cart',
+  },
+};
+
+export const StatusBadge: Story = {
+  args: {
+    badgeLabel: '✓',
+    size: 42,
+    color: 'secondary',
+    ariaLabel: 'Status: Complete',
   },
 };

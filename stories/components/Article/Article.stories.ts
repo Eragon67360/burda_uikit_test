@@ -25,6 +25,9 @@ const meta: Meta<ArticleArgs> = {
       },
     },
   },
+  args: {
+    backgroundColor: 'white',
+  },
   argTypes: {
     backgroundColor: {
       control: 'radio',
