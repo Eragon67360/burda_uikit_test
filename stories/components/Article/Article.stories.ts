@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/html';
 import { expect, fn, userEvent, within } from '@storybook/test';
 import { createArticle } from './Article';
 import { ArticleArgs } from '@/stories/types';
+import { ArgsCategory } from '@/stories/types/story';
 
 const meta: Meta<ArticleArgs> = {
   title: 'Components (Molecules)/Article',
@@ -30,37 +31,42 @@ const meta: Meta<ArticleArgs> = {
       options: ['white', 'gray'],
       description: 'Background color of the article',
       table: {
-        defaultValue: { summary: 'white' },
         type: { summary: 'white | gray' },
+        defaultValue: { summary: 'white' },
+        category: ArgsCategory.PROPS,
       },
     },
     title: {
       control: 'text',
       description: 'Title of the article',
+      type: { name: 'string', required: true },
       table: {
-        type: { summary: 'string' },
+        category: ArgsCategory.PROPS,
       },
     },
     image: {
       control: 'text',
       description: 'URL of the article image',
+      type: { name: 'string', required: true },
       table: {
-        type: { summary: 'string' },
+        category: ArgsCategory.PROPS,
       },
     },
     imageAltText: {
       control: 'text',
       description: 'Alternative text for the image',
+      type: { name: 'string' },
       table: {
-        type: { summary: 'string' },
         defaultValue: { summary: 'Uses title if not provided' },
+        category: ArgsCategory.ACCESSIBILITY,
       },
     },
     buttonLabel: {
       control: 'text',
       description: 'Label text for the CTA button',
+      type: { name: 'string', required: true },
       table: {
-        type: { summary: 'string' },
+        category: ArgsCategory.PROPS,
       },
     },
     badgeText: {
@@ -69,6 +75,7 @@ const meta: Meta<ArticleArgs> = {
       table: {
         type: { summary: 'string' },
         defaultValue: { summary: 'undefined' },
+        category: ArgsCategory.PROPS,
       },
     },
     onClick: {
@@ -76,6 +83,7 @@ const meta: Meta<ArticleArgs> = {
       description: 'Click handler for the article',
       table: {
         type: { summary: '() => void' },
+        category: ArgsCategory.PROPS,
       },
     },
   },

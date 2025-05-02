@@ -47,7 +47,7 @@ AccessibleArticleArgs) => {
   imageContainer.appendChild(imgElement);
 
   if (badgeText && badgeText.length > 0) {
-    const badgeElement = createBadge(badgeText, 42, 'primary');
+    const badgeElement = createBadge({ badgeLabel: badgeText, size: 42, color: 'primary' });
     imageContainer.appendChild(badgeElement);
   }
 
