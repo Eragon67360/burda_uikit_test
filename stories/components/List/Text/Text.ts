@@ -1,23 +1,15 @@
 import { createButtonLink } from '@/components/Button/ButtonLink/ButtonLink';
+import { TextArgs, TextItem } from '@/stories/types';
 import './text.css';
-import { ButtonLinkArgs } from '@/stories/types';
 
-type LinkItem = ButtonLinkArgs & {
-  href: string;
-};
-
-type TextItem =
-  | {
-      text: string;
-    }
-  | LinkItem;
-
-export type TextArgs<T extends 'ordered' | 'unordered' | 'links' = 'ordered' | 'unordered' | 'links'> = {
-  variant: T;
-  title?: string;
-  items: T extends 'links' ? LinkItem[] : TextItem[];
-};
-
+/**
+ * Creates a text list component with various styling options
+ * @param {TextArgs} props - The configuration options
+ * @param {('ordered'|'unordered'|'links')} props.variant - The style variant of the list
+ * @param {string} [props.title] - Optional title for the list
+ * @param {Array<TextItem|LinkItem>} props.items - The items to display in the list
+ * @returns {HTMLElement} The created list component
+ */
 export const createText = ({ variant, title, items }: TextArgs) => {
   const container = document.createElement('div');
   container.className = 'flex flex-col';
