@@ -5,7 +5,7 @@ import { createText } from './Text';
 
 const meta: Meta<TextArgs> = {
   title: 'Components (Atoms)/List/Text',
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   parameters: {
     controls: { expanded: true },
     layout: 'padded',
