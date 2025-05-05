@@ -1,0 +1,99 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TextboxStories from './Textbox.stories';
+
+<Meta of={TextboxStories} />
+
+<Title of={TextboxStories} />
+
+<Description of={TextboxStories} />
+
+<Primary />
+
+<Controls of={TextboxStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="textbox-wrapper">
+  <div class="w-full">
+    <div class="flex flex-col">
+      <!-- Top button -->
+      <div class="flex items-center justify-center transition-opacity duration-200" data-button="top">
+        <div class="border-t border-neutral-400 w-full h-0"></div>
+        <button 
+          id="textbox-123-trigger-top"
+          aria-expanded="false"
+          aria-controls="textbox-123-content"
+          class="textbox-trigger flex items-center gap-2 mx-4 w-fit text-nowrap justify-center text-base-black text-button-label group cursor-pointer"
+        >
+          <span class="border-b-2 border-transparent transition group-hover:border-secondary-light">
+            See more
+          </span>
+          <span class="chevron-wrapper scale-90">
+            <!-- Chevron icon -->
+          </span>
+        </button>
+        <div class="border-t border-neutral-400 w-full h-0"></div>
+      </div>
+
+      <!-- Content -->
+      <div
+        id="textbox-123-content"
+        class="textbox-content transition-all duration-200 overflow-hidden"
+        role="region"
+        aria-labelledby="textbox-123-trigger-top"
+      >
+        <div class="pt-4">
+          <!-- Your content here -->
+        </div>
+      </div>
+
+      <!-- Bottom button -->
+      <div class="items-center justify-center opacity-0 transition-opacity duration-200 hidden mt-4" data-button="bottom">
+        <!-- Similar structure to top button -->
+      </div>
+    </div>
+
+  </div>
+</div>
+  `}
+/>
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="textbox.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const textbox = createTextbox({
+      expandText: 'See more',
+      collapseText: 'See less',
+      content: '<p>Your expandable content here</p>'
+    });
+    document.querySelector('#your-container').appendChild(textbox);
+  });
+</script>
+`}
+/>
+
+## Accessibility
+
+The textbox component implements the following accessibility features:
+
+- Uses proper ARIA attributes (`aria-expanded`, `aria-controls`, `aria-labelledby`)
+- Content region is properly labeled and associated with its trigger button
+- Supports keyboard navigation
+- Maintains focus management during expand/collapse operations
+- Provides clear visual feedback for hover and focus states
+
+<br />
+
+<Stories includePrimary={false} />

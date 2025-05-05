@@ -52,7 +52,7 @@ const meta: Meta<SelectionListArgs> = {
     onChange: {
       description: 'Callback function triggered when selection changes',
       table: {
-        category: ArgsCategory.PROPS,
+        category: ArgsCategory.EVENTS,
       },
     },
   },
