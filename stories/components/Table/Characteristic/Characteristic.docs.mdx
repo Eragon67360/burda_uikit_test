@@ -1,0 +1,95 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as CharacteristicStories from './Characteristic.stories';
+
+<Meta of={CharacteristicStories} />
+
+<Title of={CharacteristicStories} />
+
+<Description of={CharacteristicStories} />
+
+<Primary />
+
+<Controls of={CharacteristicStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<table class="w-full border-collapse">
+  <thead class="bg-base-white">
+    <tr>
+      <th class="p-4 text-left text-teaser-copy">Column 1</th>
+      <th class="p-4 text-center text-copy font-bold">Column 2</th>
+      <th class="p-4 text-center text-copy font-bold">Column 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="bg-neutral-100">
+      <td class="p-4 text-left text-copy font-bold">Row 1, Col 1</td>
+      <td class="p-4 text-center">
+        <span class="w-4 h-4 inline-block">
+          <svg><!-- Icon content --></svg>
+        </span>
+      </td>
+      <td class="p-4 text-center">Row 1, Col 3</td>
+    </tr>
+    <tr class="bg-base-white">
+      <td class="p-4 text-left text-copy font-bold">Row 2, Col 1</td>
+      <td class="p-4 text-center">Row 2, Col 2</td>
+      <td class="p-4 text-center">Row 2, Col 3</td>
+    </tr>
+  </tbody>
+</table>
+  `}
+/>
+
+### JavaScript Implementation
+
+<details>
+<summary>Expand code block</summary>
+<Source
+  language="javascript"
+  dark
+  code={`
+const createCharacteristic = ({ headers, rows }) => {
+  const getRowBgColor = (index) => {
+    return index % 2 === 1 ? 'bg-base-white' : 'bg-neutral-100';
+  };
+
+const getCellStyle = (rowIndex, colIndex) => {
+if (rowIndex === 0) {
+return colIndex === 0 ? 'text-teaser-copy' : 'text-copy font-bold';
+}
+return colIndex === 0 ? 'text-copy font-bold' : '';
+};
+
+const getAlignment = (colIndex) => {
+return colIndex === 0 ? 'text-left' : 'text-center';
+};
+
+// ... rest of the implementation
+};
+`}
+/>
+
+</details>
+
+## Accessibility
+
+The characteristic table implements several accessibility features:
+
+- Uses semantic table structure with `<thead>` and `<tbody>`
+- Maintains clear visual hierarchy with styled headers
+- Provides consistent text alignment patterns for better readability
+- Uses alternating row backgrounds to improve row distinction
+- Ensures proper color contrast for all text content
+- Icons are properly sized and centered for visual consistency
+- First column acts as row headers with bold styling
+
+<br />
+
+<Stories includePrimary={false} />
