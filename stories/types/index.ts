@@ -10,3 +10,4 @@ export * from './image.type';
 export * from './listText.type';
 export * from './listTag.type';
 export * from './selectionList.type';
+export * from './accordionTextbox.type';
