@@ -5,3 +5,4 @@ export * from './cartAndPay.type';
 export * from './article.type';
 export * from './badge.type';
 export * from './icon.type';
+export * from './infoTag.type';

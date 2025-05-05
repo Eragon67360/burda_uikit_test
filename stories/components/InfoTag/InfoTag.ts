@@ -1,4 +1,4 @@
-import { InfoTagArgs } from '@/stories/types/infoTag.type';
+import { InfoTagArgs } from '@/stories/types';
 import './infoTag.css';
 
 /**

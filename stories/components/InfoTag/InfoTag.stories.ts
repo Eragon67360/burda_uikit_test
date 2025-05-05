@@ -1,7 +1,7 @@
 // InfoTag.stories.ts
 import type { Meta, StoryObj } from '@storybook/html';
 import { createInfoTag } from './InfoTag';
-import { InfoTagArgs } from '@/stories/types/infoTag.type';
+import { InfoTagArgs } from '@/stories/types';
 
 const meta: Meta<InfoTagArgs> = {
   title: 'Components (Atoms)/InfoTag',
