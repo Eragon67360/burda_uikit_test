@@ -1,13 +1,11 @@
+import { SelectionListArgs } from '@/stories/types';
 import './selectionList.css';
 
-export type SelectionListArgs = {
-  items: string[];
-  name: string;
-  selectedValue?: string;
-  backgroundColor?: 'white' | 'gray';
-  onChange?: (value: string) => void;
-};
-
+/**
+ * Creates a styled radio button selection list
+ * @param {SelectionListArgs} props - The configuration options
+ * @returns {HTMLDivElement} A container div with radio inputs and labels
+ */
 export const createSelectionList = ({
   items,
   name,
@@ -49,7 +47,6 @@ export const createSelectionList = ({
     label.appendChild(radio);
     label.appendChild(span);
 
-    // Add to container
     container.appendChild(label);
   });
 

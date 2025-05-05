@@ -6,12 +6,6 @@ import { createHorizontalScroller } from '../../HorizontalScroller/HorizontalScr
  * Creates a single tag element with optional icon
  * @param {TagArgs} props - The configuration options
  * @returns {HTMLElement} A div element containing the tag
- *
- * @example
- * const tag = createTag({
- *   text: 'New Feature',
- *   showIcon: true
- * });
  */
 export const createTag = ({ text, showIcon = true }: TagArgs) => {
   const mainContainerDiv = document.createElement('div');
@@ -36,12 +30,6 @@ export const createTag = ({ text, showIcon = true }: TagArgs) => {
  * Creates a responsive tag group with horizontal scrolling on mobile
  * @param {Array<TagArgs>} tags - Array of tag configurations
  * @returns {HTMLElement} A container with desktop and mobile layouts
- *
- * @example
- * const tagGroup = createTagGroup([
- *   { text: 'First Tag', showIcon: true },
- *   { text: 'Second Tag', showIcon: false }
- * ]);
  */
 export const createTagGroup = (tags: Array<TagArgs>) => {
   const container = document.createElement('div');
