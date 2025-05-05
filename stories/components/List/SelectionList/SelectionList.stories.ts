@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import { createSelectionList } from './SelectionList';
 import { SelectionListArgs } from '@/stories/types';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { createSelectionList } from './SelectionList';
 
 const meta: Meta<SelectionListArgs> = {
   title: 'Components (Atoms)/List/SelectionList',
@@ -13,6 +13,9 @@ const meta: Meta<SelectionListArgs> = {
         component:
           'A radio button selection list component that allows users to choose one option from a vertical list. Supports different background colors and provides accessible radio button controls with custom styling.',
       },
+    },
+    backgrounds: {
+      default: 'Gray',
     },
   },
   argTypes: {
@@ -65,6 +68,9 @@ export const White: Story = {
       description: {
         story: 'Default selection list with white background, suitable for standard content areas.',
       },
+    },
+    backgrounds: {
+      default: 'Gray',
     },
   },
   args: {
