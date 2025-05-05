@@ -1,8 +1,8 @@
-import { IconRegistry, IconCategory } from '@/stories/assets/icons';
+import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { ButtonCTAVariant } from '@/stories/types';
+import { sanitizeHTMLRichContent } from '@/stories/utils/sanitize';
 import { createBadge } from '../Badge/Badge';
 import { createButtonCTA } from '../Button/CTA/ButtonCTA';
-import { sanitizeHTMLRichContent } from '@/stories/utils/sanitize';
-import { ButtonCTAVariant } from '@/stories/types';
 
 export type SubscriptionPlanDetailPageItemArgs = {
   title: string;
@@ -36,7 +36,12 @@ export const createSubscriptionPlanDetailPageItem = ({
   container.style.maxWidth = maxWidth;
 
   if (badgeLabel) {
-    const badge = createBadge(badgeLabel, 80, 'secondary', 'top-[unset] bottom-full translate-y-2/3 left-[unset] right-8');
+    const badge = createBadge({
+      badgeLabel,
+      size: 80,
+      color: 'secondary',
+      classNames: 'top-[unset] bottom-full translate-y-2/3 left-[unset] right-8',
+    });
     container.appendChild(badge);
   }
 

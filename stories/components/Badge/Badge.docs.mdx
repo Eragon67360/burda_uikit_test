@@ -1,0 +1,84 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+<Title of={BadgeStories} />
+
+<Description of={BadgeStories} />
+
+<Primary />
+
+<Controls of={BadgeStories.Primary} sort="requiredFirst" />
+
+## Usage
+
+The Badge component is used to display status information or notifications, typically positioned absolutely relative to its parent container.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Basic Badge -->
+<div 
+  class="absolute top-0 left-0 p-2 aspect-square bg-primary-interaction rounded-full flex items-center justify-center"
+  role="status"
+  aria-label="Tipp"
+  style="min-width: 42px; min-height: 42px;"
+>
+  <div class="font-bold text-copy-small">
+    Tipp
+  </div>
+</div>
+
+<!-- Secondary Badge -->
+
+<div
+  class="absolute top-0 left-0 p-2 aspect-square bg-secondary-interaction rounded-full flex items-center justify-center"
+  role="status"
+  aria-label="Status"
+  style="min-width: 42px; min-height: 42px;"
+>
+  <div class="font-bold text-copy-small">Status</div>
+</div>
+`} />
+
+### JavaScript Implementation
+
+<details>
+<summary>Expand code block</summary>
+<Source
+  language="javascript"
+  dark
+  code={`
+// Create and append a badge
+const badge = createBadge('New', 42, 'primary');
+parentElement.appendChild(badge);
+
+// Create a badge with custom classes and aria-label
+const customBadge = createBadge(
+'5',
+32,
+'secondary',
+'translate-x-1/2 translate-y-1/2',
+'Five unread messages'
+);
+`}
+/>
+
+</details>
+
+## Accessibility
+
+The Badge component implements the following accessibility features:
+
+- Uses `role="status"` to indicate its purpose
+- Includes `aria-label` for screen readers
+- Maintains sufficient color contrast for text visibility
+- Provides meaningful text alternatives through `aria-label` when badge text is not descriptive enough
+
+<br />
+
+<Stories includePrimary={false} />

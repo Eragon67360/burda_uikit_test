@@ -1,4 +1,11 @@
-export const createBadge = (badgeLabel: string, size: number, color: 'primary' | 'secondary', classNames?: string, ariaLabel?: string) => {
+import { BadgeProps } from '@/stories/types';
+
+/**
+ * Creates a badge element with the specified configuration
+ * @param {BadgeProps} props - The configuration options
+ * @returns {HTMLElement} The created badge element
+ */
+export const createBadge = ({ badgeLabel, size = 42, color = 'primary', classNames, ariaLabel }: BadgeProps): HTMLElement => {
   const badgeElement = document.createElement('div');
   badgeElement.className = `absolute top-0 left-0 p-2 aspect-square bg-${color}-interaction rounded-full flex items-center justify-center`;
   badgeElement.classList.add(...(classNames?.split(' ') ?? []));
