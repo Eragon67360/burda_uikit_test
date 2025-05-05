@@ -1,0 +1,91 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as FAQStories from './FAQ.stories';
+
+<Meta of={FAQStories} />
+
+<Title of={FAQStories} />
+
+<Description of={FAQStories} />
+
+<Primary />
+
+<Controls of={FAQStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="w-full md:w-[23.5rem] max-w-2xl mx-auto rounded-lg overflow-hidden">
+  <!-- Accordion Item -->
+  <div>
+    <button 
+      class="w-full flex justify-between items-center gap-6 p-8 text-left bg-base-white hover:bg-secondary-light transition"
+      aria-expanded="false"
+      aria-controls="faq-content-1"
+    >
+      <span class="text-label md:text-subhead3">What is your return policy?</span>
+      <svg class="w-[18px] h-[18px]" aria-hidden="true">
+        <use href="#icon-chevron-down" />
+      </svg>
+    </button>
+    
+    <div 
+      id="faq-content-1"
+      class="accordion-content bg-secondary-light"
+      role="region"
+      aria-labelledby="faq-trigger-1"
+    >
+      Our return policy allows returns within 30 days of purchase...
+    </div>
+    
+    <div class="h-[1px] bg-neutral-400" aria-hidden="true"></div>
+  </div>
+  
+  <!-- Additional accordion items... -->
+</div>
+  `}
+/>
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="faq.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faq = createFAQ({
+      items: [
+        {
+          trigger: 'What is your return policy?',
+          content: 'Our return policy allows returns within 30 days...'
+        }
+        // Additional items...
+      ],
+      backgroundColor: 'white'
+    });
+    document.querySelector('#faq-container').appendChild(faq);
+  });
+</script>
+`}
+/>
+
+## Accessibility
+
+The FAQ component implements the following accessibility features:
+
+- Uses semantic HTML structure for accordion pattern
+- Implements proper ARIA attributes for accordion functionality
+- Supports keyboard navigation
+- Provides visual feedback for interactive states
+- Maintains proper focus management
+- Allows only one panel to be expanded at a time for better content organization
+
+<br />
+
+<Stories includePrimary={false} />
