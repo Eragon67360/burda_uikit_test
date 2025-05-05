@@ -1,0 +1,56 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TagStories from './Tag.stories';
+
+<Meta of={TagStories} />
+
+<Title of={TagStories} />
+
+<Description of={TagStories} />
+
+<Primary />
+
+<Controls of={TagStories.SingleTagDesktop} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Single Tag -->
+<div class="w-fit flex items-center py-3 md:py-4 pr-6 md:pr-8 pl-4 md:pl-5 my-auto gap-2 md:gap-4 rounded-[3.25rem] border border-neutral-200 bg-neutral-50">
+  <!-- Optional Icon -->
+  <div>
+    <svg><!-- Success icon --></svg>
+  </div>
+  <span class="text-label whitespace-nowrap">Tag Text</span>
+</div>
+
+<!-- Tag Group -->
+<div class="overflow-hidden w-full max-w-[100dvw] flex items-center justify-center">
+  <!-- Desktop Layout -->
+  <div class="hidden md:flex flex-wrap justify-center gap-4 max-w-[84rem] mx-auto">
+    <!-- Tags go here -->
+  </div>
+  
+  <!-- Mobile Layout with Horizontal Scroller -->
+  <div class="flex md:hidden flex-wrap justify-center gap-4 w-full max-w-[100dvw] overflow-x-hidden">
+    <!-- Horizontal scroller with tags -->
+  </div>
+</div>
+  `}
+/>
+
+## Accessibility
+
+- Tags use semantic HTML elements for proper structure
+- Text content is readable and has sufficient contrast
+- Interactive elements (if added) should be keyboard accessible
+- Group container provides proper overflow handling for mobile scrolling
+- Icons are decorative and properly hidden from screen readers
+
+<br />
+
+<Stories includePrimary={false} />
