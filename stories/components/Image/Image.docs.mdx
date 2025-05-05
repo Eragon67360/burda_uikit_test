@@ -1,0 +1,45 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as ImageStories from './Image.stories';
+
+<Meta of={ImageStories} />
+
+<Title of={ImageStories} />
+
+<Description of={ImageStories} />
+
+<Primary />
+
+<Controls of={ImageStories.Square} sort="requiredFirst" />
+
+## Usage
+
+The Image component provides a consistent way to display images while maintaining specific aspect ratios.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="h-48 aspect-video">
+  <img 
+    src="/path/to/image.jpg"
+    alt="Descriptive text for the image"
+    class="w-full h-full object-cover rounded-lg"
+    loading="lazy"
+  />
+</div>
+  `}
+/>
+
+## Accessibility
+
+- Always provide meaningful alt text for images that convey information
+- Use empty alt="" for decorative images
+- The component includes lazy loading for better performance
+- Images maintain aspect ratio to prevent layout shifts
+- The ratio demonstration box in the stories is hidden from screen readers
+
+<br />
+
+<Stories includePrimary={false} />

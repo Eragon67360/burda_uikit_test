@@ -1,8 +1,4 @@
-export type ImageArgs = {
-  src: string;
-  ratio: '1:1' | '4:3' | '16:9';
-  alt?: string;
-};
+import { ImageArgs } from '@/stories/types';
 
 const ratioClasses = {
   '1:1': 'aspect-square',
@@ -10,10 +6,12 @@ const ratioClasses = {
   '16:9': 'aspect-video',
 };
 
+/**
+ * Creates an image component with specified aspect ratio
+ * @param {ImageArgs} props - The configuration options
+ * @returns {HTMLElement} A div container with the image
+ */
 export const createImage = ({ src, ratio, alt = '' }: ImageArgs) => {
-  const container = document.createElement('div');
-  container.className = 'flex gap-4 w-full';
-
   const imageWrapper = document.createElement('div');
   imageWrapper.className = `h-48 ${ratioClasses[ratio]}`;
 
@@ -21,15 +19,8 @@ export const createImage = ({ src, ratio, alt = '' }: ImageArgs) => {
   img.src = src;
   img.alt = alt;
   img.className = 'w-full h-full object-cover rounded-lg';
+  img.setAttribute('loading', 'lazy');
 
   imageWrapper.appendChild(img);
-
-  const ratioBox = document.createElement('div');
-  ratioBox.className = ` ${ratioClasses[ratio]} h-48 bg-secondary-interaction rounded-lg flex items-center justify-center text-white font-medium`;
-  ratioBox.textContent = ratio;
-
-  container.appendChild(imageWrapper);
-  container.appendChild(ratioBox);
-
-  return container;
+  return imageWrapper;
 };
