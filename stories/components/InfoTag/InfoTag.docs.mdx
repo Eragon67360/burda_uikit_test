@@ -1,0 +1,58 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as InfoTagStories from './InfoTag.stories';
+
+<Meta of={InfoTagStories} />
+
+<Title of={InfoTagStories} />
+
+<Description of={InfoTagStories} />
+
+<Primary />
+
+<Controls of={InfoTagStories.Default} sort="requiredFirst" />
+
+## Usage
+
+The InfoTag component is used to display important information or status messages in a visually distinct way.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="rounded-md bg-secondary-extra-light px-5 py-3 flex items-center justify-center" role="status">
+  <span class="text-subhead3">ab 3,40 € pro Ausgabe</span>
+</div>
+  `}
+/>
+
+### JavaScript Implementation
+
+<Source
+  language="javascript"
+  dark
+  code={`
+import { createInfoTag } from './InfoTag';
+
+const infoTag = createInfoTag({
+label: 'ab 3,40 € pro Ausgabe'
+});
+
+// Add to DOM
+document.body.appendChild(infoTag);
+`}
+/>
+
+## Accessibility
+
+The InfoTag component follows these accessibility guidelines:
+
+1. Uses semantic HTML structure
+2. Includes `role="status"` to indicate informative content
+3. Ensures sufficient color contrast for text visibility
+4. Text content is readable and properly sized
+
+<br />
+
+<Stories includePrimary={false} />
