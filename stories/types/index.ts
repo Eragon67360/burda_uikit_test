@@ -9,3 +9,4 @@ export * from './infoTag.type';
 export * from './image.type';
 export * from './listText.type';
 export * from './listTag.type';
+export * from './selectionList.type';
