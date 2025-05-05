@@ -13,3 +13,4 @@ export * from './languageDropdown.type';
 export * from './listTag.type';
 export * from './listText.type';
 export * from './selectionList.type';
+export * from './tableText.type';
