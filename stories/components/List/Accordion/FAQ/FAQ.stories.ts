@@ -1,7 +1,7 @@
-import { FAQArgs } from '@/stories/types/accordionFAQ.type';
 import { ArgsCategory } from '@/stories/types/story';
 import type { Meta, StoryObj } from '@storybook/html';
 import { createFAQ } from './FAQ';
+import { FAQArgs } from '@/stories/types';
 
 const meta: Meta<FAQArgs> = {
   title: 'Components (Atoms)/List/Accordion/FAQ',

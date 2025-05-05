@@ -1,7 +1,7 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
-import { FAQArgs } from '@/stories/types/accordionFAQ.type';
 import { getSizedIcon } from '@/utils/iconUtils';
 import './fAQ.css';
+import { FAQArgs } from '@/stories/types';
 
 /**
  * Creates an accessible FAQ accordion component
