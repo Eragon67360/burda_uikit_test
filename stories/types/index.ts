@@ -14,3 +14,4 @@ export * from './listTag.type';
 export * from './listText.type';
 export * from './selectionList.type';
 export * from './tableText.type';
+export * from './tableCharacteristic.type';
