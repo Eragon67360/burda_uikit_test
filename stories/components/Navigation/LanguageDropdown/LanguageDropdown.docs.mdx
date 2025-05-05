@@ -1,0 +1,109 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as LanguageDropdownStories from './LanguageDropdown.stories';
+
+<Meta of={LanguageDropdownStories} />
+
+<Title of={LanguageDropdownStories} />
+
+<Description of={LanguageDropdownStories} />
+
+<Primary />
+
+<Controls of={LanguageDropdownStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="relative inline-block w-fit h-full language-dropdown">
+  <button 
+    type="button"
+    class="flex items-center justify-between w-fit bg-transparent h-full px-4 pt-2 pb-1 gap-2 text-sm font-medium"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    aria-controls="language-dropdown-list"
+  >
+    <span class="text-sm font-semibold font-instrument-sans">Sprache</span>
+    <div class="flag-icon">
+      <!-- Flag SVG -->
+    </div>
+    <span class="transition-transform duration-300">
+      <!-- Chevron SVG -->
+    </span>
+  </button>
+
+  <div 
+    id="language-dropdown-list"
+    class="absolute z-50 mt-2 left-1/2 -translate-x-1/2 py-3 pl-2 pr-4 w-fit bg-base-white shadow-lg rounded-lg hidden"
+    role="listbox"
+    aria-label="Select language"
+  >
+    <div class="space-y-4 px-2.5 py-3">
+      <!-- Language options -->
+      <div class="flex items-center justify-start gap-3 cursor-pointer rounded-lg transition group p-2">
+        <div class="relative flex items-center justify-center">
+          <input 
+            type="radio" 
+            name="language-select" 
+            value="en"
+            class="appearance-none size-4 transition..."
+            role="option"
+            aria-selected="true"
+          />
+          <div class="absolute inset-0 items-center transition..."></div>
+        </div>
+        <div class="flag-icon">
+          <!-- Flag SVG -->
+        </div>
+        <span class="border-b-2 border-transparent group-hover:border-secondary-interaction transition">
+          English
+        </span>
+      </div>
+      <!-- Additional language options -->
+    </div>
+  </div>
+</div>
+  `}
+/>
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="language-dropdown.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdown = createLanguageDropdown({
+      options: [
+        { code: 'en', name: 'English', icon: 'england' },
+        { code: 'fr', name: 'Français', icon: 'france' }
+      ],
+      selectedLanguage: 'en',
+      label: 'Language'
+    });
+    document.querySelector('#language-selector').appendChild(dropdown);
+  });
+</script>
+`}
+/>
+
+## Accessibility
+
+The language dropdown implements the following accessibility features:
+
+- Uses proper ARIA attributes (`aria-expanded`, `aria-haspopup`, `aria-controls`)
+- Implements radio group pattern for language selection
+- Supports keyboard navigation
+- Provides visual feedback for interactive states
+- Maintains focus management
+- Uses semantic HTML structure
+
+<br />
+
+<Stories includePrimary={false} />

@@ -9,6 +9,7 @@ export * from './cartAndPay.type';
 export * from './icon.type';
 export * from './image.type';
 export * from './infoTag.type';
+export * from './languageDropdown.type';
 export * from './listTag.type';
 export * from './listText.type';
 export * from './selectionList.type';
