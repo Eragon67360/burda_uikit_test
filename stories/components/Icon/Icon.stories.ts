@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/html';
-import { createIcon, IconArgs } from './Icon';
+import { createIcon } from './Icon';
 import { IconRegistry, IconCategory } from '@/assets/icons';
 import { ArgsCategory } from '@/stories/types/story';
 import { play } from './Icon.test';
+import { IconArgs } from '@/stories/types';
 
 const meta: Meta<IconArgs> = {
   title: 'Components (Atoms)/Icon',
-
+  tags: ['!autodocs'],
   parameters: {
     layout: 'centered',
     controls: { expanded: true },

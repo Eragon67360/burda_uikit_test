@@ -1,19 +1,11 @@
 import { IconRegistry, IconCategory } from '@/assets/icons';
+import { IconArgs } from '@/stories/types';
 
-export type IconArgs = {
-  name: keyof (typeof IconRegistry)[IconCategory.SYSTEM];
-  size?: number;
-  classNames?: string | undefined;
-} & AccessibilityArgs;
-
-type AccessibilityArgs = {
-  role?: string | undefined;
-  ariaLabel?: string | undefined;
-  focusable?: boolean;
-  ariaHidden?: boolean;
-  alternativeText?: string | undefined;
-};
-
+/**
+ * Creates an SVG icon element with the specified configuration
+ * @param {IconArgs} props - The icon configuration options
+ * @returns {string} The HTML string representation of the SVG icon
+ */
 export const createIcon = ({ name, size = 20, classNames, role, ariaLabel, focusable = false, ariaHidden = false }: IconArgs) => {
   const iconSvg = IconRegistry[IconCategory.SYSTEM][name];
 
