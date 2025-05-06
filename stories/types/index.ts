@@ -18,3 +18,4 @@ export * from './tableText.type';
 export * from './tabs.type';
 export * from './tooltip.type';
 export * from './popup.type';
+export * from './pagination.type';
