@@ -151,7 +151,7 @@ export const createHomepage = ({
   subscriptionSection.appendChild(subscriptionPlans);
 
   const tagsSection = document.createElement('section');
-  tagsSection.className = 'bg-neutral-100 px-12 py-32';
+  tagsSection.className = 'bg-neutral-100 px-4 py-32';
 
   const tags = [
     { text: 'Lorem ipsum dolor sitaemt' },
