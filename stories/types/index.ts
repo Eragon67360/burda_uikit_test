@@ -16,3 +16,4 @@ export * from './selectionList.type';
 export * from './tableCharacteristic.type';
 export * from './tableText.type';
 export * from './tabs.type';
+export * from './tooltip.type';
