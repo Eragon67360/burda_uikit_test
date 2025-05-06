@@ -19,3 +19,4 @@ export * from './tabs.type';
 export * from './tooltip.type';
 export * from './popup.type';
 export * from './pagination.type';
+export * from './slideNavButton.type';
