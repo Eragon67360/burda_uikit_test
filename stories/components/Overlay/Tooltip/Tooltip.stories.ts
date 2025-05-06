@@ -1,13 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import { createTooltip, TooltipArgs } from './Tooltip';
-import { IconRegistry, IconCategory } from '@/assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { TooltipArgs } from '@/stories/types';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { createTooltip } from './Tooltip';
 
 const meta: Meta<TooltipArgs> = {
   title: 'Components (Atoms)/Overlay/Tooltip',
-
+  tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
     controls: { expanded: true },
     docs: {
       description: {
@@ -91,13 +92,25 @@ const meta: Meta<TooltipArgs> = {
     },
   },
 
-  render: (args) => createTooltip(args),
+  render: (args) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'm-auto w-full max-h-[500px] h-screen p-4 flex items-center justify-center';
+    wrapper.appendChild(createTooltip(args));
+    return wrapper;
+  },
 };
 
 export default meta;
 type Story = StoryObj<TooltipArgs>;
 
 export const Basic: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A simple tooltip with basic text content. This is the most common use case for providing brief explanations or hints.',
+      },
+    },
+  },
   args: {
     content: 'This is a basic tooltip with text content.',
     position: 'top',
@@ -105,6 +118,13 @@ export const Basic: Story = {
 };
 
 export const WithRichContent: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates how tooltips can contain rich HTML content including headings, formatted text, and interactive elements.',
+      },
+    },
+  },
   args: {
     content: `
       <div class="space-y-2">
@@ -120,6 +140,13 @@ export const WithRichContent: Story = {
 };
 
 export const CustomTrigger: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows how to customize the trigger icon to better match the context where the tooltip is used.',
+      },
+    },
+  },
   args: {
     content: 'Tooltip with custom trigger icon',
     triggerIcon: IconRegistry[IconCategory.SYSTEM].help,
@@ -128,29 +155,26 @@ export const CustomTrigger: Story = {
 };
 
 export const ShortContent: Story = {
-  render: () =>
-    createTooltip({
-      content: 'Short tooltip content',
-    }),
+  args: {
+    content: 'Short tooltip content',
+  },
 };
 
 export const LongContent: Story = {
-  render: () =>
-    createTooltip({
-      content: `
+  args: {
+    content: `
       <div class="space-y-2">
         <p>This is a longer tooltip content that will expand to fit the content but won't exceed 400px in width. 
            It will wrap naturally when it reaches that limit.</p>
         <p>Multiple paragraphs are handled gracefully.</p>
       </div>
     `,
-    }),
+  },
 };
 
 export const WithList: Story = {
-  render: () =>
-    createTooltip({
-      content: `
+  args: {
+    content: `
       <div class="space-y-2">
         <h3 class="font-semibold">Features:</h3>
         <ul class="list-disc pl-4 space-y-1">
@@ -161,12 +185,14 @@ export const WithList: Story = {
         </ul>
       </div>
     `,
-    }),
+  },
 };
 
 const createShowcaseTemplate = () => {
   const wrapper = document.createElement('div');
-  wrapper.className = 'w-[480px] p-4';
+  wrapper.className = 'm-auto w-full max-h-[500px] h-screen p-4 flex flex-col items-center justify-center';
+  const content = document.createElement('div');
+  content.className = 'flex flex-col items-start justify-center';
 
   const label = document.createElement('label');
   label.className = 'block text-sm font-medium text-gray-700 mb-1';
@@ -197,12 +223,22 @@ const createShowcaseTemplate = () => {
 
   inputContainer.appendChild(input);
   inputContainer.appendChild(tooltip);
-  wrapper.appendChild(label);
-  wrapper.appendChild(inputContainer);
+
+  content.appendChild(label);
+  content.appendChild(inputContainer);
+  wrapper.appendChild(content);
 
   return wrapper;
 };
 
 export const InputWithTooltip: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A practical example showing how tooltips can be integrated with form inputs to provide additional information or help text.',
+      },
+    },
+  },
   render: () => createShowcaseTemplate(),
 };

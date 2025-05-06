@@ -1,19 +1,12 @@
+import { TooltipArgs } from '@/stories/types';
 import './tooltip.css';
 import { IconRegistry, IconCategory } from '@/assets/icons';
 
-export type TooltipArgs = {
-  content: string | HTMLElement;
-  triggerIcon?: string;
-  position?: 'top' | 'right' | 'bottom' | 'left';
-  classNames?: string | undefined;
-} & AccessibilityArgs;
-
-type AccessibilityArgs = {
-  ariaLabelTrigger?: string;
-  ariaLabelClose?: string;
-  ariaControlsId?: string;
-};
-
+/**
+ * Creates a tooltip component with the specified configuration
+ * @param {TooltipArgs} props - The tooltip configuration options
+ * @returns {HTMLElement} The tooltip wrapper element containing the trigger and content
+ */
 export const createTooltip = ({
   content,
   triggerIcon = IconRegistry[IconCategory.SYSTEM].info,
@@ -22,7 +15,7 @@ export const createTooltip = ({
   ariaLabelTrigger,
   ariaLabelClose,
   ariaControlsId,
-}: TooltipArgs) => {
+}: TooltipArgs): HTMLElement => {
   const wrapper = document.createElement('div');
   wrapper.className = 'relative inline-block';
 
