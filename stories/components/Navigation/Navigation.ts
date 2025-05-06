@@ -492,8 +492,8 @@ export const createNavigation = ({
   }
 
   const ctaContainer = document.createElement('div');
-  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${
-    has2LinesNavigation ? '' : 'rounded-ee-lg'
+  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg  ${
+    has2LinesNavigation ? '' : 'rounded-ee-lg rounded-br-lg'
   }`;
 
   const loginButton = createButtonCTA({
