@@ -1,4 +1,5 @@
-import { createPopup, PopupArgs, PopupPosition } from './Popup';
+import { PopupArgs, PopupPosition } from '@/stories/types';
+import { createPopup } from './Popup';
 
 type Toast = {
   element: HTMLElement;
