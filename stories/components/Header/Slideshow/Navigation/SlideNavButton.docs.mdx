@@ -1,0 +1,71 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as SlideNavButtonStories from './SlideNavButton.stories';
+
+<Meta of={SlideNavButtonStories} />
+
+<Title of={SlideNavButtonStories} />
+
+<Description of={SlideNavButtonStories} />
+
+<Primary />
+
+<Controls of={SlideNavButtonStories.Next} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Next button -->
+<button
+  type="button"
+  class="group cursor-pointer bg-base-white transition-all duration-300 hover:bg-secondary-light size-11 md:size-12 p-1 rounded-lg"
+  aria-label="next slide"
+>
+  <svg class="w-4 h-4">
+    <use href="#icon-chevronRight" />
+  </svg>
+</button>
+
+<!-- Previous button -->
+
+<button
+  type="button"
+  class="group cursor-pointer bg-base-white transition-all duration-300 hover:bg-secondary-light size-11 md:size-12 p-1 rounded-lg"
+  aria-label="previous slide"
+>
+  <svg class="w-4 h-4">
+    <use href="#icon-chevronLeft" />
+  </svg>
+</button>
+
+<!-- Disabled state -->
+
+<button
+  type="button"
+  class="group cursor-not-allowed bg-base-white size-11 md:size-12 p-1 rounded-lg"
+  aria-label="next slide"
+  disabled
+  aria-disabled="true"
+>
+  <svg class="w-4 h-4 opacity-50">
+    <use href="#icon-chevronRight" />
+  </svg>
+</button>
+`} />
+
+## Accessibility
+
+The navigation buttons implement the following accessibility features:
+
+- Proper `aria-label` describing the button's action ("next slide" or "previous slide")
+- Disabled state properly conveyed using both `disabled` and `aria-disabled` attributes
+- Adequate touch target size (44px minimum) on all devices
+- Icon-only buttons have descriptive labels for screen readers
+
+<br />
+
+<Stories includePrimary={false} />

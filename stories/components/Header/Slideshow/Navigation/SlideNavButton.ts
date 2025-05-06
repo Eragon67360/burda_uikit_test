@@ -1,14 +1,18 @@
 import { createIcon } from '@/components/Icon/Icon';
+import { SlideshowNavButtonArgs } from '@/stories/types';
 
-export type SlideshowNavButtonArgs = {
-  mode: 'previous' | 'next';
-  disabled?: boolean;
-  backgroundColor?: 'white' | 'gray';
-  classNames?: string;
-  onClick?: () => void;
-};
-
-export const createSlideshowNavButton = ({ mode, disabled = false, classNames, backgroundColor, onClick }: SlideshowNavButtonArgs) => {
+/**
+ * Creates a slideshow navigation button element
+ * @param {SlideshowNavButtonArgs} props - The button configuration options
+ * @returns {HTMLButtonElement} The created button element
+ */
+export const createSlideshowNavButton = ({
+  mode,
+  disabled = false,
+  classNames,
+  backgroundColor,
+  onClick,
+}: SlideshowNavButtonArgs): HTMLButtonElement => {
   const icon = mode === 'next' ? 'chevronRight' : 'chevronLeft';
 
   const btnButton = document.createElement('button');
