@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/html';
-import { createSlideProgress } from './SlideProgress';
 import { SlideProgressArgs } from '@/stories/types';
 import { ArgsCategory } from '@/stories/types/story';
+import type { Meta, StoryObj } from '@storybook/html';
+import { createSlideProgress } from './SlideProgress';
 
 const meta: Meta<SlideProgressArgs> = {
   title: 'Components (Atoms)/Slideshow/SlideProgress',
