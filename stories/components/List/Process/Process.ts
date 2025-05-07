@@ -29,7 +29,7 @@ export const createProcess = ({
 }: ProcessArgs) => {
   const processContainer = document.createElement('div');
   processContainer.className = 'process-container max-w-[90rem] flex flex-col gap-8 py-16 px-8 md:px-12 items-center';
-  const computedBackgroundColor = backgroundColor === 'white' ? 'bg-base-white' : 'bg-primary-extra-light';
+  const computedBackgroundColor = backgroundColor === 'white' ? 'bg-base-white' : 'bg-brand-custom-background';
 
   processContainer.classList.add(computedBackgroundColor);
 
