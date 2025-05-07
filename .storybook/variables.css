@@ -65,6 +65,11 @@
   --color-neutral-450: hsla(0, 0%, 58%, 1);
   --color-neutral-500: hsla(0, 0%, 45%, 1);
 
+  /** Custom variable for the process list */
+  --color-brand-custom-background: hsla(49, 75%, 89%, 1);
+
   /** Storybook */
   --color-storybook-label: hsla(0, 0%, 32%, 1);
+
+
 }

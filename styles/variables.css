@@ -30,6 +30,8 @@
   --color-neutral-450: var(--color-neutral-450);
   --color-neutral-500: var(--color-neutral-500);
 
+  --color-brand-custom-background: var(--color-brand-custom-background);
+
   --color-storybook-label: var(--color-storybook-label);
 
   --radius: 0.5rem;
