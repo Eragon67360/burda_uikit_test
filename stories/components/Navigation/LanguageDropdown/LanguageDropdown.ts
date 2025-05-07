@@ -40,7 +40,7 @@ export const createLanguageDropdown = ({
 
   const currentLanguageText = document.createElement('span');
   currentLanguageText.textContent = label;
-  currentLanguageText.className = `text-sm font-semibold font-instrument-sans`;
+  currentLanguageText.className = `text-sm font-semibold font-sans`;
 
   const dropdownIcon = document.createElement('span');
   dropdownIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 14);

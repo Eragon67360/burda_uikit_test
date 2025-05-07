@@ -31,6 +31,8 @@
  * color: var(--color-primary-interaction);
  * background: var(--color-secondary-extraLight);
  */
+
+/* You can import here other Google fonts or use font files */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 
 :root {
@@ -65,9 +67,17 @@
   --color-neutral-450: hsla(0, 0%, 58%, 1);
   --color-neutral-500: hsla(0, 0%, 45%, 1);
 
-  /** Custom variable for the process list */
+  /* Custom variable for the process list */
   --color-brand-custom-background: hsla(49, 75%, 89%, 1);
 
-  /** Storybook */
+  /* Storybook */
   --color-storybook-label: hsla(0, 0%, 32%, 1);
+
+  /* Fonts */
+  --font-sans: 'Instrument Sans', sans-serif;
+  --font-serif: 'Roboto Serif', serif;
+
+  /* Radius */
+  --radius: 0.5rem;
+  --radius-nested: 0.25rem;
 }

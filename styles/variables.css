@@ -34,11 +34,11 @@
 
   --color-storybook-label: var(--color-storybook-label);
 
-  --radius: 0.5rem;
-  --radius-nested: 0.25rem;
+  --radius: var(--radius);
+  --radius-nested: var(--radius-nested);
 
-  --font-instrument-sans: 'Instrument Sans', sans-serif;
-  --font-roboto-serif: 'Roboto Serif', serif;
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 
   --text-h1-desktop: 3.25rem;
   --text-h1-desktop--line-height: 4.125rem;

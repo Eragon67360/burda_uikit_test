@@ -2,7 +2,7 @@
 import type { Preview } from '@storybook/html';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import './tailwind.css';
-import './variables.css';
+import './brand.css';
 
 const extendedVP = {
   desktop: {
