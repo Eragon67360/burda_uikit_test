@@ -1,20 +1,12 @@
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { LanguageDropdownArgs, LanguageOption } from '@/stories/types';
 import { getSizedIcon } from '@/stories/utils/iconUtils';
 
-export type LanguageOption = {
-  code: string;
-  name: string;
-  icon: string; // Icon identifier from IconRegistry
-};
-
-export type LanguageDropdownArgs = {
-  options: LanguageOption[];
-  selectedLanguage?: string;
-  label?: string;
-  disabled?: boolean;
-  isCompressed: boolean;
-};
-
+/**
+ * Creates an accessible language selection dropdown with flag icons
+ * @param {LanguageDropdownArgs} props - The configuration options
+ * @returns {HTMLElement} The language dropdown wrapper element
+ */
 export const createLanguageDropdown = ({
   options,
   selectedLanguage,
@@ -32,6 +24,7 @@ export const createLanguageDropdown = ({
         flex items-center justify-between w-fit bg-transparent h-full
         px-4 pt-2 pb-1 gap-2 text-sm font-medium text-gray-700
         hover:bg-secondary-light
+        disabled:hover:bg-transparent
         hover:border-transparent
         active:bg-secondary-interaction
         border-b-[5px] border-transparent 
@@ -47,7 +40,7 @@ export const createLanguageDropdown = ({
 
   const currentLanguageText = document.createElement('span');
   currentLanguageText.textContent = label;
-  currentLanguageText.className = `text-sm font-semibold font-instrument-sans`;
+  currentLanguageText.className = `text-sm font-semibold font-sans`;
 
   const dropdownIcon = document.createElement('span');
   dropdownIcon.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].chevronDown, 14);

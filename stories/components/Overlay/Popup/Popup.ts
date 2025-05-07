@@ -1,27 +1,6 @@
-import { IconRegistry, IconCategory } from '@/assets/icons';
+import { IconCategory, IconRegistry } from '@/assets/icons';
+import { PopupArgs, PopupPosition, PopupTriggerArgs } from '@/stories/types';
 import { ToastManager } from './ToastManager';
-
-export type PopupVariant = 'error' | 'success' | 'info';
-export type PopupPosition = 'top-right' | 'top' | 'top-left' | 'bottom-right' | 'bottom' | 'bottom-left';
-
-export type PopupAction = {
-  label: string;
-  icon: string;
-  href: string;
-};
-
-export type PopupArgs = {
-  variant: PopupVariant;
-  position: PopupPosition;
-  title: string;
-  description: string;
-  action?: PopupAction;
-  onClose?: () => void;
-};
-export type PopupTriggerArgs = PopupArgs & {
-  triggerLabel?: string;
-  triggerVariant?: 'primary' | 'secondary';
-};
 
 const variantStyles = {
   error: 'border-system-error bg-red-50',
@@ -38,6 +17,11 @@ const positionStyles = {
   'bottom-left': 'bottom-4 left-4 transform-origin-bottom',
 };
 
+/**
+ * Creates a popup element with the specified configuration
+ * @param {PopupArgs} args - Configuration options for the popup
+ * @returns {HTMLElement} A wrapper div containing the popup element
+ */
 export const createPopup = ({ variant, position, title, description, action, onClose }: PopupArgs) => {
   const wrapper = document.createElement('div');
   const popup = document.createElement('div');
@@ -101,6 +85,11 @@ export const createPopup = ({ variant, position, title, description, action, onC
   return wrapper;
 };
 
+/**
+ * Creates a button that triggers a popup when clicked
+ * @param {PopupTriggerArgs} args - Configuration options for both the trigger button and popup
+ * @returns {HTMLElement} A wrapper div containing the trigger button
+ */
 export const createPopupWithTrigger = ({ triggerLabel = 'Show Toast', triggerVariant = 'primary', ...popupArgs }: PopupTriggerArgs) => {
   const wrapper = document.createElement('div');
 
@@ -124,6 +113,10 @@ export const createPopupWithTrigger = ({ triggerLabel = 'Show Toast', triggerVar
   return wrapper;
 };
 
+/**
+ * Shows a popup using the ToastManager singleton
+ * @param {PopupArgs} args - Configuration options for the popup
+ */
 export const showToast = (args: PopupArgs) => {
   ToastManager.getInstance().show(args);
 };

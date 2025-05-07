@@ -1,14 +1,13 @@
 import { IconCategory, IconRegistry } from '@/assets/icons';
+import { PaginationArgs } from '@/stories/types';
 import { getSizedIcon } from '@/utils/iconUtils';
 
-export type PaginationArgs = {
-  variant?: 'white' | 'grey';
-  currentPage: number;
-  totalPages: number;
-  onPageChange?: (page: number) => void;
-};
-
-export const createPagination = ({ variant = 'white', currentPage, totalPages, onPageChange }: PaginationArgs) => {
+/**
+ * Creates a pagination component with navigation controls
+ * @param {PaginationArgs} props - The pagination configuration options
+ * @returns {HTMLElement} The pagination container element
+ */
+export const createPagination = ({ variant = 'white', currentPage, totalPages, onPageChange }: PaginationArgs): HTMLElement => {
   const baseClasses = 'flex items-center gap-2';
   const variantClasses = variant === 'grey' ? 'bg-neutral-100' : 'bg-white';
 
@@ -43,7 +42,11 @@ export const createPagination = ({ variant = 'white', currentPage, totalPages, o
         <button
         class="relative w-12 h-12 flex items-center justify-center
                overflow-hidden group
-               ${isDisabled ? 'bg-neutral-50 hover:bg-neutral-50 text-neutral-400 cursor-not-allowed' : 'cursor-pointer hover:bg-secondary-light/100'}
+               ${
+                 isDisabled
+                   ? 'bg-neutral-50 hover:bg-neutral-50 text-neutral-400 cursor-not-allowed'
+                   : 'cursor-pointer hover:bg-secondary-light/100'
+               }
                transition-colors duration-300 ease-in-out rounded-md
               
                focus:ring-base-black"

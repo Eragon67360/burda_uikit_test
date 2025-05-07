@@ -1,13 +1,13 @@
-import { IconRegistry, IconCategory } from '@/stories/assets/icons';
-import { createButtonCTA } from '../Button/CTA/ButtonCTA';
-import './subscriptionPlanDetailPage.css';
+import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { ButtonCTAVariant, ButtonIconVariant, TabItem } from '@/stories/types';
 import { createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
-import { createTabs, TabItem } from '../Tabs/Tabs';
+import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import {
   SubscriptionPlanDetailPageItemArgs,
   createSubscriptionPlanDetailPageItem,
 } from '../SubscriptionPlanDetailPageItem/SubscriptionPlanDetailPageItem';
-import { ButtonCTAVariant, ButtonIconVariant } from '@/stories/types';
+import { createTabs } from '../Tabs/Tabs';
+import './subscriptionPlanDetailPage.css';
 
 export type SubscriptionPlanDetailPageArgs = {
   image?: string;

@@ -1,26 +1,26 @@
 @layer utilities {
   .text-h1 {
-    @apply text-h1-mobile md:text-h1-desktop font-roboto-serif;
+    @apply text-h1-mobile md:text-h1-desktop font-serif;
   }
 
   .text-h2 {
-    @apply text-h2-mobile md:text-h2-desktop font-roboto-serif;
+    @apply text-h2-mobile md:text-h2-desktop font-serif;
   }
 
   .text-h3 {
-    @apply text-h3-mobile md:text-h3-desktop font-roboto-serif;
+    @apply text-h3-mobile md:text-h3-desktop font-serif;
   }
 
   .text-h4 {
-    @apply text-h4-mobile md:text-h4-desktop font-roboto-serif;
+    @apply text-h4-mobile md:text-h4-desktop font-serif;
   }
 
   .text-h5 {
-    @apply text-h5-mobile md:text-h5-desktop font-roboto-serif;
+    @apply text-h5-mobile md:text-h5-desktop font-serif;
   }
 
   .text-h6 {
-    @apply text-h6-mobile md:text-h6-desktop font-roboto-serif;
+    @apply text-h6-mobile md:text-h6-desktop font-serif;
   }
 
   .text-subhead1 {
@@ -40,23 +40,23 @@
   }
 
   .text-subscription-default {
-    @apply text-subscription-default-mobile md:text-subscription-default-desktop font-roboto-serif;
+    @apply text-subscription-default-mobile md:text-subscription-default-desktop font-serif;
   }
 
   .text-subscription-small {
-    @apply text-subscription-small-mobile md:text-subscription-small-desktop font-roboto-serif;
+    @apply text-subscription-small-mobile md:text-subscription-small-desktop font-serif;
   }
 
   .text-order-step {
-    @apply text-order-step-mobile md:text-order-step-desktop font-roboto-serif;
+    @apply text-order-step-mobile md:text-order-step-desktop font-serif;
   }
 
   .text-hotline-footer-default {
-    @apply text-hotline-footer-default-mobile md:text-hotline-footer-default-desktop font-roboto-serif;
+    @apply text-hotline-footer-default-mobile md:text-hotline-footer-default-desktop font-serif;
   }
 
   .text-hotline-footer-small {
-    @apply text-hotline-footer-small-mobile md:text-hotline-footer-small-desktop font-roboto-serif;
+    @apply text-hotline-footer-small-mobile md:text-hotline-footer-small-desktop font-serif;
   }
 
   .text-teaser {

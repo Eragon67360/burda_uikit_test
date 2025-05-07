@@ -1,6 +1,6 @@
+import { IconArgs } from '@/stories/types';
 import { expect } from '@storybook/test';
 import { PlayFunction, Renderer } from 'storybook/internal/types';
-import { IconArgs } from './Icon';
 
 export const play: PlayFunction<Renderer, IconArgs> = async ({ canvasElement, args }) => {
   const icon = canvasElement.firstChild as HTMLElement;

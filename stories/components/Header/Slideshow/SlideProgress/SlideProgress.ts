@@ -1,31 +1,12 @@
 // SlideProgress.ts
 import { IconCategory, IconRegistry } from '@/assets/icons';
+import { ProgressState, SlideProgressArgs, SlideProgressReturn } from '@/stories/types';
 
-export type SlideProgressArgs = {
-  totalSteps: number;
-  duration: number;
-  isPlaying?: boolean;
-  currentStep?: number;
-  onPlayPauseClick?: () => void;
-  onStepComplete?: () => void;
-  onStepClick?: (index: number) => void;
-  initialProgressWidth?: number;
-  initialRemainingTime?: number;
-};
-
-interface ProgressState {
-  currentStep: number;
-  isPlaying: boolean;
-  progressWidth: number;
-  startTime: number | null;
-  remainingTime: number;
-}
-interface SlideProgressReturn {
-  element: HTMLElement;
-  cleanup: () => void;
-  getProgressWidth: () => number;
-}
-
+/**
+ * Creates a slide progress component with interactive controls and automatic progression
+ * @param {SlideProgressArgs} props - Configuration options for the progress component
+ * @returns {SlideProgressReturn} Object containing the created element and control functions
+ */
 export const createSlideProgress = ({
   totalSteps,
   duration,

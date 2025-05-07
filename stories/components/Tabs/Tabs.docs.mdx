@@ -1,0 +1,92 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TabsStories from './Tabs.stories';
+
+<Meta of={TabsStories} />
+
+<Title of={TabsStories} />
+
+<Description of={TabsStories} />
+
+<Primary />
+
+<Controls of={TabsStories.SimpleSelection} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<div class="p-2 rounded-lg bg-base-white">
+  <div role="tablist" aria-label="Tabs" class="flex gap-2">
+    <button
+      role="tab"
+      id="tab-1"
+      aria-selected="true"
+      aria-controls="panel-1"
+      class="grow px-4 py-2 rounded text-button-label bg-secondary-interaction"
+    >
+      Tab 1
+    </button>
+    <button
+      role="tab"
+      id="tab-2"
+      aria-selected="false"
+      aria-controls="panel-2"
+      class="grow px-4 py-2 rounded text-button-label hover:bg-secondary-light"
+    >
+      Tab 2
+    </button>
+  </div>
+
+  <!-- Optional content panels -->
+
+  <div class="mt-4">
+    <div
+      role="tabpanel"
+      id="panel-1"
+      aria-labelledby="tab-1"
+      tabindex="0"
+      class="transition-opacity duration-200"
+    >
+      Content for Tab 1
+    </div>
+    <div
+      role="tabpanel"
+      id="panel-2"
+      aria-labelledby="tab-2"
+      tabindex="0"
+      class="hidden transition-opacity duration-200"
+    >
+      Content for Tab 2
+    </div>
+  </div>
+</div>
+  `}
+/>
+
+## Accessibility
+
+The Tabs component follows the WAI-ARIA Tabs Pattern and implements the following accessibility features:
+
+- Keyboard navigation:
+  - Left/Right arrows to move between tabs
+  - Up/Down arrows as alternatives
+  - Automatic focus management
+- Focus indicators for keyboard navigation
+
+### Keyboard Support
+
+`Tab` : Moves focus to the selected tab and its associated panel
+
+`Left/Right Arrow` : Moves focus to the previous/next tab
+
+`Up/Down Arrow` : Same as Left/Right Arrow
+
+`Space/Enter` : Activates the focused tab
+
+<br />
+
+<Stories includePrimary={false} />

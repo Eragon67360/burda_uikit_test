@@ -1,20 +1,10 @@
-export type TabItem = {
-  id: string;
-  label: string;
-  content?: string;
-};
+import { TabsArgs } from '@/stories/types';
 
-export type TabsArgs = {
-  items: TabItem[];
-  variant?: 'outline' | 'plain';
-  color?: 'primary' | 'secondary';
-  hasContent?: boolean;
-  selectedId?: string;
-  background?: 'white' | 'gray';
-  disabled?: boolean;
-  onTabSelected?: (id: string) => void;
-};
-
+/**
+ * Creates a tabbed interface component
+ * @param {TabsArgs} props - The configuration options for the tabs
+ * @returns {HTMLElement} A div element containing the tabs interface
+ */
 export const createTabs = ({
   items,
   variant = 'plain',
@@ -24,7 +14,7 @@ export const createTabs = ({
   background = 'white',
   disabled = false,
   onTabSelected = () => {},
-}: TabsArgs) => {
+}: TabsArgs): HTMLElement => {
   const colorClasses = {
     default: color === 'primary' ? 'bg-primary-interaction' : 'bg-secondary-interaction',
     hover: color === 'primary' ? 'hover:bg-primary-light' : 'hover:bg-secondary-light',

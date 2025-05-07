@@ -1,14 +1,14 @@
 import { createSearch, SearchArgs } from '@/components/Form/Search/Search';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
+import { ButtonCTAVariant, ButtonIconVariant, LanguageDropdownArgs } from '@/stories/types';
 import { getSizedIcon } from '@/stories/utils/iconUtils';
 import { createButtonIcon } from '../Button/ButtonIcon/ButtonIcon';
+import { createButtonLink } from '../Button/ButtonLink/ButtonLink';
 import { createCartAndPay } from '../Button/CartAndPay/CartAndPay';
 import { createButtonCTA } from '../Button/CTA/ButtonCTA';
 import { createFlyout, LinkItem } from './Flyout/Flyout';
-import { createLanguageDropdown, LanguageDropdownArgs } from './LanguageDropdown/LanguageDropdown';
+import { createLanguageDropdown } from './LanguageDropdown/LanguageDropdown';
 import './navigation.css';
-import { createButtonLink } from '../Button/ButtonLink/ButtonLink';
-import { ButtonCTAVariant, ButtonIconVariant } from '@/stories/types';
 
 export type NavigationItemType = 'flyout' | 'link';
 
@@ -492,8 +492,8 @@ export const createNavigation = ({
   }
 
   const ctaContainer = document.createElement('div');
-  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg ${
-    has2LinesNavigation ? '' : 'rounded-ee-lg'
+  ctaContainer.className = `flex items-center h-full overflow-hidden w-fit min-w-fit rounded-se-lg  ${
+    has2LinesNavigation ? '' : 'rounded-ee-lg rounded-br-lg'
   }`;
 
   const loginButton = createButtonCTA({
@@ -582,7 +582,7 @@ export const createNavigation = ({
         duration-300 
         ease-in-out 
         h-full 
-        max-h-[calc(100dvh-142px)] 
+        max-h-[calc(100dvh-164px)] 
         overflow-y-auto
     `;
     const searchResultsContainer = document.createElement('div');
@@ -604,7 +604,7 @@ export const createNavigation = ({
 
     mobileSearchResultsPanel.appendChild(searchResultsContainer);
 
-    searchWrapper.className = 'bg-neutral-200 rounded flex gap-3 transition-all duration-300';
+    searchWrapper.className = 'bg-neutral-200 rounded flex gap-3 transition-all duration-300 w-full mr-4';
     const iconSpan = document.createElement('span');
     iconSpan.innerHTML = getSizedIcon(IconRegistry[IconCategory.SYSTEM].search, 18);
     iconSpan.className = 'm-4 order-1';
@@ -639,6 +639,7 @@ export const createNavigation = ({
       mobileSearchResultsPanel.classList.remove('translate-y-0');
       mobileSearchResultsPanel.classList.add('translate-y-full');
       searchWrapper.classList.add('border-b-0');
+      searchWrapper.classList.add('bg-neutral-200');
       searchWrapper.classList.remove('bg-base-white');
       searchWrapper.classList.remove('border-b-[5px]', 'border-secondary-dark');
       iconSpan.classList.add('order-1');

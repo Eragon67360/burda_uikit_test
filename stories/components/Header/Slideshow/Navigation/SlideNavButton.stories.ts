@@ -1,11 +1,19 @@
+import { SlideshowNavButtonArgs } from '@/stories/types';
+import { ArgsCategory } from '@/stories/types/story';
 import type { Meta, StoryObj } from '@storybook/html';
-import { SlideshowNavButtonArgs, createSlideshowNavButton } from './SlideNavButton';
+import { createSlideshowNavButton } from './SlideNavButton';
 
 const meta: Meta<SlideshowNavButtonArgs> = {
   title: 'Components (Atoms)/Slideshow/Navigation',
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component:
+          'A responsive navigation button component for slideshows. Features directional indicators, disabled states, and color variants. Automatically adapts its size based on viewport width.',
+      },
+    },
     viewport: {
       defaultViewport: 'responsive',
       viewports: {
@@ -26,24 +34,45 @@ const meta: Meta<SlideshowNavButtonArgs> = {
       },
     },
   },
+  args: {
+    mode: 'next',
+    disabled: false,
+  },
   argTypes: {
     mode: {
       control: 'radio',
       options: ['previous', 'next'],
-      description: 'Direction of the navigation button',
+      description: 'Sets the direction of the navigation button',
+      type: { name: 'string', required: true },
+      table: {
+        category: ArgsCategory.PROPS,
+        type: { summary: 'enum' },
+        defaultValue: { summary: 'next' },
+      },
     },
     disabled: {
       control: 'boolean',
-      description: 'Disabled state of the button',
+      description: 'Controls the disabled state of the button',
+      type: { name: 'boolean', required: false },
+      table: {
+        category: ArgsCategory.ACCESSIBILITY,
+      },
     },
     backgroundColor: {
       control: 'radio',
       options: ['white', 'gray'],
-      description: 'Background color of the button',
+      description: 'Sets the background color variant',
+      table: {
+        category: ArgsCategory.PROPS,
+        defaultValue: { summary: 'white' },
+      },
     },
     onClick: {
       action: 'clicked',
-      description: 'Click handler',
+      description: 'Click event handler function',
+      table: {
+        category: ArgsCategory.EVENTS,
+      },
     },
   },
   render: (args) => createSlideshowNavButton(args),
@@ -60,13 +89,20 @@ export const Next: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Navigation button that adapts to screen size: 2.75rem on mobile, 3rem on desktop.',
+        story: 'Standard next button variant with right-pointing chevron icon. Adapts size from 2.75rem (mobile) to 3rem (desktop).',
       },
     },
   },
 };
 
 export const Previous: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Standard previous button variant with left-pointing chevron icon.',
+      },
+    },
+  },
   args: {
     mode: 'previous',
     disabled: false,
@@ -74,6 +110,14 @@ export const Previous: Story = {
 };
 
 export const DisabledNext: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Disabled state of the next button. Features reduced opacity, disabled cursor, and proper ARIA attributes for accessibility.',
+      },
+    },
+  },
   args: {
     mode: 'next',
     disabled: true,
@@ -81,6 +125,14 @@ export const DisabledNext: Story = {
 };
 
 export const DisabledPrevious: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Disabled state of the previous button. Shows visual feedback of inactive state while maintaining proper accessibility attributes.',
+      },
+    },
+  },
   args: {
     mode: 'previous',
     disabled: true,
@@ -94,6 +146,12 @@ export const GrayBackgroundNext: Story = {
     backgroundColor: 'gray',
   },
   parameters: {
+    docs: {
+      description: {
+        story:
+          'Next button variant with gray background, useful for placement on light or white backgrounds where the default white background might not provide enough contrast.',
+      },
+    },
     backgrounds: {
       default: 'White',
     },
@@ -107,19 +165,29 @@ export const GrayBackgroundDisabledPrevious: Story = {
     backgroundColor: 'gray',
   },
   parameters: {
+    docs: {
+      description: {
+        story: 'Disabled previous button with gray background. Combines the disabled state styling with the alternative background color.',
+      },
+    },
     backgrounds: {
       default: 'White',
     },
   },
 };
 
-// Add responsive testing stories
 export const ResponsiveMobile: Story = {
   args: {
     mode: 'next',
     disabled: false,
   },
   parameters: {
+    docs: {
+      description: {
+        story:
+          'Mobile viewport demonstration (375px width). Button size adjusts to 2.75rem (44px) to maintain touch target accessibility standards.',
+      },
+    },
     viewport: {
       defaultViewport: 'mobile',
     },
@@ -132,6 +200,12 @@ export const ResponsiveDesktop: Story = {
     disabled: false,
   },
   parameters: {
+    docs: {
+      description: {
+        story:
+          'Desktop viewport demonstration (1440px width). Button size increases to 3rem (48px) for better visual balance on larger screens.',
+      },
+    },
     viewport: {
       defaultViewport: 'desktop',
     },

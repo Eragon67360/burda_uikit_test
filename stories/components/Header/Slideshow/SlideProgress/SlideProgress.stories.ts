@@ -1,44 +1,80 @@
+import { SlideProgressArgs } from '@/stories/types';
+import { ArgsCategory } from '@/stories/types/story';
 import type { Meta, StoryObj } from '@storybook/html';
-import { createSlideProgress, SlideProgressArgs } from './SlideProgress';
+import { createSlideProgress } from './SlideProgress';
 
 const meta: Meta<SlideProgressArgs> = {
   title: 'Components (Atoms)/Slideshow/SlideProgress',
   tags: ['autodocs'],
   parameters: {
+    docs: {
+      description: {
+        component:
+          'A responsive progress indicator for slideshows featuring multiple steps, play/pause control, and interactive navigation. Supports automatic progression with customizable durations and manual navigation through step clicks.',
+      },
+    },
     layout: 'centered',
+  },
+  args: {
+    isPlaying: true,
+    currentStep: 0,
   },
   argTypes: {
     totalSteps: {
       control: { type: 'number', min: 1, max: 10 },
       description: 'Number of progress sections to display',
+      type: { name: 'number', required: true },
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '3' },
+        category: ArgsCategory.PROPS,
       },
     },
     duration: {
       control: { type: 'number', min: 1, max: 10 },
       description: 'Duration in seconds for each section to complete',
+      type: { name: 'number', required: true },
       table: {
+        category: ArgsCategory.PROPS,
         type: { summary: 'number' },
-        defaultValue: { summary: '3' },
       },
     },
     isPlaying: {
       control: 'boolean',
-      description: 'Initial play state of the progress',
+      description: 'Controls the play/pause state of the progress',
       table: {
+        category: ArgsCategory.PROPS,
         type: { summary: 'boolean' },
         defaultValue: { summary: 'true' },
       },
     },
+    currentStep: {
+      control: 'number',
+      description: 'Current active step index',
+      table: {
+        category: ArgsCategory.PROPS,
+        type: { summary: 'number' },
+        defaultValue: { summary: '0' },
+      },
+    },
     onPlayPauseClick: {
       action: 'playPauseClicked',
-      description: 'Callback function when play/pause button is clicked',
+      description: 'Callback triggered when play/pause button is clicked',
+      table: {
+        category: ArgsCategory.EVENTS,
+      },
     },
     onStepComplete: {
       action: 'stepCompleted',
-      description: 'Callback function when a step is completed',
+      description: 'Callback triggered when a step completes its progress',
+      table: {
+        category: ArgsCategory.EVENTS,
+      },
+    },
+    onStepClick: {
+      action: 'stepClicked',
+      description: 'Callback triggered when a step is clicked',
+      table: {
+        category: ArgsCategory.EVENTS,
+      },
     },
   },
   render: (args) => {
@@ -51,6 +87,13 @@ export default meta;
 type Story = StoryObj<SlideProgressArgs>;
 
 export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default configuration with three steps and three-second duration per step. Automatically starts playing on mount.',
+      },
+    },
+  },
   args: {
     totalSteps: 3,
     duration: 3,
@@ -59,17 +102,18 @@ export const Default: Story = {
 };
 
 export const PausedState: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Progress indicator in paused state. Progress bars remain static until play is resumed. Useful for manual control or initial loading states.',
+      },
+    },
+  },
   args: {
     totalSteps: 3,
     duration: 3,
     isPlaying: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Shows the progress in a paused state. Useful for when you want to start the slideshow manually.',
-      },
-    },
   },
 };
 
@@ -82,7 +126,8 @@ export const LongPresentation: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Configuration for longer presentations with more steps and longer duration per slide.',
+        story:
+          'Extended configuration with seven steps and longer five-second durations. Suitable for presentations with more detailed content requiring longer viewing times.',
       },
     },
   },
@@ -97,7 +142,8 @@ export const QuickTransitions: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Rapid transitions between slides, suitable for quick previews or dynamic content.',
+        story:
+          'Fast-paced configuration with one-second transitions. Ideal for quick previews or highlight reels where rapid content rotation is desired.',
       },
     },
   },
@@ -112,7 +158,8 @@ export const MinimalConfiguration: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Minimal configuration with a single step, demonstrating the component's behavior with minimal content.",
+        story:
+          "Minimal setup with a single progress step. Demonstrates the component's behavior with minimal content and can be used for simple loading indicators.",
       },
     },
   },
@@ -127,7 +174,8 @@ export const InteractiveDemo: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive demonstration with automatic play/pause toggling.',
+        story:
+          'Interactive demonstration showcasing automatic play/pause toggling and step navigation. The play state automatically toggles after 2 seconds to demonstrate the transition.',
       },
     },
   },

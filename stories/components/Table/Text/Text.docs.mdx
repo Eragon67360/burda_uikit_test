@@ -1,0 +1,81 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TextStories from './Text.stories';
+
+<Meta of={TextStories} />
+
+<Title of={TextStories} />
+
+<Description of={TextStories} />
+
+<Primary />
+
+<Controls of={TextStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<table class="w-full border-collapse" role="table" aria-label="Data table">
+  <tbody role="rowgroup">
+    <tr class="border-b border-neutral-200" role="row">
+      <td class="p-4 text-copy font-bold bg-base-white">Row 1, Column 1</td>
+      <td class="p-4 bg-neutral-100">Row 1, Column 2</td>
+    </tr>
+    <tr class="border-b border-neutral-200" role="row">
+      <td class="p-4 text-copy font-bold bg-base-white">Row 2, Column 1</td>
+      <td class="p-4 bg-neutral-100">Row 2, Column 2</td>
+    </tr>
+  </tbody>
+</table>
+  `}
+/>
+
+### JavaScript Implementation
+
+<details>
+<summary>Expand code block</summary>
+<Source
+  language="javascript"
+  dark
+  code={`
+const createText = ({ rows }) => {
+  const table = document.createElement('table');
+  table.className = 'w-full border-collapse';
+  table.setAttribute('role', 'table');
+  table.setAttribute('aria-label', 'Data table');
+
+const tbody = document.createElement('tbody');
+tbody.setAttribute('role', 'rowgroup');
+
+rows.forEach((row, rowIndex) => {
+const isLastRow = rowIndex === rows.length - 1;
+const tr = createTableRow(row, isLastRow);
+tr.setAttribute('role', 'row');
+tbody.appendChild(tr);
+});
+
+table.appendChild(tbody);
+return table;
+};
+`}
+/>
+
+</details>
+
+## Accessibility
+
+The table component implements proper semantic table structure and ARIA attributes:
+
+- Uses semantic `<table>`, `<tbody>`, and `<tr>` elements
+- Includes appropriate ARIA roles: `table`, `rowgroup`, and `row`
+- Provides an `aria-label` for screen readers
+- First column is visually distinguished with bold text and different background
+- Maintains proper color contrast for all text content
+
+<br />
+
+<Stories includePrimary={false} />

@@ -1,0 +1,81 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as SelectionListStories from './SelectionList.stories';
+
+<Meta of={SelectionListStories} />
+
+<Title of={SelectionListStories} />
+
+<Description of={SelectionListStories} />
+
+<Primary />
+
+<Controls of={SelectionListStories.White} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Selection List with white background -->
+<div class="flex flex-col divide-y divide-neutral-300 bg-white rounded">
+  <label class="flex items-center gap-3 cursor-pointer px-4 py-4">
+    <input 
+      type="radio"
+      name="radio-group"
+      value="Option 1"
+      class="size-4 border rounded-full border-neutral-450 bg-neutral-100
+        checked:border-base-black checked:bg-base-white checked:before:bg-secondary-interaction
+        appearance-none relative
+        before:content-[''] before:block before:w-2.5 before:h-2.5 before:rounded-full 
+        before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2
+        transition-all duration-200 ease-in-out
+        before:transition-all before:duration-200 before:ease-in-out
+        before:scale-0 checked:before:scale-100
+        hover:border-base-black"
+    />
+    <span class="text-label">Option 1</span>
+  </label>
+  <!-- Additional radio options follow the same pattern -->
+</div>
+  `}
+/>
+
+### JavaScript Implementation
+
+<Source
+  language="javascript"
+  dark
+  code={`
+const selectionList = createSelectionList({
+  items: ['Option 1', 'Option 2', 'Option 3'],
+  name: 'radio-group',
+  selectedValue: 'Option 1',
+  backgroundColor: 'white',
+  onChange: (value) => console.log('Selected:', value)
+});
+
+// Add to your document
+document.body.appendChild(selectionList);
+`}
+/>
+
+## Accessibility
+
+The SelectionList component follows these accessibility best practices:
+
+- Uses semantic HTML with proper `<input type="radio">` elements
+- Groups related radio buttons using the same `name` attribute
+- Supports standard form submission
+
+### Keyboard Navigation
+
+- Use <kbd>Tab</kbd> to focus the radio group
+- Use <kbd>↑</kbd> / <kbd>↓</kbd> or <kbd>←</kbd> / <kbd>→</kbd> to navigate between options
+- Use <kbd>Space</kbd> to select the focused option
+
+<br />
+
+<Stories includePrimary={false} />
