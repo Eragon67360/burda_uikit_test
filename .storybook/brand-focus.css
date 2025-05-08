@@ -36,27 +36,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 
 :root {
-  /* Colors */
-
+  /* Brand Color */
   --color-brand: hsla(358, 80%, 51%, 1);
+  --color-brand-foreground: hsla(0, 0%, 0%, 1);
 
+  /* Primary Colors */
   --color-primary-interaction: hsla(358, 80%, 51%, 1);
+  --color-primary-interaction-foreground: hsla(0, 0%, 0%, 1);
+
   --color-primary-light: hsla(358, 80%, 61%, 1);
-  --color-primary-extraLight: hsla(358, 80%, 71%, 1);
+  --color-primary-light-foreground: hsla(0, 0%, 0%, 1);
+
+  --color-primary-extra-light: hsla(358, 80%, 71%, 1);
+  --color-primary-extra-light-foreground: hsla(0, 0%, 0%, 1);
+
   --color-primary-dark: hsla(358, 80%, 31%, 1);
+  --color-primary-dark-foreground: hsla(0, 0%, 0%, 1);
 
+
+  /* Secondary Colors */
   --color-secondary-interaction: hsla(169, 38%, 67%, 1);
-  --color-secondary-light: hsla(169, 38%, 77%, 1);
-  --color-secondary-extraLight: hsla(168, 39%, 87%, 1);
-  --color-secondary-dark: hsla(169, 38%, 47%, 1);
+  --color-secondary-interaction-foreground: hsla(0, 0%, 0%, 1);
 
+  --color-secondary-light: hsla(169, 38%, 77%, 1);
+  --color-secondary-light-foreground: hsla(0, 0%, 0%, 1);
+
+  --color-secondary-extraLight: hsla(168, 39%, 87%, 1);
+  --color-secondary-extraLight-foreground: hsla(0, 0%, 0%, 1);
+
+  --color-secondary-dark: hsla(169, 38%, 47%, 1);
+  --color-secondary-dark-foreground: hsla(0, 0%, 0%, 1);
+
+  /* Tertiary Color */
   --color-tertiary: hsla(44, 36%, 78%, 1);
+  --color-tertiary-foreground: hsla(0, 0%, 0%, 1);
 
   --color-system-success: hsla(118, 53%, 57%, 1);
   --color-system-notification: hsla(46, 79%, 67%, 1);
   --color-system-error: hsla(0, 100%, 44%, 1);
 
-  --color-base-black: hsla(0, 0%, 0%, 1);
   --color-base-notification: hsla(0, 0%, 100%, 1);
 
   --color-neutral-50: hsla(0, 0%, 98%, 1);
