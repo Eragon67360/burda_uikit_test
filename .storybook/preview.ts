@@ -1,7 +1,7 @@
 // .storybook/preview.ts
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import type { Preview } from '@storybook/html';
-// import './brand.css';
+import './brand.css';
 import './tailwind.css';
 
 const extendedVP = {
@@ -124,10 +124,7 @@ const preview: Preview = {
     (Story, context) => {
       const themeName = context.globals.theme || 'FOCUS';
 
-      // Dynamically import brand-specific CSS
-      import(`./brand-${themeName.toLowerCase()}.css`);
-
-      // applyBrandTheme(themeName as keyof typeof brandThemes);
+      document.documentElement.setAttribute('data-theme', themeName.toLowerCase());
 
       return Story();
     },

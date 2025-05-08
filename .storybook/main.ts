@@ -42,7 +42,7 @@ const config: StorybookConfig = {
     return config;
   },
 
-  staticDirs: ['../public'],
+  staticDirs: ['../public', '.'],
 
   docs: {
     autodocs: true,
