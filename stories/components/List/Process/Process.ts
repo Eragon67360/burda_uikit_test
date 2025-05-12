@@ -1,8 +1,8 @@
-import { getSizedIcon } from '@/stories/utils/iconUtils';
-import './process.css';
 import { IconCategory, IconRegistry } from '@/stories/assets/icons';
-import { createButtonCTA } from '../../Button/CTA/ButtonCTA';
 import { ButtonCTAVariant } from '@/stories/types';
+import { getSizedIcon } from '@/stories/utils/iconUtils';
+import { createButtonCTA } from '../../Button/CTA/ButtonCTA';
+import './process.css';
 
 export type ProcessItem = {
   order: number;

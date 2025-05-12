@@ -1,8 +1,8 @@
 // .storybook/preview.ts
-import type { Preview } from '@storybook/html';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import './tailwind.css';
+import type { Decorator, Preview } from '@storybook/html';
 import './brand.css';
+import './tailwind.css';
 
 const extendedVP = {
   desktop: {
@@ -20,6 +20,14 @@ const extendedVP = {
     },
   },
 };
+
+const themeDecorator: Decorator = (Story, context) => {
+  const themeName = context.globals.theme || 'FOCUS';
+  document.documentElement.setAttribute('data-theme', themeName.toLowerCase());
+  localStorage.setItem('sb-theme', themeName.toLowerCase());
+  return Story();
+};
+
 const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
@@ -105,11 +113,21 @@ const preview: Preview = {
   beforeEach: () => {
     localStorage.setItem('primaryColorMode', 'light');
   },
-  decorators: [
-    (Story) => {
-      return Story();
+  globalTypes: {
+    theme: {
+      name: 'Brand',
+      description: 'Global brand theme',
+      defaultValue: 'FOCUS',
+      toolbar: {
+        icon: 'paintbrush',
+        items: [
+          { value: 'FOCUS', title: 'FOCUS Brand' },
+          { value: 'MSG', title: 'Mein Schöner Garten Brand' },
+        ],
+      },
     },
-  ],
+  },
+  decorators: [themeDecorator],
 };
 
 export default preview;

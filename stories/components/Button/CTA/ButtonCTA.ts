@@ -146,8 +146,8 @@ export const createButtonCTA = ({
     ] as const,
 
     [ButtonCTAVariant.LARGE]: [
-      'bg-base-black',
-      'text-base-white text-button-label-large',
+      'bg-black',
+      'text-white text-button-label-large',
       'border-none disabled:border',
       'focus:ring-base-black',
       'disabled:text-neutral-400',
@@ -172,8 +172,8 @@ export const createButtonCTA = ({
     ] as const,
 
     [ButtonCTAVariant.LARGE_LIGHT]: [
-      'bg-base-white',
-      'text-base-black text-button-label-large',
+      'bg-white',
+      'text-black text-button-label-large',
       'border-none disabled:border',
       'focus:ring-base-black',
       'disabled:text-neutral-400',

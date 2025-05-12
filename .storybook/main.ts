@@ -17,6 +17,7 @@ const config: StorybookConfig = {
     '@storybook/addon-styling-webpack',
     '@storybook/addon-backgrounds',
     '@storybook/addon-a11y',
+    '@storybook/addon-themes',
     '@chromatic-com/storybook',
   ],
 
@@ -41,7 +42,7 @@ const config: StorybookConfig = {
     return config;
   },
 
-  staticDirs: ['../public'],
+  staticDirs: ['../public', '.'],
 
   docs: {
     autodocs: true,

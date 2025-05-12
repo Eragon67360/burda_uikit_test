@@ -1,25 +1,42 @@
 @theme {
   --color-brand: var(--color-brand);
+  --color-brand-foreground: var(--color-brand-foreground);
 
   --color-primary-interaction: var(--color-brand);
+  --color-primary-interaction-foreground: var(--color-brand-foreground);
+
   --color-primary-light: var(--color-primary-light);
-  --color-primary-extra-light: var(--color-primary-extraLight);
+  --color-primary-light-foreground: var(--color-primary-light-foreground);
+
+  --color-primary-extra-light: var(--color-primary-extra-light);
+  --color-primary-extra-light-foreground: var(--color-primary-extra-light-foreground);
+
   --color-primary-dark: var(--color-primary-dark);
+  --color-primary-dark-foreground: var(--color-primary-dark-foreground);
 
   --color-secondary-interaction: var(--color-secondary-interaction);
+  --color-secondary-interaction-foreground: var(--color-secondary-interaction-foreground);
+
   --color-secondary-light: var(--color-secondary-light);
-  --color-secondary-extra-light: var(--color-secondary-extraLight);
+  --color-secondary-light-foreground: var(--color-secondary-light-foreground);
+
+  --color-secondary-extraLight: var(--color-secondary-extraLight);
+  --color-secondary-extraLight-foreground: var(--color-secondary-extraLight-foreground);
+
   --color-secondary-dark: var(--color-secondary-dark);
+  --color-secondary-dark-foreground: var(--color-secondary-dark-foreground);
 
   --color-tertiary: var(--color-tertiary);
+  --color-tertiary-foreground: var(--color-tertiary-foreground);
 
   --color-system-success: var(--color-system-success);
   --color-system-notification: var(--color-system-notification);
   --color-system-error: var(--color-system-error);
 
   --color-base-transparent: #ffffff00;
-  --color-base-notification: var(--color-base-notification);
-  --color-base-white: var(--color-base-notification);
+
+  /* TODO find and replace the colors here */
+  --color-base-white: var(--color-base-white);
   --color-base-black: var(--color-base-black);
 
   --color-neutral-50: var(--color-neutral-50);
