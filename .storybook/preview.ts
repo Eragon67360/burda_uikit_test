@@ -1,6 +1,6 @@
 // .storybook/preview.ts
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import type { Preview } from '@storybook/html';
+import type { Decorator, Preview } from '@storybook/html';
 import './brand.css';
 import './tailwind.css';
 
@@ -19,6 +19,13 @@ const extendedVP = {
       height: '900px',
     },
   },
+};
+
+const themeDecorator: Decorator = (Story, context) => {
+  const themeName = context.globals.theme || 'FOCUS';
+  document.documentElement.setAttribute('data-theme', themeName.toLowerCase());
+  localStorage.setItem('sb-theme', themeName.toLowerCase());
+  return Story();
 };
 
 const preview: Preview = {
@@ -120,15 +127,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [
-    (Story, context) => {
-      const themeName = context.globals.theme || 'FOCUS';
-
-      document.documentElement.setAttribute('data-theme', themeName.toLowerCase());
-
-      return Story();
-    },
-  ],
+  decorators: [themeDecorator],
 };
 
 export default preview;
