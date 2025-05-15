@@ -1,0 +1,112 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as CartAndPayStories from './CartAndPay.stories';
+
+<Meta of={CartAndPayStories} />
+
+<Title of={CartAndPayStories} />
+
+<Description of={CartAndPayStories} />
+
+<Primary />
+
+<Controls of={CartAndPayStories.Default} sort="requiredFirst" />
+
+## Usage
+
+The CartAndPay component is a specialized button designed for cart and payment actions. It features an icon, customizable label, and an optional item count display.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Default Cart Button -->
+<button 
+  type="button"
+  class="text-base-black text-button-label border-none px-6 gap-2 min-w-fit w-fit h-18 rounded-none cursor-pointer flex items-center bg-neutral-300"
+  aria-label="Cart & Pay"
+  aria-describedby="cart-count"
+>
+  <span class="text-base-black text-sm font-semibold">Cart & Pay</span>
+  <div class="flex items-center justify-center relative">
+    <span>
+      <!-- Cart Icon SVG -->
+    </span>
+  </div>
+</button>
+
+<!-- Cart Button with Items -->
+<button 
+  type="button"
+  class="text-base-black text-button-label border-none px-6 gap-2 min-w-fit w-fit h-18 rounded-none cursor-pointer flex items-center bg-primary-interaction"
+  aria-label="Cart & Pay"
+  aria-describedby="cart-count"
+>
+  <span class="text-base-black text-sm font-semibold">Cart & Pay</span>
+  <div class="flex items-center justify-center relative">
+    <div class="absolute -top-1.5 -right-1/2 bg-base-white rounded-full size-[15px] flex items-center justify-center">
+      <span id="cart-count" aria-label="You have 3 items in your cart" class="font-bold text-xs text-base-black">3</span>
+    </div>
+    <span>
+      <!-- Cart Icon SVG -->
+    </span>
+  </div>
+</button>
+  `}
+/>
+
+### JavaScript Implementation
+
+<details>
+<summary>Expand implementation details</summary>
+<Source
+  language="javascript"
+  dark
+  code={`
+const cartButton = createCartAndPay({
+  label: 'Cart & Pay',
+  icon: 'cart',
+  items: [1, 2, 3], // Optional: Add items to show count
+  disabled: false,
+  ariaLabelCartCount: 'You have 3 items in your cart',
+  onClick: () => {
+    // Handle click event
+  }
+});
+
+// Add to DOM
+document.body.appendChild(cartButton);
+`}
+/>
+
+</details>
+
+## Accessibility
+
+The CartAndPay component implements several accessibility features:
+
+1. **ARIA Labels**:
+
+   - `aria-label` for inner count badge to describe amount of items in cart
+
+2. **Keyboard Navigation**:
+
+- Focusable with keyboard
+- Visual focus indicators
+- Proper tab order
+
+3. **States**:
+
+   - Visible disabled state
+   - Focus and hover states
+   - Active state feedback
+
+4. **Screen Reader Support**:
+   - Meaningful cart count announcements
+   - Icon is properly hidden from screen readers
+   - Clear button purpose indication
+
+<br />
+
+<Stories includePrimary={false} />

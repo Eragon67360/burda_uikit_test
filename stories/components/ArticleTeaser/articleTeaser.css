@@ -1,0 +1,27 @@
+@keyframes articleTeaserDisappear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes articleTeaserAppear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-article-teaser-disappear {
+  animation: articleTeaserDisappear 0.2s ease-out forwards;
+}
+
+.animate-article-teaser-appear {
+  animation: articleTeaserAppear 0.2s ease-in forwards;
+}

@@ -1,0 +1,114 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+
+<Meta title="Design System/Colors" />
+
+<ColorPalette>
+  {/* Brand Colors */}
+  <ColorItem
+    title="Brand Colors"
+    subtitle="Primary Brand Palette"
+    colors={{
+      Brand: "var(--color-brand)",
+    }}
+  />
+
+{/* Primary Colors */}
+
+{" "}
+
+<ColorItem
+  title="Primary Colors"
+  subtitle="Primary Color Variations"
+  colors={{
+    'Primary Interaction': 'var(--color-brand)',
+    'Primary Light': 'var(--color-primary-light)',
+    'Primary Extra Light': 'var(--color-primary-extraLight)',
+    'Primary Dark': 'var(--color-primary-dark)',
+  }}
+/>
+
+{/* Secondary Colors */}
+
+{" "}
+
+<ColorItem
+  title="Secondary Colors"
+  subtitle="Secondary Color Variations"
+  colors={{
+    'Secondary Interaction': 'var(--color-secondary-interaction)',
+    'Secondary Light': 'var(--color-secondary-light)',
+    'Secondary Extra Light': 'var(--color-secondary-extraLight)',
+    'Secondary Dark': 'var(--color-secondary-dark)',
+  }}
+/>
+
+{/* Tertiary Colors */}
+
+{" "}
+
+<ColorItem
+  title="Tertiary Colors"
+  subtitle="Tertiary Color"
+  colors={{
+    Tertiary: 'var(--color-tertiary)',
+  }}
+/>
+
+{/* System Colors */}
+
+{" "}
+
+<ColorItem
+  title="System Colors"
+  subtitle="Semantic System Colors"
+  colors={{
+    Success: 'var(--color-system-success)',
+    Notification: 'var(--color-system-notification)',
+    Error: 'var(--color-system-error)',
+  }}
+/>
+
+{/* Base Colors */}
+
+{" "}
+
+<ColorItem
+  title="Base Colors"
+  subtitle="Fundamental Base Colors"
+  colors={{
+    'Base Notification': 'var(--color-base-notification)',
+    White: 'var(--color-base-notification)',
+    Black: 'var(--color-base-black)',
+    Transparent: '#FFFFFF00',
+  }}
+/>
+
+{/* Neutral Colors */}
+
+{" "}
+
+<ColorItem
+  title="Neutral Colors"
+  subtitle="Neutral Color Palette"
+  colors={{
+    'Neutral 50': 'var(--color-neutral-50)',
+    'Neutral 100': 'var(--color-neutral-100)',
+    'Neutral 200': 'var(--color-neutral-200)',
+    'Neutral 300': 'var(--color-neutral-300)',
+    'Neutral 400': 'var(--color-neutral-400)',
+    'Neutral 450': 'var(--color-neutral-450)',
+    'Neutral 500': 'var(--color-neutral-500)',
+  }}
+/>
+
+{/* Border Radius */}
+
+  <ColorItem
+    title="Border Radius"
+    subtitle="Radius Variations"
+    colors={{
+      "Default Border Radius": "0.5rem",
+      "Nested Border Radius": "0.25rem",
+    }}
+  />
+</ColorPalette>

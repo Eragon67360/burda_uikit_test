@@ -1,0 +1,145 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+<Title of={IconStories} />
+
+<Description of={IconStories} />
+
+<Primary />
+
+<Controls of={IconStories.Default} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Basic Icon -->
+<svg class="focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-0" 
+     width="20" 
+     height="20" 
+     focusable="false" 
+     tabindex="-1">
+  <use href="#icon-name" />
+</svg>
+
+<!-- Accessible Icon (as image) -->
+
+<svg
+  class="focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-0"
+  width="20"
+  height="20"
+  role="img"
+  aria-label="Icon description"
+  focusable="false"
+  tabindex="-1"
+>
+  <use href="#icon-name" />
+</svg>
+
+<!-- Interactive Icon -->
+
+<svg
+  class="focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-0"
+  width="20"
+  height="20"
+  focusable="true"
+  tabindex="0"
+  role="button"
+  aria-label="Interactive icon action"
+>
+  <use href="#icon-name" />
+</svg>
+`} />
+
+### JavaScript Implementation
+
+<Source
+  language="javascript"
+  dark
+  code={`
+// Create a basic icon
+const icon = createIcon({
+  name: 'headphones',
+  size: 20
+});
+
+// Create an accessible icon
+const accessibleIcon = createIcon({
+name: 'document',
+size: 24,
+role: 'img',
+ariaLabel: 'Document icon'
+});
+
+// Create an interactive icon
+const interactiveIcon = createIcon({
+name: 'close',
+size: 20,
+role: 'button',
+ariaLabel: 'Close dialog',
+focusable: true
+});
+`}
+/>
+
+## Accessibility
+
+Icons can serve different purposes in an interface and should be implemented with appropriate accessibility considerations:
+
+1. **Decorative Icons**
+
+   - Use `ariaHidden={true}` for purely decorative icons
+   - No role or aria-label required
+
+2. **Meaningful Icons**
+
+   - Set `role="img"` and provide `ariaLabel` when the icon conveys meaning
+   - Ensure the aria-label clearly describes the icon's purpose
+
+3. **Interactive Icons**
+
+   - Set `focusable={true}` and appropriate `role` (e.g., "button")
+   - Provide clear `ariaLabel` describing the action
+   - Ensure proper keyboard navigation support
+
+4. **Icons with Text**
+   - When accompanied by visible text, use `ariaHidden={true}` to prevent redundant announcements
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Decorative icon -->
+<svg aria-hidden="true" focusable="false" tabindex="-1">...</svg>
+
+<!-- Meaningful icon -->
+
+<svg role="img" aria-label="Calendar" focusable="false" tabindex="-1">
+  ...
+</svg>
+
+<!-- Interactive icon -->
+
+<svg role="button" aria-label="Close dialog" focusable="true" tabindex="0">
+  ...
+</svg>
+
+<!-- Icon with text -->
+
+<button>
+  <svg aria-hidden="true" focusable="false" tabindex="-1">
+    ...
+  </svg>
+  <span>Close</span>
+</button>
+`} />
+
+<br />
+
+<Stories includePrimary={false} />

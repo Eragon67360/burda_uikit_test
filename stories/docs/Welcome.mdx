@@ -1,0 +1,140 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="Welcome"
+  parameters={{
+    order: 1,
+  }}
+/>
+
+<div className="max-w-4xl mx-auto px-4 py-8 flex flex-col items-start sb-unstyled">
+    <a href="/?path=/docs/willkommen" className="sb-unstyled mx-auto mb-4 inline-flex items-center px-4 py-2 border border-neutral-200 rounded-lg text-copy-desktop text-neutral-500 hover:bg-neutral-50">
+        🇩🇪 Deutsche Version
+    </a>
+    <img src="burda_logo.png" width={500} className="mx-auto" />
+    <div className="mb-12 text-center mx-16">
+        <h1 className="text-h2-desktop">UI Kit Abo-Shop</h1>
+        <div className="mt-2 text-copy-desktop text-neutral-500 mb-8 mx-auto sb-unstyled">
+            Welcome to the FOCUS Abo-Shop UI Kit documentation. This design system provides a collection of reusable
+            HTML components and patterns built with TypeScript and TailwindCSS, designed to create consistent,
+            accessible, and engaging subscription experiences for FOCUS magazine's digital platform.
+        </div>
+    </div>
+
+    <div className="grid grid-cols-2 md:grid-cols-2 gap-8 mb-2 sb-unstyled w-full">
+        <div className="bg-primary-extra-light p-6 rounded-lg sb-unstyled">
+            <p className="text-h6-desktop mb-4 text-base-black sb-unstyled">
+                ## Technical Stack
+            </p>
+            <ul className="text-copy-desktop text-base-black space-y-2 sb-unstyled">
+                <li>• HTML5 for semantic markup</li>
+                <li>• TypeScript for type-safe component logic</li>
+                <li>• TailwindCSS for styling</li>
+                <li>• Storybook for documentation and testing</li>
+            </ul>
+        </div>
+
+        <div className="bg-secondary-extra-light p-6 rounded-lg sb-unstyled">
+            <p className="text-h6-desktop mb-4 text-base-black sb-unstyled">
+                ## Key Features
+            </p>
+            <ul className="text-copy-desktop text-neutral-500 space-y-2 sb-unstyled">
+                <li>• Vanilla JavaScript/TypeScript components</li>
+                <li>• Responsive design patterns</li>
+                <li>• WCAG accessibility compliance</li>
+                <li>• Consistent Burda design language</li>
+            </ul>
+        </div>
+    </div>
+
+    <div className="border-t mt-4">
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Component Structure
+        </p>
+        <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
+            Each component follows a consistent structure:
+        </div>
+        <div className="gap-4 mt-4 sb-unstyled grid grid-cols-2 sb-unstyled">
+            <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Stories File (.stories.ts)
+                </p>
+                <div className="text-copy-desktop text-neutral-500 sb-unstyled">
+                    Contains Storybook configuration, controls, and documentation for the
+                    component.
+                </div>
+            </div>
+            <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Component File (.ts)
+                </p>
+                <div className="text-copy-desktop text-neutral-500 sb-unstyled">
+                    Includes the component logic, type definitions, and DOM manipulation.
+                </div>
+            </div>
+            <div className="bg-neutral-50 p-4 rounded-lg sb-unstyled">
+                <p className="text-subhead4-desktop mb-2 text-base-black sb-unstyled">
+                    ### Styles (.css)
+                </p>
+                <div className="text-copy-desktop text-neutral-500 sb-unstyled">
+                    Optional CSS file for complex animations or styles not covered by
+                    TailwindCSS.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div className="border-t mt-4">
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Links
+        </p>
+        <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
+            Here are some Quicklinks to help you get started:
+        </div>
+        <div className="gap-4 mt-4 sb-unstyled grid grid-cols-2 sb-unstyled">
+            <a href="/?path=/docs/getting-started" className="border rounded-lg p-6 sb-unstyled">
+                <p className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">
+                    ### Getting Started
+                </p>
+                <div className="text-copy-desktop text-neutral-500 sb-unstyled">
+                    Learn how to integrate and use our components in your FOCUS Abo-Shop projects.
+                </div>
+            </a>
+
+            <a href="/?path=/docs/components-atoms" className="border border-neutral-200 rounded-lg p-6 sb-unstyled">
+                <p className="text-subhead3-desktop mb-3 text-base-black sb-unstyled">
+                    ### Components
+                </p>
+                <div className="text-copy-desktop text-neutral-500 sb-unstyled">
+                    Explore our library of pre-built UI components with live examples and documentation.
+                </div>
+            </a>
+
+            <a href="/?path=/docs/design-system" className="border border-neutral-200 rounded-lg p-6">
+                <p className="text-subhead3-desktop mb-3 text-base-black">
+                    ### Design Tokens
+                </p>
+                <div className="text-copy-desktop text-neutral-500">
+                    Reference our design foundations including colors, typography, and spacing variables.
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <div className="border-t mt-4 w-full">
+        <p className="text-h6-desktop mt-4 sb-unstyled mb-0 text-base-black">
+            ## Development Guidelines
+        </p>
+        <div className="text-copy-desktop text-neutral-500 mb-4 sb-unstyled">
+            Use the following tips to ensure consistency between UI-Kit code base and website development
+        </div>
+        <ul className="text-copy-desktop text-neutral-500 space-y-2 sb-unstyled">
+            <li>• Use TypeScript for all component logic</li>
+            <li>• Follow BEM methodology for any custom CSS</li>
+            <li>• Maintain accessibility standards</li>
+            <li>• Document all component properties and usage</li>
+        </ul>
+    </div>
+
+</div>

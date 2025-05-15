@@ -1,0 +1,7 @@
+.base-button {
+  writing-mode: sideways-lr;
+}
+
+.padding-transition {
+  transition: padding 1s ease-in-out;
+}

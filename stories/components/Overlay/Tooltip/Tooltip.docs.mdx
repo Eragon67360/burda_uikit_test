@@ -1,0 +1,97 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} />
+
+<Title of={TooltipStories} />
+
+<Description of={TooltipStories} />
+
+<Primary />
+
+<Controls of={TooltipStories.Basic} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Basic Tooltip -->
+<div class="relative inline-block">
+  <button 
+    type="button"
+    class="p-2 rounded-full transition-colors text-base-black hover:text-secondary-dark"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls="tooltip-1"
+    aria-label="Open tooltip"
+  >
+    <svg><!-- Info icon --></svg>
+  </button>
+  
+  <div 
+    id="tooltip-1"
+    role="tooltip"
+    class="invisible opacity-0 scale-95 absolute z-50 min-w-[200px] max-w-[400px] w-max p-4 bg-white rounded-lg shadow-lg border border-gray-200"
+  >
+    <button 
+      type="button"
+      class="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full"
+      aria-label="Close tooltip"
+      tabindex="-1"
+    >
+      <svg><!-- Close icon --></svg>
+    </button>
+    <div class="pr-6">
+      <!-- Tooltip content -->
+    </div>
+  </div>
+</div>
+  `}
+/>
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="tooltip.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tooltip = createTooltip({
+      content: 'Tooltip content',
+      position: 'top',
+      ariaLabelTrigger: 'Open tooltip',
+      ariaLabelClose: 'Close tooltip',
+      ariaControlsId: 'tooltip-1'
+    });
+    document.body.appendChild(tooltip);
+  });
+</script>
+`}
+/>
+
+## Accessibility
+
+The Tooltip component implements the following accessibility features:
+
+- Uses `role="tooltip"` for proper semantic meaning
+- Implements ARIA attributes for trigger button (`aria-haspopup`, `aria-expanded`, `aria-controls`)
+- Provides keyboard navigation support (Escape to close)
+- Ensures focus management between trigger and close button
+- Supports screen readers through descriptive ARIA labels
+
+### Keyboard Navigation
+
+- `Enter` or `Space`: Opens/closes the tooltip
+- `Escape`: Closes the tooltip
+- `Tab`: Moves focus between interactive elements
+- `Shift + Tab`: Moves focus in reverse order
+
+<br />
+
+<Stories includePrimary={false} />

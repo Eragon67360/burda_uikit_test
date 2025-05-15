@@ -1,0 +1,100 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as ButtonCTAStories from './ButtonCTA.stories';
+
+<Meta of={ButtonCTAStories} />
+
+<Title of={ButtonCTAStories} />
+
+<Description of={ButtonCTAStories} />
+
+<Primary />
+
+<Controls of={ButtonCTAStories.Primary} sort="requiredFirst" />
+
+## Usage
+
+The ButtonCTA component is a versatile call-to-action button that supports multiple variants, states, and configurations. It's designed to provide clear visual hierarchy and interactive feedback while maintaining accessibility.
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Primary Button -->
+<button
+  type="button"
+  class="group transition-all duration-500 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-0 disabled:cursor-not-allowed relative overflow-hidden cursor-pointer bg-primary-interaction text-button-label"
+  aria-label="Primary action"
+>
+  <div class="relative z-10 flex items-center justify-center gap-3 group-disabled:gap-3 transition-all">
+    <span class="relative z-10">Button Label</span>
+    <!-- Optional Icon -->
+    <span class="icon">
+      <svg aria-hidden="true">
+        <use href="#icon-arrow-right" />
+      </svg>
+    </span>
+  </div>
+</button>
+
+<!-- Secondary Button with Left Icon -->
+
+<button type="button" class="group transition-all duration-500 bg-secondary-interaction text-button-label" aria-label="Secondary action">
+  <div class="relative z-10 flex items-center justify-center gap-3">
+    <span class="icon">
+      <svg aria-hidden="true">
+        <use href="#icon-arrow-left" />
+      </svg>
+    </span>
+    <span class="relative z-10">Button Label</span>
+  </div>
+</button>
+`} />
+
+## Implementation
+
+### JavaScript Integration
+
+<details>
+<summary>Show code</summary>
+<Source
+  language="javascript"
+  dark
+  code={`
+import { createButtonCTA, ButtonCTAVariant } from './ButtonCTA';
+
+// Create a primary button
+const primaryButton = createButtonCTA({
+variant: ButtonCTAVariant.PRIMARY,
+label: 'Submit',
+icon: 'arrow-right',
+onClick: () => console.log('Button clicked')
+});
+
+// Add to DOM
+document.body.appendChild(primaryButton);
+`}
+/>
+
+</details>
+
+## Accessibility
+
+The ButtonCTA component follows WCAG 2.1 guidelines and implements the following accessibility features:
+
+- Proper focus management with visible focus indicators
+- ARIA labels for buttons with icons
+- Disabled state handling
+- Keyboard navigation support
+- Color contrast compliance
+- Interactive state feedback
+
+### Keyboard Navigation
+
+- <kbd>Tab</kbd>: Focuses the button
+- <kbd>Enter</kbd> or <kbd>Space</kbd>: Activates the button
+- <kbd>Shift + Tab</kbd>: Moves focus to previous element
+
+<br />
+<Stories includePrimary={false} />
