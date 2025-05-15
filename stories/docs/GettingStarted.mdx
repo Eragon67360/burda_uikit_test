@@ -1,0 +1,385 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="Getting Started"
+  parameters={{
+    order: 2,
+  }}
+/>
+
+<div className="flex items-center gap-4">
+  # Getting Started
+  <br />
+  <a href="/?path=/docs/erste-schritte--docs" className="text-xs sb-unstyled text-blue-500">
+    🇩🇪 Deutsche Version
+  </a>
+</div>
+
+Welcome to the FOCUS Abo-Shop UI Kit. This guide will help you integrate our components into your project.
+
+## Installation
+
+First, install the required dependencies:
+
+```bash
+npm install tailwindcss postcss autoprefixer
+# or
+yarn add tailwindcss postcss autoprefixer
+```
+
+## Configuration
+
+### 1. TailwindCSS Setup
+
+Create a `tailwind.config.js` or `tailwind.config.ts` file in your project root:
+
+<details>
+<summary>**tailwind.config.js** (Click to expand)</summary>
+```js
+/**
+ * Tailwind CSS Configuration for FOCUS Abo-Shop UI Kit
+ *
+ * This configuration extends Tailwind's default theme with custom design tokens
+ * that match our design system specifications.
+ *
+ * Structure:
+ * - Colors: Maps to CSS variables defined in variables.css
+ *   • Brand colors
+ *   • Primary/Secondary/Tertiary variations
+ *   • System status colors
+ *   • Base colors
+ *   • Neutral palette
+ *
+ * - Typography: Comprehensive type system
+ *   • Desktop and Mobile variants
+ *   • Headlines (h1-h6)
+ *   • Subheaders
+ *   • Subscription text styles
+ *   • Order step typography
+ *   • Hotline footer styles
+ *   • Copy variations
+ *   • Labels and buttons
+ *   Each typography setting includes:
+ *   • Font size
+ *   • Line height
+ *   • Letter spacing (where applicable)
+ *   • Font weight
+ *
+ * - Border Radius: Standard and nested component variations
+ *
+ * - Font Families:
+ *   • Instrument Sans: Primary UI font
+ *   • Roboto Serif: Secondary font
+ *
+ * Usage:
+ * This configuration should be used in conjunction with variables.css
+ * to maintain consistent styling across the application.
+ */
+module.exports = {
+  content: ['./stories/**/*.{js,jsx,ts,tsx,html}'],
+  theme: {
+    extend: {
+      colors: {
+        brand: 'var(--color-brand)',
+        primary: {
+          interaction: 'var(--color-brand)',
+          light: 'var(--color-primary-light)',
+          'extra-light': 'var(--color-primary-extraLight)',
+          dark: 'var(--color-primary-dark)'
+        },
+        secondary: {
+          interaction: 'var(--color-secondary-interaction)',
+          light: 'var(--color-secondary-light)',
+          'extra-light': 'var(--color-secondary-extraLight)',
+          dark: 'var(--color-secondary-dark)'
+        },
+        tertiary: 'var(--color-tertiary)',
+        system: {
+          success: 'var(--color-system-success)',
+          notification: 'var(--color-system-notification)',
+          error: 'var(--color-system-error)',
+        },
+        base: {
+          transparent: '#FFFFFF00',
+          notification: 'var(--color-base-notification)',
+          white: 'var(--color-base-notification)',
+          black: 'var(--color-base-black)'
+        },
+        neutral: {
+          50: 'var(--color-neutral-50)',
+          100: 'var(--color-neutral-100)',
+          200: 'var(--color-neutral-200)',
+          300: 'var(--color-neutral-300)',
+          400: 'var(--color-neutral-400)',
+          450: 'var(--color-neutral-450)',
+          500: 'var(--color-neutral-500)',
+        },
+        'storybook-label': 'var(--color-storybook-label)',
+      },
+      borderRadius: {
+        DEFAULT: '0.5rem',
+        nested: '0.25rem'
+      },
+      fontFamily: {
+        'instrument-sans': ['"Instrument Sans"', 'sans-serif'],
+        'roboto-serif': ['"Roboto Serif"', 'serif'],
+      },
+      fontSize: {
+        /** DESKTOP */
+        /** Headlines */
+        'h1-desktop': ['3.25rem', { lineHeight: '4.125rem', letterSpacing: '-0.04875rem', fontWeight: 600 }],
+        'h2-desktop': ['2.75rem', { lineHeight: '3.125rem', letterSpacing: '-0.0275rem', fontWeight: 600 }],
+        'h3-desktop': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.0225rem', fontWeight: 600 }],
+        'h4-desktop': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.01875rem', fontWeight: 600 }],
+        'h5-desktop': ['1.5rem', { lineHeight: '1.75rem', letterSpacing: '-0.015rem', fontWeight: 600 }],
+        'h6-desktop': ['1.25rem', { lineHeight: '1.5rem', fontWeight: 600 }],
+        /** Subhead */
+        'subhead1-desktop': ['1.875rem', { lineHeight: '2.5rem', fontWeight: 600 }],
+        'subhead2-desktop': ['1.5rem', { lineHeight: '2rem', fontWeight: 600 }],
+        'subhead3-desktop': ['1.125rem', { lineHeight: '1.375rem', fontWeight: 600 }],
+        'subhead4-desktop': ['1rem', { lineHeight: '1.25rem', fontWeight: 600 }],
+        /** Subscription */
+        'subscription-default-desktop': ['2.25rem', { lineHeight: '3rem', letterSpacing: '-0.045rem', fontWeight: 600 }],
+        'subscription-small-desktop': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.01875rem', fontWeight: 600 }],
+        /** Order step */
+        'order-step-desktop': ['1.875rem', { lineHeight: '2.75rem', letterSpacing: '-0.0375rem', fontWeight: 700 }],
+        /** Hotline footer */
+        'hotline-footer-default-desktop': ['3.75rem', { lineHeight: '4rem', fontWeight: 400 }],
+        'hotline-footer-small-desktop': ['1rem', { lineHeight: '1rem', fontWeight: 600 }],
+        /** Copy */
+        'teaser-desktop': ['1.125rem', { lineHeight: '1.5rem', letterSpacing: '-0.0225rem', fontWeight: 500 }],
+        'copy-desktop': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '-0.00875rem', fontWeight: 400 }],
+        'copy-small-desktop': ['0.75rem', { lineHeight: '1.125rem', fontWeight: 500 }],
+        'bulletpoint-copy-desktop': ['1rem', { lineHeight: '1.25rem', letterSpacing: '0.01rem', fontWeight: 600 }],
+        'footer-copy-desktop': ['0.75rem', { lineHeight: '1.125rem', letterSpacing: '0.0075rem', fontWeight: 400 }],
+        /** Label */
+        'label-desktop': ['0.75rem', { lineHeight: '1.125rem', letterSpacing: '-0.0075rem', fontWeight: 400 }],
+        'button-label-desktop': ['0.875rem', { lineHeight: '1.25rem', fontWeight: 700 }],
+        'button-label-large-desktop': ['1.125rem', { lineHeight: '1.625rem', letterSpacing: '0.01125rem', fontWeight: 700 }],
+        'input-desktop': ['0.875rem', { lineHeight: '1.25rem', fontWeight: 500 }],
+        'placeholder-desktop': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '-0.00875rem', fontWeight: 400 }],
+        'link-desktop': ['0.875rem', { lineHeight: '2rem', fontWeight: 700 }],
+        'link-small-desktop': ['0.75rem', { lineHeight: '1.5rem', fontWeight: 700 }],
+
+        /** MOBILE */
+        /** Headlines */
+        'h1-mobile': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '-0.0225rem', fontWeight: 600 }],
+        'h2-mobile': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.01875rem', fontWeight: 600 }],
+        'h3-mobile': ['1.5rem', { lineHeight: '2rem', letterSpacing: '-0.015rem', fontWeight: 600 }],
+        'h4-mobile': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '-0.0125rem', fontWeight: 600 }],
+        'h5-mobile': ['1.125rem', { lineHeight: '1.5rem', fontWeight: 600 }],
+        'h6-mobile': ['1rem', { lineHeight: '1.5rem', fontWeight: 600 }],
+        /** Subhead */
+        'subhead1-mobile': ['1.25rem', { lineHeight: '1.75rem', fontWeight: 500 }],
+        'subhead2-mobile': ['1.125rem', { lineHeight: '1.625rem', fontWeight: 500 }],
+        'subhead3-mobile': ['1rem', { lineHeight: '1.375rem', fontWeight: 500 }],
+        'subhead4-mobile': ['0.875rem', { lineHeight: '1.25rem', fontWeight: 500 }],
+        /** Subscription */
+        'subscription-default-mobile': ['2rem', { fontWeight: 600 }],
+        'subscription-small-mobile': ['1.5rem', { fontWeight: 600 }],
+        /** Order step */
+        'order-step-mobile': ['1.5rem', { lineHeight: '2.5rem', letterSpacing: '-0.03rem', fontWeight: 700 }],
+        /** Hotline footer */
+        'hotline-footer-default-mobile': ['2.5rem', { lineHeight: '3rem', fontWeight: 400 }],
+        'hotline-footer-small-mobile': ['1rem', { lineHeight: '1rem', fontWeight: 600 }],
+        /** Copy */
+        'teaser-mobile': ['1rem', { lineHeight: '1.25rem', fontWeight: 500 }],
+        'copy-mobile': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '-0.00875rem', fontWeight: 400 }],
+        'copy-small-mobile': ['0.75rem', { lineHeight: '1rem', fontWeight: 400 }],
+        'bulletpoint-copy-mobile': ['0.875rem', { lineHeight: '1.25rem', fontWeight: 600 }],
+        'footer-copy-mobile': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.00875rem', fontWeight: 400 }],
+        /** Label */
+        'label-mobile': ['0.75rem', { lineHeight: '0.875rem', letterSpacing: '-0.0075rem', fontWeight: 400 }],
+        'button-label-mobile': ['0.875rem', { lineHeight: '1rem', fontWeight: 700 }],
+        'button-label-large-mobile': ['1rem', { lineHeight: '1.25rem', letterSpacing: '0.02rem', fontWeight: 700 }],
+        'input-mobile': ['0.875rem', { lineHeight: '1.25rem', fontWeight: 500 }],
+        'placeholder-mobile': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '-0.00875rem', fontWeight: 400 }],
+        'link-mobile': ['0.875rem', { lineHeight: '1.75rem', fontWeight: 700 }],
+        'link-small-mobile': ['0.75rem', { lineHeight: '1rem', fontWeight: 700 }],
+
+
+        /** Storybook */
+        'label': ['0.9375', { lineHeight: '1.4375rem', letterSpacing: '-0.01875rem', fontWeight: 500 }],
+      },
+      fontWeight: {
+        'normal': 400,
+        'bold': 700,
+      },
+    }
+
+},
+plugins: [],
+};
+
+````
+</details>
+
+### 2. CSS Variables
+
+Create a `variables.css` file and import it into your main stylesheet:
+<details>
+<summary>**variables.css** (Click to expand)</summary>
+```css
+/**
+ * Design System Variables
+ *
+ * This file contains all design tokens used throughout the FOCUS Abo-Shop UI Kit.
+ *
+ * Colors Usage:
+ * - Primary colors (--color-primary-*): Main brand colors, primary actions, and key UI elements
+ * - Secondary colors (--color-secondary-*): Supporting elements, backgrounds, and secondary actions
+ * - Tertiary colors (--color-tertiary): Accent elements and decorative purposes
+ * - System colors (--color-system-*): Feedback states like success, error, and notifications
+ * - Base colors (--color-base-*): Fundamental black and white variations
+ * - Neutral colors (--color-neutral-*): Grayscale spectrum for text, borders, and subtle backgrounds
+ *
+ * Color Variants:
+ * - interaction: Active states and interactive elements
+ * - light: Lighter variations for hover states
+ * - extraLight: Very light variations for backgrounds
+ * - dark: Darker variations for pressed states
+ *
+ * Typography:
+ * The design system uses two font families:
+ * - Instrument Sans: Primary font for UI elements
+ * - Roboto Serif: Secondary font for specific typographic needs
+ *
+ * Implementation:
+ * 1. Import this file into your main stylesheet
+ * 2. Use these variables with the var() function
+ * 3. Ensure the Google Fonts import is maintained
+ *
+ * Example:
+ * color: var(--color-primary-interaction);
+ * background: var(--color-secondary-extraLight);
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+
+:root {
+  /* Colors */
+
+  --color-brand: hsla(358, 80%, 51%, 1);
+
+  --color-primary-interaction: hsla(358, 80%, 51%, 1);
+  --color-primary-light: hsla(358, 80%, 61%, 1);
+  --color-primary-extraLight: hsla(358, 80%, 71%, 1);
+  --color-primary-dark: hsla(358, 80%, 31%, 1);
+
+  --color-secondary-interaction: hsla(169, 38%, 67%, 1);
+  --color-secondary-light: hsla(169, 38%, 77%, 1);
+  --color-secondary-extraLight: hsla(169, 38%, 87%, 1);
+  --color-secondary-dark: hsla(169, 38%, 47%, 1);
+
+  --color-tertiary: hsla(44, 36%, 78%, 1);
+
+  --color-system-success: hsla(118, 53%, 57%, 1);
+  --color-system-notification: hsla(46, 79%, 67%, 1);
+  --color-system-error: hsla(0, 100%, 44%, 1);
+
+  --color-base-black: hsla(0, 0%, 0%, 1);
+  --color-base-notification: hsla(0, 0%, 100%, 1);
+
+  --color-neutral-50: hsla(0, 0%, 98%, 1);
+  --color-neutral-100: hsla(0, 0%, 96%, 1);
+  --color-neutral-200: hsla(0, 0%, 90%, 1);
+  --color-neutral-300: hsla(0, 0%, 83%, 1);
+  --color-neutral-400: hsla(0, 0%, 64%, 1);
+  --color-neutral-450: hsla(0, 0%, 58%, 1);
+  --color-neutral-500: hsla(0, 0%, 45%, 1);
+
+  /** Storybook */
+  --color-storybook-label: hsla(0, 0%, 32%, 1);
+}
+````
+
+</details>
+
+## Using Components
+
+Our components are framework-agnostic and can be integrated into any JavaScript project. Here's how to use them:
+
+### Basic Usage
+
+1. **Copy the Component Code**: Use the "Show Code" button in any component's story to copy the TypeScript implementation.
+
+2. **Create a Wrapper**: Depending on your framework, create an appropriate wrapper:
+
+#### For React:
+
+```tsx
+import { useEffect, useRef } from 'react';
+import { createImage, ImageArgs } from './Image';
+
+const Image = (props: ImageArgs) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const imageElement = createImage(props);
+      containerRef.current.innerHTML = '';
+      containerRef.current.appendChild(imageElement);
+    }
+  }, [props]);
+
+  return <div ref={containerRef} />;
+};
+
+export default Image;
+```
+
+#### For Vue:
+
+```tsx
+<template>
+  <div ref="container"></div>
+</template>
+
+<script setup lang="ts">
+import { onMounted, ref, watch } from "vue";
+import { createImage, ImageArgs } from "./Image";
+
+const props = defineProps<ImageArgs>();
+const container = ref<HTMLDivElement>();
+
+const renderImage = () => {
+  if (container.value) {
+    const imageElement = createImage(props);
+    container.value.innerHTML = "";
+    container.value.appendChild(imageElement);
+  }
+};
+
+onMounted(renderImage);
+watch(props, renderImage);
+</script>
+```
+
+### Example Implementation
+
+```tsx
+// Using the Image component
+const MyPage = () => {
+  return <Image src="/path/to/image.jpg" ratio="16:9" alt="Description" />;
+};
+```
+
+## Best Practices
+
+1. **TypeScript**: Always use the provided TypeScript types for proper type checking:
+
+```ts
+import type { ImageArgs } from './Image';
+```
+
+2. **CSS Classes**: Our components use TailwindCSS classes. Ensure your build process includes these classes in your final CSS bundle.
+
+3. **Accessibility**: Maintain WCAG compliance by providing proper alt texts and ARIA labels when extending components.
+
+4. **Performance**: Components are lightweight by default. When wrapping them, avoid unnecessary re-renders.
+
+## Need Help?
+
+- Check component documentation for specific props and usage examples
+- Review the Design Tokens section for available styles
+- Explore our Components section for more examples

@@ -1,0 +1,47 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as ButtonIconStories from './ButtonIcon.stories';
+
+<Meta of={ButtonIconStories} />
+
+<Title of={ButtonIconStories} />
+
+<Description of={ButtonIconStories} />
+
+<Primary />
+
+<Controls of={ButtonIconStories.Small} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source 
+  language="html" 
+  dark 
+  code={`
+<!-- Button Icon with Small Variant -->
+<button 
+  type="button" 
+  class="group shrink-0 transition-[color,opacity] duration-300 focus:outline-hidden focus:ring-none focus:border-transparent disabled:cursor-not-allowed relative rounded-lg overflow-hidden flex items-center justify-center cursor-pointer bg-transparent border-none text-base-black hover:text-secondary-dark active:bg-transparent active:opacity-60 focus-visible:bg-base-white focus-visible:ring-2 focus-visible:ring-secondary-dark disabled:bg-base-white disabled:text-neutral-400 disabled:border-none size-10 p-1"
+  aria-label="Delete item"
+>
+  <!-- Icon Component -->
+  <svg>...</svg>
+</button>
+  `} 
+/>
+
+<br />
+<Stories includePrimary={false} />
+
+## Accessibility
+
+The ButtonIcon component supports accessibility through the `ariaLabel` prop. This label is crucial for screen readers to provide context about the button's function.
+
+### Example
+
+```html
+<button type="button" aria-label="Close modal" class="...">
+  <!-- Icon -->
+</button>
+```

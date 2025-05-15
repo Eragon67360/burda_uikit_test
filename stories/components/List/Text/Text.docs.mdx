@@ -1,0 +1,67 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as TextStories from './Text.stories';
+
+<Meta of={TextStories} />
+
+<Title of={TextStories} />
+
+<Description of={TextStories} />
+
+<Primary />
+
+<Controls of={TextStories.Ordered} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Ordered List -->
+<div class="flex flex-col">
+  <h3 class="text-teaser mb-4">List Title</h3>
+  <ol class="list-decimal marker:text-bulletpoint-copy pl-5">
+    <li class="mb-2">First item</li>
+    <li class="mb-2">Second item</li>
+    <li class="mb-2">Third item</li>
+  </ol>
+</div>
+
+<!-- Unordered List -->
+
+<div class="flex flex-col">
+  <h3 class="text-teaser mb-4">List Title</h3>
+  <ul class="list-disc pl-5">
+    <li class="mb-2">First item</li>
+    <li class="mb-2">Second item</li>
+    <li class="mb-2">Third item</li>
+  </ul>
+</div>
+
+<!-- Links List -->
+
+<div class="flex flex-col">
+  <h3 class="text-teaser mb-4">Links Title</h3>
+  <ul class="list-none">
+    <li class="mb-1">
+      <a href="#" class="button-link">
+        <span>Link Text</span>
+        <svg class="icon">
+          <use href="#icon-arrowRight" />
+        </svg>
+      </a>
+    </li>
+  </ul>
+</div>
+`} />
+
+## Accessibility
+
+- Lists use semantic HTML elements (`<ul>`, `<ol>`, `<li>`) for proper structure
+- Title uses `<h3>` for proper document outline
+
+<br />
+
+<Stories includePrimary={false} />

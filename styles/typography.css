@@ -1,0 +1,121 @@
+@layer utilities {
+  .text-h1 {
+    @apply text-h1-mobile md:text-h1-desktop font-serif;
+  }
+
+  .text-h2 {
+    @apply text-h2-mobile md:text-h2-desktop font-serif;
+  }
+
+  .text-h3 {
+    @apply text-h3-mobile md:text-h3-desktop font-serif;
+  }
+
+  .text-h4 {
+    @apply text-h4-mobile md:text-h4-desktop font-serif;
+  }
+
+  .text-h5 {
+    @apply text-h5-mobile md:text-h5-desktop font-serif;
+  }
+
+  .text-h6 {
+    @apply text-h6-mobile md:text-h6-desktop font-serif;
+  }
+
+  .text-subhead1 {
+    @apply text-subhead1-mobile md:text-subhead1-desktop;
+  }
+
+  .text-subhead2 {
+    @apply text-subhead2-mobile md:text-subhead2-desktop;
+  }
+
+  .text-subhead3 {
+    @apply text-subhead3-mobile md:text-subhead3-desktop;
+  }
+
+  .text-subhead4 {
+    @apply text-subhead4-mobile md:text-subhead4-desktop;
+  }
+
+  .text-subscription-default {
+    @apply text-subscription-default-mobile md:text-subscription-default-desktop font-serif;
+  }
+
+  .text-subscription-small {
+    @apply text-subscription-small-mobile md:text-subscription-small-desktop font-serif;
+  }
+
+  .text-order-step {
+    @apply text-order-step-mobile md:text-order-step-desktop font-serif;
+  }
+
+  .text-hotline-footer-default {
+    @apply text-hotline-footer-default-mobile md:text-hotline-footer-default-desktop font-serif;
+  }
+
+  .text-hotline-footer-small {
+    @apply text-hotline-footer-small-mobile md:text-hotline-footer-small-desktop font-serif;
+  }
+
+  .text-teaser {
+    @apply text-teaser-mobile md:text-teaser-desktop;
+  }
+
+  .text-teaser-copy {
+    @apply text-teaser-copy-mobile md:text-teaser-copy-desktop;
+  }
+
+  .text-copy {
+    @apply text-copy-mobile md:text-copy-desktop;
+  }
+
+  .text-copy-small {
+    @apply text-copy-small-mobile md:text-copy-small-desktop;
+  }
+
+  .text-bulletpoint-copy {
+    @apply text-bulletpoint-copy-mobile md:text-bulletpoint-copy-desktop;
+  }
+
+  .text-footer-copy {
+    @apply text-footer-copy-mobile md:text-footer-copy-desktop;
+  }
+
+  .text-label {
+    @apply text-label-mobile md:text-label-desktop;
+  }
+
+  .text-button-label {
+    @apply text-button-label-mobile md:text-button-label-desktop;
+  }
+
+  .text-button-label-large {
+    @apply text-button-label-large-mobile md:text-button-label-large-desktop;
+  }
+
+  .text-input {
+    @apply text-input-mobile md:text-input-desktop;
+  }
+
+  .text-placeholder {
+    @apply text-placeholder-mobile md:text-placeholder-desktop;
+  }
+
+  .text-link {
+    @apply text-link-mobile md:text-link-desktop;
+  }
+
+  .text-link-small {
+    @apply text-link-small-mobile md:text-link-small-desktop;
+  }
+
+  .text-offcanvas-level1 {
+    @apply text-offcanvas-level1-mobile;
+  }
+
+  .text-offcanvas-level2 {
+    @apply text-offcanvas-level2-mobile;
+  }
+}

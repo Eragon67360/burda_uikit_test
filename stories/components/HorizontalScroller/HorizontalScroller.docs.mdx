@@ -1,0 +1,325 @@
+import { Meta, Canvas, Controls, Source, Stories } from '@storybook/blocks';
+import * as HorizontalScrollerStories from './HorizontalScroller.stories';
+
+<Meta of={HorizontalScrollerStories} />
+
+# HorizontalScroller Component
+
+The HorizontalScroller component is designed to display a series of elements in a horizontally scrollable format. This component is particularly useful for showcasing products, blog posts, or any other content that benefits from a horizontal layout.
+
+## Component Demo
+
+<Canvas of={HorizontalScrollerStories.DefaultHorizontalScroller} withToolbar />
+
+## Props
+
+<Controls />
+
+## Usage
+
+### Component Markup
+
+<Source language="html" dark code={`
+<!-- ADD UNIQUE ID IN THE LINE BELOW AND REFERENCE IT IN JS REGISTRATION -->
+<div id="" class="flex flex-col gap-4 w-full max-w-full items-center">
+  <div class="scroll-container max-w-fit flex overflow-x-auto items-center scrollbar-hide gap-4 pb-4">
+
+    <!-- ADD ANY NUMBER OF ELEMENTS -->
+
+    <!-- ELEMENT -->
+    <!-- ELEMENT -->
+    <!-- ... -->
+
+  </div>
+  <div class="control-container w-full items-center justify-between gap-2">
+    <button
+      type="button"
+      class="group cursor-pointer bg-base-white transition-all duration-300 hover:bg-secondary-light focus:outline-hidden focus:ring-none focus:border-transparent disabled:cursor-not-allowed relative z-40 overflow-hidden flex items-center justify-center text-base-black size-11 md:size-12 p-1 rounded-lg focus:ring-base-black disabled:text-neutral-400 disabled:border-neutral-300 disabled:bg-base-white active:bg-secondary-dark prev-button"
+      aria-label="previous slide"
+      onclick="handlePrevButtonClick()"
+    >
+      <!-- ADD ICON FOR PREVIOUS BUTTON -->
+    </button>
+    <div class="dot-container flex justify-center gap-2">
+      <button class="pagination-dot w-2 h-2 rounded-full border-[1.5px] cursor-pointer transition-all duration-200 border-[#949494]"></button>
+    </div>
+    <button
+      type="button"
+      class="group cursor-pointer bg-base-white transition-all duration-300 hover:bg-secondary-light focus:outline-hidden focus:ring-none focus:border-transparent disabled:cursor-not-allowed relative z-40 overflow-hidden flex items-center justify-center text-base-black size-11 md:size-12 p-1 rounded-lg focus:ring-base-black disabled:text-neutral-400 disabled:border-neutral-300 disabled:bg-base-white active:bg-secondary-dark next-button"
+      aria-label="next slide"
+      onclick="handleNextButtonClick()"
+    >
+      <!-- ADD ICON FOR NEXT BUTTON -->
+    </button>
+  </div>
+</div>
+`} />
+
+### Register JavaScript globally
+
+<Source
+  language="html"
+  dark
+  code={`
+<script src="horizontalScroller.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadHorizontalScroller('<ID USED IN MARKUP>', <VALUE FOR showControls>, '<VALUE FOR horizontalScrollContainerPadding>');
+    });
+</script>
+`}
+/>
+
+### JavaScript Implementation
+
+<details>
+
+<summary> Expand code block </summary>
+<Source language="javascript" dark code={`
+{/* horizontalScroller.js */}
+
+class HorizontalScroller {
+
+    constructor(id, showControls, padding) {
+        console.log('loadHorizontalScroller', id, showControls, padding);
+        this.groupId = id;
+        this.showControls = showControls;
+        this.padding = padding;
+        this.container = document.getElementById(this.groupId);
+        this.scrollContainer = this.container.querySelector('.scroll-container');
+        this.controlContainer = this.container.querySelector('.control-container');
+        this.dotContainer = this.container.querySelector('.dot-container');
+        this.dots = [];
+        this.prevButton = this.container.querySelector('.prev-button');
+        this.nextButton = this.container.querySelector('.next-button');
+        this.contentPages = 1;
+        this.currentPage = 1;
+        this.isDown = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+
+        this.resizeTimeout = null;
+
+        requestAnimationFrame(() => {
+            this.init();
+        });
+    }
+
+    init() {
+        console.log('init');
+        this.initContainer();
+        this.initContentPages();
+        this.initControls();
+        this.removeEventListeners();
+        this.addEventListeners();
+        this.updateControls();
+    }
+
+    initContainer() {
+        const scrollContainerChildrenArray = Array.from(this.scrollContainer.childNodes || []);
+        const scrollContainerChildren = scrollContainerChildrenArray.filter((child) => child instanceof HTMLElement);
+        if (!scrollContainerChildren || scrollContainerChildren.length === 0) return;
+
+        scrollContainerChildren.forEach((child) => {
+            child.classList.add('select-none');
+        });
+
+        if (this.padding) {
+            this.controlContainer.style.paddingLeft = this.padding;
+            this.controlContainer.style.paddingRight = this.padding;
+            scrollContainerChildren[0].style.paddingLeft = this.padding;
+            scrollContainerChildren[scrollContainerChildren.length - 1].style.paddingRight = this.padding;
+        }
+
+        if (this.showControls) {
+            this.scrollContainer.classList.remove('snap-x', 'snap-mandatory');
+            scrollContainerChildren.forEach((child) => {
+                child.classList.remove('snap-start');
+            });
+        } else {
+            this.scrollContainer.classList.add('snap-x', 'snap-mandatory');
+            scrollContainerChildren.forEach((child) => {
+                child.classList.add('snap-start');
+            });
+        }
+    }
+
+    initContentPages() {
+        try {
+            const containerWidth = this.container.clientWidth;
+            const scrollWidth = this.scrollContainer.scrollWidth;
+            this.contentPages = Math.ceil(scrollWidth / containerWidth);
+        } catch {
+            this.contentPages = 1;
+        }
+        if (this.contentPages < 1 || isNaN(this.contentPages)) {
+            this.contentPages = 1;
+        }
+        if (this.contentPages === 1) {
+            this.container.classList.add('items-center');
+            this.scrollContainer.classList.remove('cursor-grab');
+            this.scrollContainer.style.removeProperty('cursor');
+        } else {
+            this.container.classList.remove('items-center');
+            this.scrollContainer.classList.add('cursor-grab');
+        }
+    }
+
+    initControls() {
+        if (!this.showControls || this.contentPages <= 1) {
+            this.controlContainer.classList.remove('flex');
+            this.controlContainer.classList.add('hidden');
+            return;
+        }
+        this.controlContainer.classList.remove('hidden');
+        this.controlContainer.classList.add('flex');
+        const dot = this.container.querySelector('.pagination-dot');
+        if (!dot) return;
+        this.dotContainer.innerHTML = '';
+        for (let i = 0; i < this.contentPages; i++) {
+            this.dotContainer.appendChild(dot.cloneNode(true));
+        }
+        this.dots = this.container.querySelectorAll('.pagination-dot');
+    }
+
+    updateControls() {
+        if (!this.container) return;
+        this.dots.forEach((dot, index) => {
+            dot.classList.remove('border-secondary-dark', 'bg-secondary-interaction', 'border-[#949494]');
+            if (index === this.currentPage - 1) {
+                dot.classList.add('border-secondary-dark', 'bg-secondary-interaction');
+            } else {
+                dot.classList.add('border-[#949494]');
+            }
+        });
+
+        if (this.currentPage === 1) {
+            this.prevButton.setAttribute('disabled', 'true');
+        } else {
+            this.prevButton.removeAttribute('disabled');
+        }
+        if (this.currentPage === this.contentPages) {
+            this.nextButton.setAttribute('disabled', 'true');
+        } else {
+            this.nextButton.removeAttribute('disabled');
+        }
+    }
+
+    handleMouseDown(e) {
+        this.isDown = true;
+        if (!this.scrollContainer || this.contentPages <= 1) return;
+        this.scrollContainer.style.cursor = 'grabbing';
+        this.startX = e.pageX - this.scrollContainer.offsetLeft;
+        this.scrollLeft = this.scrollContainer.scrollLeft;
+    }
+
+    handleMouseLeave() {
+        this.isDown = false;
+        if (!this.scrollContainer || this.contentPages <= 1) return;
+        this.scrollContainer.style.cursor = 'grab';
+    }
+
+    handleMouseUp() {
+        this.isDown = false;
+        if (!this.scrollContainer || this.contentPages <= 1) return;
+        this.scrollContainer.style.cursor = 'grab';
+    }
+
+    handleMouseMove(e) {
+        if (!this.isDown || this.contentPages <= 1 || !this.scrollContainer) return;
+        e.preventDefault();
+        const x = e.pageX - this.scrollContainer.offsetLeft;
+        const walk = (x - this.startX) * 2; //scroll-fast
+        this.scrollContainer.scrollLeft = this.scrollLeft - walk;
+    }
+
+    handleScroll() {
+        if (this.contentPages <= 1) return;
+        const visibleWith = this.container.clientWidth;
+        const scrollOffset = this.scrollContainer.scrollLeft;
+        const visibleCenter = scrollOffset + (this.container.clientWidth / 2);
+        const rightEdge = scrollOffset + visibleWith;
+        if (rightEdge >= this.scrollContainer.scrollWidth) {
+            this.currentPage = this.contentPages;
+        } else if (scrollOffset <= 0) {
+            this.currentPage = 1;
+        } else {
+            this.currentPage = Math.ceil(visibleCenter / visibleWith);
+        }
+        this.updateControls();
+    }
+
+    handleDotClick(index) {
+        const scrollWidth = this.scrollContainer.scrollWidth;
+        const scrollPerPage = scrollWidth / this.contentPages;
+        this.scrollContainer.scrollTo({ left: scrollPerPage * index, behavior: 'smooth' });
+        this.currentPage = index + 1;
+        this.updateControls();
+    }
+
+    handleNextButtonClick() {
+        console.log('handleNextButtonClick', this.currentPage, this.contentPages);
+        if (this.currentPage >= this.contentPages) return;
+        const scrollWidth = this.scrollContainer.scrollWidth;
+        const scrollPerPage = scrollWidth / this.contentPages;
+        this.scrollContainer.scrollTo({ left: scrollPerPage * this.currentPage, behavior: 'smooth' });
+        this.currentPage = this.currentPage + 1;
+        this.updateControls();
+    }
+
+    handlePrevButtonClick() {
+        if (this.currentPage <= 1) return;
+        const scrollWidth = this.scrollContainer.scrollWidth;
+        const scrollPerPage = scrollWidth / this.contentPages;
+        this.scrollContainer.scrollTo({ left: scrollPerPage * (this.currentPage - 2), behavior: 'smooth' });
+        this.currentPage = this.currentPage - 1;
+        this.updateControls();
+    }
+
+    handleResize() {
+        if (this.resizeTimeout) {
+            clearTimeout(this.resizeTimeout);
+        }
+        this.resizeTimeout = setTimeout(() => {
+            this.init();
+        }, 100);
+    }
+
+    addEventListeners() {
+        this.scrollContainer.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        this.scrollContainer.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+        this.scrollContainer.addEventListener('mouseup', this.handleMouseUp.bind(this));
+        this.scrollContainer.addEventListener('mousemove', this.handleMouseMove.bind(this));
+        this.scrollContainer.addEventListener('scroll', this.handleScroll.bind(this));
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.handleDotClick(index));
+        });
+        this.prevButton.addEventListener('click', this.handlePrevButtonClick.bind(this));
+        this.nextButton.addEventListener('click', this.handleNextButtonClick.bind(this));
+        window.addEventListener('resize', this.handleResize.bind(this));
+    }
+
+    removeEventListeners() {
+        this.scrollContainer?.removeEventListener('mousedown', this.handleMouseDown.bind(this));
+        this.scrollContainer?.removeEventListener('mouseleave', this.handleMouseLeave.bind(this));
+        this.scrollContainer?.removeEventListener('mouseup', this.handleMouseUp.bind(this));
+        this.scrollContainer?.removeEventListener('mousemove', this.handleMouseMove.bind(this));
+        this.scrollContainer?.removeEventListener('scroll', this.handleScroll.bind(this));
+        this.dots?.forEach((dot, index) => {
+            dot.removeEventListener('click', () => this.handleDotClick(index));
+        });
+        this.prevButton?.removeEventListener('click', this.handlePrevButtonClick.bind(this));
+        this.nextButton?.removeEventListener('click', this.handleNextButtonClick.bind(this));
+        window.removeEventListener('resize', this.handleResize.bind(this));
+    }
+
+}
+
+const loadHorizontalScroller = (id, showControls, padding) => {
+new HorizontalScroller(id, showControls, padding);
+}
+`} />
+
+</details>
+<br/>
+<Stories includePrimary={false} />

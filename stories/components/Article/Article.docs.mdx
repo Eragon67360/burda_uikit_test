@@ -1,0 +1,90 @@
+import { Meta, Canvas, Controls, Source, Stories, Description, Title, Primary } from '@storybook/blocks';
+import * as ArticleStories from './Article.stories';
+
+<Meta of={ArticleStories} />
+
+<Title of={ArticleStories} />
+
+<Description of={ArticleStories} />
+
+<Primary />
+
+<Controls of={ArticleStories.DefaultArticle} sort="requiredFirst" />
+
+## Usage
+
+### Component Markup
+
+<Source
+  language="html"
+  dark
+  code={`
+<!-- Article component with badge -->
+<article 
+  role="article"
+  aria-label="Just Vegan Heißluftfritteuse"
+  class="shrink h-72 min-w-44 w-48 p-4 flex flex-col justify-end gap-4 bg-base-white rounded"
+  tabindex="0"
+>
+  <!-- Image container with optional badge -->
+  <div class="relative h-0 grow w-full px-2.5">
+    <img 
+      src="fryer_4.png"
+      alt="Just Vegan Heißluftfritteuse"
+      loading="lazy"
+      class="size-full object-contain pointer-events-none"
+    />
+    
+    <!-- Optional Badge -->
+    <div 
+      role="status"
+      aria-label="Tipp"
+      class="absolute top-0 left-0 bg-primary-interaction rounded-full flex items-center justify-center"
+      style="min-width: 42px; min-height: 42px;"
+    >
+      <span class="font-bold text-copy-small text-base-white">
+        Tipp
+      </span>
+    </div>
+  </div>
+
+  <!-- Title -->
+
+{' '}
+
+<p class="text-label text-center">Just Vegan Heißluftfritteuse</p>
+
+  <!-- CTA Button -->
+
+  <button 
+    type="button"
+    class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary text-base-white hover:bg-primary-dark"
+  >
+    <span>Details</span>
+    <svg aria-hidden="true" class="w-4 h-4">
+      <use href="#icon-arrowRight" />
+    </svg>
+  </button>
+</article>
+  `}
+/>
+
+## Accessibility
+
+The Article component follows WCAG guidelines and best practices to ensure an accessible experience for all users. Here's a concise overview of its accessibility features:
+
+### Semantic Structure
+
+The component uses semantic HTML elements and ARIA attributes to provide clear structure and context for assistive technologies. The `<article>` element properly identifies content as a self-contained composition.
+
+### Keyboard Interaction
+
+Keyboard users can navigate through the component using standard Tab navigation. The article is focusable and responds to Enter key activation, maintaining a logical tab order through all interactive elements.
+
+### Screen Reader Support
+
+The component implements appropriate ARIA labels, roles, and states to ensure screen readers can effectively communicate the content and state changes to users. Images include descriptive alt text, and dynamic content changes are properly announced.
+
+<br />
+
+<Stories includePrimary={false} />

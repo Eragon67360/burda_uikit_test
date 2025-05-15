@@ -1,0 +1,146 @@
+import { Meta, Typeset } from '@storybook/blocks';
+
+<Meta title="Design System/Typography" />
+
+export const typography = {
+  fonts: {
+    primary: 'var(--font-sans)',
+    serif: 'var(--font-serif)',
+  },
+  weights: {
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+  },
+  sizes: {
+    desktop: {
+      h1: 52, // Converted from 3.25rem
+      h2: 44, // Converted from 2.75rem
+      h3: 36, // Converted from 2.25rem
+      h4: 30, // Converted from 1.875rem
+      h5: 24, // Converted from 1.5rem
+      h6: 20, // Converted from 1.25rem
+      subhead1: 30, // Converted from 1.875rem
+      subhead2: 24, // Converted from 1.5rem
+      copy: 14, // Converted from 0.875rem
+      copySmall: 12, // Converted from 0.75rem
+    },
+    mobile: {
+      h1: 36, // Converted from 2.25rem
+      h2: 30, // Converted from 1.875rem
+      h3: 24, // Converted from 1.5rem
+      h4: 20, // Converted from 1.25rem
+      h5: 18, // Converted from 1.125rem
+      h6: 16, // Converted from 1rem
+      subhead1: 20, // Converted from 1.25rem
+      subhead2: 18, // Converted from 1.125rem
+      copy: 14, // Converted from 0.875rem
+      copySmall: 12, // Converted from 0.75rem
+    },
+  },
+};
+
+export const SampleText = 'Lorem ipsum dolor sit amet momentum';
+
+# Typography System
+
+## Font Families
+
+- Primary Font: Instrument Sans
+- Serif Font: Roboto Serif
+
+## Font Weights
+
+- Normal: 400
+- Medium: 500
+- Semibold: 600
+- Bold: 700
+
+## Headline Styles (Desktop)
+
+<Typeset
+  fontSizes={[
+    typography.sizes.desktop.h1,
+    typography.sizes.desktop.h2,
+    typography.sizes.desktop.h3,
+    typography.sizes.desktop.h4,
+    typography.sizes.desktop.h5,
+    typography.sizes.desktop.h6,
+  ]}
+  fontWeight={typography.weights.semibold}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.serif}
+/>
+
+## Headline Styles (Mobile)
+
+<Typeset
+  fontSizes={[
+    typography.sizes.mobile.h1,
+    typography.sizes.mobile.h2,
+    typography.sizes.mobile.h3,
+    typography.sizes.mobile.h4,
+    typography.sizes.mobile.h5,
+    typography.sizes.mobile.h6,
+  ]}
+  fontWeight={typography.weights.semibold}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.serif}
+/>
+
+## Subhead Styles (Desktop)
+
+<Typeset
+  fontSizes={[typography.sizes.desktop.subhead1, typography.sizes.desktop.subhead2]}
+  fontWeight={typography.weights.semibold}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.primary}
+/>
+
+## Subhead Styles (Mobile)
+
+<Typeset
+  fontSizes={[typography.sizes.mobile.subhead1, typography.sizes.mobile.subhead2]}
+  fontWeight={typography.weights.semibold}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.primary}
+/>
+
+## Text Styles (Desktop)
+
+<Typeset
+  fontSizes={[typography.sizes.desktop.copy, typography.sizes.desktop.copySmall]}
+  fontWeight={typography.weights.normal}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.primary}
+/>
+
+## Text Styles (Mobile)
+
+<Typeset
+  fontSizes={[typography.sizes.mobile.copy, typography.sizes.mobile.copySmall]}
+  fontWeight={typography.weights.normal}
+  sampleText={SampleText}
+  fontFamily={typography.fonts.primary}
+/>
+
+## Typography Variants
+
+### Responsive Typography Classes
+
+All typography classes are responsive and adapt between mobile and desktop:
+
+- `.text-h1` to `.text-h6`
+- `.text-subhead1` to `.text-subhead4`
+- `.text-copy`
+- `.text-copy-small`
+- And many more...
+
+### Special Typography Classes
+
+- Subscription: `.text-subscription-default`, `.text-subscription-small`
+- Hotline Footer: `.text-hotline-footer-default`, `.text-hotline-footer-small`
+- Order Step: `.text-order-step`
+- Button Labels: `.text-button-label`, `.text-button-label-large`
+- Links: `.text-link`, `.text-link-small`
